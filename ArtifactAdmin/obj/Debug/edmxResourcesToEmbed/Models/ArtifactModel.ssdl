@@ -1,0 +1,364 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="artModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ActFlow">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idStep" Type="int" />
+    <Property Name="idAction" Type="int" />
+  </EntityType>
+  <EntityType Name="Action">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idStep" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Artifact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ArtifactType" Type="int" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArtifactType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Descrioption" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArtifactTypeBonus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Artifact" Type="int" Nullable="false" />
+    <Property Name="Bonus" Type="int" Nullable="false" />
+    <Property Name="Modifier" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bonus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Constellation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+    <Property Name="Icon" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConstellationBonus">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bonus" Type="int" Nullable="false" />
+    <Property Name="Constallation" Type="int" Nullable="false" />
+    <Property Name="Modifier" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Statistic">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="kStep" Type="int" Nullable="false" />
+    <Property Name="kAct" Type="int" Nullable="false" />
+    <Property Name="time" Type="int" />
+    <Property Name="nStep" Type="int" />
+    <Property Name="nAct" Type="int" />
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Step">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idActFlow" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Talent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="MaxLevel" Type="int" Nullable="false" />
+    <Property Name="Modifier" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserArtifact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Artifact" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Constellation" Type="int" Nullable="false" />
+    <Property Name="TotalEnergy" Type="int" Nullable="false" />
+    <Property Name="EnergyRegenRate" Type="float" Nullable="false" />
+    <Property Name="PredictionRadius" Type="int" Nullable="false" />
+    <Property Name="ExperiencePoints" Type="bigint" Nullable="false" />
+    <Property Name="ExperienceLevel" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserTalent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserArtifact" Type="int" Nullable="false" />
+    <Property Name="UserTalent" Type="int" Nullable="false" />
+    <Property Name="TalentLevel" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ActFlow_Action">
+    <End Role="Action" Type="Self.Action" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Action">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActFlow">
+        <PropertyRef Name="idAction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActFlow_Step">
+    <End Role="Step" Type="Self.Step" Multiplicity="0..1" />
+    <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Step">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActFlow">
+        <PropertyRef Name="idStep" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Action_Step">
+    <End Role="Step" Type="Self.Step" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Action" Type="Self.Action" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Step">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Action">
+        <PropertyRef Name="idStep" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Artifact_ArtifactType">
+    <End Role="ArtifactType" Type="Self.ArtifactType" Multiplicity="1" />
+    <End Role="Artifact" Type="Self.Artifact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ArtifactType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Artifact">
+        <PropertyRef Name="ArtifactType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtifactTypeBonus_Artifact">
+    <End Role="Artifact" Type="Self.Artifact" Multiplicity="1" />
+    <End Role="ArtifactTypeBonus" Type="Self.ArtifactTypeBonus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artifact">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArtifactTypeBonus">
+        <PropertyRef Name="Artifact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtifactTypeBonus_Bonus">
+    <End Role="Bonus" Type="Self.Bonus" Multiplicity="1" />
+    <End Role="ArtifactTypeBonus" Type="Self.ArtifactTypeBonus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArtifactTypeBonus">
+        <PropertyRef Name="Bonus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConstellationBonus_Bonus">
+    <End Role="Bonus" Type="Self.Bonus" Multiplicity="1" />
+    <End Role="ConstellationBonus" Type="Self.ConstellationBonus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConstellationBonus">
+        <PropertyRef Name="Bonus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConstellationBonus_Constellation">
+    <End Role="Constellation" Type="Self.Constellation" Multiplicity="1" />
+    <End Role="ConstellationBonus" Type="Self.ConstellationBonus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Constellation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ConstellationBonus">
+        <PropertyRef Name="Constallation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Step_ActFlow">
+    <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="0..1" />
+    <End Role="Step" Type="Self.Step" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActFlow">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Step">
+        <PropertyRef Name="idActFlow" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserArtifact_Artifact">
+    <End Role="Artifact" Type="Self.Artifact" Multiplicity="1" />
+    <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artifact">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserArtifact">
+        <PropertyRef Name="Artifact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserArtifact_Constellation">
+    <End Role="Constellation" Type="Self.Constellation" Multiplicity="1" />
+    <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Constellation">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserArtifact">
+        <PropertyRef Name="Constellation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTalent_Talent">
+    <End Role="Talent" Type="Self.Talent" Multiplicity="1" />
+    <End Role="UserTalent" Type="Self.UserTalent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Talent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserTalent">
+        <PropertyRef Name="UserTalent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTalent_UserArtifact">
+    <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
+    <End Role="UserTalent" Type="Self.UserTalent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserArtifact">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserTalent">
+        <PropertyRef Name="UserArtifact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="artModelStoreContainer">
+    <EntitySet Name="ActFlow" EntityType="Self.ActFlow" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Artifact" EntityType="Self.Artifact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtifactType" EntityType="Self.ArtifactType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtifactTypeBonus" EntityType="Self.ArtifactTypeBonus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Bonus" EntityType="Self.Bonus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Constellation" EntityType="Self.Constellation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConstellationBonus" EntityType="Self.ConstellationBonus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Talent" EntityType="Self.Talent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserArtifact" EntityType="Self.UserArtifact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserTalent" EntityType="Self.UserTalent" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
+      <End Role="Action" EntitySet="Action" />
+      <End Role="ActFlow" EntitySet="ActFlow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActFlow_Step" Association="Self.FK_ActFlow_Step">
+      <End Role="Step" EntitySet="Step" />
+      <End Role="ActFlow" EntitySet="ActFlow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Action_Step" Association="Self.FK_Action_Step">
+      <End Role="Step" EntitySet="Step" />
+      <End Role="Action" EntitySet="Action" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Artifact_ArtifactType" Association="Self.FK_Artifact_ArtifactType">
+      <End Role="ArtifactType" EntitySet="ArtifactType" />
+      <End Role="Artifact" EntitySet="Artifact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtifactTypeBonus_Artifact" Association="Self.FK_ArtifactTypeBonus_Artifact">
+      <End Role="Artifact" EntitySet="Artifact" />
+      <End Role="ArtifactTypeBonus" EntitySet="ArtifactTypeBonus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ArtifactTypeBonus_Bonus" Association="Self.FK_ArtifactTypeBonus_Bonus">
+      <End Role="Bonus" EntitySet="Bonus" />
+      <End Role="ArtifactTypeBonus" EntitySet="ArtifactTypeBonus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConstellationBonus_Bonus" Association="Self.FK_ConstellationBonus_Bonus">
+      <End Role="Bonus" EntitySet="Bonus" />
+      <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConstellationBonus_Constellation" Association="Self.FK_ConstellationBonus_Constellation">
+      <End Role="Constellation" EntitySet="Constellation" />
+      <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Step_ActFlow" Association="Self.FK_Step_ActFlow">
+      <End Role="ActFlow" EntitySet="ActFlow" />
+      <End Role="Step" EntitySet="Step" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserArtifact_Artifact" Association="Self.FK_UserArtifact_Artifact">
+      <End Role="Artifact" EntitySet="Artifact" />
+      <End Role="UserArtifact" EntitySet="UserArtifact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserArtifact_Constellation" Association="Self.FK_UserArtifact_Constellation">
+      <End Role="Constellation" EntitySet="Constellation" />
+      <End Role="UserArtifact" EntitySet="UserArtifact" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTalent_Talent" Association="Self.FK_UserTalent_Talent">
+      <End Role="Talent" EntitySet="Talent" />
+      <End Role="UserTalent" EntitySet="UserTalent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTalent_UserArtifact" Association="Self.FK_UserTalent_UserArtifact">
+      <End Role="UserArtifact" EntitySet="UserArtifact" />
+      <End Role="UserTalent" EntitySet="UserTalent" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
