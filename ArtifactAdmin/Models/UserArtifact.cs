@@ -16,7 +16,7 @@ namespace ArtifactAdmin.Models
     {
         public UserArtifact()
         {
-            this.UserTalents = new HashSet<UserTalent>();
+            this.UserArtifactTalents = new HashSet<UserArtifactTalent>();
         }
     
         public int id { get; set; }
@@ -28,9 +28,11 @@ namespace ArtifactAdmin.Models
         public int PredictionRadius { get; set; }
         public long ExperiencePoints { get; set; }
         public int ExperienceLevel { get; set; }
+        public int User { get; set; }
     
         public virtual Artifact Artifact1 { get; set; }
         public virtual Constellation Constellation1 { get; set; }
-        public virtual ICollection<UserTalent> UserTalents { get; set; }
+        public virtual User User1 { get; set; }
+        public virtual ICollection<UserArtifactTalent> UserArtifactTalents { get; set; }
     }
 }

@@ -9,29 +9,39 @@
         <EntityTypeShape EntityType="artModel.Action" Width="1.5" PointX="8" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Artifact" Width="1.5" PointX="3.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.ArtifactType" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="artModel.ArtifactTypeBonu" Width="1.5" PointX="8" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Bonu" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Constellation" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.ConstellationBonu" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="artModel.Statistic" Width="1.5" PointX="10.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="artModel.Statistic" Width="1.5" PointX="11.125" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Step" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.sysdiagram" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Talent" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.UserArtifact" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="artModel.UserTalent" Width="1.5" PointX="8.25" PointY="4.75" IsExpanded="true" />
         <AssociationConnector Association="artModel.FK_ActFlow_Action" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_ActFlow_Step" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_Step_ActFlow" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_Action_Step" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_Artifact_ArtifactType" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_ArtifactTypeBonus_Artifact" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_UserArtifact_Artifact" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_ArtifactTypeBonus_Bonus" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Bonus" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Constellation" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_UserArtifact_Constellation" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_UserTalent_Talent" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_UserTalent_UserArtifact" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="artModel.ArtifactBonu" Width="1.5" PointX="11" PointY="0.75" />
+        <EntityTypeShape EntityType="artModel.BasePredisposition" Width="1.5" PointX="13.375" PointY="2" />
+        <EntityTypeShape EntityType="artModel.Carrier" Width="1.5" PointX="14.625" PointY="9.625" />
+        <EntityTypeShape EntityType="artModel.CarrierPredisposition" Width="1.5" PointX="16.875" PointY="7.5" />
+        <EntityTypeShape EntityType="artModel.CharrierCharacteristic" Width="1.5" PointX="16.875" PointY="11.125" />
+        <EntityTypeShape EntityType="artModel.Race" Width="1.5" PointX="12.375" PointY="7.625" />
+        <EntityTypeShape EntityType="artModel.User" Width="1.5" PointX="3.75" PointY="2.375" />
+        <EntityTypeShape EntityType="artModel.UserArtifactTalent" Width="1.5" PointX="8.25" PointY="2.625" />
+        <AssociationConnector Association="artModel.FK_ArtifactTypeBonus_Artifact1" />
+        <AssociationConnector Association="artModel.FK_ArtifactTypeBonus_Bonus1" />
+        <AssociationConnector Association="artModel.FK_Carrier_Race" />
+        <AssociationConnector Association="artModel.FK_CarrierPredisposition_Carrier" />
+        <AssociationConnector Association="artModel.FK_CharrierCharacteristics_Carrier" />
+        <AssociationConnector Association="artModel.FK_UserTalent_Talent1" />
+        <AssociationConnector Association="artModel.FK_UserArtifact_User" />
+        <AssociationConnector Association="artModel.FK_UserTalent_UserArtifact1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

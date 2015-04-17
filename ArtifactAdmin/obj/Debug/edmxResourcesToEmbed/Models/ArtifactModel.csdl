@@ -29,10 +29,10 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ArtifactType" Type="Int32" Nullable="false" />
-    <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="ArtifactType1" Relationship="Self.FK_Artifact_ArtifactType" FromRole="Artifact" ToRole="ArtifactType" />
-    <NavigationProperty Name="ArtifactTypeBonus" Relationship="Self.FK_ArtifactTypeBonus_Artifact" FromRole="Artifact" ToRole="ArtifactTypeBonus" />
     <NavigationProperty Name="UserArtifacts" Relationship="Self.FK_UserArtifact_Artifact" FromRole="Artifact" ToRole="UserArtifact" />
+    <NavigationProperty Name="ArtifactBonus" Relationship="artModel.FK_ArtifactTypeBonus_Artifact1" FromRole="Artifact" ToRole="ArtifactBonu" />
   </EntityType>
   <EntityType Name="ArtifactType">
     <Key>
@@ -40,20 +40,9 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Descrioption" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Artifacts" Relationship="Self.FK_Artifact_ArtifactType" FromRole="ArtifactType" ToRole="Artifact" />
-  </EntityType>
-  <EntityType Name="ArtifactTypeBonu">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Artifact" Type="Int32" Nullable="false" />
-    <Property Name="Bonus" Type="Int32" Nullable="false" />
-    <Property Name="Modifier" Type="Double" Nullable="false" />
-    <NavigationProperty Name="Artifact1" Relationship="Self.FK_ArtifactTypeBonus_Artifact" FromRole="ArtifactTypeBonus" ToRole="Artifact" />
-    <NavigationProperty Name="Bonu" Relationship="Self.FK_ArtifactTypeBonus_Bonus" FromRole="ArtifactTypeBonus" ToRole="Bonus" />
   </EntityType>
   <EntityType Name="Bonu">
     <Key>
@@ -62,8 +51,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="ArtifactTypeBonus" Relationship="Self.FK_ArtifactTypeBonus_Bonus" FromRole="Bonus" ToRole="ArtifactTypeBonus" />
     <NavigationProperty Name="ConstellationBonus" Relationship="Self.FK_ConstellationBonus_Bonus" FromRole="Bonus" ToRole="ConstellationBonus" />
+    <NavigationProperty Name="ArtifactBonus" Relationship="artModel.FK_ArtifactTypeBonus_Bonus1" FromRole="Bonu" ToRole="ArtifactBonu" />
   </EntityType>
   <EntityType Name="Constellation">
     <Key>
@@ -71,7 +60,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-    <Property Name="Icon" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Icon" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
     <NavigationProperty Name="ConstellationBonus" Relationship="Self.FK_ConstellationBonus_Constellation" FromRole="Constellation" ToRole="ConstellationBonus" />
     <NavigationProperty Name="UserArtifacts" Relationship="Self.FK_UserArtifact_Constellation" FromRole="Constellation" ToRole="UserArtifact" />
@@ -129,7 +118,9 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MaxLevel" Type="Int32" Nullable="false" />
     <Property Name="Modifier" Type="Double" Nullable="false" />
-    <NavigationProperty Name="UserTalents" Relationship="Self.FK_UserTalent_Talent" FromRole="Talent" ToRole="UserTalent" />
+    <Property Name="BaseValue" Type="Double" Nullable="false" />
+    <Property Name="BaseModifier" Type="Double" Nullable="false" />
+    <NavigationProperty Name="UserArtifactTalents" Relationship="artModel.FK_UserTalent_Talent1" FromRole="Talent" ToRole="UserArtifactTalent" />
   </EntityType>
   <EntityType Name="UserArtifact">
     <Key>
@@ -146,18 +137,9 @@
     <Property Name="ExperienceLevel" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Artifact1" Relationship="Self.FK_UserArtifact_Artifact" FromRole="UserArtifact" ToRole="Artifact" />
     <NavigationProperty Name="Constellation1" Relationship="Self.FK_UserArtifact_Constellation" FromRole="UserArtifact" ToRole="Constellation" />
-    <NavigationProperty Name="UserTalents" Relationship="Self.FK_UserTalent_UserArtifact" FromRole="UserArtifact" ToRole="UserTalent" />
-  </EntityType>
-  <EntityType Name="UserTalent">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="UserArtifact" Type="Int32" Nullable="false" />
-    <Property Name="UserTalent1" Type="Int32" Nullable="false" />
-    <Property Name="TalentLevel" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Talent" Relationship="Self.FK_UserTalent_Talent" FromRole="UserTalent" ToRole="Talent" />
-    <NavigationProperty Name="UserArtifact1" Relationship="Self.FK_UserTalent_UserArtifact" FromRole="UserTalent" ToRole="UserArtifact" />
+    <Property Name="User" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User1" Relationship="artModel.FK_UserArtifact_User" FromRole="UserArtifact" ToRole="User" />
+    <NavigationProperty Name="UserArtifactTalents" Relationship="artModel.FK_UserTalent_UserArtifact1" FromRole="UserArtifact" ToRole="UserArtifactTalent" />
   </EntityType>
   <Association Name="FK_ActFlow_Action">
     <End Role="Action" Type="Self.Action" Multiplicity="0..1">
@@ -223,18 +205,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ArtifactTypeBonus_Artifact">
-    <End Role="Artifact" Type="Self.Artifact" Multiplicity="1" />
-    <End Role="ArtifactTypeBonus" Type="Self.ArtifactTypeBonu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Artifact">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="ArtifactTypeBonus">
-        <PropertyRef Name="Artifact" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_UserArtifact_Artifact">
     <End Role="Artifact" Type="Self.Artifact" Multiplicity="1" />
     <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="*" />
@@ -244,18 +214,6 @@
       </Principal>
       <Dependent Role="UserArtifact">
         <PropertyRef Name="Artifact" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ArtifactTypeBonus_Bonus">
-    <End Role="Bonus" Type="Self.Bonu" Multiplicity="1" />
-    <End Role="ArtifactTypeBonus" Type="Self.ArtifactTypeBonu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Bonus">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ArtifactTypeBonus">
-        <PropertyRef Name="Bonus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -295,36 +253,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserTalent_Talent">
-    <End Role="Talent" Type="Self.Talent" Multiplicity="1" />
-    <End Role="UserTalent" Type="Self.UserTalent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Talent">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="UserTalent">
-        <PropertyRef Name="UserTalent1" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UserTalent_UserArtifact">
-    <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
-    <End Role="UserTalent" Type="Self.UserTalent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UserArtifact">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="UserTalent">
-        <PropertyRef Name="UserArtifact" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="artEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="ActFlows" EntityType="Self.ActFlow" />
     <EntitySet Name="Actions" EntityType="Self.Action" />
     <EntitySet Name="Artifacts" EntityType="Self.Artifact" />
     <EntitySet Name="ArtifactTypes" EntityType="Self.ArtifactType" />
-    <EntitySet Name="ArtifactTypeBonus" EntityType="Self.ArtifactTypeBonu" />
     <EntitySet Name="Bonus" EntityType="Self.Bonu" />
     <EntitySet Name="Constellations" EntityType="Self.Constellation" />
     <EntitySet Name="ConstellationBonus" EntityType="Self.ConstellationBonu" />
@@ -333,7 +266,6 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="Talents" EntityType="Self.Talent" />
     <EntitySet Name="UserArtifacts" EntityType="Self.UserArtifact" />
-    <EntitySet Name="UserTalents" EntityType="Self.UserTalent" />
     <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
       <End Role="Action" EntitySet="Actions" />
       <End Role="ActFlow" EntitySet="ActFlows" />
@@ -354,17 +286,9 @@
       <End Role="ArtifactType" EntitySet="ArtifactTypes" />
       <End Role="Artifact" EntitySet="Artifacts" />
     </AssociationSet>
-    <AssociationSet Name="FK_ArtifactTypeBonus_Artifact" Association="Self.FK_ArtifactTypeBonus_Artifact">
-      <End Role="Artifact" EntitySet="Artifacts" />
-      <End Role="ArtifactTypeBonus" EntitySet="ArtifactTypeBonus" />
-    </AssociationSet>
     <AssociationSet Name="FK_UserArtifact_Artifact" Association="Self.FK_UserArtifact_Artifact">
       <End Role="Artifact" EntitySet="Artifacts" />
       <End Role="UserArtifact" EntitySet="UserArtifacts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ArtifactTypeBonus_Bonus" Association="Self.FK_ArtifactTypeBonus_Bonus">
-      <End Role="Bonus" EntitySet="Bonus" />
-      <End Role="ArtifactTypeBonus" EntitySet="ArtifactTypeBonus" />
     </AssociationSet>
     <AssociationSet Name="FK_ConstellationBonus_Bonus" Association="Self.FK_ConstellationBonus_Bonus">
       <End Role="Bonus" EntitySet="Bonus" />
@@ -378,13 +302,254 @@
       <End Role="Constellation" EntitySet="Constellations" />
       <End Role="UserArtifact" EntitySet="UserArtifacts" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserTalent_Talent" Association="Self.FK_UserTalent_Talent">
-      <End Role="Talent" EntitySet="Talents" />
-      <End Role="UserTalent" EntitySet="UserTalents" />
+    <EntitySet Name="ArtifactBonus" EntityType="artModel.ArtifactBonu" />
+    <EntitySet Name="BasePredispositions" EntityType="artModel.BasePredisposition" />
+    <EntitySet Name="Carriers" EntityType="artModel.Carrier" />
+    <EntitySet Name="CarrierPredispositions" EntityType="artModel.CarrierPredisposition" />
+    <EntitySet Name="CharrierCharacteristics" EntityType="artModel.CharrierCharacteristic" />
+    <EntitySet Name="Races" EntityType="artModel.Race" />
+    <EntitySet Name="Users" EntityType="artModel.User" />
+    <EntitySet Name="UserArtifactTalents" EntityType="artModel.UserArtifactTalent" />
+    <AssociationSet Name="FK_ArtifactTypeBonus_Artifact1" Association="artModel.FK_ArtifactTypeBonus_Artifact1">
+      <End Role="Artifact" EntitySet="Artifacts" />
+      <End Role="ArtifactBonu" EntitySet="ArtifactBonus" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserTalent_UserArtifact" Association="Self.FK_UserTalent_UserArtifact">
+    <AssociationSet Name="FK_ArtifactTypeBonus_Bonus1" Association="artModel.FK_ArtifactTypeBonus_Bonus1">
+      <End Role="Bonu" EntitySet="Bonus" />
+      <End Role="ArtifactBonu" EntitySet="ArtifactBonus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carrier_Race" Association="artModel.FK_Carrier_Race">
+      <End Role="Race" EntitySet="Races" />
+      <End Role="Carrier" EntitySet="Carriers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierPredisposition_Carrier" Association="artModel.FK_CarrierPredisposition_Carrier">
+      <End Role="Carrier" EntitySet="Carriers" />
+      <End Role="CarrierPredisposition" EntitySet="CarrierPredispositions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CharrierCharacteristics_Carrier" Association="artModel.FK_CharrierCharacteristics_Carrier">
+      <End Role="Carrier" EntitySet="Carriers" />
+      <End Role="CharrierCharacteristic" EntitySet="CharrierCharacteristics" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTalent_Talent1" Association="artModel.FK_UserTalent_Talent1">
+      <End Role="Talent" EntitySet="Talents" />
+      <End Role="UserArtifactTalent" EntitySet="UserArtifactTalents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserArtifact_User" Association="artModel.FK_UserArtifact_User">
+      <End Role="User" EntitySet="Users" />
       <End Role="UserArtifact" EntitySet="UserArtifacts" />
-      <End Role="UserTalent" EntitySet="UserTalents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserTalent_UserArtifact1" Association="artModel.FK_UserTalent_UserArtifact1">
+      <End Role="UserArtifact" EntitySet="UserArtifacts" />
+      <End Role="UserArtifactTalent" EntitySet="UserArtifactTalents" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="ArtifactBonu">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Artifact" Type="Int32" Nullable="false" />
+    <Property Name="Bonus" Type="Int32" Nullable="false" />
+    <Property Name="Modifier" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Artifact1" Relationship="artModel.FK_ArtifactTypeBonus_Artifact1" FromRole="ArtifactBonu" ToRole="Artifact" />
+    <NavigationProperty Name="Bonu" Relationship="artModel.FK_ArtifactTypeBonus_Bonus1" FromRole="ArtifactBonu" ToRole="Bonu" />
+  </EntityType>
+  <EntityType Name="BasePredisposition">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="Carrier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Race" Type="Int32" Nullable="false" />
+    <Property Name="ExpirienceLevel" Type="Int32" Nullable="false" />
+    <Property Name="ExpiriencePoints" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Race1" Relationship="artModel.FK_Carrier_Race" FromRole="Carrier" ToRole="Race" />
+    <NavigationProperty Name="CarrierPredispositions" Relationship="artModel.FK_CarrierPredisposition_Carrier" FromRole="Carrier" ToRole="CarrierPredisposition" />
+    <NavigationProperty Name="CharrierCharacteristics" Relationship="artModel.FK_CharrierCharacteristics_Carrier" FromRole="Carrier" ToRole="CharrierCharacteristic" />
+  </EntityType>
+  <EntityType Name="CarrierPredisposition">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kindness" Type="Double" Nullable="false" />
+    <Property Name="Temperance" Type="Double" Nullable="false" />
+    <Property Name="Bravery" Type="Double" Nullable="false" />
+    <Property Name="Eloquence" Type="Double" Nullable="false" />
+    <Property Name="Cunning" Type="Double" Nullable="false" />
+    <Property Name="Inventiveness" Type="Double" Nullable="false" />
+    <Property Name="Observation" Type="Double" Nullable="false" />
+    <Property Name="Carrier" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Carrier1" Relationship="artModel.FK_CarrierPredisposition_Carrier" FromRole="CarrierPredisposition" ToRole="Carrier" />
+  </EntityType>
+  <EntityType Name="CharrierCharacteristic">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Strength" Type="Int32" Nullable="false" />
+    <Property Name="Armor" Type="Int32" Nullable="false" />
+    <Property Name="Agility" Type="Int32" Nullable="false" />
+    <Property Name="Accuracy" Type="Int32" Nullable="false" />
+    <Property Name="Knowledge" Type="Int32" Nullable="false" />
+    <Property Name="Intellect" Type="Int32" Nullable="false" />
+    <Property Name="HitPoints" Type="Int32" Nullable="false" />
+    <Property Name="Carrier" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Carrier1" Relationship="artModel.FK_CharrierCharacteristics_Carrier" FromRole="CharrierCharacteristic" ToRole="Carrier" />
+  </EntityType>
+  <EntityType Name="Race">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Strength" Type="Int32" Nullable="false" />
+    <Property Name="Armor" Type="Int32" Nullable="false" />
+    <Property Name="Agility" Type="Int32" Nullable="false" />
+    <Property Name="Accuracy" Type="Int32" Nullable="false" />
+    <Property Name="Knowledge" Type="Int32" Nullable="false" />
+    <Property Name="Intellect" Type="Int32" Nullable="false" />
+    <Property Name="HitPoints" Type="Int32" Nullable="false" />
+    <Property Name="MoveSpeed" Type="Int32" Nullable="false" />
+    <Property Name="Size" Type="Int32" Nullable="false" />
+    <Property Name="Charisma" Type="Int32" Nullable="false" />
+    <Property Name="ResistanceToArtifact" Type="Int32" Nullable="false" />
+    <Property Name="Kindness" Type="Double" Nullable="false" />
+    <Property Name="Temperance" Type="Double" Nullable="false" />
+    <Property Name="Bravery" Type="Double" Nullable="false" />
+    <Property Name="Eloquence" Type="Double" Nullable="false" />
+    <Property Name="Cunning" Type="Double" Nullable="false" />
+    <Property Name="Inventiveness" Type="Double" Nullable="false" />
+    <Property Name="Observation" Type="Double" Nullable="false" />
+    <Property Name="Stealthy" Type="Double" Nullable="false" />
+    <Property Name="StrengthLevelModifier" Type="Double" Nullable="false" />
+    <Property Name="ArmorLevelModifier" Type="Double" Nullable="false" />
+    <Property Name="AgilityLevelModifier" Type="Double" Nullable="false" />
+    <Property Name="AccuracyLevelModifier" Type="Double" Nullable="false" />
+    <Property Name="KnowledgeLevelModifier" Type="Double" Nullable="false" />
+    <Property Name="IntellectLevelModifier" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Carriers" Relationship="artModel.FK_Carrier_Race" FromRole="Race" ToRole="Carrier" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="UserArtifacts" Relationship="artModel.FK_UserArtifact_User" FromRole="User" ToRole="UserArtifact" />
+  </EntityType>
+  <EntityType Name="UserArtifactTalent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserArtifact" Type="Int32" Nullable="false" />
+    <Property Name="UserTalent" Type="Int32" Nullable="false" />
+    <Property Name="TalentLevel" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Talent" Relationship="artModel.FK_UserTalent_Talent1" FromRole="UserArtifactTalent" ToRole="Talent" />
+    <NavigationProperty Name="UserArtifact1" Relationship="artModel.FK_UserTalent_UserArtifact1" FromRole="UserArtifactTalent" ToRole="UserArtifact" />
+  </EntityType>
+  <Association Name="FK_ArtifactTypeBonus_Artifact1">
+    <End Type="artModel.Artifact" Role="Artifact" Multiplicity="1" />
+    <End Type="artModel.ArtifactBonu" Role="ArtifactBonu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Artifact">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ArtifactBonu">
+        <PropertyRef Name="Artifact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ArtifactTypeBonus_Bonus1">
+    <End Type="artModel.Bonu" Role="Bonu" Multiplicity="1" />
+    <End Type="artModel.ArtifactBonu" Role="ArtifactBonu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bonu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ArtifactBonu">
+        <PropertyRef Name="Bonus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carrier_Race">
+    <End Type="artModel.Race" Role="Race" Multiplicity="1" />
+    <End Type="artModel.Carrier" Role="Carrier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Race">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Carrier">
+        <PropertyRef Name="Race" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierPredisposition_Carrier">
+    <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
+    <End Type="artModel.CarrierPredisposition" Role="CarrierPredisposition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CarrierPredisposition">
+        <PropertyRef Name="Carrier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CharrierCharacteristics_Carrier">
+    <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
+    <End Type="artModel.CharrierCharacteristic" Role="CharrierCharacteristic" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CharrierCharacteristic">
+        <PropertyRef Name="Carrier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTalent_Talent1">
+    <End Type="artModel.Talent" Role="Talent" Multiplicity="1" />
+    <End Type="artModel.UserArtifactTalent" Role="UserArtifactTalent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Talent">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserArtifactTalent">
+        <PropertyRef Name="UserTalent" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserArtifact_User">
+    <End Type="artModel.User" Role="User" Multiplicity="1" />
+    <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserArtifact">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserTalent_UserArtifact1">
+    <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="1" />
+    <End Type="artModel.UserArtifactTalent" Role="UserArtifactTalent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserArtifact">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserArtifactTalent">
+        <PropertyRef Name="UserArtifact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

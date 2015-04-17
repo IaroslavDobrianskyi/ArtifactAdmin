@@ -12,14 +12,18 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ArtifactTypeBonu
+    public partial class CarrierPredisposition
     {
         public int id { get; set; }
-        public int Artifact { get; set; }
-        public int Bonus { get; set; }
-        public double Modifier { get; set; }
+        public double Kindness { get; set; }
+        public double Temperance { get; set; }
+        public double Bravery { get; set; }
+        public double Eloquence { get; set; }
+        public double Cunning { get; set; }
+        public double Inventiveness { get; set; }
+        public double Observation { get; set; }
+        public int Carrier { get; set; }
     
-        public virtual Artifact Artifact1 { get; set; }
-        public virtual Bonu Bonu { get; set; }
+        public virtual Carrier Carrier1 { get; set; }
     }
 }

@@ -12,14 +12,14 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class UserTalent
+    public partial class ArtifactBonu
     {
         public int id { get; set; }
-        public int UserArtifact { get; set; }
-        public int UserTalent1 { get; set; }
-        public int TalentLevel { get; set; }
+        public int Artifact { get; set; }
+        public int Bonus { get; set; }
+        public double Modifier { get; set; }
     
-        public virtual Talent Talent { get; set; }
-        public virtual UserArtifact UserArtifact1 { get; set; }
+        public virtual Artifact Artifact1 { get; set; }
+        public virtual Bonu Bonu { get; set; }
     }
 }

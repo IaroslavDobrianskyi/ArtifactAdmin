@@ -16,8 +16,8 @@ namespace ArtifactAdmin.Models
     {
         public Artifact()
         {
-            this.ArtifactTypeBonus = new HashSet<ArtifactTypeBonu>();
             this.UserArtifacts = new HashSet<UserArtifact>();
+            this.ArtifactBonus = new HashSet<ArtifactBonu>();
         }
     
         public int id { get; set; }
@@ -26,7 +26,7 @@ namespace ArtifactAdmin.Models
         public string Icon { get; set; }
     
         public virtual ArtifactType ArtifactType1 { get; set; }
-        public virtual ICollection<ArtifactTypeBonu> ArtifactTypeBonus { get; set; }
         public virtual ICollection<UserArtifact> UserArtifacts { get; set; }
+        public virtual ICollection<ArtifactBonu> ArtifactBonus { get; set; }
     }
 }

@@ -12,21 +12,21 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Talent
+    public partial class Carrier
     {
-        public Talent()
+        public Carrier()
         {
-            this.UserArtifactTalents = new HashSet<UserArtifactTalent>();
+            this.CarrierPredispositions = new HashSet<CarrierPredisposition>();
+            this.CharrierCharacteristics = new HashSet<CharrierCharacteristic>();
         }
     
         public int id { get; set; }
-        public string Description { get; set; }
-        public string Name { get; set; }
-        public int MaxLevel { get; set; }
-        public double Modifier { get; set; }
-        public double BaseValue { get; set; }
-        public double BaseModifier { get; set; }
+        public int Race { get; set; }
+        public int ExpirienceLevel { get; set; }
+        public int ExpiriencePoints { get; set; }
     
-        public virtual ICollection<UserArtifactTalent> UserArtifactTalents { get; set; }
+        public virtual Race Race1 { get; set; }
+        public virtual ICollection<CarrierPredisposition> CarrierPredispositions { get; set; }
+        public virtual ICollection<CharrierCharacteristic> CharrierCharacteristics { get; set; }
     }
 }

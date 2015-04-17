@@ -24,18 +24,9 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="ArtifactType" Type="int" Nullable="false" />
-    <Property Name="Icon" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
-  <EntityType Name="ArtifactType">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Icon" Type="nvarchar" MaxLength="100" Nullable="false" />
-    <Property Name="Descrioption" Type="nchar" MaxLength="50" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ArtifactTypeBonus">
+  <EntityType Name="ArtifactBonus">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -43,6 +34,21 @@
     <Property Name="Artifact" Type="int" Nullable="false" />
     <Property Name="Bonus" Type="int" Nullable="false" />
     <Property Name="Modifier" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ArtifactType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Descrioption" Type="nchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BasePredisposition">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
   </EntityType>
   <EntityType Name="Bonus">
     <Key>
@@ -52,13 +58,50 @@
     <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Carrier">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Race" Type="int" Nullable="false" />
+    <Property Name="ExpirienceLevel" Type="int" Nullable="false" />
+    <Property Name="ExpiriencePoints" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CarrierPredisposition">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kindness" Type="float" Nullable="false" />
+    <Property Name="Temperance" Type="float" Nullable="false" />
+    <Property Name="Bravery" Type="float" Nullable="false" />
+    <Property Name="Eloquence" Type="float" Nullable="false" />
+    <Property Name="Cunning" Type="float" Nullable="false" />
+    <Property Name="Inventiveness" Type="float" Nullable="false" />
+    <Property Name="Observation" Type="float" Nullable="false" />
+    <Property Name="Carrier" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CharrierCharacteristics">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Strength" Type="int" Nullable="false" />
+    <Property Name="Armor" Type="int" Nullable="false" />
+    <Property Name="Agility" Type="int" Nullable="false" />
+    <Property Name="Accuracy" Type="int" Nullable="false" />
+    <Property Name="Knowledge" Type="int" Nullable="false" />
+    <Property Name="Intellect" Type="int" Nullable="false" />
+    <Property Name="HitPoints" Type="int" Nullable="false" />
+    <Property Name="Carrier" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Constellation">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
-    <Property Name="Icon" Type="nchar" MaxLength="100" Nullable="false" />
+    <Property Name="Icon" Type="nchar" MaxLength="250" Nullable="false" />
     <Property Name="Description" Type="nchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="ConstellationBonus">
@@ -69,6 +112,38 @@
     <Property Name="Bonus" Type="int" Nullable="false" />
     <Property Name="Constallation" Type="int" Nullable="false" />
     <Property Name="Modifier" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Race">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Strength" Type="int" Nullable="false" />
+    <Property Name="Armor" Type="int" Nullable="false" />
+    <Property Name="Agility" Type="int" Nullable="false" />
+    <Property Name="Accuracy" Type="int" Nullable="false" />
+    <Property Name="Knowledge" Type="int" Nullable="false" />
+    <Property Name="Intellect" Type="int" Nullable="false" />
+    <Property Name="HitPoints" Type="int" Nullable="false" />
+    <Property Name="MoveSpeed" Type="int" Nullable="false" />
+    <Property Name="Size" Type="int" Nullable="false" />
+    <Property Name="Charisma" Type="int" Nullable="false" />
+    <Property Name="ResistanceToArtifact" Type="int" Nullable="false" />
+    <Property Name="Kindness" Type="float" Nullable="false" />
+    <Property Name="Temperance" Type="float" Nullable="false" />
+    <Property Name="Bravery" Type="float" Nullable="false" />
+    <Property Name="Eloquence" Type="float" Nullable="false" />
+    <Property Name="Cunning" Type="float" Nullable="false" />
+    <Property Name="Inventiveness" Type="float" Nullable="false" />
+    <Property Name="Observation" Type="float" Nullable="false" />
+    <Property Name="Stealthy" Type="float" Nullable="false" />
+    <Property Name="StrengthLevelModifier" Type="float" Nullable="false" />
+    <Property Name="ArmorLevelModifier" Type="float" Nullable="false" />
+    <Property Name="AgilityLevelModifier" Type="float" Nullable="false" />
+    <Property Name="AccuracyLevelModifier" Type="float" Nullable="false" />
+    <Property Name="KnowledgeLevelModifier" Type="float" Nullable="false" />
+    <Property Name="IntellectLevelModifier" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="Statistic">
     <Key>
@@ -109,6 +184,17 @@
     <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="MaxLevel" Type="int" Nullable="false" />
     <Property Name="Modifier" Type="float" Nullable="false" />
+    <Property Name="BaseValue" Type="float" Nullable="false" />
+    <Property Name="BaseModifier" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="UserArtifact">
     <Key>
@@ -123,8 +209,9 @@
     <Property Name="PredictionRadius" Type="int" Nullable="false" />
     <Property Name="ExperiencePoints" Type="bigint" Nullable="false" />
     <Property Name="ExperienceLevel" Type="int" Nullable="false" />
+    <Property Name="User" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="UserTalent">
+  <EntityType Name="UserArtifactTalent">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -187,25 +274,61 @@
   </Association>
   <Association Name="FK_ArtifactTypeBonus_Artifact">
     <End Role="Artifact" Type="Self.Artifact" Multiplicity="1" />
-    <End Role="ArtifactTypeBonus" Type="Self.ArtifactTypeBonus" Multiplicity="*" />
+    <End Role="ArtifactBonus" Type="Self.ArtifactBonus" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Artifact">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="ArtifactTypeBonus">
+      <Dependent Role="ArtifactBonus">
         <PropertyRef Name="Artifact" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ArtifactTypeBonus_Bonus">
     <End Role="Bonus" Type="Self.Bonus" Multiplicity="1" />
-    <End Role="ArtifactTypeBonus" Type="Self.ArtifactTypeBonus" Multiplicity="*" />
+    <End Role="ArtifactBonus" Type="Self.ArtifactBonus" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Bonus">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="ArtifactTypeBonus">
+      <Dependent Role="ArtifactBonus">
         <PropertyRef Name="Bonus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Carrier_Race">
+    <End Role="Race" Type="Self.Race" Multiplicity="1" />
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Race">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Carrier">
+        <PropertyRef Name="Race" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CarrierPredisposition_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
+    <End Role="CarrierPredisposition" Type="Self.CarrierPredisposition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CarrierPredisposition">
+        <PropertyRef Name="Carrier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CharrierCharacteristics_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
+    <End Role="CharrierCharacteristics" Type="Self.CharrierCharacteristics" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CharrierCharacteristics">
+        <PropertyRef Name="Carrier" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -269,26 +392,38 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserArtifact_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="UserArtifact">
+        <PropertyRef Name="User" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserTalent_Talent">
     <End Role="Talent" Type="Self.Talent" Multiplicity="1" />
-    <End Role="UserTalent" Type="Self.UserTalent" Multiplicity="*" />
+    <End Role="UserArtifactTalent" Type="Self.UserArtifactTalent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Talent">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="UserTalent">
+      <Dependent Role="UserArtifactTalent">
         <PropertyRef Name="UserTalent" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserTalent_UserArtifact">
     <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
-    <End Role="UserTalent" Type="Self.UserTalent" Multiplicity="*" />
+    <End Role="UserArtifactTalent" Type="Self.UserArtifactTalent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserArtifact">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="UserTalent">
+      <Dependent Role="UserArtifactTalent">
         <PropertyRef Name="UserArtifact" />
       </Dependent>
     </ReferentialConstraint>
@@ -297,17 +432,23 @@
     <EntitySet Name="ActFlow" EntityType="Self.ActFlow" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Artifact" EntityType="Self.Artifact" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ArtifactBonus" EntityType="Self.ArtifactBonus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ArtifactType" EntityType="Self.ArtifactType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ArtifactTypeBonus" EntityType="Self.ArtifactTypeBonus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BasePredisposition" EntityType="Self.BasePredisposition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Bonus" EntityType="Self.Bonus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Carrier" EntityType="Self.Carrier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CarrierPredisposition" EntityType="Self.CarrierPredisposition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CharrierCharacteristics" EntityType="Self.CharrierCharacteristics" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Constellation" EntityType="Self.Constellation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ConstellationBonus" EntityType="Self.ConstellationBonus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Talent" EntityType="Self.Talent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserArtifact" EntityType="Self.UserArtifact" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UserTalent" EntityType="Self.UserTalent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserArtifactTalent" EntityType="Self.UserArtifactTalent" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
       <End Role="Action" EntitySet="Action" />
       <End Role="ActFlow" EntitySet="ActFlow" />
@@ -326,11 +467,23 @@
     </AssociationSet>
     <AssociationSet Name="FK_ArtifactTypeBonus_Artifact" Association="Self.FK_ArtifactTypeBonus_Artifact">
       <End Role="Artifact" EntitySet="Artifact" />
-      <End Role="ArtifactTypeBonus" EntitySet="ArtifactTypeBonus" />
+      <End Role="ArtifactBonus" EntitySet="ArtifactBonus" />
     </AssociationSet>
     <AssociationSet Name="FK_ArtifactTypeBonus_Bonus" Association="Self.FK_ArtifactTypeBonus_Bonus">
       <End Role="Bonus" EntitySet="Bonus" />
-      <End Role="ArtifactTypeBonus" EntitySet="ArtifactTypeBonus" />
+      <End Role="ArtifactBonus" EntitySet="ArtifactBonus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Carrier_Race" Association="Self.FK_Carrier_Race">
+      <End Role="Race" EntitySet="Race" />
+      <End Role="Carrier" EntitySet="Carrier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CarrierPredisposition_Carrier" Association="Self.FK_CarrierPredisposition_Carrier">
+      <End Role="Carrier" EntitySet="Carrier" />
+      <End Role="CarrierPredisposition" EntitySet="CarrierPredisposition" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CharrierCharacteristics_Carrier" Association="Self.FK_CharrierCharacteristics_Carrier">
+      <End Role="Carrier" EntitySet="Carrier" />
+      <End Role="CharrierCharacteristics" EntitySet="CharrierCharacteristics" />
     </AssociationSet>
     <AssociationSet Name="FK_ConstellationBonus_Bonus" Association="Self.FK_ConstellationBonus_Bonus">
       <End Role="Bonus" EntitySet="Bonus" />
@@ -352,13 +505,17 @@
       <End Role="Constellation" EntitySet="Constellation" />
       <End Role="UserArtifact" EntitySet="UserArtifact" />
     </AssociationSet>
+    <AssociationSet Name="FK_UserArtifact_User" Association="Self.FK_UserArtifact_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserArtifact" EntitySet="UserArtifact" />
+    </AssociationSet>
     <AssociationSet Name="FK_UserTalent_Talent" Association="Self.FK_UserTalent_Talent">
       <End Role="Talent" EntitySet="Talent" />
-      <End Role="UserTalent" EntitySet="UserTalent" />
+      <End Role="UserArtifactTalent" EntitySet="UserArtifactTalent" />
     </AssociationSet>
     <AssociationSet Name="FK_UserTalent_UserArtifact" Association="Self.FK_UserTalent_UserArtifact">
       <End Role="UserArtifact" EntitySet="UserArtifact" />
-      <End Role="UserTalent" EntitySet="UserTalent" />
+      <End Role="UserArtifactTalent" EntitySet="UserArtifactTalent" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

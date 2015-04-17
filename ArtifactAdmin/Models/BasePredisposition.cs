@@ -12,19 +12,8 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bonu
+    public partial class BasePredisposition
     {
-        public Bonu()
-        {
-            this.ConstellationBonus = new HashSet<ConstellationBonu>();
-            this.ArtifactBonus = new HashSet<ArtifactBonu>();
-        }
-    
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    
-        public virtual ICollection<ConstellationBonu> ConstellationBonus { get; set; }
-        public virtual ICollection<ArtifactBonu> ArtifactBonus { get; set; }
+        public int id { get; set; }
     }
 }

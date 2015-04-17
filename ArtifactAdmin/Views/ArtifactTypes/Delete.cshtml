@@ -1,0 +1,48 @@
+﻿@model ArtifactAdmin.Models.ArtifactType
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви дійсно хочете видалити цей запис?</h3>
+<div>
+    <h4>Типи артефактів</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Icon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descrioption)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descrioption)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> 
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+    }
+</div>

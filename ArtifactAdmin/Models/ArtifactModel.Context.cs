@@ -29,7 +29,6 @@ namespace ArtifactAdmin.Models
         public virtual DbSet<Action> Actions { get; set; }
         public virtual DbSet<Artifact> Artifacts { get; set; }
         public virtual DbSet<ArtifactType> ArtifactTypes { get; set; }
-        public virtual DbSet<ArtifactTypeBonu> ArtifactTypeBonus { get; set; }
         public virtual DbSet<Bonu> Bonus { get; set; }
         public virtual DbSet<Constellation> Constellations { get; set; }
         public virtual DbSet<ConstellationBonu> ConstellationBonus { get; set; }
@@ -38,6 +37,13 @@ namespace ArtifactAdmin.Models
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Talent> Talents { get; set; }
         public virtual DbSet<UserArtifact> UserArtifacts { get; set; }
-        public virtual DbSet<UserTalent> UserTalents { get; set; }
+        public virtual DbSet<ArtifactBonu> ArtifactBonus { get; set; }
+        public virtual DbSet<BasePredisposition> BasePredispositions { get; set; }
+        public virtual DbSet<Carrier> Carriers { get; set; }
+        public virtual DbSet<CarrierPredisposition> CarrierPredispositions { get; set; }
+        public virtual DbSet<CharrierCharacteristic> CharrierCharacteristics { get; set; }
+        public virtual DbSet<Race> Races { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserArtifactTalent> UserArtifactTalents { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ArtifactAdmin.Models.Constellation
+﻿@model ArtifactAdmin.Models.ArtifactType
 
 @{
     ViewBag.Title = "Create";
@@ -7,12 +7,12 @@
 <h2>Створити новий запис</h2>
 
 
-@using (Html.BeginForm("Create", "Constellations", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "ArtifactTypes", FormMethod.Post, new { enctype = "multipart/form-data" })) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Сузір'я</h4>
+        <h4>Типи артефактів</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -26,25 +26,35 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Icon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Icon, new { htmlAttributes = new { @class = "file", @type = "file", @name = "file", @accept = "image/*",
-           @onchange="javascript:ShowIcon(this);"} })
+                @Html.EditorFor(model => model.Icon, new
+           {
+               htmlAttributes = new
+               {
+                   @class = "file",
+                   @type = "file",
+                   @name = "file",
+                   @accept = "image/*",
+                   @onchange = "javascript:ShowIcon(this);"
+               }
+               
+           })
                 @if (Model == null)
                 {
-                    <img src="#" id="icon" width=" 160 " height=" 120" hidden> 
+                    <img src="#" id="icon" width=" 160 " height=" 120" hidden>
                 }
                 else
                 {
-                    <img src=@Model.Icon id="icon" width=" 160 " height=" 120" >
+                    <img src=@Model.Icon id="icon" width=" 160 " height=" 120">
                 }
-                @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
+                 @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Descrioption, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Descrioption, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Descrioption, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -76,5 +86,5 @@
             }
         }
     };
-    </script>
+</script>
 }

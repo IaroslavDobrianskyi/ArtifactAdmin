@@ -161,6 +161,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ArtifactTypesController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -174,6 +175,9 @@
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Artifact.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ArtifactBonu.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ArtifactModel.Context.cs">
@@ -194,10 +198,20 @@
     <Compile Include="Models\ArtifactType.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ArtifactTypeBonu.cs">
+    <Compile Include="Models\ArtifactTypes.cs" />
+    <Compile Include="Models\BasePredisposition.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Bonu.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Carrier.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarrierPredisposition.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CharrierCharacteristic.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Constellation.cs">
@@ -208,6 +222,9 @@
     </Compile>
     <Compile Include="Models\Constellations.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Race.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Statistic.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -220,10 +237,13 @@
     <Compile Include="Models\Talent.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserArtifact.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\UserTalent.cs">
+    <Compile Include="Models\UserArtifactTalent.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -306,8 +326,14 @@
     <Content Include="Views\Constellations\Details.cshtml" />
     <Content Include="Views\Constellations\Edit.cshtml" />
     <Content Include="Views\Constellations\Index.cshtml" />
+    <Content Include="Views\ArtifactTypes\Create.cshtml" />
+    <Content Include="Views\ArtifactTypes\Delete.cshtml" />
+    <Content Include="Views\ArtifactTypes\Details.cshtml" />
+    <Content Include="Views\ArtifactTypes\Edit.cshtml" />
+    <Content Include="Views\ArtifactTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\ArtifactTypes\" />
     <Folder Include="App_Data\Constellations\" />
     <Folder Include="Resources\Views\" />
   </ItemGroup>

@@ -11,132 +11,120 @@ using System.IO;
 
 namespace ArtifactAdmin.Controllers
 {
-    public class ConstellationsController : Controller
+    public class ArtifactTypesController : Controller
     {
         private artEntities db = new artEntities();
 
-        // GET: Constellations
+        // GET: ArtifactTypes
         public ActionResult Index()
         {
-            return View(db.Constellations.ToList());
+            return View(db.ArtifactTypes.ToList());
         }
 
-        // GET: Constellations/Details/5
+        // GET: ArtifactTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Constellation constellation = db.Constellations.Find(id);
-            if (constellation == null)
+            ArtifactType artifactType = db.ArtifactTypes.Find(id);
+            if (artifactType == null)
             {
                 return HttpNotFound();
             }
-            return View(constellation);
+            return View(artifactType);
         }
 
-        // GET: Constellations/Create
+        // GET: ArtifactTypes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Constellations/Create
+        // POST: ArtifactTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name,Icon,Description")] Constellation constellation,HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactType artifactType, HttpPostedFileBase Icon)
         {
             if (ModelState.IsValid)
             {
                 var fileName = Path.GetFileName(Icon.FileName);
                 fileName = Guid.NewGuid().ToString() + '_' + fileName;
-                var path = Path.Combine(Server.MapPath("~/App_Data/Constellations"), fileName);
+                var path = Path.Combine(Server.MapPath("~/App_Data/ArtifactTypes"), fileName);
                 Icon.SaveAs(path);
-                constellation.Icon = path;
-               
-                    try
-                    {
-                        db.Constellations.Add(constellation);
-                        db.SaveChanges();
-                       
-                    }
-                    catch 
-                    {
-                       
-                    }
-                
+                artifactType.Icon = path;
+                try
+                {
+                    db.ArtifactTypes.Add(artifactType);
+                    db.SaveChanges();
+                }
+                catch
+                {
+
+                }
                 return RedirectToAction("Index");
             }
 
-            return View(constellation);
+            return View(artifactType);
         }
 
-        // GET: Constellations/Edit/5
+        // GET: ArtifactTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Constellation constellation = db.Constellations.Find(id);
-            if (constellation == null)
+            ArtifactType artifactType = db.ArtifactTypes.Find(id);
+            if (artifactType == null)
             {
                 return HttpNotFound();
             }
-            return View(constellation);
+            return View(artifactType);
         }
 
-        // POST: Constellations/Edit/5
+        // POST: ArtifactTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,Icon,Description")] Constellation constellation)
+        public ActionResult Edit([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactType artifactType)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Entry(constellation).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                catch { }
+                db.Entry(artifactType).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(constellation);
+            return View(artifactType);
         }
 
-        // GET: Constellations/Delete/5
+        // GET: ArtifactTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Constellation constellation = db.Constellations.Find(id);
-            if (constellation == null)
+            ArtifactType artifactType = db.ArtifactTypes.Find(id);
+            if (artifactType == null)
             {
                 return HttpNotFound();
             }
-            return View(constellation);
+            return View(artifactType);
         }
 
-        // POST: Constellations/Delete/5
+        // POST: ArtifactTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Constellation constellation = db.Constellations.Find(id);
-
-            try
-            {
-                db.Constellations.Remove(constellation);
-                db.SaveChanges();
-            }
-            catch { }
+            ArtifactType artifactType = db.ArtifactTypes.Find(id);
+            db.ArtifactTypes.Remove(artifactType);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

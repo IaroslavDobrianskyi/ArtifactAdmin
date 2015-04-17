@@ -12,19 +12,18 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bonu
+    public partial class CharrierCharacteristic
     {
-        public Bonu()
-        {
-            this.ConstellationBonus = new HashSet<ConstellationBonu>();
-            this.ArtifactBonus = new HashSet<ArtifactBonu>();
-        }
+        public int id { get; set; }
+        public int Strength { get; set; }
+        public int Armor { get; set; }
+        public int Agility { get; set; }
+        public int Accuracy { get; set; }
+        public int Knowledge { get; set; }
+        public int Intellect { get; set; }
+        public int HitPoints { get; set; }
+        public int Carrier { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    
-        public virtual ICollection<ConstellationBonu> ConstellationBonus { get; set; }
-        public virtual ICollection<ArtifactBonu> ArtifactBonus { get; set; }
+        public virtual Carrier Carrier1 { get; set; }
     }
 }

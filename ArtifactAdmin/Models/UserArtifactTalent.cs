@@ -12,19 +12,14 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Bonu
+    public partial class UserArtifactTalent
     {
-        public Bonu()
-        {
-            this.ConstellationBonus = new HashSet<ConstellationBonu>();
-            this.ArtifactBonus = new HashSet<ArtifactBonu>();
-        }
+        public int id { get; set; }
+        public int UserArtifact { get; set; }
+        public int UserTalent { get; set; }
+        public int TalentLevel { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-    
-        public virtual ICollection<ConstellationBonu> ConstellationBonus { get; set; }
-        public virtual ICollection<ArtifactBonu> ArtifactBonus { get; set; }
+        public virtual Talent Talent { get; set; }
+        public virtual UserArtifact UserArtifact1 { get; set; }
     }
 }
