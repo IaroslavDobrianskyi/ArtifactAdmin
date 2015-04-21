@@ -28,14 +28,9 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Icon, new { htmlAttributes = new { @class = "file", @type = "file", @name = "file", @accept = "image/*",
            @onchange="javascript:ShowIcon(this);"} })
-                @if (Model == null)
-                {
-                    <img src="#" id="icon" width=" 160 " height=" 120" hidden> 
-                }
-                else
-                {
-                    <img src=@Model.Icon id="icon" width=" 160 " height=" 120" >
-                }
+               
+                    <img src="#" id="ic" width=" 160 " height=" 120" hidden>
+               
                 @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -64,17 +59,13 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
     function ShowIcon(input) {
-        document.getElementById("icon").hidden = false;
-        //var name = document.getElementById("Icon").value;
-        //document.images['icon'].src = name;
+        document.getElementById("ic").hidden = false;
         if (input.files && input.files[0])
         {
             var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#icon').attr('src', e.target.result);
-                reader.readAsDataUrl(input.files[0]);
+            reader.onload =  function(e) {$('#ic').attr('src', e.target.result); }
+        reader.readAsDataURL(input.files[0]);
             }
-        }
-    };
+            };
     </script>
 }

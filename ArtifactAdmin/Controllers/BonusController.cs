@@ -7,134 +7,111 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ArtifactAdmin.Models;
-using System.IO;
 
 namespace ArtifactAdmin.Controllers
 {
-    public class ArtifactTypesController : Controller
+    public class BonusController : Controller
     {
         private artEntities db = new artEntities();
 
-        // GET: ArtifactTypes
+        // GET: Bonus
         public ActionResult Index()
         {
-            return View(db.ArtifactTypes.ToList());
+            return View(db.Bonus.ToList());
         }
 
-        // GET: ArtifactTypes/Details/5
+        // GET: Bonus/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ArtifactType artifactType = db.ArtifactTypes.Find(id);
-            if (artifactType == null)
+            Bonu bonu = db.Bonus.Find(id);
+            if (bonu == null)
             {
                 return HttpNotFound();
             }
-            return View(artifactType);
+            return View(bonu);
         }
 
-        // GET: ArtifactTypes/Create
+        // GET: Bonus/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ArtifactTypes/Create
+        // POST: Bonus/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactType artifactType, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] Bonu bonu)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(Icon.FileName);
-                fileName = Guid.NewGuid().ToString() + '_' + fileName;
-                string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
-                var path = Path.Combine(Server.MapPath(IPath+"ArtifactTypes"), fileName);
-                Icon.SaveAs(path);
-                artifactType.Icon = fileName;
-                try
-                {
-                    db.ArtifactTypes.Add(artifactType);
-                    db.SaveChanges();
-                }
-                catch
-                {
-
-                }
+                db.Bonus.Add(bonu);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(artifactType);
+            return View(bonu);
         }
 
-        // GET: ArtifactTypes/Edit/5
+        // GET: Bonus/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ArtifactType artifactType = db.ArtifactTypes.Find(id);
-            if (artifactType == null)
+            Bonu bonu = db.Bonus.Find(id);
+            if (bonu == null)
             {
                 return HttpNotFound();
             }
-            return View(artifactType);
+            return View(bonu);
         }
 
-        // POST: ArtifactTypes/Edit/5
+        // POST: Bonus/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactType artifactType)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Bonu bonu)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(artifactType).State = EntityState.Modified;
+                db.Entry(bonu).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(artifactType);
+            return View(bonu);
         }
 
-        // GET: ArtifactTypes/Delete/5
+        // GET: Bonus/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ArtifactType artifactType = db.ArtifactTypes.Find(id);
-            if (artifactType == null)
+            Bonu bonu = db.Bonus.Find(id);
+            if (bonu == null)
             {
                 return HttpNotFound();
             }
-            return View(artifactType);
+            return View(bonu);
         }
 
-        // POST: ArtifactTypes/Delete/5
+        // POST: Bonus/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ArtifactType artifactType = db.ArtifactTypes.Find(id);
-            string fileName = artifactType.Icon;
-            string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
-            var path = Path.Combine(Server.MapPath(IPath + "ArtifactTypes"), fileName);
-            FileInfo file = new FileInfo(path);
-            if (file.Exists) file.Delete();
-            try
-            {
-                db.ArtifactTypes.Remove(artifactType);
-                db.SaveChanges();
-            }
-            catch { }
+            Bonu bonu = db.Bonus.Find(id);
+            db.Bonus.Remove(bonu);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 

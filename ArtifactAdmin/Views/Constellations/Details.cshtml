@@ -24,7 +24,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.Icon)
-            <img src="/App_Data/Constellations/tv_box2.jpg" id="icon" width=" 160 " height=" 120">
+            <img src="@(@ArtifactAdmin.App_Start.ImagePath.ImPath+"Constellations/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
         </dd>
 
         <dt>

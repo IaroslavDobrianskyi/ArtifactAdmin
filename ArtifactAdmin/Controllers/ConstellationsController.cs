@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Configuration;
 using ArtifactAdmin.Models;
 using System.IO;
 
@@ -53,9 +54,12 @@ namespace ArtifactAdmin.Controllers
             {
                 var fileName = Path.GetFileName(Icon.FileName);
                 fileName = Guid.NewGuid().ToString() + '_' + fileName;
-                var path = Path.Combine(Server.MapPath("~/App_Data/Constellations"), fileName);
+
+                string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
+
+                var path = Path.Combine(Server.MapPath(IPath+"Constellations"), fileName);
                 Icon.SaveAs(path);
-                constellation.Icon = path;
+                constellation.Icon = fileName;
                
                     try
                     {
@@ -130,11 +134,16 @@ namespace ArtifactAdmin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Constellation constellation = db.Constellations.Find(id);
-
+            string fileName = constellation.Icon;
+            string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
+            var path = Path.Combine(Server.MapPath(IPath + "Constellations"), fileName);
+            FileInfo file = new FileInfo(path);
+            if (file.Exists) file.Delete();
             try
             {
                 db.Constellations.Remove(constellation);
                 db.SaveChanges();
+
             }
             catch { }
             return RedirectToAction("Index");

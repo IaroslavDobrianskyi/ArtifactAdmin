@@ -25,6 +25,7 @@
 
         <dd>
             @Html.DisplayFor(model => model.Icon)
+            <img src="@(@ArtifactAdmin.App_Start.ImagePath.ImPath+"ArtifactTypes/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
         </dd>
 
         <dt>

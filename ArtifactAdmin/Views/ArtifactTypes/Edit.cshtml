@@ -28,7 +28,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Icon, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Icon, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.Icon, new { htmlAttributes = new { @class = "form-control" } })
+                <img src="@(@ArtifactAdmin.App_Start.ImagePath.ImPath+"ArtifactTypes/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
                 @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
             </div>
         </div>

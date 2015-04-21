@@ -38,14 +38,9 @@
                }
                
            })
-                @if (Model == null)
-                {
+                
                     <img src="#" id="icon" width=" 160 " height=" 120" hidden>
-                }
-                else
-                {
-                    <img src=@Model.Icon id="icon" width=" 160 " height=" 120">
-                }
+                
                  @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -75,15 +70,14 @@
 <script type="text/javascript">
     function ShowIcon(input) {
         document.getElementById("icon").hidden = false;
-        //var name = document.getElementById("Icon").value;
-        //document.images['icon'].src = name;
         if (input.files && input.files[0])
         {
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#icon').attr('src', e.target.result);
-                reader.readAsDataUrl(input.files[0]);
             }
+                reader.readAsDataURL(input.files[0]);
+            
         }
     };
 </script>
