@@ -10,111 +10,107 @@ using ArtifactAdmin.Models;
 
 namespace ArtifactAdmin.Controllers
 {
-    public class BonusController : Controller
+    public class TalentsController : Controller
     {
         private artEntities db = new artEntities();
 
-        // GET: Bonus
+        // GET: Talents
         public ActionResult Index()
         {
-            return View(db.Bonus.ToList());
+            return View(db.Talents.ToList());
         }
 
-        // GET: Bonus/Details/5
+        // GET: Talents/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bonu bonu = db.Bonus.Find(id);
-            if (bonu == null)
+            Talent talent = db.Talents.Find(id);
+            if (talent == null)
             {
                 return HttpNotFound();
             }
-            return View(bonu);
+            return View(talent);
         }
 
-        // GET: Bonus/Create
+        // GET: Talents/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Bonus/Create
+        // POST: Talents/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description")] Bonu bonu)
+        public ActionResult Create([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier")] Talent talent)
         {
             if (ModelState.IsValid)
             {
-                db.Bonus.Add(bonu);
+                db.Talents.Add(talent);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(bonu);
+            return View(talent);
         }
 
-        // GET: Bonus/Edit/5
+        // GET: Talents/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bonu bonu = db.Bonus.Find(id);
-            if (bonu == null)
+            Talent talent = db.Talents.Find(id);
+            if (talent == null)
             {
                 return HttpNotFound();
             }
-            return View(bonu);
+            return View(talent);
         }
 
-        // POST: Bonus/Edit/5
+        // POST: Talents/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description")] Bonu bonu)
+        public ActionResult Edit([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier")] Talent talent)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    db.Entry(bonu).State = EntityState.Modified;
-                    db.SaveChanges();
-                }
-                catch { }
+                db.Entry(talent).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(bonu);
+            return View(talent);
         }
 
-        // GET: Bonus/Delete/5
+        // GET: Talents/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Bonu bonu = db.Bonus.Find(id);
-            if (bonu == null)
+            Talent talent = db.Talents.Find(id);
+            if (talent == null)
             {
                 return HttpNotFound();
             }
-            return View(bonu);
+            return View(talent);
         }
 
-        // POST: Bonus/Delete/5
+        // POST: Talents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Bonu bonu = db.Bonus.Find(id);
-            db.Bonus.Remove(bonu);
+            Talent talent = db.Talents.Find(id);
+            db.Talents.Remove(talent);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

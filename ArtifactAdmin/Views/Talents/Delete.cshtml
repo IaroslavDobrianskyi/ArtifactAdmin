@@ -1,0 +1,72 @@
+﻿@model ArtifactAdmin.Models.Talent
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви дійсно хочете видалити цей запис?</h3>
+<div>
+    <h4>Таланти</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseValue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseValue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseModifier)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> 
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+    }
+</div>
