@@ -186,6 +186,7 @@
     <Property Name="Modifier" Type="float" Nullable="false" />
     <Property Name="BaseValue" Type="float" Nullable="false" />
     <Property Name="BaseModifier" Type="float" Nullable="false" />
+    <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
   </EntityType>
   <EntityType Name="User">
     <Key>

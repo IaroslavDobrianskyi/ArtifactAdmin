@@ -191,6 +191,7 @@
           <Property Name="Modifier" Type="float" Nullable="false" />
           <Property Name="BaseValue" Type="float" Nullable="false" />
           <Property Name="BaseModifier" Type="float" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -648,6 +649,7 @@
           <Property Name="BaseValue" Type="Double" Nullable="false" />
           <Property Name="BaseModifier" Type="Double" Nullable="false" />
           <NavigationProperty Name="UserArtifactTalents" Relationship="artModel.FK_UserTalent_Talent1" FromRole="Talent" ToRole="UserArtifactTalent" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="UserArtifact">
           <Key>
@@ -1189,6 +1191,7 @@
           <EntitySetMapping Name="Talents">
             <EntityTypeMapping TypeName="artModel.Talent">
               <MappingFragment StoreEntitySet="Talent">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="BaseModifier" ColumnName="BaseModifier" />
                 <ScalarProperty Name="BaseValue" ColumnName="BaseValue" />
                 <ScalarProperty Name="id" ColumnName="id" />

@@ -105,6 +105,7 @@
     <EntitySetMapping Name="Talents">
       <EntityTypeMapping TypeName="artModel.Talent">
         <MappingFragment StoreEntitySet="Talent">
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="BaseModifier" ColumnName="BaseModifier" />
           <ScalarProperty Name="BaseValue" ColumnName="BaseValue" />
           <ScalarProperty Name="id" ColumnName="id" />

@@ -25,5 +25,9 @@ namespace ArtifactAdmin.Models
         public double Modifier { get; set; }
         public double BaseValue { get; set; }
         public double BaseModifier { get; set; }
+        [Required(ErrorMessageResourceName = "RequiredIcon",
+         ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+        [Display(Name = "Іконка")]
+        public string Icon { get; set; }
     }
 }

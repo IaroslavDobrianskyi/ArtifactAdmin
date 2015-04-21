@@ -121,6 +121,7 @@
     <Property Name="BaseValue" Type="Double" Nullable="false" />
     <Property Name="BaseModifier" Type="Double" Nullable="false" />
     <NavigationProperty Name="UserArtifactTalents" Relationship="artModel.FK_UserTalent_Talent1" FromRole="Talent" ToRole="UserArtifactTalent" />
+    <Property Name="Icon" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="UserArtifact">
     <Key>

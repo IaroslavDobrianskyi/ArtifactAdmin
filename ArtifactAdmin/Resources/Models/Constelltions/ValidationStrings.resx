@@ -121,7 +121,7 @@
     <value>Введіть опис!</value>
   </data>
   <data name="RequiredIcon" xml:space="preserve">
-    <value>Введіть шлях до іконки!</value>
+    <value>Виберіть іконку!</value>
   </data>
   <data name="RequiredName" xml:space="preserve">
     <value>Введіть назву!</value>

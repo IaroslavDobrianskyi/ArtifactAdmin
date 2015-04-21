@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ArtifactAdmin.Models;
+using System.IO;
 
 namespace ArtifactAdmin.Controllers
 {
@@ -46,12 +47,23 @@ namespace ArtifactAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier")] Talent talent)
+        public ActionResult Create([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")]
+            Talent talent,HttpPostedFileBase Icon)
         {
             if (ModelState.IsValid)
             {
-                db.Talents.Add(talent);
-                db.SaveChanges();
+                var fileName = Path.GetFileName(Icon.FileName);
+                fileName = Guid.NewGuid().ToString() + '_' + fileName;
+                string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
+                var path = Path.Combine(Server.MapPath(IPath + "Talents"), fileName);
+                Icon.SaveAs(path);
+                talent.Icon = fileName;
+                try
+                {
+                    db.Talents.Add(talent);
+                    db.SaveChanges();
+                }
+                catch { }
                 return RedirectToAction("Index");
             }
 
@@ -78,7 +90,7 @@ namespace ArtifactAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier")] Talent talent)
+        public ActionResult Edit([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")] Talent talent)
         {
             if (ModelState.IsValid)
             {
@@ -110,8 +122,17 @@ namespace ArtifactAdmin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Talent talent = db.Talents.Find(id);
-            db.Talents.Remove(talent);
-            db.SaveChanges();
+            string fileName = talent.Icon;
+            string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
+            var path = Path.Combine(Server.MapPath(IPath + "Talents"), fileName);
+            FileInfo file = new FileInfo(path);
+            if (file.Exists) file.Delete();
+            try
+            {
+                db.Talents.Remove(talent);
+                db.SaveChanges();
+            }
+            catch { }
             return RedirectToAction("Index");
         }
 

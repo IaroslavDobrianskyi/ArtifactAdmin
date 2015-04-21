@@ -70,7 +70,7 @@ namespace ValidationConstellation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Введіть шлях до іконки!.
+        ///   Looks up a localized string similar to Виберіть іконку!.
         /// </summary>
         public static string RequiredIcon {
             get {

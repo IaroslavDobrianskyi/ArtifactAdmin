@@ -26,6 +26,7 @@ namespace ArtifactAdmin.Models
         public double Modifier { get; set; }
         public double BaseValue { get; set; }
         public double BaseModifier { get; set; }
+        public string Icon { get; set; }
     
         public virtual ICollection<UserArtifactTalent> UserArtifactTalents { get; set; }
     }
