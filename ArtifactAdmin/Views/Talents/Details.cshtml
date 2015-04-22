@@ -23,7 +23,6 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Icon)
             <img src="@(@ArtifactAdmin.App_Start.ImagePath.ImPath+"Talents/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
         </dd>
         <dt>
@@ -31,7 +30,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description, new { rows = "10", cols = "50", @readonly = true })
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.MaxLevel)

@@ -26,7 +26,7 @@
             @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Description)
+            @Html.TextAreaFor(modelItem => item.Description, new { @readonly = true, rows = "10", cols = "50" })
         </td>
         <td>
             @Html.ActionLink("Змінити", "Edit", new { id = item.Id }) |

@@ -126,4 +126,7 @@
   <data name="RequiredName" xml:space="preserve">
     <value>Введіть назву!</value>
   </data>
+  <data name="StringLength" xml:space="preserve">
+    <value>Перевищена довжина рядка!</value>
+  </data>
 </root>

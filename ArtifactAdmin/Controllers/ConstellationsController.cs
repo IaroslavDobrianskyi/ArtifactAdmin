@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Configuration;
+//using System.Web.Configuration;
 using ArtifactAdmin.Models;
 using System.IO;
 
@@ -29,7 +29,9 @@ namespace ArtifactAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+        
             Constellation constellation = db.Constellations.Find(id);
+           
             if (constellation == null)
             {
                 return HttpNotFound();
@@ -50,6 +52,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Name,Icon,Description")] Constellation constellation,HttpPostedFileBase Icon)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
                 var fileName = Path.GetFileName(Icon.FileName);
@@ -60,19 +63,19 @@ namespace ArtifactAdmin.Controllers
                 var path = Path.Combine(Server.MapPath(IPath+"Constellations"), fileName);
                 Icon.SaveAs(path);
                 constellation.Icon = fileName;
-               
                     try
                     {
                         db.Constellations.Add(constellation);
                         db.SaveChanges();
                        
                     }
-                    catch 
+                    catch
                     {
-                       
+                        ViewBag.Error = "Помилка при створенні нового запису";
+                        return View(constellation);
                     }
-                
-                return RedirectToAction("Index");
+
+                    return RedirectToAction("Index");
             }
 
             return View(constellation);
@@ -100,6 +103,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name,Icon,Description")] Constellation constellation)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
                 try
@@ -107,7 +111,11 @@ namespace ArtifactAdmin.Controllers
                     db.Entry(constellation).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                catch { }
+                catch
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    return View(constellation);
+                }
                 return RedirectToAction("Index");
             }
             return View(constellation);
@@ -133,6 +141,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.Error = "";
             Constellation constellation = db.Constellations.Find(id);
             string fileName = constellation.Icon;
             string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
@@ -145,7 +154,11 @@ namespace ArtifactAdmin.Controllers
                 db.SaveChanges();
 
             }
-            catch { }
+            catch 
+            {
+                ViewBag.Error = "Помилка при видаленні запису !";
+                return View(constellation);
+            }
             return RedirectToAction("Index");
         }
 

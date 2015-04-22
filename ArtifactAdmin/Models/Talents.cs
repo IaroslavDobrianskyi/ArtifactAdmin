@@ -16,10 +16,14 @@ namespace ArtifactAdmin.Models
         [Required(ErrorMessageResourceName = "RequiredDescription",
         ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Опис")]
+        [StringLength(500, ErrorMessageResourceName = "StringLength",
+  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Description { get; set; }
         [Required(ErrorMessageResourceName = "RequiredName",
     ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Назва")]
+        [StringLength(50, ErrorMessageResourceName = "StringLength",
+  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Name { get; set; }
         public int MaxLevel { get; set; }
         public double Modifier { get; set; }

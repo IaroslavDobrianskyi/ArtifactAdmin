@@ -86,5 +86,14 @@ namespace ValidationConstellation {
                 return ResourceManager.GetString("RequiredName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Перевищена довжина рядка!.
+        /// </summary>
+        public static string StringLength {
+            get {
+                return ResourceManager.GetString("StringLength", resourceCulture);
+            }
+        }
     }
 }

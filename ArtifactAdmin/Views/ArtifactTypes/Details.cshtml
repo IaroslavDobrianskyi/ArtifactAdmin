@@ -23,7 +23,6 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Icon)
             <img src="@(@ArtifactAdmin.App_Start.ImagePath.ImPath+"ArtifactTypes/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
         </dd>
 
@@ -32,7 +31,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Descrioption)
+            @Html.TextAreaFor(model => model.Descrioption, new { rows = "10", cols = "50", @readonly = true })
         </dd>
 
     </dl>

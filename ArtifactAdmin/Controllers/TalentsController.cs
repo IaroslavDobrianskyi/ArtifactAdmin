@@ -50,6 +50,7 @@ namespace ArtifactAdmin.Controllers
         public ActionResult Create([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")]
             Talent talent,HttpPostedFileBase Icon)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
                 var fileName = Path.GetFileName(Icon.FileName);
@@ -63,7 +64,11 @@ namespace ArtifactAdmin.Controllers
                     db.Talents.Add(talent);
                     db.SaveChanges();
                 }
-                catch { }
+                catch
+                {
+                    ViewBag.Error = "Помилка при створенні нового запису";
+                    return View(talent);
+                }
                 return RedirectToAction("Index");
             }
 
@@ -92,10 +97,19 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")] Talent talent)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
-                db.Entry(talent).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.Entry(talent).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    return View(talent);
+                }
                 return RedirectToAction("Index");
             }
             return View(talent);
@@ -121,6 +135,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.Error = "";
             Talent talent = db.Talents.Find(id);
             string fileName = talent.Icon;
             string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
@@ -132,7 +147,11 @@ namespace ArtifactAdmin.Controllers
                 db.Talents.Remove(talent);
                 db.SaveChanges();
             }
-            catch { }
+            catch 
+            {
+                ViewBag.Error = "Помилка при видаленні запису !";
+                return View(talent);
+            }
             return RedirectToAction("Index");
         }
 

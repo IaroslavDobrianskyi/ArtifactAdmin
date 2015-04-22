@@ -218,9 +218,9 @@
     <Compile Include="Models\CharrierCharacteristic.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Constellation.cs">
+    <None Include="Models\Constellation.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
-    </Compile>
+    </None>
     <Compile Include="Models\ConstellationBonu.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>

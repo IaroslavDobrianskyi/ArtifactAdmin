@@ -48,10 +48,19 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description")] Bonu bonu)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
+                try 
+                { 
                 db.Bonus.Add(bonu);
                 db.SaveChanges();
+                }
+                catch 
+                {
+                    ViewBag.Error = "Помилка при створенні нового запису";
+                    return View(bonu);
+                }
                 return RedirectToAction("Index");
             }
 
@@ -80,6 +89,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] Bonu bonu)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
                 try
@@ -87,7 +97,11 @@ namespace ArtifactAdmin.Controllers
                     db.Entry(bonu).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                catch { }
+                catch
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    return View(bonu);
+                }
                 return RedirectToAction("Index");
             }
             return View(bonu);
@@ -113,9 +127,18 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.Error = "";
             Bonu bonu = db.Bonus.Find(id);
+            try
+            { 
             db.Bonus.Remove(bonu);
             db.SaveChanges();
+            }
+            catch
+            {
+                ViewBag.Error = "Помилка при видаленні запису !";
+                return View(bonu);
+            }
             return RedirectToAction("Index");
         }
 

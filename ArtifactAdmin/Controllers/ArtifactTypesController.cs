@@ -49,6 +49,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactType artifactType, HttpPostedFileBase Icon)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
                 var fileName = Path.GetFileName(Icon.FileName);
@@ -64,7 +65,8 @@ namespace ArtifactAdmin.Controllers
                 }
                 catch
                 {
-
+                     ViewBag.Error = "Помилка при створенні нового запису";
+                     return View(artifactType);
                 }
                 return RedirectToAction("Index");
             }
@@ -94,10 +96,19 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactType artifactType)
         {
+            ViewBag.Error = "";
             if (ModelState.IsValid)
             {
-                db.Entry(artifactType).State = EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.Entry(artifactType).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    return View(artifactType);
+                }
                 return RedirectToAction("Index");
             }
             return View(artifactType);
@@ -123,6 +134,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            ViewBag.Error = "";
             ArtifactType artifactType = db.ArtifactTypes.Find(id);
             string fileName = artifactType.Icon;
             string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
@@ -134,7 +146,11 @@ namespace ArtifactAdmin.Controllers
                 db.ArtifactTypes.Remove(artifactType);
                 db.SaveChanges();
             }
-            catch { }
+            catch 
+            {
+                 ViewBag.Error = "Помилка при видаленні запису !";
+                return View(artifactType);
+            }
             return RedirectToAction("Index");
         }
 
