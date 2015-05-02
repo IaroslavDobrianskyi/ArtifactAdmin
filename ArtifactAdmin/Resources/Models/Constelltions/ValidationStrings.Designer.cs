@@ -79,11 +79,29 @@ namespace ValidationConstellation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Виберіть хоч би один рядок в список!.
+        /// </summary>
+        public static string RequiredList {
+            get {
+                return ResourceManager.GetString("RequiredList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введіть назву!.
         /// </summary>
         public static string RequiredName {
             get {
                 return ResourceManager.GetString("RequiredName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введіть текст!.
+        /// </summary>
+        public static string RequiredText {
+            get {
+                return ResourceManager.GetString("RequiredText", resourceCulture);
             }
         }
         

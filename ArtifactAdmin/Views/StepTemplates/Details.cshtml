@@ -1,0 +1,49 @@
+﻿@model ArtifactAdmin.Models.StepTemplates
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Шаблон кроку</h4>
+    <hr />
+    @{string Obj = "stepObject.Name";}
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.stepTemplate.Description)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.stepTemplate.Description, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stepTemplate.StepText)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.stepTemplate.StepText, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stepTemplate.Name)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.stepTemplate.Name, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.stepTemplate.StepObjectStepTemplates)
+        </dt>
+        <dd>
+            @Html.ListBoxFor(model => model.selectedStepObject, new SelectList(Model.selectedStepObject, "idObjType", Obj),
+new { size = 8, style = "width:280px" })
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.stepTemplate.id }) |
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

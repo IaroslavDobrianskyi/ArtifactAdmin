@@ -12,8 +12,18 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BasePredisposition
+    public partial class Predisposition
     {
+        public Predisposition()
+        {
+            this.ActionTemplatePredispositions = new HashSet<ActionTemplatePredisposition>();
+        }
+    
         public int id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public long Mask { get; set; }
+    
+        public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
     }
 }

@@ -12,21 +12,20 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Race
+    public partial class StepTemplate
     {
-        public Race()
+        public StepTemplate()
         {
-            this.Carriers = new HashSet<Carrier>();
+            this.StepObjectStepTemplates = new HashSet<StepObjectStepTemplate>();
+            this.StepTemplateActionTemplates = new HashSet<StepTemplateActionTemplate>();
         }
     
-        public string Description { get; set; }
         public int id { get; set; }
-        public long Characreristics { get; set; }
-        public long CharacteristicsLevelModifier { get; set; }
-        public long Predisposition { get; set; }
-        public long Properties { get; set; }
-        public string Icon { get; set; }
+        public string Description { get; set; }
+        public string StepText { get; set; }
+        public string Name { get; set; }
     
-        public virtual ICollection<Carrier> Carriers { get; set; }
+        public virtual ICollection<StepObjectStepTemplate> StepObjectStepTemplates { get; set; }
+        public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
     }
 }

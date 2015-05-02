@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a39c2c007a9c4a65ad8d3560b59e47d0" Name="Diagram1">
+      <Diagram DiagramId="a39c2c007a9c4a65ad8d3560b59e47d0" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="artModel.ActFlow" Width="1.5" PointX="10.25" PointY="11.5" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Action" Width="1.5" PointX="8" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Artifact" Width="1.5" PointX="3.75" PointY="8.625" IsExpanded="true" />
@@ -27,21 +27,45 @@
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Constellation" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_UserArtifact_Constellation" ManuallyRouted="false" />
         <EntityTypeShape EntityType="artModel.ArtifactBonu" Width="1.5" PointX="11" PointY="0.75" />
-        <EntityTypeShape EntityType="artModel.BasePredisposition" Width="1.5" PointX="13.375" PointY="2" />
         <EntityTypeShape EntityType="artModel.Carrier" Width="1.5" PointX="14.625" PointY="9.625" />
-        <EntityTypeShape EntityType="artModel.CarrierPredisposition" Width="1.5" PointX="16.875" PointY="7.5" />
-        <EntityTypeShape EntityType="artModel.CharrierCharacteristic" Width="1.5" PointX="16.875" PointY="11.125" />
         <EntityTypeShape EntityType="artModel.Race" Width="1.5" PointX="12.375" PointY="7.625" />
         <EntityTypeShape EntityType="artModel.User" Width="1.5" PointX="3.75" PointY="2.375" />
         <EntityTypeShape EntityType="artModel.UserArtifactTalent" Width="1.5" PointX="8.25" PointY="2.625" />
         <AssociationConnector Association="artModel.FK_ArtifactTypeBonus_Artifact1" />
         <AssociationConnector Association="artModel.FK_ArtifactTypeBonus_Bonus1" />
         <AssociationConnector Association="artModel.FK_Carrier_Race" />
-        <AssociationConnector Association="artModel.FK_CarrierPredisposition_Carrier" />
-        <AssociationConnector Association="artModel.FK_CharrierCharacteristics_Carrier" />
         <AssociationConnector Association="artModel.FK_UserTalent_Talent1" />
         <AssociationConnector Association="artModel.FK_UserArtifact_User" />
         <AssociationConnector Association="artModel.FK_UserTalent_UserArtifact1" />
+        <EntityTypeShape EntityType="artModel.ActionDescription" Width="1.5" PointX="3" PointY="18.625" />
+        <EntityTypeShape EntityType="artModel.ActionTemplate" Width="1.5" PointX="13" PointY="23.375" />
+        <EntityTypeShape EntityType="artModel.ActionTemplateActionDescription" Width="1.5" PointX="18.25" PointY="21.125" />
+        <EntityTypeShape EntityType="artModel.ActionTemplatePredisposition" Width="1.5" PointX="15.25" PointY="24.375" />
+        <EntityTypeShape EntityType="artModel.Characteristic" Width="1.5" PointX="8.75" PointY="5.75" />
+        <EntityTypeShape EntityType="artModel.MapObject" Width="1.5" PointX="3.75" PointY="16.375" />
+        <EntityTypeShape EntityType="artModel.MapObjectProbability" Width="1.5" PointX="6" PointY="20" />
+        <EntityTypeShape EntityType="artModel.MapZone" Width="1.5" PointX="0.75" PointY="20" />
+        <EntityTypeShape EntityType="artModel.Predisposition" Width="1.5" PointX="13" PointY="26.5" />
+        <EntityTypeShape EntityType="artModel.Property" Width="1.5" PointX="8.75" PointY="8.75" />
+        <EntityTypeShape EntityType="artModel.StepObject" Width="1.5" PointX="13" PointY="16.125" />
+        <EntityTypeShape EntityType="artModel.StepObjectStepTemplate" Width="1.5" PointX="15.25" PointY="18" />
+        <EntityTypeShape EntityType="artModel.StepObjectType" Width="1.5" PointX="10.75" PointY="18" />
+        <EntityTypeShape EntityType="artModel.StepTemplate" Width="1.5" PointX="13" PointY="19.25" />
+        <EntityTypeShape EntityType="artModel.StepTemplateActionTemplate" Width="1.5" PointX="15.25" PointY="21.5" />
+        <EntityTypeShape EntityType="artModel.ZoneCoordinat" Width="1.5" PointX="3" PointY="24.5" />
+        <AssociationConnector Association="artModel.FK_ActionDescription_MapZone" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateActionDescription_ActionDescription" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateActionDescription_ActionTemplate" />
+        <AssociationConnector Association="artModel.FK_ActionTemplatePredisposition_ActionTemplate" />
+        <AssociationConnector Association="artModel.FK_StepTemplateActionTemplate_ActionTemplate" />
+        <AssociationConnector Association="artModel.FK_ActionTemplatePredisposition_Predisposition" />
+        <AssociationConnector Association="artModel.FK_MapObjectProbability_MapObject" />
+        <AssociationConnector Association="artModel.FK_MapObjectProbability_MapZone" />
+        <AssociationConnector Association="artModel.FK_ZoneCoordinats_MapZone" />
+        <AssociationConnector Association="artModel.FK_StepObject_StepObjectType" />
+        <AssociationConnector Association="artModel.FK_StepObjectStepTemplate_StepObject" />
+        <AssociationConnector Association="artModel.FK_StepObjectStepTemplate_StepTemplate" />
+        <AssociationConnector Association="artModel.FK_StepTemplateActionTemplate_StepTemplate" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,163 @@
+﻿@model ArtifactAdmin.Models.StepTemplates
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Змінити</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    string Obj = "stepObject.Name";
+    <div class="form-horizontal">
+        <h4>Шаблон кроку</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.stepTemplate.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stepTemplate.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.stepTemplate.Description, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.stepTemplate.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stepTemplate.StepText, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.stepTemplate.StepText, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.stepTemplate.StepText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.stepTemplate.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.stepTemplate.Name, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.stepTemplate.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.ListBoxFor(model => model.stepObject, new MultiSelectList(Model.stepObject, "idObjType", Obj),
+         new { size = 8, style = "width:250px" })
+                </td>
+
+                <td>
+                    @Html.ListBoxFor(model => model.stepObjectType,
+              new SelectList(Model.stepObjectType, "id", "Name"),
+     new { size = 4, onclick = "javascript:AddTypObj();" })
+                    <span id="TypeMes" class="alert-warning"></span>
+                    <br />
+                    <input type="button" id="add" value=">"
+                           onclick="javascript: MoveObj(document.getElementById('stepObject'),document.getElementById('selectedStepObject'));" />
+                    <br />
+                    <input type="button" id="rem" value="<"
+                           onclick="javascript: MoveObj(document.getElementById('selectedStepObject'), document.getElementById('stepObject'));" />
+                </td>
+                <td>
+                    @Html.ListBoxFor(model => model.selectedStepObject, new MultiSelectList(Model.selectedStepObject, "idObjType", Obj),
+new { size = 8, style = "width:250px" })
+                    @*@Html.ValidationMessageFor(model => model.selectedStepObject, "", new { @class = "text-danger" })*@
+                    <span id="ObjMes" class="alert-warning"></span>
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll()" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    function MoveObj(From, To) {
+        var SelID = '';
+        var SelText = '';
+        // Move rows from SS1 to SS2 from bottom to top
+        for (i = From.options.length - 1; i >= 0; i--) {
+            if (From.options[i].selected == true) {
+                SelID = From.options[i].value;
+                SelText = From.options[i].text;
+                var newRow = new Option(SelText, SelID);
+                To.options[To.length] = newRow;
+                From.options[i] = null;
+            }
+        }
+    }
+    function SelectSort(SelList) {
+        var ID = '';
+        var Text = '';
+        for (x = 0; x < SelList.length - 1; x++) {
+            for (y = x + 1; y < SelList.length; y++) {
+                if (SelList[x].text > SelList[y].text) {
+                    // Swap rows
+                    ID = SelList[x].value;
+                    Text = SelList[x].text;
+                    SelList[x].value = SelList[y].value;
+                    SelList[x].text = SelList[y].text;
+                    SelList[y].value = ID;
+                    SelList[y].text = Text;
+                }
+            }
+        }
+    }
+    function AddTypObj() {
+        var SelID = '';
+        var SelText = '';
+        var From = document.getElementById("stepObjectType");
+        var To = document.getElementById("stepObject");
+        var To1 = document.getElementById('selectedStepObject');
+        var ObjEx = false;
+        for (i = From.options.length - 1; i >= 0; i--) {
+            if (From.options[i].selected == true) {
+                SelID = From.options[i].value;
+                SelText = From.options[i].text;
+                if (SelID != "") {
+                    for (j = To.options.length - 1; j >= 0; j--) {
+                        if (To.options[j].value.substring(To.options[j].value.indexOf(".") + 1) == SelID) {
+                            To.options[j].selected = true;
+                            ObjEx = true;
+                        }
+                    }
+                    if (!ObjEx) {
+                        document.getElementById("TypeMes").textContent = "Тип " + SelText + " вже вибраний !";
+                    }
+                    else
+                        document.getElementById("TypeMes").textContent = "";
+                }
+                else
+                    document.getElementById("TypeMes").textContent = "";
+
+            }
+        }
+        MoveObj(To, To1);
+    }
+    function SelAll() {
+        var OT = document.getElementById("stepObjectType");
+        var SO = document.getElementById("stepObject");
+        var To = document.getElementById('selectedStepObject');
+        for (i = To.options.length - 1; i >= 0; i--) {
+            To.options[i].selected = true;
+        }
+        for (i = OT.options.length - 1; i >= 0; i--) {
+            OT.options[i].selected = true;
+        }
+        for (i = SO.options.length - 1; i >= 0; i--) {
+            SO.options[i].selected = true;
+        }
+    }
+</script>
+}

@@ -142,49 +142,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BasePredispositions">
-      <EntityTypeMapping TypeName="artModel.BasePredisposition">
-        <MappingFragment StoreEntitySet="BasePredisposition">
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Carriers">
       <EntityTypeMapping TypeName="artModel.Carrier">
         <MappingFragment StoreEntitySet="Carrier">
-          <ScalarProperty Name="ExpiriencePoints" ColumnName="ExpiriencePoints" />
-          <ScalarProperty Name="ExpirienceLevel" ColumnName="ExpirienceLevel" />
+          <ScalarProperty Name="DefaultPredisposition" ColumnName="DefaultPredisposition" />
+          <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+          <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+          <ScalarProperty Name="Properties" ColumnName="Properties" />
+          <ScalarProperty Name="ExperiencePoints" ColumnName="ExperiencePoints" />
+          <ScalarProperty Name="ExperienceLevel" ColumnName="ExperienceLevel" />
           <ScalarProperty Name="Race" ColumnName="Race" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CarrierPredispositions">
-      <EntityTypeMapping TypeName="artModel.CarrierPredisposition">
-        <MappingFragment StoreEntitySet="CarrierPredisposition">
-          <ScalarProperty Name="Carrier" ColumnName="Carrier" />
-          <ScalarProperty Name="Observation" ColumnName="Observation" />
-          <ScalarProperty Name="Inventiveness" ColumnName="Inventiveness" />
-          <ScalarProperty Name="Cunning" ColumnName="Cunning" />
-          <ScalarProperty Name="Eloquence" ColumnName="Eloquence" />
-          <ScalarProperty Name="Bravery" ColumnName="Bravery" />
-          <ScalarProperty Name="Temperance" ColumnName="Temperance" />
-          <ScalarProperty Name="Kindness" ColumnName="Kindness" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CharrierCharacteristics">
-      <EntityTypeMapping TypeName="artModel.CharrierCharacteristic">
-        <MappingFragment StoreEntitySet="CharrierCharacteristics">
-          <ScalarProperty Name="Carrier" ColumnName="Carrier" />
-          <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
-          <ScalarProperty Name="Intellect" ColumnName="Intellect" />
-          <ScalarProperty Name="Knowledge" ColumnName="Knowledge" />
-          <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
-          <ScalarProperty Name="Agility" ColumnName="Agility" />
-          <ScalarProperty Name="Armor" ColumnName="Armor" />
-          <ScalarProperty Name="Strength" ColumnName="Strength" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -192,31 +159,11 @@
     <EntitySetMapping Name="Races">
       <EntityTypeMapping TypeName="artModel.Race">
         <MappingFragment StoreEntitySet="Race">
-          <ScalarProperty Name="IntellectLevelModifier" ColumnName="IntellectLevelModifier" />
-          <ScalarProperty Name="KnowledgeLevelModifier" ColumnName="KnowledgeLevelModifier" />
-          <ScalarProperty Name="AccuracyLevelModifier" ColumnName="AccuracyLevelModifier" />
-          <ScalarProperty Name="AgilityLevelModifier" ColumnName="AgilityLevelModifier" />
-          <ScalarProperty Name="ArmorLevelModifier" ColumnName="ArmorLevelModifier" />
-          <ScalarProperty Name="StrengthLevelModifier" ColumnName="StrengthLevelModifier" />
-          <ScalarProperty Name="Stealthy" ColumnName="Stealthy" />
-          <ScalarProperty Name="Observation" ColumnName="Observation" />
-          <ScalarProperty Name="Inventiveness" ColumnName="Inventiveness" />
-          <ScalarProperty Name="Cunning" ColumnName="Cunning" />
-          <ScalarProperty Name="Eloquence" ColumnName="Eloquence" />
-          <ScalarProperty Name="Bravery" ColumnName="Bravery" />
-          <ScalarProperty Name="Temperance" ColumnName="Temperance" />
-          <ScalarProperty Name="Kindness" ColumnName="Kindness" />
-          <ScalarProperty Name="ResistanceToArtifact" ColumnName="ResistanceToArtifact" />
-          <ScalarProperty Name="Charisma" ColumnName="Charisma" />
-          <ScalarProperty Name="Size" ColumnName="Size" />
-          <ScalarProperty Name="MoveSpeed" ColumnName="MoveSpeed" />
-          <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
-          <ScalarProperty Name="Intellect" ColumnName="Intellect" />
-          <ScalarProperty Name="Knowledge" ColumnName="Knowledge" />
-          <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
-          <ScalarProperty Name="Agility" ColumnName="Agility" />
-          <ScalarProperty Name="Armor" ColumnName="Armor" />
-          <ScalarProperty Name="Strength" ColumnName="Strength" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Properties" ColumnName="Properties" />
+          <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+          <ScalarProperty Name="CharacteristicsLevelModifier" ColumnName="CharacteristicsLevelModifier" />
+          <ScalarProperty Name="Characreristics" ColumnName="Characreristics" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
@@ -238,6 +185,160 @@
           <ScalarProperty Name="TalentLevel" ColumnName="TalentLevel" />
           <ScalarProperty Name="UserTalent" ColumnName="UserTalent" />
           <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionDescriptions">
+      <EntityTypeMapping TypeName="artModel.ActionDescription">
+        <MappingFragment StoreEntitySet="ActionDescription">
+          <ScalarProperty Name="ActionText" ColumnName="ActionText" />
+          <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+          <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTemplates">
+      <EntityTypeMapping TypeName="artModel.ActionTemplate">
+        <MappingFragment StoreEntitySet="ActionTemplate">
+          <ScalarProperty Name="PredispositionResult" ColumnName="PredispositionResult" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTemplateActionDescriptions">
+      <EntityTypeMapping TypeName="artModel.ActionTemplateActionDescription">
+        <MappingFragment StoreEntitySet="ActionTemplateActionDescription">
+          <ScalarProperty Name="ActionDescription" ColumnName="ActionDescription" />
+          <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTemplatePredispositions">
+      <EntityTypeMapping TypeName="artModel.ActionTemplatePredisposition">
+        <MappingFragment StoreEntitySet="ActionTemplatePredisposition">
+          <ScalarProperty Name="RequirementHight" ColumnName="RequirementHight" />
+          <ScalarProperty Name="RequirementLow" ColumnName="RequirementLow" />
+          <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+          <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Characteristics">
+      <EntityTypeMapping TypeName="artModel.Characteristic">
+        <MappingFragment StoreEntitySet="Characteristics">
+          <ScalarProperty Name="Mask" ColumnName="Mask" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapObjects">
+      <EntityTypeMapping TypeName="artModel.MapObject">
+        <MappingFragment StoreEntitySet="MapObject">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapObjectProbabilities">
+      <EntityTypeMapping TypeName="artModel.MapObjectProbability">
+        <MappingFragment StoreEntitySet="MapObjectProbability">
+          <ScalarProperty Name="Probability" ColumnName="Probability" />
+          <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+          <ScalarProperty Name="MapObject" ColumnName="MapObject" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapZones">
+      <EntityTypeMapping TypeName="artModel.MapZone">
+        <MappingFragment StoreEntitySet="MapZone">
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Predispositions">
+      <EntityTypeMapping TypeName="artModel.Predisposition">
+        <MappingFragment StoreEntitySet="Predisposition">
+          <ScalarProperty Name="Mask" ColumnName="Mask" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Properties">
+      <EntityTypeMapping TypeName="artModel.Property">
+        <MappingFragment StoreEntitySet="Properties">
+          <ScalarProperty Name="Deviation" ColumnName="Deviation" />
+          <ScalarProperty Name="Mask" ColumnName="Mask" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StepObjects">
+      <EntityTypeMapping TypeName="artModel.StepObject">
+        <MappingFragment StoreEntitySet="StepObject">
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StepObjectType" ColumnName="StepObjectType" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StepObjectStepTemplates">
+      <EntityTypeMapping TypeName="artModel.StepObjectStepTemplate">
+        <MappingFragment StoreEntitySet="StepObjectStepTemplate">
+          <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
+          <ScalarProperty Name="StepObject" ColumnName="StepObject" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StepObjectTypes">
+      <EntityTypeMapping TypeName="artModel.StepObjectType">
+        <MappingFragment StoreEntitySet="StepObjectType">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StepTemplates">
+      <EntityTypeMapping TypeName="artModel.StepTemplate">
+        <MappingFragment StoreEntitySet="StepTemplate">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="StepText" ColumnName="StepText" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StepTemplateActionTemplates">
+      <EntityTypeMapping TypeName="artModel.StepTemplateActionTemplate">
+        <MappingFragment StoreEntitySet="StepTemplateActionTemplate">
+          <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+          <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ZoneCoordinats">
+      <EntityTypeMapping TypeName="artModel.ZoneCoordinat">
+        <MappingFragment StoreEntitySet="ZoneCoordinats">
+          <ScalarProperty Name="y" ColumnName="y" />
+          <ScalarProperty Name="x" ColumnName="x" />
+          <ScalarProperty Name="MapZone" ColumnName="MapZone" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

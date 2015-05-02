@@ -12,17 +12,16 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Carrier
+    public partial class MapObject
     {
-        public int id { get; set; }
-        public int Race { get; set; }
-        public int ExperienceLevel { get; set; }
-        public int ExperiencePoints { get; set; }
-        public long Properties { get; set; }
-        public long Predisposition { get; set; }
-        public long Characteristics { get; set; }
-        public long DefaultPredisposition { get; set; }
+        public MapObject()
+        {
+            this.MapObjectProbabilities = new HashSet<MapObjectProbability>();
+        }
     
-        public virtual Race Race1 { get; set; }
+        public int id { get; set; }
+        public string Name { get; set; }
+    
+        public virtual ICollection<MapObjectProbability> MapObjectProbabilities { get; set; }
     }
 }

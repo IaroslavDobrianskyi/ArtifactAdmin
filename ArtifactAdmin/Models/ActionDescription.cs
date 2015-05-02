@@ -12,18 +12,19 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CarrierPredisposition
+    public partial class ActionDescription
     {
-        public int id { get; set; }
-        public double Kindness { get; set; }
-        public double Temperance { get; set; }
-        public double Bravery { get; set; }
-        public double Eloquence { get; set; }
-        public double Cunning { get; set; }
-        public double Inventiveness { get; set; }
-        public double Observation { get; set; }
-        public int Carrier { get; set; }
+        public ActionDescription()
+        {
+            this.ActionTemplateActionDescriptions = new HashSet<ActionTemplateActionDescription>();
+        }
     
-        public virtual Carrier Carrier1 { get; set; }
+        public int id { get; set; }
+        public int ActionTemplate { get; set; }
+        public Nullable<int> MapZone { get; set; }
+        public string ActionText { get; set; }
+    
+        public virtual MapZone MapZone1 { get; set; }
+        public virtual ICollection<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
     }
 }

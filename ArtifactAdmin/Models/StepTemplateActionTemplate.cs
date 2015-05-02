@@ -12,18 +12,13 @@ namespace ArtifactAdmin.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CharrierCharacteristic
+    public partial class StepTemplateActionTemplate
     {
         public int id { get; set; }
-        public int Strength { get; set; }
-        public int Armor { get; set; }
-        public int Agility { get; set; }
-        public int Accuracy { get; set; }
-        public int Knowledge { get; set; }
-        public int Intellect { get; set; }
-        public int HitPoints { get; set; }
-        public int Carrier { get; set; }
+        public int StepTemplate { get; set; }
+        public int ActionTemplate { get; set; }
     
-        public virtual Carrier Carrier1 { get; set; }
+        public virtual ActionTemplate ActionTemplate1 { get; set; }
+        public virtual StepTemplate StepTemplate1 { get; set; }
     }
 }

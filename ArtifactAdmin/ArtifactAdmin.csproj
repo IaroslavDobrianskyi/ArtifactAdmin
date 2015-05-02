@@ -166,6 +166,9 @@
     <Compile Include="Controllers\BonusController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StepObjectsController.cs" />
+    <Compile Include="Controllers\StepObjectTypesController.cs" />
+    <Compile Include="Controllers\StepTemplatesController.cs" />
     <Compile Include="Controllers\TalentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -175,6 +178,18 @@
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Action.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionDescription.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionTemplate.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionTemplateActionDescription.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionTemplatePredisposition.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Artifact.cs">
@@ -202,9 +217,6 @@
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ArtifactTypes.cs" />
-    <Compile Include="Models\BasePredisposition.cs">
-      <DependentUpon>ArtifactModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Bonu.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -212,20 +224,32 @@
     <Compile Include="Models\Carrier.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarrierPredisposition.cs">
-      <DependentUpon>ArtifactModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CharrierCharacteristic.cs">
-      <DependentUpon>ArtifactModel.tt</DependentUpon>
-    </Compile>
     <None Include="Models\Constellation.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </None>
+    <Compile Include="Models\Characteristic.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ConstellationBonu.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Constellations.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MapObject.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MapObjectProbability.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MapZone.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Predisposition.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Property.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Race.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -235,6 +259,24 @@
     <Compile Include="Models\Step.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StepObject.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StepObjects.cs" />
+    <Compile Include="Models\StepObjectStepTemplate.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StepObjectType.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StepObjectTypes.cs" />
+    <Compile Include="Models\StepTemplate.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StepTemplateActionTemplate.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StepTemplates.cs" />
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -251,6 +293,10 @@
     <Compile Include="Models\UserArtifactTalent.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewStepObject.cs" />
+    <Compile Include="Models\ZoneCoordinat.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Models\Constelltions\ValidationStrings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -258,6 +304,21 @@
       <DependentUpon>ValidationStrings.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Content Include="Views\StepObjectTypes\Create.cshtml" />
+    <Content Include="Views\StepObjectTypes\Delete.cshtml" />
+    <Content Include="Views\StepObjectTypes\Details.cshtml" />
+    <Content Include="Views\StepObjectTypes\Edit.cshtml" />
+    <Content Include="Views\StepObjectTypes\Index.cshtml" />
+    <Content Include="Views\StepObjects\Create.cshtml" />
+    <Content Include="Views\StepObjects\Delete.cshtml" />
+    <Content Include="Views\StepObjects\Details.cshtml" />
+    <Content Include="Views\StepObjects\Edit.cshtml" />
+    <Content Include="Views\StepObjects\Index.cshtml" />
+    <Content Include="Views\StepTemplates\Create.cshtml" />
+    <Content Include="Views\StepTemplates\Delete.cshtml" />
+    <Content Include="Views\StepTemplates\Details.cshtml" />
+    <Content Include="Views\StepTemplates\Edit.cshtml" />
+    <Content Include="Views\StepTemplates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

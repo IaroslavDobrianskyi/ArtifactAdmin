@@ -38,12 +38,25 @@ namespace ArtifactAdmin.Models
         public virtual DbSet<Talent> Talents { get; set; }
         public virtual DbSet<UserArtifact> UserArtifacts { get; set; }
         public virtual DbSet<ArtifactBonu> ArtifactBonus { get; set; }
-        public virtual DbSet<BasePredisposition> BasePredispositions { get; set; }
         public virtual DbSet<Carrier> Carriers { get; set; }
-        public virtual DbSet<CarrierPredisposition> CarrierPredispositions { get; set; }
-        public virtual DbSet<CharrierCharacteristic> CharrierCharacteristics { get; set; }
         public virtual DbSet<Race> Races { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserArtifactTalent> UserArtifactTalents { get; set; }
+        public virtual DbSet<ActionDescription> ActionDescriptions { get; set; }
+        public virtual DbSet<ActionTemplate> ActionTemplates { get; set; }
+        public virtual DbSet<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
+        public virtual DbSet<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
+        public virtual DbSet<Characteristic> Characteristics { get; set; }
+        public virtual DbSet<MapObject> MapObjects { get; set; }
+        public virtual DbSet<MapObjectProbability> MapObjectProbabilities { get; set; }
+        public virtual DbSet<MapZone> MapZones { get; set; }
+        public virtual DbSet<Predisposition> Predispositions { get; set; }
+        public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<StepObject> StepObjects { get; set; }
+        public virtual DbSet<StepObjectStepTemplate> StepObjectStepTemplates { get; set; }
+        public virtual DbSet<StepObjectType> StepObjectTypes { get; set; }
+        public virtual DbSet<StepTemplate> StepTemplates { get; set; }
+        public virtual DbSet<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
+        public virtual DbSet<ZoneCoordinat> ZoneCoordinats { get; set; }
     }
 }

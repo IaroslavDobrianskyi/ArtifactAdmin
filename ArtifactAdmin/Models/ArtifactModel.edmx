@@ -22,6 +22,41 @@
           <Property Name="idUser" Type="int" Nullable="false" />
           <Property Name="idStep" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ActionDescription">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionTemplate" Type="int" Nullable="false" />
+          <Property Name="MapZone" Type="int" />
+          <Property Name="ActionText" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ActionTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PredispositionResult" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionTemplateActionDescription">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionTemplate" Type="int" Nullable="false" />
+          <Property Name="ActionDescription" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionTemplatePredisposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionTemplate" Type="int" Nullable="false" />
+          <Property Name="Predisposition" Type="int" Nullable="false" />
+          <Property Name="RequirementLow" Type="int" Nullable="false" />
+          <Property Name="RequirementHight" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Artifact">
           <Key>
             <PropertyRef Name="id" />
@@ -49,12 +84,6 @@
           <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
           <Property Name="Descrioption" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="BasePredisposition">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-        </EntityType>
         <EntityType Name="Bonus">
           <Key>
             <PropertyRef Name="Id" />
@@ -69,36 +98,21 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Race" Type="int" Nullable="false" />
-          <Property Name="ExpirienceLevel" Type="int" Nullable="false" />
-          <Property Name="ExpiriencePoints" Type="int" Nullable="false" />
+          <Property Name="ExperienceLevel" Type="int" Nullable="false" />
+          <Property Name="ExperiencePoints" Type="int" Nullable="false" />
+          <Property Name="Properties" Type="bigint" Nullable="false" />
+          <Property Name="Predisposition" Type="bigint" Nullable="false" />
+          <Property Name="Characteristics" Type="bigint" Nullable="false" />
+          <Property Name="DefaultPredisposition" Type="bigint" Nullable="false" />
         </EntityType>
-        <EntityType Name="CarrierPredisposition">
+        <EntityType Name="Characteristics">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Kindness" Type="float" Nullable="false" />
-          <Property Name="Temperance" Type="float" Nullable="false" />
-          <Property Name="Bravery" Type="float" Nullable="false" />
-          <Property Name="Eloquence" Type="float" Nullable="false" />
-          <Property Name="Cunning" Type="float" Nullable="false" />
-          <Property Name="Inventiveness" Type="float" Nullable="false" />
-          <Property Name="Observation" Type="float" Nullable="false" />
-          <Property Name="Carrier" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CharrierCharacteristics">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Strength" Type="int" Nullable="false" />
-          <Property Name="Armor" Type="int" Nullable="false" />
-          <Property Name="Agility" Type="int" Nullable="false" />
-          <Property Name="Accuracy" Type="int" Nullable="false" />
-          <Property Name="Knowledge" Type="int" Nullable="false" />
-          <Property Name="Intellect" Type="int" Nullable="false" />
-          <Property Name="HitPoints" Type="int" Nullable="false" />
-          <Property Name="Carrier" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Mask" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Constellation">
           <Key>
@@ -118,37 +132,60 @@
           <Property Name="Constallation" Type="int" Nullable="false" />
           <Property Name="Modifier" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="MapObject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapObjectProbability">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MapObject" Type="int" Nullable="false" />
+          <Property Name="MapZone" Type="int" Nullable="false" />
+          <Property Name="Probability" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapZone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZoneName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Color" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Predisposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Mask" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Properties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Mask" Type="bigint" Nullable="false" />
+          <Property Name="Deviation" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Race">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="Strength" Type="int" Nullable="false" />
-          <Property Name="Armor" Type="int" Nullable="false" />
-          <Property Name="Agility" Type="int" Nullable="false" />
-          <Property Name="Accuracy" Type="int" Nullable="false" />
-          <Property Name="Knowledge" Type="int" Nullable="false" />
-          <Property Name="Intellect" Type="int" Nullable="false" />
-          <Property Name="HitPoints" Type="int" Nullable="false" />
-          <Property Name="MoveSpeed" Type="int" Nullable="false" />
-          <Property Name="Size" Type="int" Nullable="false" />
-          <Property Name="Charisma" Type="int" Nullable="false" />
-          <Property Name="ResistanceToArtifact" Type="int" Nullable="false" />
-          <Property Name="Kindness" Type="float" Nullable="false" />
-          <Property Name="Temperance" Type="float" Nullable="false" />
-          <Property Name="Bravery" Type="float" Nullable="false" />
-          <Property Name="Eloquence" Type="float" Nullable="false" />
-          <Property Name="Cunning" Type="float" Nullable="false" />
-          <Property Name="Inventiveness" Type="float" Nullable="false" />
-          <Property Name="Observation" Type="float" Nullable="false" />
-          <Property Name="Stealthy" Type="float" Nullable="false" />
-          <Property Name="StrengthLevelModifier" Type="float" Nullable="false" />
-          <Property Name="ArmorLevelModifier" Type="float" Nullable="false" />
-          <Property Name="AgilityLevelModifier" Type="float" Nullable="false" />
-          <Property Name="AccuracyLevelModifier" Type="float" Nullable="false" />
-          <Property Name="KnowledgeLevelModifier" Type="float" Nullable="false" />
-          <Property Name="IntellectLevelModifier" Type="float" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Characreristics" Type="bigint" Nullable="false" />
+          <Property Name="CharacteristicsLevelModifier" Type="bigint" Nullable="false" />
+          <Property Name="Predisposition" Type="bigint" Nullable="false" />
+          <Property Name="Properties" Type="bigint" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Statistic">
           <Key>
@@ -169,6 +206,48 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idUser" Type="int" Nullable="false" />
           <Property Name="idActFlow" Type="int" />
+        </EntityType>
+        <EntityType Name="StepObject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StepObjectType" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StepObjectStepTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StepObject" Type="int" Nullable="false" />
+          <Property Name="StepTemplate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StepObjectType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StepTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="StepText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StepTemplateActionTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StepTemplate" Type="int" Nullable="false" />
+          <Property Name="ActionTemplate" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -226,6 +305,15 @@
           <Property Name="UserTalent" Type="int" Nullable="false" />
           <Property Name="TalentLevel" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="ZoneCoordinats">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="MapZone" Type="int" Nullable="false" />
+          <Property Name="x" Type="int" Nullable="false" />
+          <Property Name="y" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_ActFlow_Action">
           <End Role="Action" Type="Self.Action" Multiplicity="0..1">
             <OnDelete Action="Cascade" />
@@ -263,6 +351,66 @@
             </Principal>
             <Dependent Role="Action">
               <PropertyRef Name="idStep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionDescription_MapZone">
+          <End Role="MapZone" Type="Self.MapZone" Multiplicity="0..1" />
+          <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionDescription">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateActionDescription_ActionDescription">
+          <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="1" />
+          <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionDescription">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateActionDescription">
+              <PropertyRef Name="ActionDescription" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateActionDescription_ActionTemplate">
+          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+          <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateActionDescription">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplatePredisposition_ActionTemplate">
+          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+          <End Role="ActionTemplatePredisposition" Type="Self.ActionTemplatePredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplatePredisposition">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplatePredisposition_Predisposition">
+          <End Role="Predisposition" Type="Self.Predisposition" Multiplicity="1" />
+          <End Role="ActionTemplatePredisposition" Type="Self.ActionTemplatePredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predisposition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplatePredisposition">
+              <PropertyRef Name="Predisposition" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -314,30 +462,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CarrierPredisposition_Carrier">
-          <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
-          <End Role="CarrierPredisposition" Type="Self.CarrierPredisposition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrier">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CarrierPredisposition">
-              <PropertyRef Name="Carrier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CharrierCharacteristics_Carrier">
-          <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
-          <End Role="CharrierCharacteristics" Type="Self.CharrierCharacteristics" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrier">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CharrierCharacteristics">
-              <PropertyRef Name="Carrier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ConstellationBonus_Bonus">
           <End Role="Bonus" Type="Self.Bonus" Multiplicity="1" />
           <End Role="ConstellationBonus" Type="Self.ConstellationBonus" Multiplicity="*" />
@@ -362,6 +486,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_MapObjectProbability_MapObject">
+          <End Role="MapObject" Type="Self.MapObject" Multiplicity="1" />
+          <End Role="MapObjectProbability" Type="Self.MapObjectProbability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapObject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MapObjectProbability">
+              <PropertyRef Name="MapObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapObjectProbability_MapZone">
+          <End Role="MapZone" Type="Self.MapZone" Multiplicity="1" />
+          <End Role="MapObjectProbability" Type="Self.MapObjectProbability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MapObjectProbability">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Step_ActFlow">
           <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="0..1" />
           <End Role="Step" Type="Self.Step" Multiplicity="*" />
@@ -371,6 +519,66 @@
             </Principal>
             <Dependent Role="Step">
               <PropertyRef Name="idActFlow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepObject_StepObjectType">
+          <End Role="StepObjectType" Type="Self.StepObjectType" Multiplicity="1" />
+          <End Role="StepObject" Type="Self.StepObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepObjectType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepObject">
+              <PropertyRef Name="StepObjectType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepObjectStepTemplate_StepObject">
+          <End Role="StepObject" Type="Self.StepObject" Multiplicity="1" />
+          <End Role="StepObjectStepTemplate" Type="Self.StepObjectStepTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepObject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepObjectStepTemplate">
+              <PropertyRef Name="StepObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepObjectStepTemplate_StepTemplate">
+          <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1" />
+          <End Role="StepObjectStepTemplate" Type="Self.StepObjectStepTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepObjectStepTemplate">
+              <PropertyRef Name="StepTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepTemplateActionTemplate_ActionTemplate">
+          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+          <End Role="StepTemplateActionTemplate" Type="Self.StepTemplateActionTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepTemplateActionTemplate">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepTemplateActionTemplate_StepTemplate">
+          <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1" />
+          <End Role="StepTemplateActionTemplate" Type="Self.StepTemplateActionTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepTemplateActionTemplate">
+              <PropertyRef Name="StepTemplate" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -434,27 +642,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ZoneCoordinats_MapZone">
+          <End Role="MapZone" Type="Self.MapZone" Multiplicity="1" />
+          <End Role="ZoneCoordinats" Type="Self.ZoneCoordinats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZoneCoordinats">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="artModelStoreContainer">
           <EntitySet Name="ActFlow" EntityType="Self.ActFlow" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionDescription" EntityType="Self.ActionDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionTemplate" EntityType="Self.ActionTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionTemplateActionDescription" EntityType="Self.ActionTemplateActionDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionTemplatePredisposition" EntityType="Self.ActionTemplatePredisposition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Artifact" EntityType="Self.Artifact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtifactBonus" EntityType="Self.ArtifactBonus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtifactType" EntityType="Self.ArtifactType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="BasePredisposition" EntityType="Self.BasePredisposition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bonus" EntityType="Self.Bonus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carrier" EntityType="Self.Carrier" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CarrierPredisposition" EntityType="Self.CarrierPredisposition" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CharrierCharacteristics" EntityType="Self.CharrierCharacteristics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Characteristics" EntityType="Self.Characteristics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Constellation" EntityType="Self.Constellation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstellationBonus" EntityType="Self.ConstellationBonus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapObject" EntityType="Self.MapObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapObjectProbability" EntityType="Self.MapObjectProbability" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapZone" EntityType="Self.MapZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Predisposition" EntityType="Self.Predisposition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StepObject" EntityType="Self.StepObject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StepObjectStepTemplate" EntityType="Self.StepObjectStepTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StepObjectType" EntityType="Self.StepObjectType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StepTemplate" EntityType="Self.StepTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StepTemplateActionTemplate" EntityType="Self.StepTemplateActionTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Talent" EntityType="Self.Talent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserArtifact" EntityType="Self.UserArtifact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserArtifactTalent" EntityType="Self.UserArtifactTalent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZoneCoordinats" EntityType="Self.ZoneCoordinats" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
             <End Role="Action" EntitySet="Action" />
             <End Role="ActFlow" EntitySet="ActFlow" />
@@ -466,6 +699,26 @@
           <AssociationSet Name="FK_Action_Step" Association="Self.FK_Action_Step">
             <End Role="Step" EntitySet="Step" />
             <End Role="Action" EntitySet="Action" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionDescription_MapZone" Association="Self.FK_ActionDescription_MapZone">
+            <End Role="MapZone" EntitySet="MapZone" />
+            <End Role="ActionDescription" EntitySet="ActionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="Self.FK_ActionTemplateActionDescription_ActionDescription">
+            <End Role="ActionDescription" EntitySet="ActionDescription" />
+            <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateActionDescription_ActionTemplate" Association="Self.FK_ActionTemplateActionDescription_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+            <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplatePredisposition_ActionTemplate" Association="Self.FK_ActionTemplatePredisposition_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+            <End Role="ActionTemplatePredisposition" EntitySet="ActionTemplatePredisposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplatePredisposition_Predisposition" Association="Self.FK_ActionTemplatePredisposition_Predisposition">
+            <End Role="Predisposition" EntitySet="Predisposition" />
+            <End Role="ActionTemplatePredisposition" EntitySet="ActionTemplatePredisposition" />
           </AssociationSet>
           <AssociationSet Name="FK_Artifact_ArtifactType" Association="Self.FK_Artifact_ArtifactType">
             <End Role="ArtifactType" EntitySet="ArtifactType" />
@@ -483,14 +736,6 @@
             <End Role="Race" EntitySet="Race" />
             <End Role="Carrier" EntitySet="Carrier" />
           </AssociationSet>
-          <AssociationSet Name="FK_CarrierPredisposition_Carrier" Association="Self.FK_CarrierPredisposition_Carrier">
-            <End Role="Carrier" EntitySet="Carrier" />
-            <End Role="CarrierPredisposition" EntitySet="CarrierPredisposition" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CharrierCharacteristics_Carrier" Association="Self.FK_CharrierCharacteristics_Carrier">
-            <End Role="Carrier" EntitySet="Carrier" />
-            <End Role="CharrierCharacteristics" EntitySet="CharrierCharacteristics" />
-          </AssociationSet>
           <AssociationSet Name="FK_ConstellationBonus_Bonus" Association="Self.FK_ConstellationBonus_Bonus">
             <End Role="Bonus" EntitySet="Bonus" />
             <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
@@ -499,9 +744,37 @@
             <End Role="Constellation" EntitySet="Constellation" />
             <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
           </AssociationSet>
+          <AssociationSet Name="FK_MapObjectProbability_MapObject" Association="Self.FK_MapObjectProbability_MapObject">
+            <End Role="MapObject" EntitySet="MapObject" />
+            <End Role="MapObjectProbability" EntitySet="MapObjectProbability" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapObjectProbability_MapZone" Association="Self.FK_MapObjectProbability_MapZone">
+            <End Role="MapZone" EntitySet="MapZone" />
+            <End Role="MapObjectProbability" EntitySet="MapObjectProbability" />
+          </AssociationSet>
           <AssociationSet Name="FK_Step_ActFlow" Association="Self.FK_Step_ActFlow">
             <End Role="ActFlow" EntitySet="ActFlow" />
             <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepObject_StepObjectType" Association="Self.FK_StepObject_StepObjectType">
+            <End Role="StepObjectType" EntitySet="StepObjectType" />
+            <End Role="StepObject" EntitySet="StepObject" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepObjectStepTemplate_StepObject" Association="Self.FK_StepObjectStepTemplate_StepObject">
+            <End Role="StepObject" EntitySet="StepObject" />
+            <End Role="StepObjectStepTemplate" EntitySet="StepObjectStepTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepObjectStepTemplate_StepTemplate" Association="Self.FK_StepObjectStepTemplate_StepTemplate">
+            <End Role="StepTemplate" EntitySet="StepTemplate" />
+            <End Role="StepObjectStepTemplate" EntitySet="StepObjectStepTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepTemplateActionTemplate_ActionTemplate" Association="Self.FK_StepTemplateActionTemplate_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+            <End Role="StepTemplateActionTemplate" EntitySet="StepTemplateActionTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepTemplateActionTemplate_StepTemplate" Association="Self.FK_StepTemplateActionTemplate_StepTemplate">
+            <End Role="StepTemplate" EntitySet="StepTemplate" />
+            <End Role="StepTemplateActionTemplate" EntitySet="StepTemplateActionTemplate" />
           </AssociationSet>
           <AssociationSet Name="FK_UserArtifact_Artifact" Association="Self.FK_UserArtifact_Artifact">
             <End Role="Artifact" EntitySet="Artifact" />
@@ -522,6 +795,10 @@
           <AssociationSet Name="FK_UserTalent_UserArtifact" Association="Self.FK_UserTalent_UserArtifact">
             <End Role="UserArtifact" EntitySet="UserArtifact" />
             <End Role="UserArtifactTalent" EntitySet="UserArtifactTalent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZoneCoordinats_MapZone" Association="Self.FK_ZoneCoordinats_MapZone">
+            <End Role="MapZone" EntitySet="MapZone" />
+            <End Role="ZoneCoordinats" EntitySet="ZoneCoordinats" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -832,10 +1109,7 @@
             <End Role="UserArtifact" EntitySet="UserArtifacts" />
           </AssociationSet>
           <EntitySet Name="ArtifactBonus" EntityType="artModel.ArtifactBonu" />
-          <EntitySet Name="BasePredispositions" EntityType="artModel.BasePredisposition" />
           <EntitySet Name="Carriers" EntityType="artModel.Carrier" />
-          <EntitySet Name="CarrierPredispositions" EntityType="artModel.CarrierPredisposition" />
-          <EntitySet Name="CharrierCharacteristics" EntityType="artModel.CharrierCharacteristic" />
           <EntitySet Name="Races" EntityType="artModel.Race" />
           <EntitySet Name="Users" EntityType="artModel.User" />
           <EntitySet Name="UserArtifactTalents" EntityType="artModel.UserArtifactTalent" />
@@ -851,14 +1125,6 @@
             <End Role="Race" EntitySet="Races" />
             <End Role="Carrier" EntitySet="Carriers" />
           </AssociationSet>
-          <AssociationSet Name="FK_CarrierPredisposition_Carrier" Association="artModel.FK_CarrierPredisposition_Carrier">
-            <End Role="Carrier" EntitySet="Carriers" />
-            <End Role="CarrierPredisposition" EntitySet="CarrierPredispositions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CharrierCharacteristics_Carrier" Association="artModel.FK_CharrierCharacteristics_Carrier">
-            <End Role="Carrier" EntitySet="Carriers" />
-            <End Role="CharrierCharacteristic" EntitySet="CharrierCharacteristics" />
-          </AssociationSet>
           <AssociationSet Name="FK_UserTalent_Talent1" Association="artModel.FK_UserTalent_Talent1">
             <End Role="Talent" EntitySet="Talents" />
             <End Role="UserArtifactTalent" EntitySet="UserArtifactTalents" />
@@ -870,6 +1136,74 @@
           <AssociationSet Name="FK_UserTalent_UserArtifact1" Association="artModel.FK_UserTalent_UserArtifact1">
             <End Role="UserArtifact" EntitySet="UserArtifacts" />
             <End Role="UserArtifactTalent" EntitySet="UserArtifactTalents" />
+          </AssociationSet>
+          <EntitySet Name="ActionDescriptions" EntityType="artModel.ActionDescription" />
+          <EntitySet Name="ActionTemplates" EntityType="artModel.ActionTemplate" />
+          <EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
+          <EntitySet Name="ActionTemplatePredispositions" EntityType="artModel.ActionTemplatePredisposition" />
+          <EntitySet Name="Characteristics" EntityType="artModel.Characteristic" />
+          <EntitySet Name="MapObjects" EntityType="artModel.MapObject" />
+          <EntitySet Name="MapObjectProbabilities" EntityType="artModel.MapObjectProbability" />
+          <EntitySet Name="MapZones" EntityType="artModel.MapZone" />
+          <EntitySet Name="Predispositions" EntityType="artModel.Predisposition" />
+          <EntitySet Name="Properties" EntityType="artModel.Property" />
+          <EntitySet Name="StepObjects" EntityType="artModel.StepObject" />
+          <EntitySet Name="StepObjectStepTemplates" EntityType="artModel.StepObjectStepTemplate" />
+          <EntitySet Name="StepObjectTypes" EntityType="artModel.StepObjectType" />
+          <EntitySet Name="StepTemplates" EntityType="artModel.StepTemplate" />
+          <EntitySet Name="StepTemplateActionTemplates" EntityType="artModel.StepTemplateActionTemplate" />
+          <EntitySet Name="ZoneCoordinats" EntityType="artModel.ZoneCoordinat" />
+          <AssociationSet Name="FK_ActionDescription_MapZone" Association="artModel.FK_ActionDescription_MapZone">
+            <End Role="MapZone" EntitySet="MapZones" />
+            <End Role="ActionDescription" EntitySet="ActionDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="artModel.FK_ActionTemplateActionDescription_ActionDescription">
+            <End Role="ActionDescription" EntitySet="ActionDescriptions" />
+            <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateActionDescription_ActionTemplate" Association="artModel.FK_ActionTemplateActionDescription_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+            <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplatePredisposition_ActionTemplate" Association="artModel.FK_ActionTemplatePredisposition_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+            <End Role="ActionTemplatePredisposition" EntitySet="ActionTemplatePredispositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepTemplateActionTemplate_ActionTemplate" Association="artModel.FK_StepTemplateActionTemplate_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+            <End Role="StepTemplateActionTemplate" EntitySet="StepTemplateActionTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplatePredisposition_Predisposition" Association="artModel.FK_ActionTemplatePredisposition_Predisposition">
+            <End Role="Predisposition" EntitySet="Predispositions" />
+            <End Role="ActionTemplatePredisposition" EntitySet="ActionTemplatePredispositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapObjectProbability_MapObject" Association="artModel.FK_MapObjectProbability_MapObject">
+            <End Role="MapObject" EntitySet="MapObjects" />
+            <End Role="MapObjectProbability" EntitySet="MapObjectProbabilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MapObjectProbability_MapZone" Association="artModel.FK_MapObjectProbability_MapZone">
+            <End Role="MapZone" EntitySet="MapZones" />
+            <End Role="MapObjectProbability" EntitySet="MapObjectProbabilities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZoneCoordinats_MapZone" Association="artModel.FK_ZoneCoordinats_MapZone">
+            <End Role="MapZone" EntitySet="MapZones" />
+            <End Role="ZoneCoordinat" EntitySet="ZoneCoordinats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepObject_StepObjectType" Association="artModel.FK_StepObject_StepObjectType">
+            <End Role="StepObjectType" EntitySet="StepObjectTypes" />
+            <End Role="StepObject" EntitySet="StepObjects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepObjectStepTemplate_StepObject" Association="artModel.FK_StepObjectStepTemplate_StepObject">
+            <End Role="StepObject" EntitySet="StepObjects" />
+            <End Role="StepObjectStepTemplate" EntitySet="StepObjectStepTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepObjectStepTemplate_StepTemplate" Association="artModel.FK_StepObjectStepTemplate_StepTemplate">
+            <End Role="StepTemplate" EntitySet="StepTemplates" />
+            <End Role="StepObjectStepTemplate" EntitySet="StepObjectStepTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepTemplateActionTemplate_StepTemplate" Association="artModel.FK_StepTemplateActionTemplate_StepTemplate">
+            <End Role="StepTemplate" EntitySet="StepTemplates" />
+            <End Role="StepTemplateActionTemplate" EntitySet="StepTemplateActionTemplates" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ArtifactBonu">
@@ -883,53 +1217,19 @@
           <NavigationProperty Name="Artifact1" Relationship="artModel.FK_ArtifactTypeBonus_Artifact1" FromRole="ArtifactBonu" ToRole="Artifact" />
           <NavigationProperty Name="Bonu" Relationship="artModel.FK_ArtifactTypeBonus_Bonus1" FromRole="ArtifactBonu" ToRole="Bonu" />
         </EntityType>
-        <EntityType Name="BasePredisposition">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-        </EntityType>
         <EntityType Name="Carrier">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Race" Type="Int32" Nullable="false" />
-          <Property Name="ExpirienceLevel" Type="Int32" Nullable="false" />
-          <Property Name="ExpiriencePoints" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Race1" Relationship="artModel.FK_Carrier_Race" FromRole="Carrier" ToRole="Race" />
-          <NavigationProperty Name="CarrierPredispositions" Relationship="artModel.FK_CarrierPredisposition_Carrier" FromRole="Carrier" ToRole="CarrierPredisposition" />
-          <NavigationProperty Name="CharrierCharacteristics" Relationship="artModel.FK_CharrierCharacteristics_Carrier" FromRole="Carrier" ToRole="CharrierCharacteristic" />
-        </EntityType>
-        <EntityType Name="CarrierPredisposition">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Kindness" Type="Double" Nullable="false" />
-          <Property Name="Temperance" Type="Double" Nullable="false" />
-          <Property Name="Bravery" Type="Double" Nullable="false" />
-          <Property Name="Eloquence" Type="Double" Nullable="false" />
-          <Property Name="Cunning" Type="Double" Nullable="false" />
-          <Property Name="Inventiveness" Type="Double" Nullable="false" />
-          <Property Name="Observation" Type="Double" Nullable="false" />
-          <Property Name="Carrier" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carrier1" Relationship="artModel.FK_CarrierPredisposition_Carrier" FromRole="CarrierPredisposition" ToRole="Carrier" />
-        </EntityType>
-        <EntityType Name="CharrierCharacteristic">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Strength" Type="Int32" Nullable="false" />
-          <Property Name="Armor" Type="Int32" Nullable="false" />
-          <Property Name="Agility" Type="Int32" Nullable="false" />
-          <Property Name="Accuracy" Type="Int32" Nullable="false" />
-          <Property Name="Knowledge" Type="Int32" Nullable="false" />
-          <Property Name="Intellect" Type="Int32" Nullable="false" />
-          <Property Name="HitPoints" Type="Int32" Nullable="false" />
-          <Property Name="Carrier" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carrier1" Relationship="artModel.FK_CharrierCharacteristics_Carrier" FromRole="CharrierCharacteristic" ToRole="Carrier" />
+          <Property Name="ExperienceLevel" Type="Int32" Nullable="false" />
+          <Property Name="ExperiencePoints" Type="Int32" Nullable="false" />
+          <Property Name="Properties" Type="Int64" Nullable="false" />
+          <Property Name="Predisposition" Type="Int64" Nullable="false" />
+          <Property Name="Characteristics" Type="Int64" Nullable="false" />
+          <Property Name="DefaultPredisposition" Type="Int64" Nullable="false" />
         </EntityType>
         <EntityType Name="Race">
           <Key>
@@ -937,32 +1237,12 @@
           </Key>
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="Strength" Type="Int32" Nullable="false" />
-          <Property Name="Armor" Type="Int32" Nullable="false" />
-          <Property Name="Agility" Type="Int32" Nullable="false" />
-          <Property Name="Accuracy" Type="Int32" Nullable="false" />
-          <Property Name="Knowledge" Type="Int32" Nullable="false" />
-          <Property Name="Intellect" Type="Int32" Nullable="false" />
-          <Property Name="HitPoints" Type="Int32" Nullable="false" />
-          <Property Name="MoveSpeed" Type="Int32" Nullable="false" />
-          <Property Name="Size" Type="Int32" Nullable="false" />
-          <Property Name="Charisma" Type="Int32" Nullable="false" />
-          <Property Name="ResistanceToArtifact" Type="Int32" Nullable="false" />
-          <Property Name="Kindness" Type="Double" Nullable="false" />
-          <Property Name="Temperance" Type="Double" Nullable="false" />
-          <Property Name="Bravery" Type="Double" Nullable="false" />
-          <Property Name="Eloquence" Type="Double" Nullable="false" />
-          <Property Name="Cunning" Type="Double" Nullable="false" />
-          <Property Name="Inventiveness" Type="Double" Nullable="false" />
-          <Property Name="Observation" Type="Double" Nullable="false" />
-          <Property Name="Stealthy" Type="Double" Nullable="false" />
-          <Property Name="StrengthLevelModifier" Type="Double" Nullable="false" />
-          <Property Name="ArmorLevelModifier" Type="Double" Nullable="false" />
-          <Property Name="AgilityLevelModifier" Type="Double" Nullable="false" />
-          <Property Name="AccuracyLevelModifier" Type="Double" Nullable="false" />
-          <Property Name="KnowledgeLevelModifier" Type="Double" Nullable="false" />
-          <Property Name="IntellectLevelModifier" Type="Double" Nullable="false" />
           <NavigationProperty Name="Carriers" Relationship="artModel.FK_Carrier_Race" FromRole="Race" ToRole="Carrier" />
+          <Property Name="Characreristics" Type="Int64" Nullable="false" />
+          <Property Name="CharacteristicsLevelModifier" Type="Int64" Nullable="false" />
+          <Property Name="Predisposition" Type="Int64" Nullable="false" />
+          <Property Name="Properties" Type="Int64" Nullable="false" />
+          <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1021,30 +1301,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CarrierPredisposition_Carrier">
-          <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
-          <End Type="artModel.CarrierPredisposition" Role="CarrierPredisposition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrier">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CarrierPredisposition">
-              <PropertyRef Name="Carrier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CharrierCharacteristics_Carrier">
-          <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
-          <End Type="artModel.CharrierCharacteristic" Role="CharrierCharacteristic" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrier">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CharrierCharacteristic">
-              <PropertyRef Name="Carrier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserTalent_Talent1">
           <End Type="artModel.Talent" Role="Talent" Multiplicity="1" />
           <End Type="artModel.UserArtifactTalent" Role="UserArtifactTalent" Multiplicity="*" />
@@ -1078,6 +1334,328 @@
             </Principal>
             <Dependent Role="UserArtifactTalent">
               <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ActionDescription">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
+          <Property Name="MapZone" Type="Int32" />
+          <Property Name="ActionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MapZone1" Relationship="artModel.FK_ActionDescription_MapZone" FromRole="ActionDescription" ToRole="MapZone" />
+          <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionDescription" FromRole="ActionDescription" ToRole="ActionTemplateActionDescription" />
+        </EntityType>
+        <EntityType Name="ActionTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PredispositionResult" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateActionDescription" />
+          <NavigationProperty Name="ActionTemplatePredispositions" Relationship="artModel.FK_ActionTemplatePredisposition_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplatePredisposition" />
+          <NavigationProperty Name="StepTemplateActionTemplates" Relationship="artModel.FK_StepTemplateActionTemplate_ActionTemplate" FromRole="ActionTemplate" ToRole="StepTemplateActionTemplate" />
+        </EntityType>
+        <EntityType Name="ActionTemplateActionDescription">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
+          <Property Name="ActionDescription" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActionDescription1" Relationship="artModel.FK_ActionTemplateActionDescription_ActionDescription" FromRole="ActionTemplateActionDescription" ToRole="ActionDescription" />
+          <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionTemplateActionDescription_ActionTemplate" FromRole="ActionTemplateActionDescription" ToRole="ActionTemplate" />
+        </EntityType>
+        <EntityType Name="ActionTemplatePredisposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
+          <Property Name="Predisposition" Type="Int32" Nullable="false" />
+          <Property Name="RequirementLow" Type="Int32" Nullable="false" />
+          <Property Name="RequirementHight" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionTemplatePredisposition_ActionTemplate" FromRole="ActionTemplatePredisposition" ToRole="ActionTemplate" />
+          <NavigationProperty Name="Predisposition1" Relationship="artModel.FK_ActionTemplatePredisposition_Predisposition" FromRole="ActionTemplatePredisposition" ToRole="Predisposition" />
+        </EntityType>
+        <EntityType Name="Characteristic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Mask" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapObject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="MapObjectProbabilities" Relationship="artModel.FK_MapObjectProbability_MapObject" FromRole="MapObject" ToRole="MapObjectProbability" />
+        </EntityType>
+        <EntityType Name="MapObjectProbability">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MapObject" Type="Int32" Nullable="false" />
+          <Property Name="MapZone" Type="Int32" Nullable="false" />
+          <Property Name="Probability" Type="Double" Nullable="false" />
+          <NavigationProperty Name="MapObject1" Relationship="artModel.FK_MapObjectProbability_MapObject" FromRole="MapObjectProbability" ToRole="MapObject" />
+          <NavigationProperty Name="MapZone1" Relationship="artModel.FK_MapObjectProbability_MapZone" FromRole="MapObjectProbability" ToRole="MapZone" />
+        </EntityType>
+        <EntityType Name="MapZone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZoneName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_MapZone" FromRole="MapZone" ToRole="ActionDescription" />
+          <NavigationProperty Name="MapObjectProbabilities" Relationship="artModel.FK_MapObjectProbability_MapZone" FromRole="MapZone" ToRole="MapObjectProbability" />
+          <NavigationProperty Name="ZoneCoordinats" Relationship="artModel.FK_ZoneCoordinats_MapZone" FromRole="MapZone" ToRole="ZoneCoordinat" />
+        </EntityType>
+        <EntityType Name="Predisposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Mask" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ActionTemplatePredispositions" Relationship="artModel.FK_ActionTemplatePredisposition_Predisposition" FromRole="Predisposition" ToRole="ActionTemplatePredisposition" />
+        </EntityType>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Mask" Type="Int64" Nullable="false" />
+          <Property Name="Deviation" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StepObject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StepObjectType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StepObjectType1" Relationship="artModel.FK_StepObject_StepObjectType" FromRole="StepObject" ToRole="StepObjectType" />
+          <NavigationProperty Name="StepObjectStepTemplates" Relationship="artModel.FK_StepObjectStepTemplate_StepObject" FromRole="StepObject" ToRole="StepObjectStepTemplate" />
+        </EntityType>
+        <EntityType Name="StepObjectStepTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StepObject" Type="Int32" Nullable="false" />
+          <Property Name="StepTemplate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="StepObject1" Relationship="artModel.FK_StepObjectStepTemplate_StepObject" FromRole="StepObjectStepTemplate" ToRole="StepObject" />
+          <NavigationProperty Name="StepTemplate1" Relationship="artModel.FK_StepObjectStepTemplate_StepTemplate" FromRole="StepObjectStepTemplate" ToRole="StepTemplate" />
+        </EntityType>
+        <EntityType Name="StepObjectType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StepObjects" Relationship="artModel.FK_StepObject_StepObjectType" FromRole="StepObjectType" ToRole="StepObject" />
+        </EntityType>
+        <EntityType Name="StepTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="StepText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="StepObjectStepTemplates" Relationship="artModel.FK_StepObjectStepTemplate_StepTemplate" FromRole="StepTemplate" ToRole="StepObjectStepTemplate" />
+          <NavigationProperty Name="StepTemplateActionTemplates" Relationship="artModel.FK_StepTemplateActionTemplate_StepTemplate" FromRole="StepTemplate" ToRole="StepTemplateActionTemplate" />
+        </EntityType>
+        <EntityType Name="StepTemplateActionTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StepTemplate" Type="Int32" Nullable="false" />
+          <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_StepTemplateActionTemplate_ActionTemplate" FromRole="StepTemplateActionTemplate" ToRole="ActionTemplate" />
+          <NavigationProperty Name="StepTemplate1" Relationship="artModel.FK_StepTemplateActionTemplate_StepTemplate" FromRole="StepTemplateActionTemplate" ToRole="StepTemplate" />
+        </EntityType>
+        <EntityType Name="ZoneCoordinat">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="MapZone" Type="Int32" Nullable="false" />
+          <Property Name="x" Type="Int32" Nullable="false" />
+          <Property Name="y" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MapZone1" Relationship="artModel.FK_ZoneCoordinats_MapZone" FromRole="ZoneCoordinat" ToRole="MapZone" />
+        </EntityType>
+        <Association Name="FK_ActionDescription_MapZone">
+          <End Type="artModel.MapZone" Role="MapZone" Multiplicity="0..1" />
+          <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionDescription">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateActionDescription_ActionDescription">
+          <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="1" />
+          <End Type="artModel.ActionTemplateActionDescription" Role="ActionTemplateActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionDescription">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateActionDescription">
+              <PropertyRef Name="ActionDescription" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateActionDescription_ActionTemplate">
+          <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="1" />
+          <End Type="artModel.ActionTemplateActionDescription" Role="ActionTemplateActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateActionDescription">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplatePredisposition_ActionTemplate">
+          <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="1" />
+          <End Type="artModel.ActionTemplatePredisposition" Role="ActionTemplatePredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplatePredisposition">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepTemplateActionTemplate_ActionTemplate">
+          <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="1" />
+          <End Type="artModel.StepTemplateActionTemplate" Role="StepTemplateActionTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepTemplateActionTemplate">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplatePredisposition_Predisposition">
+          <End Type="artModel.Predisposition" Role="Predisposition" Multiplicity="1" />
+          <End Type="artModel.ActionTemplatePredisposition" Role="ActionTemplatePredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predisposition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplatePredisposition">
+              <PropertyRef Name="Predisposition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapObjectProbability_MapObject">
+          <End Type="artModel.MapObject" Role="MapObject" Multiplicity="1" />
+          <End Type="artModel.MapObjectProbability" Role="MapObjectProbability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapObject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MapObjectProbability">
+              <PropertyRef Name="MapObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MapObjectProbability_MapZone">
+          <End Type="artModel.MapZone" Role="MapZone" Multiplicity="1" />
+          <End Type="artModel.MapObjectProbability" Role="MapObjectProbability" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="MapObjectProbability">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZoneCoordinats_MapZone">
+          <End Type="artModel.MapZone" Role="MapZone" Multiplicity="1" />
+          <End Type="artModel.ZoneCoordinat" Role="ZoneCoordinat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ZoneCoordinat">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepObject_StepObjectType">
+          <End Type="artModel.StepObjectType" Role="StepObjectType" Multiplicity="1" />
+          <End Type="artModel.StepObject" Role="StepObject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepObjectType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepObject">
+              <PropertyRef Name="StepObjectType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepObjectStepTemplate_StepObject">
+          <End Type="artModel.StepObject" Role="StepObject" Multiplicity="1" />
+          <End Type="artModel.StepObjectStepTemplate" Role="StepObjectStepTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepObject">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepObjectStepTemplate">
+              <PropertyRef Name="StepObject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepObjectStepTemplate_StepTemplate">
+          <End Type="artModel.StepTemplate" Role="StepTemplate" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="artModel.StepObjectStepTemplate" Role="StepObjectStepTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepObjectStepTemplate">
+              <PropertyRef Name="StepTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepTemplateActionTemplate_StepTemplate">
+          <End Type="artModel.StepTemplate" Role="StepTemplate" Multiplicity="1" />
+          <End Type="artModel.StepTemplateActionTemplate" Role="StepTemplateActionTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StepTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepTemplateActionTemplate">
+              <PropertyRef Name="StepTemplate" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1228,49 +1806,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="BasePredispositions">
-            <EntityTypeMapping TypeName="artModel.BasePredisposition">
-              <MappingFragment StoreEntitySet="BasePredisposition">
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Carriers">
             <EntityTypeMapping TypeName="artModel.Carrier">
               <MappingFragment StoreEntitySet="Carrier">
-                <ScalarProperty Name="ExpiriencePoints" ColumnName="ExpiriencePoints" />
-                <ScalarProperty Name="ExpirienceLevel" ColumnName="ExpirienceLevel" />
+                <ScalarProperty Name="DefaultPredisposition" ColumnName="DefaultPredisposition" />
+                <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+                <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+                <ScalarProperty Name="Properties" ColumnName="Properties" />
+                <ScalarProperty Name="ExperiencePoints" ColumnName="ExperiencePoints" />
+                <ScalarProperty Name="ExperienceLevel" ColumnName="ExperienceLevel" />
                 <ScalarProperty Name="Race" ColumnName="Race" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarrierPredispositions">
-            <EntityTypeMapping TypeName="artModel.CarrierPredisposition">
-              <MappingFragment StoreEntitySet="CarrierPredisposition">
-                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
-                <ScalarProperty Name="Observation" ColumnName="Observation" />
-                <ScalarProperty Name="Inventiveness" ColumnName="Inventiveness" />
-                <ScalarProperty Name="Cunning" ColumnName="Cunning" />
-                <ScalarProperty Name="Eloquence" ColumnName="Eloquence" />
-                <ScalarProperty Name="Bravery" ColumnName="Bravery" />
-                <ScalarProperty Name="Temperance" ColumnName="Temperance" />
-                <ScalarProperty Name="Kindness" ColumnName="Kindness" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CharrierCharacteristics">
-            <EntityTypeMapping TypeName="artModel.CharrierCharacteristic">
-              <MappingFragment StoreEntitySet="CharrierCharacteristics">
-                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
-                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
-                <ScalarProperty Name="Intellect" ColumnName="Intellect" />
-                <ScalarProperty Name="Knowledge" ColumnName="Knowledge" />
-                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
-                <ScalarProperty Name="Agility" ColumnName="Agility" />
-                <ScalarProperty Name="Armor" ColumnName="Armor" />
-                <ScalarProperty Name="Strength" ColumnName="Strength" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1278,31 +1823,11 @@
           <EntitySetMapping Name="Races">
             <EntityTypeMapping TypeName="artModel.Race">
               <MappingFragment StoreEntitySet="Race">
-                <ScalarProperty Name="IntellectLevelModifier" ColumnName="IntellectLevelModifier" />
-                <ScalarProperty Name="KnowledgeLevelModifier" ColumnName="KnowledgeLevelModifier" />
-                <ScalarProperty Name="AccuracyLevelModifier" ColumnName="AccuracyLevelModifier" />
-                <ScalarProperty Name="AgilityLevelModifier" ColumnName="AgilityLevelModifier" />
-                <ScalarProperty Name="ArmorLevelModifier" ColumnName="ArmorLevelModifier" />
-                <ScalarProperty Name="StrengthLevelModifier" ColumnName="StrengthLevelModifier" />
-                <ScalarProperty Name="Stealthy" ColumnName="Stealthy" />
-                <ScalarProperty Name="Observation" ColumnName="Observation" />
-                <ScalarProperty Name="Inventiveness" ColumnName="Inventiveness" />
-                <ScalarProperty Name="Cunning" ColumnName="Cunning" />
-                <ScalarProperty Name="Eloquence" ColumnName="Eloquence" />
-                <ScalarProperty Name="Bravery" ColumnName="Bravery" />
-                <ScalarProperty Name="Temperance" ColumnName="Temperance" />
-                <ScalarProperty Name="Kindness" ColumnName="Kindness" />
-                <ScalarProperty Name="ResistanceToArtifact" ColumnName="ResistanceToArtifact" />
-                <ScalarProperty Name="Charisma" ColumnName="Charisma" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="MoveSpeed" ColumnName="MoveSpeed" />
-                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
-                <ScalarProperty Name="Intellect" ColumnName="Intellect" />
-                <ScalarProperty Name="Knowledge" ColumnName="Knowledge" />
-                <ScalarProperty Name="Accuracy" ColumnName="Accuracy" />
-                <ScalarProperty Name="Agility" ColumnName="Agility" />
-                <ScalarProperty Name="Armor" ColumnName="Armor" />
-                <ScalarProperty Name="Strength" ColumnName="Strength" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Properties" ColumnName="Properties" />
+                <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+                <ScalarProperty Name="CharacteristicsLevelModifier" ColumnName="CharacteristicsLevelModifier" />
+                <ScalarProperty Name="Characreristics" ColumnName="Characreristics" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
@@ -1324,6 +1849,160 @@
                 <ScalarProperty Name="TalentLevel" ColumnName="TalentLevel" />
                 <ScalarProperty Name="UserTalent" ColumnName="UserTalent" />
                 <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionDescriptions">
+            <EntityTypeMapping TypeName="artModel.ActionDescription">
+              <MappingFragment StoreEntitySet="ActionDescription">
+                <ScalarProperty Name="ActionText" ColumnName="ActionText" />
+                <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+                <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionTemplates">
+            <EntityTypeMapping TypeName="artModel.ActionTemplate">
+              <MappingFragment StoreEntitySet="ActionTemplate">
+                <ScalarProperty Name="PredispositionResult" ColumnName="PredispositionResult" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionTemplateActionDescriptions">
+            <EntityTypeMapping TypeName="artModel.ActionTemplateActionDescription">
+              <MappingFragment StoreEntitySet="ActionTemplateActionDescription">
+                <ScalarProperty Name="ActionDescription" ColumnName="ActionDescription" />
+                <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionTemplatePredispositions">
+            <EntityTypeMapping TypeName="artModel.ActionTemplatePredisposition">
+              <MappingFragment StoreEntitySet="ActionTemplatePredisposition">
+                <ScalarProperty Name="RequirementHight" ColumnName="RequirementHight" />
+                <ScalarProperty Name="RequirementLow" ColumnName="RequirementLow" />
+                <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+                <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Characteristics">
+            <EntityTypeMapping TypeName="artModel.Characteristic">
+              <MappingFragment StoreEntitySet="Characteristics">
+                <ScalarProperty Name="Mask" ColumnName="Mask" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapObjects">
+            <EntityTypeMapping TypeName="artModel.MapObject">
+              <MappingFragment StoreEntitySet="MapObject">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapObjectProbabilities">
+            <EntityTypeMapping TypeName="artModel.MapObjectProbability">
+              <MappingFragment StoreEntitySet="MapObjectProbability">
+                <ScalarProperty Name="Probability" ColumnName="Probability" />
+                <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+                <ScalarProperty Name="MapObject" ColumnName="MapObject" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapZones">
+            <EntityTypeMapping TypeName="artModel.MapZone">
+              <MappingFragment StoreEntitySet="MapZone">
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Predispositions">
+            <EntityTypeMapping TypeName="artModel.Predisposition">
+              <MappingFragment StoreEntitySet="Predisposition">
+                <ScalarProperty Name="Mask" ColumnName="Mask" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="artModel.Property">
+              <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="Deviation" ColumnName="Deviation" />
+                <ScalarProperty Name="Mask" ColumnName="Mask" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StepObjects">
+            <EntityTypeMapping TypeName="artModel.StepObject">
+              <MappingFragment StoreEntitySet="StepObject">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StepObjectType" ColumnName="StepObjectType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StepObjectStepTemplates">
+            <EntityTypeMapping TypeName="artModel.StepObjectStepTemplate">
+              <MappingFragment StoreEntitySet="StepObjectStepTemplate">
+                <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
+                <ScalarProperty Name="StepObject" ColumnName="StepObject" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StepObjectTypes">
+            <EntityTypeMapping TypeName="artModel.StepObjectType">
+              <MappingFragment StoreEntitySet="StepObjectType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StepTemplates">
+            <EntityTypeMapping TypeName="artModel.StepTemplate">
+              <MappingFragment StoreEntitySet="StepTemplate">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StepText" ColumnName="StepText" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StepTemplateActionTemplates">
+            <EntityTypeMapping TypeName="artModel.StepTemplateActionTemplate">
+              <MappingFragment StoreEntitySet="StepTemplateActionTemplate">
+                <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+                <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZoneCoordinats">
+            <EntityTypeMapping TypeName="artModel.ZoneCoordinat">
+              <MappingFragment StoreEntitySet="ZoneCoordinats">
+                <ScalarProperty Name="y" ColumnName="y" />
+                <ScalarProperty Name="x" ColumnName="x" />
+                <ScalarProperty Name="MapZone" ColumnName="MapZone" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
