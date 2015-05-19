@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
 
-
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL
 {
      [MetadataType(typeof(StepObjectTypeMetaData))]
     public partial class StepObjectType
@@ -13,7 +12,7 @@ namespace ArtifactAdmin.Models
     }
 public class StepObjectTypeMetaData
 {
-    public int id { get; set; }
+    public int Id { get; set; }
     [Required(ErrorMessageResourceName = "RequiredName",
     ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
     [Display(Name = "Назва")]

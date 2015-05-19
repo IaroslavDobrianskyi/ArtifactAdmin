@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
 
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL
 {
     [MetadataType(typeof(TalentMetaData))]
     public partial class Talent
@@ -12,7 +12,7 @@ namespace ArtifactAdmin.Models
     }
     public class TalentMetaData
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         [Required(ErrorMessageResourceName = "RequiredDescription",
         ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Опис")]

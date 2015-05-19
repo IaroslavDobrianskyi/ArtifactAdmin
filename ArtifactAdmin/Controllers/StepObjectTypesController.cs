@@ -6,9 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ArtifactAdmin.Models;
+using ArtifactAdmin.DAL;
 
-namespace ArtifactAdmin.Controllers
+namespace ArtifactAdmin.Web
 {
     public class StepObjectTypesController : Controller
     {
@@ -48,7 +48,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Name")] StepObjectType stepObjectType)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 try
@@ -89,7 +89,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name")] StepObjectType stepObjectType)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 try
@@ -127,7 +127,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             StepObjectType stepObjectType = db.StepObjectTypes.Find(id);
             try
             {

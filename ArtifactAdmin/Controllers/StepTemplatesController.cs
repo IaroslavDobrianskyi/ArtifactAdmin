@@ -6,9 +6,9 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ArtifactAdmin.Models;
+using ArtifactAdmin.DAL;
 
-namespace ArtifactAdmin.Controllers
+namespace ArtifactAdmin.Web
 {
     public class StepTemplatesController : Controller
     {
@@ -41,16 +41,16 @@ namespace ArtifactAdmin.Controllers
        
         public ActionResult Create()
         {
-            StepTemplates modi = GetStepTemplate(null,null);
+            StepTemplates modi = GetStepTemplate(null, null);
             return View(modi);
         }
         
-        private StepTemplates GetStepTemplate(StepTemplate stepTemplate,string[] selObj)
+        private StepTemplates GetStepTemplate(StepTemplate stepTemplate, string[] selObj)
         {
             StepTemplates modi = new StepTemplates();
-            modi.stepObjectType = db.StepObjectTypes.ToList();
-            modi.stepObjectType.Add(null);
-            modi.stepTemplate = stepTemplate;
+            modi.StepObjectType = db.StepObjectTypes.ToList();
+            modi.StepObjectType.Add(null);
+            modi.StepTemplate = stepTemplate;
             var AllObject = db.StepObjects;
             var ViewTV = new List<ViewStepObject>();
             foreach (var type in AllObject)
@@ -58,40 +58,40 @@ namespace ArtifactAdmin.Controllers
                 ViewTV.Add(new ViewStepObject
                 {
                     stepObject = type,
-                    idObjType = type.id.ToString() + "." + type.StepObjectType.ToString()
+                    IdObjType = type.id.ToString() + "." + type.StepObjectType.ToString()
                 });
             }
             if (selObj == null)
             {
-                modi.stepObject = ViewTV;
-                modi.selectedStepObject = new List<ViewStepObject>();
+                modi.StepObject = ViewTV;
+                modi.SelectedStepObject = new List<ViewStepObject>();
             }
             else 
             {
-                modi.stepObject = new List<ViewStepObject>();
-                modi.selectedStepObject = new List<ViewStepObject>();
-                Boolean sel = false;  
+                modi.StepObject = new List<ViewStepObject>();
+                modi.SelectedStepObject = new List<ViewStepObject>();
+                bool sel = false;  
                 foreach (var type in ViewTV)
                 {
                     sel = false;
                     for (int i = 0; i < selObj.Length; i++) 
                      {
-                        if (type.idObjType==selObj[i])
+                        if (type.IdObjType == selObj[i])
                         { sel = true;
                         break;
                         }
                      }
                     if (sel)
                     {
-                        modi.selectedStepObject.Add(type);
+                        modi.SelectedStepObject.Add(type);
                     }
                     else 
                     {
-                        modi.stepObject.Add(type);
+                        modi.StepObject.Add(type);
                     }
                 } 
             }
-            return(modi);
+            return modi;
         }
         // POST: StepTemplates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -101,7 +101,7 @@ namespace ArtifactAdmin.Controllers
         public ActionResult Create([Bind(Include = "id,Description,StepText,Name")] StepTemplate stepTemplate, string[] selectedStepObject)
            
         {
-            StepTemplates modi = GetStepTemplate(stepTemplate,selectedStepObject);
+            StepTemplates modi = GetStepTemplate(stepTemplate, selectedStepObject);
             if (ModelState.IsValid)
             {
                 try
@@ -150,7 +150,7 @@ namespace ArtifactAdmin.Controllers
 
         private string[] GetSelObj(int? id)
         {
-            //throw new NotImplementedException();
+            // throw new NotImplementedException();
             string[] selObj = null;
             var ST = db.StepObjectStepTemplates.Include("StepObject1").Where(p => p.StepTemplate == id);
             int i = 0;
@@ -164,7 +164,7 @@ namespace ArtifactAdmin.Controllers
                     i++;
                 }
             }
-            return (selObj);
+            return selObj;
         }
 
         // POST: StepTemplates/Edit/5

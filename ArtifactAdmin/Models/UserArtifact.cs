@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL.Models
 {
     using System;
     using System.Collections.Generic;
@@ -31,8 +31,8 @@ namespace ArtifactAdmin.Models
         public int User { get; set; }
     
         public virtual Artifact Artifact1 { get; set; }
-        public virtual Constellation Constellation1 { get; set; }
         public virtual User User1 { get; set; }
         public virtual ICollection<UserArtifactTalent> UserArtifactTalents { get; set; }
+        public virtual Constellation Constellation1 { get; set; }
     }
 }

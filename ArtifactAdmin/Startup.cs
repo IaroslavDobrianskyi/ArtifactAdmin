@@ -2,6 +2,7 @@
 using Owin;
 
 [assembly: OwinStartupAttribute(typeof(ArtifactAdmin.Startup))]
+
 namespace ArtifactAdmin
 {
     public partial class Startup

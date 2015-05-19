@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ArtifactAdmin.Models;
+using ArtifactAdmin.DAL;
 
-namespace ArtifactAdmin.Controllers
+namespace ArtifactAdmin.Web
 {
+    using DAL.Models;
+
     public class BonusController : Controller
     {
         private artEntities db = new artEntities();
@@ -48,7 +50,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Description")] Bonu bonu)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 try 
@@ -89,7 +91,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] Bonu bonu)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 try
@@ -127,7 +129,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             Bonu bonu = db.Bonus.Find(id);
             try
             { 

@@ -55,7 +55,7 @@
           <Property Name="ActionTemplate" Type="int" Nullable="false" />
           <Property Name="Predisposition" Type="int" Nullable="false" />
           <Property Name="RequirementLow" Type="int" Nullable="false" />
-          <Property Name="RequirementHight" Type="int" Nullable="false" />
+          <Property Name="RequirementHigh" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Artifact">
           <Key>
@@ -547,7 +547,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StepObjectStepTemplate_StepTemplate">
-          <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1" />
+          <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="StepObjectStepTemplate" Type="Self.StepObjectStepTemplate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StepTemplate">
@@ -859,17 +861,6 @@
           <NavigationProperty Name="ConstellationBonus" Relationship="Self.FK_ConstellationBonus_Bonus" FromRole="Bonus" ToRole="ConstellationBonus" />
           <NavigationProperty Name="ArtifactBonus" Relationship="artModel.FK_ArtifactTypeBonus_Bonus1" FromRole="Bonu" ToRole="ArtifactBonu" />
         </EntityType>
-        <EntityType Name="Constellation">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Icon" Type="String" MaxLength="250" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ConstellationBonus" Relationship="Self.FK_ConstellationBonus_Constellation" FromRole="Constellation" ToRole="ConstellationBonus" />
-          <NavigationProperty Name="UserArtifacts" Relationship="Self.FK_UserArtifact_Constellation" FromRole="Constellation" ToRole="UserArtifact" />
-        </EntityType>
         <EntityType Name="ConstellationBonu">
           <Key>
             <PropertyRef Name="id" />
@@ -879,7 +870,7 @@
           <Property Name="Constallation" Type="Int32" Nullable="false" />
           <Property Name="Modifier" Type="Double" Nullable="false" />
           <NavigationProperty Name="Bonu" Relationship="Self.FK_ConstellationBonus_Bonus" FromRole="ConstellationBonus" ToRole="Bonus" />
-          <NavigationProperty Name="Constellation" Relationship="Self.FK_ConstellationBonus_Constellation" FromRole="ConstellationBonus" ToRole="Constellation" />
+          <NavigationProperty Name="Constellation" Relationship="artModel.FK_ConstellationBonus_Constellation" FromRole="ConstellationBonu" ToRole="Constellation" />
         </EntityType>
         <EntityType Name="Statistic">
           <Key>
@@ -942,10 +933,10 @@
           <Property Name="ExperiencePoints" Type="Int64" Nullable="false" />
           <Property Name="ExperienceLevel" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Artifact1" Relationship="Self.FK_UserArtifact_Artifact" FromRole="UserArtifact" ToRole="Artifact" />
-          <NavigationProperty Name="Constellation1" Relationship="Self.FK_UserArtifact_Constellation" FromRole="UserArtifact" ToRole="Constellation" />
           <Property Name="User" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User1" Relationship="artModel.FK_UserArtifact_User" FromRole="UserArtifact" ToRole="User" />
           <NavigationProperty Name="UserArtifactTalents" Relationship="artModel.FK_UserTalent_UserArtifact1" FromRole="UserArtifact" ToRole="UserArtifactTalent" />
+          <NavigationProperty Name="Constellation1" Relationship="artModel.FK_UserArtifact_Constellation" FromRole="UserArtifact" ToRole="Constellation" />
         </EntityType>
         <Association Name="FK_ActFlow_Action">
           <End Role="Action" Type="Self.Action" Multiplicity="0..1">
@@ -1035,37 +1026,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ConstellationBonus_Constellation">
-          <End Role="Constellation" Type="Self.Constellation" Multiplicity="1" />
-          <End Role="ConstellationBonus" Type="Self.ConstellationBonu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Constellation">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ConstellationBonus">
-              <PropertyRef Name="Constallation" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_UserArtifact_Constellation">
-          <End Role="Constellation" Type="Self.Constellation" Multiplicity="1" />
-          <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Constellation">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="UserArtifact">
-              <PropertyRef Name="Constellation" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="artEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ActFlows" EntityType="Self.ActFlow" />
           <EntitySet Name="Actions" EntityType="Self.Action" />
           <EntitySet Name="Artifacts" EntityType="Self.Artifact" />
           <EntitySet Name="ArtifactTypes" EntityType="Self.ArtifactType" />
           <EntitySet Name="Bonus" EntityType="Self.Bonu" />
-          <EntitySet Name="Constellations" EntityType="Self.Constellation" />
           <EntitySet Name="ConstellationBonus" EntityType="Self.ConstellationBonu" />
           <EntitySet Name="Statistics" EntityType="Self.Statistic" />
           <EntitySet Name="Steps" EntityType="Self.Step" />
@@ -1099,14 +1065,6 @@
           <AssociationSet Name="FK_ConstellationBonus_Bonus" Association="Self.FK_ConstellationBonus_Bonus">
             <End Role="Bonus" EntitySet="Bonus" />
             <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ConstellationBonus_Constellation" Association="Self.FK_ConstellationBonus_Constellation">
-            <End Role="Constellation" EntitySet="Constellations" />
-            <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserArtifact_Constellation" Association="Self.FK_UserArtifact_Constellation">
-            <End Role="Constellation" EntitySet="Constellations" />
-            <End Role="UserArtifact" EntitySet="UserArtifacts" />
           </AssociationSet>
           <EntitySet Name="ArtifactBonus" EntityType="artModel.ArtifactBonu" />
           <EntitySet Name="Carriers" EntityType="artModel.Carrier" />
@@ -1204,6 +1162,15 @@
           <AssociationSet Name="FK_StepTemplateActionTemplate_StepTemplate" Association="artModel.FK_StepTemplateActionTemplate_StepTemplate">
             <End Role="StepTemplate" EntitySet="StepTemplates" />
             <End Role="StepTemplateActionTemplate" EntitySet="StepTemplateActionTemplates" />
+          </AssociationSet>
+          <EntitySet Name="Constellations" EntityType="artModel.Constellation" />
+          <AssociationSet Name="FK_ConstellationBonus_Constellation" Association="artModel.FK_ConstellationBonus_Constellation">
+            <End Role="Constellation" EntitySet="Constellations" />
+            <End Role="ConstellationBonu" EntitySet="ConstellationBonus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserArtifact_Constellation" Association="artModel.FK_UserArtifact_Constellation">
+            <End Role="Constellation" EntitySet="Constellations" />
+            <End Role="UserArtifact" EntitySet="UserArtifacts" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ArtifactBonu">
@@ -1377,9 +1344,9 @@
           <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
           <Property Name="Predisposition" Type="Int32" Nullable="false" />
           <Property Name="RequirementLow" Type="Int32" Nullable="false" />
-          <Property Name="RequirementHight" Type="Int32" Nullable="false" />
           <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionTemplatePredisposition_ActionTemplate" FromRole="ActionTemplatePredisposition" ToRole="ActionTemplate" />
           <NavigationProperty Name="Predisposition1" Relationship="artModel.FK_ActionTemplatePredisposition_Predisposition" FromRole="ActionTemplatePredisposition" ToRole="Predisposition" />
+          <Property Name="RequirementHigh" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Characteristic">
           <Key>
@@ -1659,6 +1626,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Constellation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ConstellationBonus" Relationship="artModel.FK_ConstellationBonus_Constellation" FromRole="Constellation" ToRole="ConstellationBonu" />
+          <NavigationProperty Name="UserArtifacts" Relationship="artModel.FK_UserArtifact_Constellation" FromRole="Constellation" ToRole="UserArtifact" />
+        </EntityType>
+        <Association Name="FK_ConstellationBonus_Constellation">
+          <End Type="artModel.Constellation" Role="Constellation" Multiplicity="1" />
+          <End Type="artModel.ConstellationBonu" Role="ConstellationBonu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Constellation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ConstellationBonu">
+              <PropertyRef Name="Constallation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserArtifact_Constellation">
+          <End Type="artModel.Constellation" Role="Constellation" Multiplicity="1" />
+          <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Constellation">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserArtifact">
+              <PropertyRef Name="Constellation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1709,16 +1711,6 @@
               <MappingFragment StoreEntitySet="Bonus">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Constellations">
-            <EntityTypeMapping TypeName="artModel.Constellation">
-              <MappingFragment StoreEntitySet="Constellation">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1884,7 +1876,7 @@
           <EntitySetMapping Name="ActionTemplatePredispositions">
             <EntityTypeMapping TypeName="artModel.ActionTemplatePredisposition">
               <MappingFragment StoreEntitySet="ActionTemplatePredisposition">
-                <ScalarProperty Name="RequirementHight" ColumnName="RequirementHight" />
+                <ScalarProperty Name="RequirementHigh" ColumnName="RequirementHigh" />
                 <ScalarProperty Name="RequirementLow" ColumnName="RequirementLow" />
                 <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
                 <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
@@ -2003,6 +1995,16 @@
                 <ScalarProperty Name="y" ColumnName="y" />
                 <ScalarProperty Name="x" ColumnName="x" />
                 <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Constellations">
+            <EntityTypeMapping TypeName="artModel.Constellation">
+              <MappingFragment StoreEntitySet="Constellation">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ArtifactAdmin.Models;
-using System.IO;
+using ArtifactAdmin.DAL;
 
-namespace ArtifactAdmin.Controllers
+
+namespace ArtifactAdmin.Web
 {
     public class TalentsController : Controller
     {
@@ -48,14 +49,15 @@ namespace ArtifactAdmin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")]
-            Talent talent,HttpPostedFileBase Icon)
+            Talent talent, HttpPostedFileBase Icon)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 var fileName = Path.GetFileName(Icon.FileName);
                 fileName = Guid.NewGuid().ToString() + '_' + fileName;
                 string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
+                Directory.CreateDirectory(Server.MapPath(IPath + "Talents"));
                 var path = Path.Combine(Server.MapPath(IPath + "Talents"), fileName);
                 Icon.SaveAs(path);
                 talent.Icon = fileName;
@@ -97,7 +99,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")] Talent talent)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 try
@@ -135,7 +137,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             Talent talent = db.Talents.Find(id);
             string fileName = talent.Icon;
             string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;

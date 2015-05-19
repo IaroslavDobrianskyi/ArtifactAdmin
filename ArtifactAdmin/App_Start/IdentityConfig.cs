@@ -3,9 +3,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using ArtifactAdmin.Models;
+using ArtifactAdmin.DAL;
 
-namespace ArtifactAdmin
+namespace ArtifactAdmin.DAL
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
@@ -36,15 +36,10 @@ namespace ArtifactAdmin
             };
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug in here.
-            manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser>
-            {
-                MessageFormat = "Your security code is: {0}"
-            });
-            manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser>
-            {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is: {0}"
-            });
+            manager.RegisterTwoFactorProvider("PhoneCode", 
+                new PhoneNumberTokenProvider<ApplicationUser> { MessageFormat = "Your security code is: {0}" });
+            manager.RegisterTwoFactorProvider("EmailCode",
+                new EmailTokenProvider<ApplicationUser> { Subject = "Security Code", BodyFormat = "Your security code is: {0}" });
             manager.EmailService = new EmailService();
             manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;

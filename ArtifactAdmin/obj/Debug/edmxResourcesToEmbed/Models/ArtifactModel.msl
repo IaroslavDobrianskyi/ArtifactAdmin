@@ -49,16 +49,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Constellations">
-      <EntityTypeMapping TypeName="artModel.Constellation">
-        <MappingFragment StoreEntitySet="Constellation">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Icon" ColumnName="Icon" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="ConstellationBonus">
       <EntityTypeMapping TypeName="artModel.ConstellationBonu">
         <MappingFragment StoreEntitySet="ConstellationBonus">
@@ -220,7 +210,7 @@
     <EntitySetMapping Name="ActionTemplatePredispositions">
       <EntityTypeMapping TypeName="artModel.ActionTemplatePredisposition">
         <MappingFragment StoreEntitySet="ActionTemplatePredisposition">
-          <ScalarProperty Name="RequirementHight" ColumnName="RequirementHight" />
+          <ScalarProperty Name="RequirementHigh" ColumnName="RequirementHigh" />
           <ScalarProperty Name="RequirementLow" ColumnName="RequirementLow" />
           <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
@@ -339,6 +329,16 @@
           <ScalarProperty Name="y" ColumnName="y" />
           <ScalarProperty Name="x" ColumnName="x" />
           <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Constellations">
+      <EntityTypeMapping TypeName="artModel.Constellation">
+        <MappingFragment StoreEntitySet="Constellation">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

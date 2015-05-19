@@ -10,7 +10,6 @@
         <EntityTypeShape EntityType="artModel.Artifact" Width="1.5" PointX="3.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.ArtifactType" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Bonu" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="artModel.Constellation" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.ConstellationBonu" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Statistic" Width="1.5" PointX="11.125" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Step" Width="1.5" PointX="5.75" PointY="10.125" IsExpanded="true" />
@@ -24,8 +23,6 @@
         <AssociationConnector Association="artModel.FK_Artifact_ArtifactType" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_UserArtifact_Artifact" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Bonus" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_ConstellationBonus_Constellation" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_UserArtifact_Constellation" ManuallyRouted="false" />
         <EntityTypeShape EntityType="artModel.ArtifactBonu" Width="1.5" PointX="11" PointY="0.75" />
         <EntityTypeShape EntityType="artModel.Carrier" Width="1.5" PointX="14.625" PointY="9.625" />
         <EntityTypeShape EntityType="artModel.Race" Width="1.5" PointX="12.375" PointY="7.625" />
@@ -40,7 +37,7 @@
         <EntityTypeShape EntityType="artModel.ActionDescription" Width="1.5" PointX="3" PointY="18.625" />
         <EntityTypeShape EntityType="artModel.ActionTemplate" Width="1.5" PointX="13" PointY="23.375" />
         <EntityTypeShape EntityType="artModel.ActionTemplateActionDescription" Width="1.5" PointX="18.25" PointY="21.125" />
-        <EntityTypeShape EntityType="artModel.ActionTemplatePredisposition" Width="1.5" PointX="15.25" PointY="24.375" />
+        <EntityTypeShape EntityType="artModel.ActionTemplatePredisposition" Width="2.5" PointX="15.25" PointY="24.375" />
         <EntityTypeShape EntityType="artModel.Characteristic" Width="1.5" PointX="8.75" PointY="5.75" />
         <EntityTypeShape EntityType="artModel.MapObject" Width="1.5" PointX="3.75" PointY="16.375" />
         <EntityTypeShape EntityType="artModel.MapObjectProbability" Width="1.5" PointX="6" PointY="20" />
@@ -66,6 +63,9 @@
         <AssociationConnector Association="artModel.FK_StepObjectStepTemplate_StepObject" />
         <AssociationConnector Association="artModel.FK_StepObjectStepTemplate_StepTemplate" />
         <AssociationConnector Association="artModel.FK_StepTemplateActionTemplate_StepTemplate" />
+        <EntityTypeShape EntityType="artModel.Constellation" Width="1.5" PointX="0.75" PointY="5.25" />
+        <AssociationConnector Association="artModel.FK_ConstellationBonus_Constellation" />
+        <AssociationConnector Association="artModel.FK_UserArtifact_Constellation" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

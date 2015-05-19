@@ -50,7 +50,7 @@
     <Property Name="ActionTemplate" Type="int" Nullable="false" />
     <Property Name="Predisposition" Type="int" Nullable="false" />
     <Property Name="RequirementLow" Type="int" Nullable="false" />
-    <Property Name="RequirementHight" Type="int" Nullable="false" />
+    <Property Name="RequirementHigh" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Artifact">
     <Key>
@@ -542,7 +542,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_StepObjectStepTemplate_StepTemplate">
-    <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1" />
+    <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="StepObjectStepTemplate" Type="Self.StepObjectStepTemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StepTemplate">

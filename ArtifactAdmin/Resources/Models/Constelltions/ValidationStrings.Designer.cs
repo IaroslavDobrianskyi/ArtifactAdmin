@@ -39,7 +39,7 @@ namespace ValidationConstellation {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ArtifactAdmin.Resources.Models.Constelltions.ValidationStrings", typeof(ValidationStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ArtifactAdmin.DAL.Resources.Models.Constelltions.ValidationStrings", typeof(ValidationStrings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
-using ArtifactAdmin.Models;
+using ArtifactAdmin.DAL;
 
-namespace ArtifactAdmin.Controllers
+namespace ArtifactAdmin.Web
 {
     [Authorize]
     public class AccountController : Controller
@@ -39,7 +39,7 @@ namespace ArtifactAdmin.Controllers
             }
         }
 
-        //
+
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -48,7 +48,7 @@ namespace ArtifactAdmin.Controllers
             return View();
         }
 
-        //
+
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -65,7 +65,7 @@ namespace ArtifactAdmin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid username or password.");
+                    ModelState.AddModelError(string.Empty, "Invalid username or password.");
                 }
             }
 
@@ -73,7 +73,7 @@ namespace ArtifactAdmin.Controllers
             return View(model);
         }
 
-        //
+
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -81,7 +81,7 @@ namespace ArtifactAdmin.Controllers
             return View();
         }
 
-        //
+
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -114,7 +114,7 @@ namespace ArtifactAdmin.Controllers
             return View(model);
         }
 
-        //
+
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
@@ -136,7 +136,7 @@ namespace ArtifactAdmin.Controllers
             }
         }
 
-        //
+
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
@@ -144,7 +144,7 @@ namespace ArtifactAdmin.Controllers
             return View();
         }
 
-        //
+
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -156,14 +156,14 @@ namespace ArtifactAdmin.Controllers
                 var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
-                    ModelState.AddModelError("", "The user either does not exist or is not confirmed.");
+                    ModelState.AddModelError(string.Empty, "The user either does not exist or is not confirmed.");
                     return View();
                 }
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 // return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -172,15 +172,15 @@ namespace ArtifactAdmin.Controllers
             return View(model);
         }
 
-        //
+
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-	
-        //
+
+
         // GET: /Account/ResetPassword
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
@@ -192,7 +192,7 @@ namespace ArtifactAdmin.Controllers
             return View();
         }
 
-        //
+
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -204,7 +204,7 @@ namespace ArtifactAdmin.Controllers
                 var user = await UserManager.FindByNameAsync(model.Email);
                 if (user == null)
                 {
-                    ModelState.AddModelError("", "No user found.");
+                    ModelState.AddModelError(string.Empty, "No user found.");
                     return View();
                 }
                 IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
@@ -223,7 +223,7 @@ namespace ArtifactAdmin.Controllers
             return View(model);
         }
 
-        //
+
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
@@ -231,7 +231,7 @@ namespace ArtifactAdmin.Controllers
             return View();
         }
 
-        //
+
         // POST: /Account/Disassociate
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -252,7 +252,7 @@ namespace ArtifactAdmin.Controllers
             return RedirectToAction("Manage", new { Message = message });
         }
 
-        //
+
         // GET: /Account/Manage
         public ActionResult Manage(ManageMessageId? message)
         {
@@ -261,13 +261,13 @@ namespace ArtifactAdmin.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
-                : "";
+                : string.Empty;
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
         }
 
-        //
+
         // POST: /Account/Manage
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -320,7 +320,7 @@ namespace ArtifactAdmin.Controllers
             return View(model);
         }
 
-        //
+
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -331,7 +331,7 @@ namespace ArtifactAdmin.Controllers
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
-        //
+
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
@@ -358,7 +358,7 @@ namespace ArtifactAdmin.Controllers
             }
         }
 
-        //
+
         // POST: /Account/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -368,7 +368,7 @@ namespace ArtifactAdmin.Controllers
             return new ChallengeResult(provider, Url.Action("LinkLoginCallback", "Account"), User.Identity.GetUserId());
         }
 
-        //
+
         // GET: /Account/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
@@ -385,7 +385,7 @@ namespace ArtifactAdmin.Controllers
             return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
 
-        //
+
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
@@ -430,7 +430,7 @@ namespace ArtifactAdmin.Controllers
             return View(model);
         }
 
-        //
+
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -440,7 +440,7 @@ namespace ArtifactAdmin.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //
+
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
@@ -488,7 +488,7 @@ namespace ArtifactAdmin.Controllers
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError("", error);
+                ModelState.AddModelError(string.Empty, error);
             }
         }
 

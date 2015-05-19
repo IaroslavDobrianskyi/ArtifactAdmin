@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
 
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL
 {
     [MetadataType(typeof(StepObjectMetaData))]
     public partial class StepObject
@@ -12,7 +12,7 @@ namespace ArtifactAdmin.Models
     }
     public class StepObjectMetaData
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int StepObjectType { get; set; }
         [Required(ErrorMessageResourceName = "RequiredName",
   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
@@ -30,7 +30,7 @@ namespace ArtifactAdmin.Models
        ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Іконка")]
         public string Icon { get; set; }
-         [Display(Name="Тип")]
+         [Display(Name = "Тип")]
         public virtual StepObjectType StepObjectType1 { get; set; }
     }
 }

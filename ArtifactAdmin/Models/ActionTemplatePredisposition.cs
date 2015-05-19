@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace ArtifactAdmin.Models
         public int ActionTemplate { get; set; }
         public int Predisposition { get; set; }
         public int RequirementLow { get; set; }
-        public int RequirementHight { get; set; }
+        public int RequirementHigh { get; set; }
     
         public virtual ActionTemplate ActionTemplate1 { get; set; }
         public virtual Predisposition Predisposition1 { get; set; }

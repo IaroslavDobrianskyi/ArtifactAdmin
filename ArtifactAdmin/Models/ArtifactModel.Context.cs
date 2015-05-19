@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL.Models
 {
     using System;
     using System.Data.Entity;
@@ -30,7 +30,6 @@ namespace ArtifactAdmin.Models
         public virtual DbSet<Artifact> Artifacts { get; set; }
         public virtual DbSet<ArtifactType> ArtifactTypes { get; set; }
         public virtual DbSet<Bonu> Bonus { get; set; }
-        public virtual DbSet<Constellation> Constellations { get; set; }
         public virtual DbSet<ConstellationBonu> ConstellationBonus { get; set; }
         public virtual DbSet<Statistic> Statistics { get; set; }
         public virtual DbSet<Step> Steps { get; set; }
@@ -58,5 +57,6 @@ namespace ArtifactAdmin.Models
         public virtual DbSet<StepTemplate> StepTemplates { get; set; }
         public virtual DbSet<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
         public virtual DbSet<ZoneCoordinat> ZoneCoordinats { get; set; }
+        public virtual DbSet<Constellation> Constellations { get; set; }
     }
 }

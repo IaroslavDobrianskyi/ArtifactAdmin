@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL
 {
     public class ExternalLoginConfirmationViewModel
     {

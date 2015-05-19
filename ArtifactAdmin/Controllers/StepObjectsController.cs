@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using ArtifactAdmin.Models;
-using System.IO;
+using ArtifactAdmin.DAL;
 
 
-namespace ArtifactAdmin.Controllers
+
+namespace ArtifactAdmin.Web
 {
     public class StepObjectsController : Controller
     {
@@ -52,15 +53,16 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,StepObjectType,Name,Description,Icon")] StepObject stepObject, HttpPostedFileBase Icon)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 var fileName = Path.GetFileName(Icon.FileName);
                 fileName = Guid.NewGuid().ToString() + '_' + fileName;
 
                 string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
-
+                Directory.CreateDirectory(Server.MapPath(IPath + "StepObjects"));
                 var path = Path.Combine(Server.MapPath(IPath + "StepObjects"), fileName);
+               
                 Icon.SaveAs(path);
                 stepObject.Icon = fileName;
                 try
@@ -68,9 +70,10 @@ namespace ArtifactAdmin.Controllers
                     db.StepObjects.Add(stepObject);
                     db.SaveChanges();
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
+                    ViewBag.ErrMes = e.Message;
                     ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name", stepObject.StepObjectType);
                     return View(stepObject);
                 }
@@ -104,7 +107,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,StepObjectType,Name,Description,Icon")] StepObject stepObject)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 try
@@ -144,7 +147,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             StepObject stepObject = db.StepObjects.Find(id);
             try
             {

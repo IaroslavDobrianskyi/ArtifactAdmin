@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ArtifactAdmin.Models
+namespace ArtifactAdmin.DAL.Models
 {
     using System;
     using System.Collections.Generic;

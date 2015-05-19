@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-//using System.Web.Configuration;
-using ArtifactAdmin.Models;
-using System.IO;
+using ArtifactAdmin.DAL;
 
-namespace ArtifactAdmin.Controllers
+
+namespace ArtifactAdmin.Web
 {
     public class ConstellationsController : Controller
     {
@@ -50,17 +50,17 @@ namespace ArtifactAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name,Icon,Description")] Constellation constellation,HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "id,Name,Icon,Description")] Constellation constellation, HttpPostedFileBase Icon)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 var fileName = Path.GetFileName(Icon.FileName);
                 fileName = Guid.NewGuid().ToString() + '_' + fileName;
 
                 string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
-
-                var path = Path.Combine(Server.MapPath(IPath+"Constellations"), fileName);
+                Directory.CreateDirectory(Server.MapPath(IPath + "Constellations"));
+                var path = Path.Combine(Server.MapPath(IPath + "Constellations"), fileName);
                 Icon.SaveAs(path);
                 constellation.Icon = fileName;
                     try
@@ -103,7 +103,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,Name,Icon,Description")] Constellation constellation)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             if (ModelState.IsValid)
             {
                 try
@@ -141,7 +141,7 @@ namespace ArtifactAdmin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ViewBag.Error = "";
+            ViewBag.Error = string.Empty;
             Constellation constellation = db.Constellations.Find(id);
             string fileName = constellation.Icon;
             string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
