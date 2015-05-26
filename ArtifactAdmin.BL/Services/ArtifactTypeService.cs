@@ -29,13 +29,15 @@ namespace ArtifactAdmin.BL.Services
 
         public IEnumerable<ArtifactTypeDto> GetAll()
         {
+            var artifactType = this.artifactTypeRepository.GetAll();
             return Mapper.Map<List<ArtifactTypeDto>>(this.artifactTypeRepository.GetAll());
         }
 
         public ArtifactTypeDto GetById(int? id)
         {
-            return Mapper.Map<ArtifactTypeDto>(this.artifactTypeRepository.GetAll()
-                                                   .FirstOrDefault(s => s.id == id));
+            var artifactType = this.artifactTypeRepository.GetAll()
+                                   .FirstOrDefault(s => s.id == id);
+            return Mapper.Map<ArtifactTypeDto>(this.artifactTypeRepository.GetAll().FirstOrDefault(s => s.id == id));
         }
 
         public ArtifactTypeDto Create(ArtifactTypeDto artifactTypeDto, HttpPostedFileBase icon)
@@ -43,14 +45,18 @@ namespace ArtifactAdmin.BL.Services
             var fileName = Path.GetFileName(icon.FileName);
             fileName = Guid.NewGuid()
                            .ToString() + '_' + fileName;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            Directory.CreateDirectory(HttpContext.Current.Server.MapPath(pathToIcon + "ArtifactTypes"));
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "ArtifactTypes"), fileName);
-            icon.SaveAs(path);
             artifactTypeDto.Icon = fileName;
             var artifactType = Mapper.Map<ArtifactType>(artifactTypeDto);
             this.artifactTypeRepository.Insert(artifactType);
             return Mapper.Map<ArtifactTypeDto>(artifactType);
+        }
+
+        public void SaveIcon(ArtifactTypeDto artifactTypeDto, HttpPostedFileBase icon)
+        {
+            var fileName = artifactTypeDto.Icon;
+            string pathToIcon = App_Start.ImagePath.ImPath;
+            var path=Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon+ "ArtifactTypes"), fileName);
+            icon.SaveAs(path);
         }
 
         public ArtifactTypeDto Update(ArtifactTypeDto artifactTypeDto)

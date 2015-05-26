@@ -43,14 +43,18 @@ namespace ArtifactAdmin.BL.Services
         {
             var fileName = Path.GetFileName(icon.FileName);
             fileName = Guid.NewGuid().ToString() + '_' + fileName;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            Directory.CreateDirectory(HttpContext.Current.Server.MapPath(pathToIcon + "Constellations"));
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "Constellations"), fileName);
-            icon.SaveAs(path);
             constellationDto.Icon = fileName;
             var constellation = Mapper.Map<Constellation>(constellationDto);
             this.constellationRepository.Insert(constellation);
             return Mapper.Map<ConstellationDto>(constellation);
+        }
+
+        public void SaveIcon(ConstellationDto constellationDto, HttpPostedFileBase icon)
+        {
+            var fileName = constellationDto.Icon;
+            var pathToIcon = App_Start.ImagePath.ImPath;
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "Constellations"), fileName);
+            icon.SaveAs(path);
         }
 
         public ConstellationDto Update(ConstellationDto constellationDto)

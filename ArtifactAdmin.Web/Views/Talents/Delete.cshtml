@@ -1,4 +1,4 @@
-﻿@model ArtifactAdmin.Models.Talent
+﻿@model ArtifactAdmin.BL.ModelsDTO.TalentDto
 
 @{
     ViewBag.Title = "Delete";
@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            <img src="@(@ArtifactAdmin.App_Start.ImagePath.ImPath+"Talents/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
+            <img src="@(@ArtifactAdmin.BL.App_Start.ImagePath.ImPath+"Talents/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
         </dd>
 
        

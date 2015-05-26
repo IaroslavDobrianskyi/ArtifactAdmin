@@ -44,14 +44,18 @@ namespace ArtifactAdmin.BL.Services
             var fileName = Path.GetFileName(icon.FileName);
             fileName = Guid.NewGuid()
                            .ToString() + "_" + fileName;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            Directory.CreateDirectory(HttpContext.Current.Server.MapPath(pathToIcon + "StepObjects"));
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "StepObjects"), fileName);
-            icon.SaveAs(path);
             stepObjectDto.Icon = fileName;
             var stepObject = Mapper.Map<StepObject>(stepObjectDto);
             this.stepObjectRepository.Insert(stepObject);
             return Mapper.Map<StepObjectDto>(stepObject);
+        }
+
+        public void SaveIcon(StepObjectDto stepObjectDto, HttpPostedFileBase icon)
+        {
+            var fileName = stepObjectDto.Icon;
+            var pathToIcon = App_Start.ImagePath.ImPath;
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "StepObjects"), fileName);
+            icon.SaveAs(path);
         }
 
         public StepObjectDto Update(StepObjectDto stepObjectDto)

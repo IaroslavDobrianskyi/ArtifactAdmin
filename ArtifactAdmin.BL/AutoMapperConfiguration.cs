@@ -32,6 +32,15 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<StepObjectType, StepObjectTypeDto>();
             Mapper.CreateMap<StepObjectTypeDto, StepObjectType>();
+
+            Mapper.CreateMap<StepTemplate, StepTemplateDto>();
+            Mapper.CreateMap<StepTemplateDto, StepTemplate>();
+
+            Mapper.CreateMap<StepObjectStepTemplate, StepObjectStepTemplateDto>();
+            Mapper.CreateMap<StepObjectStepTemplateDto, StepObjectStepTemplate>();
+
+            Mapper.CreateMap<Talent, TalentDto>();
+            Mapper.CreateMap<TalentDto, Talent>();
         } 
     }
 }

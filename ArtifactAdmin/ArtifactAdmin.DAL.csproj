@@ -260,14 +260,12 @@
     <Compile Include="Models\StepObject.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StepObjects.cs" />
     <Compile Include="Models\StepObjectStepTemplate.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StepObjectType.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\StepObjectTypes.cs" />
     <Compile Include="Models\StepTemplate.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -280,7 +278,6 @@
     <Compile Include="Models\Talent.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Talents.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -290,7 +287,6 @@
     <Compile Include="Models\UserArtifactTalent.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewStepObject.cs" />
     <Compile Include="Models\ZoneCoordinat.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>

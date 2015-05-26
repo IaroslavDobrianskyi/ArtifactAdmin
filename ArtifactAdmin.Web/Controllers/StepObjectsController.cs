@@ -9,24 +9,21 @@
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Entity;
-    using System.IO;
-    using System.Linq;
     using System.Net;
     using System.Web;
     using System.Web.Mvc;
-    using ArtifactAdmin.DAL;
     using BL.Interfaces;
+    using BL.ModelsDTO;
 
     public class StepObjectsController : Controller
     {
         private IStepObjectService stepObjectService;
+        private IStepObjectTypeService stepObjectTypeService;
 
-        public StepObjectsController(IStepObjectService stepObjectService)
+        public StepObjectsController(IStepObjectService stepObjectService, IStepObjectTypeService stepObjectTypeService)
         {
             this.stepObjectService = stepObjectService;
+            this.stepObjectTypeService = stepObjectTypeService;
         }
 
         // GET: StepObjects
@@ -56,7 +53,7 @@ namespace ArtifactAdmin.Web.Controllers
         // GET: StepObjects/Create
         public ActionResult Create()
         {
-            ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name");
+            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name");
             return View();
         }
 
@@ -65,36 +62,29 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,StepObjectType,Name,Description,Icon")] StepObject stepObject, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase Icon)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(Icon.FileName);
-                fileName = Guid.NewGuid().ToString() + '_' + fileName;
-
-                string IPath = ArtifactAdmin.BL.App_Start.ImagePath.ImPath;
-                Directory.CreateDirectory(Server.MapPath(IPath + "StepObjects"));
-                var path = Path.Combine(Server.MapPath(IPath + "StepObjects"), fileName);
-               
-                Icon.SaveAs(path);
-                stepObject.Icon = fileName;
                 try
                 {
-                    db.StepObjects.Add(stepObject);
-                    db.SaveChanges();
+                    this.stepObjectService.Create(stepObject, Icon);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name", stepObject.StepObjectType);
+                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
                     return View(stepObject);
                 }
+
+                this.stepObjectService.SaveIcon(stepObject, Icon);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name", stepObject.StepObjectType);
+            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
             return View(stepObject);
         }
 
@@ -105,12 +95,14 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StepObject stepObject = db.StepObjects.Find(id);
+
+            var stepObject = this.stepObjectService.GetById(id);
             if (stepObject == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name", stepObject.StepObjectType);
+
+            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
             return View(stepObject);
         }
 
@@ -119,25 +111,28 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,StepObjectType,Name,Description,Icon")] StepObject stepObject)
+        public ActionResult Edit([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(stepObject).State = EntityState.Modified;
-                    db.SaveChanges();
+                    this.stepObjectService.Update(stepObject);
                 }
-                catch 
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
-                    ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name", stepObject.StepObjectType);
+                    ViewBag.ErrMes = e.Message;
+                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
                     return View(stepObject);
                 }
+
                 return RedirectToAction("Index");
             }
-            ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name", stepObject.StepObjectType);
+
+            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
             return View(stepObject);
         }
 
@@ -148,11 +143,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            StepObject stepObject = db.StepObjects.Find(id);
+
+            var stepObject = this.stepObjectService.GetById(id);
             if (stepObject == null)
             {
                 return HttpNotFound();
             }
+
             return View(stepObject);
         }
 
@@ -162,28 +159,21 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
-            StepObject stepObject = db.StepObjects.Find(id);
+            ViewBag.ErrMes = string.Empty;
+            var stepObject = this.stepObjectService.GetById(id);
             try
             {
-                db.StepObjects.Remove(stepObject);
-                db.SaveChanges();
+                this.stepObjectService.Delete(id);
             }
-            catch 
+            catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
-                ViewBag.StepObjectType = new SelectList(db.StepObjectTypes, "id", "Name", stepObject.StepObjectType);
+                ViewBag.ErrMes = e.Message;
+                ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
                 return View(stepObject);
             }
-            return RedirectToAction("Index");
-        }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return RedirectToAction("Index");
         }
     }
 }

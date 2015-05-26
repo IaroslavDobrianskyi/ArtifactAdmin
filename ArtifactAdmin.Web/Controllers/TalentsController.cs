@@ -1,25 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using ArtifactAdmin.DAL;
-
-
-namespace ArtifactAdmin.Controllers
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="TalentsController.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the TalentsController type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Net;
+    using System.Web;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using BL.ModelsDTO;
+    
     public class TalentsController : Controller
     {
-        private artEntities db = new artEntities();
+        private ITalentService talentService;
+
+        public TalentsController(ITalentService talentService)
+        {
+            this.talentService = talentService;
+        }
 
         // GET: Talents
         public ActionResult Index()
         {
-            return View(db.Talents.ToList());
+            return View(this.talentService.GetAll());
         }
 
         // GET: Talents/Details/5
@@ -29,11 +37,13 @@ namespace ArtifactAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Talent talent = db.Talents.Find(id);
+
+            var talent = this.talentService.GetById(id);
             if (talent == null)
             {
                 return HttpNotFound();
             }
+
             return View(talent);
         }
 
@@ -48,29 +58,25 @@ namespace ArtifactAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")]
-            Talent talent, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "Id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")]
+            TalentDto talent, HttpPostedFileBase Icon)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(Icon.FileName);
-                fileName = Guid.NewGuid().ToString() + '_' + fileName;
-                string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
-                Directory.CreateDirectory(Server.MapPath(IPath + "Talents"));
-                var path = Path.Combine(Server.MapPath(IPath + "Talents"), fileName);
-                Icon.SaveAs(path);
-                talent.Icon = fileName;
                 try
                 {
-                    db.Talents.Add(talent);
-                    db.SaveChanges();
+                    this.talentService.Create(talent, Icon);
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
+                    ViewBag.ErrMes = e.Message;
                     return View(talent);
                 }
+
+                this.talentService.SaveIcon(talent, Icon);
                 return RedirectToAction("Index");
             }
 
@@ -84,11 +90,13 @@ namespace ArtifactAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Talent talent = db.Talents.Find(id);
+
+            var talent = this.talentService.GetById(id);
             if (talent == null)
             {
                 return HttpNotFound();
             }
+
             return View(talent);
         }
 
@@ -97,23 +105,26 @@ namespace ArtifactAdmin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")] Talent talent)
+        public ActionResult Edit([Bind(Include = "Id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")] TalentDto talent)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    db.Entry(talent).State = EntityState.Modified;
-                    db.SaveChanges();
+                    this.talentService.Update(talent);
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
                     return View(talent);
                 }
+
                 return RedirectToAction("Index");
             }
+
             return View(talent);
         }
 
@@ -124,11 +135,13 @@ namespace ArtifactAdmin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Talent talent = db.Talents.Find(id);
+
+            var talent = this.talentService.GetById(id);
             if (talent == null)
             {
                 return HttpNotFound();
             }
+
             return View(talent);
         }
 
@@ -138,32 +151,20 @@ namespace ArtifactAdmin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
-            Talent talent = db.Talents.Find(id);
-            string fileName = talent.Icon;
-            string IPath = ArtifactAdmin.App_Start.ImagePath.ImPath;
-            var path = Path.Combine(Server.MapPath(IPath + "Talents"), fileName);
-            FileInfo file = new FileInfo(path);
-            if (file.Exists) file.Delete();
+            ViewBag.ErrMes = string.Empty;
+            var talent = this.talentService.GetById(id);
             try
             {
-                db.Talents.Remove(talent);
-                db.SaveChanges();
+            this.talentService.Delete(id);
             }
-            catch 
+            catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
+                ViewBag.ErrMes = e.Message;
                 return View(talent);
             }
-            return RedirectToAction("Index");
-        }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -9,14 +9,8 @@
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Entity;
-    using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
-    using ArtifactAdmin.DAL;
     using BL.Interfaces;
     using BL.ModelsDTO;
 
@@ -66,15 +60,17 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Create([Bind(Include = "Id,Name")] StepObjectTypeDto stepObjectType)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.stepObjectTypeService.Create(stepObjectType);
                 }
-                catch 
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
+                    ViewBag.ErrMes = e.Message;
                     return View(stepObjectType);
                 }
 
@@ -109,15 +105,17 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Edit([Bind(Include = "Id,Name")] StepObjectTypeDto stepObjectType)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.stepObjectTypeService.Update(stepObjectType);
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
                     return View(stepObjectType);
                 }
 
@@ -150,14 +148,16 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             var stepObjectType = this.stepObjectTypeService.GetById(id);
             try
             {
                 this.stepObjectTypeService.Delete(id);
             }
-            catch 
+            catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
+                ViewBag.ErrMes = e.Message;
                 return View(stepObjectType);
             }
 

@@ -1,4 +1,4 @@
-﻿@model ArtifactAdmin.Models.StepTemplates
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewStepTemplateDto
 
 @{
     ViewBag.Title = "Details";
@@ -9,7 +9,7 @@
 <div>
     <h4>Шаблон кроку</h4>
     <hr />
-    @{string Obj = "stepObject.Name";}
+    @{string Obj = "StepObjectDto.Name";}
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.StepTemplate.Description)
@@ -38,7 +38,7 @@
             @Html.DisplayNameFor(model => model.StepTemplate.StepObjectStepTemplates)
         </dt>
         <dd>
-            @Html.ListBoxFor(model => model.selectedStepObject, new SelectList(Model.selectedStepObject, "idObjType", Obj),
+            @Html.ListBoxFor(model => model.SelectedStepObject, new SelectList(Model.SelectedStepObject, "idObjType", Obj),
 new { size = 8, style = "width:280px" })
         </dd>
     </dl>

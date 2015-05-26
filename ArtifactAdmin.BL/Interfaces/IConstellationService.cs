@@ -1,4 +1,11 @@
-﻿
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IConstellationService.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the IConstellationService interface.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.BL.Interfaces
 {
     using System;
@@ -13,6 +20,8 @@ namespace ArtifactAdmin.BL.Interfaces
         ConstellationDto GetById(int? id);
         
         ConstellationDto Create(ConstellationDto constellationDto, HttpPostedFileBase icon);
+
+        void SaveIcon(ConstellationDto constellationDto, HttpPostedFileBase icon);
         
         ConstellationDto Update(ConstellationDto constellationDto);
 

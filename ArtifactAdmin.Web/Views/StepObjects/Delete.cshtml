@@ -1,4 +1,4 @@
-﻿@model ArtifactAdmin.Models.StepObject
+﻿@model ArtifactAdmin.BL.ModelsDTO.StepObjectDto
 
 @{
     ViewBag.Title = "Delete";
@@ -23,7 +23,7 @@
         </dt>
 
         <dd>
-            <img src="@(@ArtifactAdmin.App_Start.ImagePath.ImPath+"StepObjects/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
+            <img src="@(@ArtifactAdmin.BL.App_Start.ImagePath.ImPath+"StepObjects/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Description)

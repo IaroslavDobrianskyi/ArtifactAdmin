@@ -61,15 +61,17 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,Description")] BonusDto bonu)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.bonusService.Create(bonu);
                 }
-                catch  
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
+                    ViewBag.ErrMes = e.Message;
                     return View(bonu);
                 }
 
@@ -104,15 +106,17 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Edit([Bind(Include = "Id,Name,Description")] BonusDto bonu)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.bonusService.Update(bonu);
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
                     return View(bonu);
                 }
 
@@ -145,14 +149,16 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             var bonu = this.bonusService.GetById(id);
             try
             { 
             this.bonusService.Delete(id);
             }
-            catch
+            catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
+                ViewBag.ErrMes = e.Message;
                 return View(bonu);
             }
 

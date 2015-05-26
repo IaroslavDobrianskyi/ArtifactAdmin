@@ -17,7 +17,11 @@ namespace ArtifactAdmin.DAL.Models
         
         void Insert(T entity);
         
+        void InsertDependent(T entity, string[] obj);
+        
         void Update(T entity);
+
+        void UpdateDependent(T entity, string[] obj);
         
         void Delete(T entity);
         

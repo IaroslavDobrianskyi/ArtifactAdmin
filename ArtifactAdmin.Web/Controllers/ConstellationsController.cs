@@ -62,18 +62,21 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Create([Bind(Include = "id,Name,Icon,Description")] ConstellationDto constellation, HttpPostedFileBase Icon)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                     try
                     {
                         this.constellationService.Create(constellation, Icon);
                     }
-                    catch
+                    catch (Exception e)
                     {
                         ViewBag.Error = "Помилка при створенні нового запису";
+                        ViewBag.ErrMes = e.Message;
                         return View(constellation);
                     }
 
+                    this.constellationService.SaveIcon(constellation,Icon);
                     return RedirectToAction("Index");
             }
 
@@ -105,15 +108,17 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Edit([Bind(Include = "id,Name,Icon,Description")] ConstellationDto constellation)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.constellationService.Update(constellation);
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
                     return View(constellation);
                 }
 
@@ -146,14 +151,16 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             var constellation = this.constellationService.GetById(id);
             try
             {
                 this.constellationService.Delete(id);
             }
-            catch 
+            catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
+                ViewBag.ErrMes = e.Message;
                 return View(constellation);
             }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ArtifactAdmin.Models.StepTemplate>
+﻿@model IEnumerable<ArtifactAdmin.BL.ModelsDTO.StepTemplateDto>
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +9,8 @@
 <p>
     @Html.ActionLink("Новий запис", "Create")
 </p>
-<table class="table">
+<table id="StepTemplate" class="tablesorter">
+    <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -25,31 +26,59 @@
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.TextAreaFor(modelItem => item.Description, new { @readonly = true, rows = "5", cols = "50" })
-        </td>
-        <td>
-            @Html.TextAreaFor(modelItem => item.StepText, new { @readonly = true, rows = "5", cols = "50" })
-        </td>
-        <td>
-            @Html.TextAreaFor(modelItem => item.Name, new { @readonly = true, rows = "5", cols = "50" })
-        </td>
-        <td>
-           @if (item.StepObjectStepTemplates.Count == 0)
-           {
-<span>---</span>
-           }
-           else {<span></span> }
-        </td>
-        <td>
-            @Html.ActionLink("Змінити", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Детально", "Details", new { id = item.id }) |
-            @Html.ActionLink("Видалити", "Delete", new { id = item.id })
-        </td>
-    </tr>
-}
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.TextAreaFor(modelItem => item.Description, new { @readonly = true, rows = "1", cols = "50" })
+                </td>
+                <td>
+                    @Html.TextAreaFor(modelItem => item.StepText, new { @readonly = true, rows = "1", cols = "50" })
+                </td>
+                <td>
+                    @Html.TextAreaFor(modelItem => item.Name, new { @readonly = true, rows = "1", cols = "50" })
+                </td>
+                <td>
+                    @if (item.StepObjectStepTemplates.Count == 0)
+                    {
+                        <span>---</span>
+                    }
+                    else
+                    {<span>@item.StepObjectStepTemplates.Count </span>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Змінити", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Детально", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Видалити", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    </tbody>
 </table>
+<div id="pager" style="position: none;">
+    <form>
+        <img src="@Url.Content("~/Content/images/first.png")" class="first" />
+        <img src="@Url.Content("~/Content/images/prev.png")" class="prev" />
+        <input type="text" class="pagedisplay" />
+        <img src="@Url.Content("~/Content/images/next.png")" class="next" />
+        <img src="@Url.Content("~/Content/images/last.png")" class="last" />
+        <select class="pagesize">
+            <option selected="selected" value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+        </select>
+    </form>
+</div>
+@section ScriptsSortStepTemplate{
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#StepTemplate").tablesorter({ headers:{4:{sorter:false},3:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
+        .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
+    });
+    </script>
+}

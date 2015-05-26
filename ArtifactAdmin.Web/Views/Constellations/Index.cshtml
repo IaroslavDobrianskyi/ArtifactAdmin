@@ -62,10 +62,10 @@
         </select>
     </form>
 </div>
-@section ScriptsSort{
+@section ScriptsSortConstellation{
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#Constellation").tablesorter({ widthFixed: true, sortList: [[0, 0]], widgets: ['zebra', 'filter'] })
+        $("#Constellation").tablesorter({ headers:{1:{sorter:false},3:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
         .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
     });
 </script>

@@ -1,4 +1,4 @@
-﻿@model ArtifactAdmin.Models.StepTemplates
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewStepTemplateDto
 
 @{
     ViewBag.Title = "Create";
@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 { 
     @Html.AntiForgeryToken()
-    string Obj = "stepObject.Name";
+    string Obj = "StepObjectDto.Name";
     <div class="form-horizontal">
         <h4>Шаблон кроку</h4>
         <hr />
@@ -52,13 +52,13 @@
                     <span id="TypeMes" class="alert-warning"></span>
                     <br />
                     <input type="button" id="add" value=">"
-                           onclick="javascript: MoveObj(document.getElementById('stepObject'),document.getElementById('selectedStepObject'));" />
+                           onclick="javascript: MoveObj(document.getElementById('StepObject'),document.getElementById('selectedStepObject'));" />
                     <br />
                     <input type="button" id="rem" value="<"
-                           onclick="javascript: MoveObj(document.getElementById('selectedStepObject'), document.getElementById('stepObject'));" />
+                           onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('stepObject'));" />
                 </td>
                 <td>
-                    @Html.ListBoxFor(model => model.selectedStepObject, new MultiSelectList(Model.selectedStepObject, "idObjType", Obj),
+                    @Html.ListBoxFor(model => model.SelectedStepObject, new MultiSelectList(Model.SelectedStepObject, "idObjType", Obj),
 new { size = 8, style = "width:250px" })
                     @*@Html.ValidationMessageFor(model => model.selectedStepObject, "", new { @class = "text-danger" })*@
                     <span id="ObjMes" class="alert-warning"></span>
@@ -116,9 +116,9 @@ new { size = 8, style = "width:250px" })
     {
         var SelID = '';
         var SelText = '';
-        var From = document.getElementById("stepObjectType");
-        var To = document.getElementById("stepObject");
-        var To1 = document.getElementById('selectedStepObject');
+        var From = document.getElementById("StepObjectType");
+        var To = document.getElementById("StepObject");
+        var To1 = document.getElementById('SelectedStepObject');
         var ObjEx=false;
         for (i = From.options.length - 1; i >= 0; i--) {
             if (From.options[i].selected == true) {
@@ -150,9 +150,9 @@ new { size = 8, style = "width:250px" })
     }
     function SelAll()
     {
-        var OT = document.getElementById("stepObjectType");
-        var SO = document.getElementById("stepObject");
-        var To = document.getElementById('selectedStepObject');
+        var OT = document.getElementById("StepObjectType");
+        var SO = document.getElementById("StepObject");
+        var To = document.getElementById('SelectedStepObject');
         for (i = To.options.length - 1; i >= 0; i--)
         {
             To.options[i].selected = true;

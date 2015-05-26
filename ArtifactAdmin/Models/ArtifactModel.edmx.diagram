@@ -45,7 +45,7 @@
         <EntityTypeShape EntityType="artModel.Predisposition" Width="1.5" PointX="13" PointY="26.5" />
         <EntityTypeShape EntityType="artModel.Property" Width="1.5" PointX="8.75" PointY="8.75" />
         <EntityTypeShape EntityType="artModel.StepObject" Width="1.5" PointX="13" PointY="16.125" />
-        <EntityTypeShape EntityType="artModel.StepObjectStepTemplate" Width="1.5" PointX="15.25" PointY="18" />
+        <EntityTypeShape EntityType="artModel.StepObjectStepTemplate" Width="3" PointX="15.25" PointY="18" />
         <EntityTypeShape EntityType="artModel.StepObjectType" Width="1.5" PointX="10.75" PointY="18" />
         <EntityTypeShape EntityType="artModel.StepTemplate" Width="1.5" PointX="13" PointY="19.25" />
         <EntityTypeShape EntityType="artModel.StepTemplateActionTemplate" Width="1.5" PointX="15.25" PointY="21.5" />

@@ -62,18 +62,21 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Create([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactTypeDto artifactType, HttpPostedFileBase Icon)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.artifactTypeService.Create(artifactType, Icon);
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
+                    ViewBag.ErrMes = e.Message;
                     return View(artifactType);
                 }
                 
+                this.artifactTypeService.SaveIcon(artifactType, Icon);
                 return RedirectToAction("Index");
             }
 
@@ -105,15 +108,17 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult Edit([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactTypeDto artifactType)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.artifactTypeService.Update(artifactType);
                 }
-                catch
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
                     return View(artifactType);
                 }
                 
@@ -146,14 +151,16 @@ namespace ArtifactAdmin.Web.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
             var artifactType = this.artifactTypeService.GetById(id);
             try
             {
                 this.artifactTypeService.Delete(id);
             }
-            catch
+            catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
+                ViewBag.ErrMes = e.Message;
                 return View(artifactType);
             }
             

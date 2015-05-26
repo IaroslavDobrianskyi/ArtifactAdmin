@@ -179,7 +179,10 @@
     <Compile Include="Controllers\BonusController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\StepObjectsController.cs" />
     <Compile Include="Controllers\StepObjectTypesController.cs" />
+    <Compile Include="Controllers\StepTemplatesController.cs" />
+    <Compile Include="Controllers\TalentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -189,10 +192,33 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\base\accordion.css" />
+    <Content Include="Content\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\base\jquery-ui.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\asc.png" />
+    <Content Include="Content\images\bg.png" />
+    <Content Include="Content\images\desc.png" />
+    <Content Include="Content\images\first.png" />
+    <Content Include="Content\images\last.png" />
+    <Content Include="Content\images\next.png" />
+    <Content Include="Content\images\prev.png" />
+    <Content Include="Content\tablesorter.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -202,6 +228,11 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.tablesorter.js" />
+    <Content Include="Scripts\jquery.tablesorter.pager.js" />
+    <Content Include="Scripts\jquery.tablesorter.widgets.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -265,6 +296,16 @@
     <Content Include="Views\StepObjectTypes\Details.cshtml" />
     <Content Include="Views\StepObjectTypes\Edit.cshtml" />
     <Content Include="Views\StepObjectTypes\Index.cshtml" />
+    <Content Include="Views\Talents\Create.cshtml" />
+    <Content Include="Views\Talents\Delete.cshtml" />
+    <Content Include="Views\Talents\Details.cshtml" />
+    <Content Include="Views\Talents\Edit.cshtml" />
+    <Content Include="Views\Talents\Index.cshtml" />
+    <Content Include="Views\StepTemplates\Create.cshtml" />
+    <Content Include="Views\StepTemplates\Delete.cshtml" />
+    <Content Include="Views\StepTemplates\Details.cshtml" />
+    <Content Include="Views\StepTemplates\Edit.cshtml" />
+    <Content Include="Views\StepTemplates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
