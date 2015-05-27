@@ -105,7 +105,7 @@ namespace ArtifactAdmin.DAL.Models
 
         public void Delete(T entity)
         {
-            switch(entity.GetType().BaseType.Name)
+            switch (entity.GetType().BaseType.Name)
             {
                 case "StepTemplate":
                     var st = entity as StepTemplate;
@@ -114,10 +114,12 @@ namespace ArtifactAdmin.DAL.Models
                     {
                         artEntities.StepObjectStepTemplates.Remove(type);
                     }
+
                     break;
                 default:
                     break;
             }
+
             artEntities.Entry(entity)
                                .State = EntityState.Deleted;
             artEntities.SaveChanges();

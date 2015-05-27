@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin.Security;
-using Owin;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AccountController.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the AccountController type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Mvc;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin.Security;
     using Models;
-    
-
+ 
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationUserManager _userManager;
+        // Used for XSRF protection when adding external logins
+        private const string XsrfKey = "XsrfId";
+
+        private ApplicationUserManager userManager;
 
         public AccountController()
         {
@@ -30,17 +34,18 @@ namespace ArtifactAdmin.Web
             UserManager = userManager;
         }
 
-        public ApplicationUserManager UserManager {
+        public ApplicationUserManager UserManager
+        {
             get
             {
-                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                return userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
+
             private set
             {
-                _userManager = value;
+                userManager = value;
             }
         }
-
 
         // GET: /Account/Login
         [AllowAnonymous]
@@ -49,7 +54,6 @@ namespace ArtifactAdmin.Web
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
-
 
         // POST: /Account/Login
         [HttpPost]
@@ -75,14 +79,12 @@ namespace ArtifactAdmin.Web
             return View(model);
         }
 
-
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
-
 
         // POST: /Account/Register
         [HttpPost]
@@ -96,7 +98,7 @@ namespace ArtifactAdmin.Web
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    await SignInAsync(user, persistent: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -115,7 +117,6 @@ namespace ArtifactAdmin.Web
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
 
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -138,14 +139,12 @@ namespace ArtifactAdmin.Web
             }
         }
 
-
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
-
 
         // POST: /Account/ForgotPassword
         [HttpPost]
@@ -174,14 +173,12 @@ namespace ArtifactAdmin.Web
             return View(model);
         }
 
-
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
-
 
         // GET: /Account/ResetPassword
         [AllowAnonymous]
@@ -191,9 +188,9 @@ namespace ArtifactAdmin.Web
             {
                 return View("Error");
             }
+
             return View();
         }
-
 
         // POST: /Account/ResetPassword
         [HttpPost]
@@ -209,6 +206,7 @@ namespace ArtifactAdmin.Web
                     ModelState.AddModelError(string.Empty, "No user found.");
                     return View();
                 }
+
                 IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
                 if (result.Succeeded)
                 {
@@ -225,14 +223,12 @@ namespace ArtifactAdmin.Web
             return View(model);
         }
 
-
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
         }
-
 
         // POST: /Account/Disassociate
         [HttpPost]
@@ -244,16 +240,16 @@ namespace ArtifactAdmin.Web
             if (result.Succeeded)
             {
                 var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                await SignInAsync(user, isPersistent: false);
+                await SignInAsync(user, persistent: false);
                 message = ManageMessageId.RemoveLoginSuccess;
             }
             else
             {
                 message = ManageMessageId.Error;
             }
+
             return RedirectToAction("Manage", new { Message = message });
         }
-
 
         // GET: /Account/Manage
         public ActionResult Manage(ManageMessageId? message)
@@ -268,7 +264,6 @@ namespace ArtifactAdmin.Web
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
         }
-
 
         // POST: /Account/Manage
         [HttpPost]
@@ -286,7 +281,7 @@ namespace ArtifactAdmin.Web
                     if (result.Succeeded)
                     {
                         var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-                        await SignInAsync(user, isPersistent: false);
+                        await SignInAsync(user, persistent: false);
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
                     else
@@ -322,7 +317,6 @@ namespace ArtifactAdmin.Web
             return View(model);
         }
 
-
         // POST: /Account/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
@@ -332,7 +326,6 @@ namespace ArtifactAdmin.Web
             // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
-
 
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
@@ -348,7 +341,7 @@ namespace ArtifactAdmin.Web
             var user = await UserManager.FindAsync(loginInfo.Login);
             if (user != null)
             {
-                await SignInAsync(user, isPersistent: false);
+                await SignInAsync(user, persistent: false);
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -360,7 +353,6 @@ namespace ArtifactAdmin.Web
             }
         }
 
-
         // POST: /Account/LinkLogin
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -370,7 +362,6 @@ namespace ArtifactAdmin.Web
             return new ChallengeResult(provider, Url.Action("LinkLoginCallback", "Account"), User.Identity.GetUserId());
         }
 
-
         // GET: /Account/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
@@ -379,14 +370,15 @@ namespace ArtifactAdmin.Web
             {
                 return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
             }
+
             IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             if (result.Succeeded)
             {
                 return RedirectToAction("Manage");
             }
+
             return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
-
 
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
@@ -407,6 +399,7 @@ namespace ArtifactAdmin.Web
                 {
                     return View("ExternalLoginFailure");
                 }
+
                 var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -414,7 +407,7 @@ namespace ArtifactAdmin.Web
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInAsync(user, isPersistent: false);
+                        await SignInAsync(user, persistent: false);
                         
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
@@ -425,13 +418,13 @@ namespace ArtifactAdmin.Web
                         return RedirectToLocal(returnUrl);
                     }
                 }
+
                 AddErrors(result);
             }
 
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
-
 
         // POST: /Account/LogOff
         [HttpPost]
@@ -441,7 +434,6 @@ namespace ArtifactAdmin.Web
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
-
 
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
@@ -465,13 +457,10 @@ namespace ArtifactAdmin.Web
                 UserManager.Dispose();
                 UserManager = null;
             }
+
             base.Dispose(disposing);
         }
-
-        #region Helpers
-        // Used for XSRF protection when adding external logins
-        private const string XsrfKey = "XsrfId";
-
+        
         private IAuthenticationManager AuthenticationManager
         {
             get
@@ -480,10 +469,10 @@ namespace ArtifactAdmin.Web
             }
         }
 
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        private async Task SignInAsync(ApplicationUser user, bool persistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, await user.GenerateUserIdentityAsync(UserManager));
+            AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = persistent }, await user.GenerateUserIdentityAsync(UserManager));
         }
 
         private void AddErrors(IdentityResult result)
@@ -501,6 +490,7 @@ namespace ArtifactAdmin.Web
             {
                 return user.PasswordHash != null;
             }
+
             return false;
         }
 
@@ -543,7 +533,9 @@ namespace ArtifactAdmin.Web
             }
 
             public string LoginProvider { get; set; }
+            
             public string RedirectUri { get; set; }
+            
             public string UserId { get; set; }
 
             public override void ExecuteResult(ControllerContext context)
@@ -553,9 +545,9 @@ namespace ArtifactAdmin.Web
                 {
                     properties.Dictionary[XsrfKey] = UserId;
                 }
+
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
     }
 }

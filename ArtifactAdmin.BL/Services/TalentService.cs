@@ -71,8 +71,8 @@ namespace ArtifactAdmin.BL.Services
             string fileName = talent.Icon;
             string pathToIcon = App_Start.ImagePath.ImPath;
             var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "Talent"), fileName);
-            FileInfo file=new FileInfo(path);
-            if(file.Exists)
+            FileInfo file = new FileInfo(path);
+            if (file.Exists)
             {
                 file.Delete();
             }

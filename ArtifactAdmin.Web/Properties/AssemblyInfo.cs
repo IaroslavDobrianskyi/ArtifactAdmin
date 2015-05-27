@@ -1,4 +1,12 @@
-﻿using System.Reflection;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the AssemblyInfo type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 

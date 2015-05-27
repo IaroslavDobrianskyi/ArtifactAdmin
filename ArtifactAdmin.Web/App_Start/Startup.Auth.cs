@@ -1,16 +1,21 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.DataProtection;
-using Microsoft.Owin.Security.Google;
-using Owin;
-using System;
-using ArtifactAdmin.Web.Models;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Startup.Auth.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the Startup type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web
 {
+    using System;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+    using Microsoft.Owin.Security.Cookies;
+    using Models;
+    using Owin;
+
     public partial class Startup
     {
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
@@ -38,23 +43,23 @@ namespace ArtifactAdmin.Web
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
-            //app.UseMicrosoftAccountAuthentication(
+            // app.UseMicrosoftAccountAuthentication(
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
+            // app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
+            // app.UseFacebookAuthentication(
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
+            // app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            // {
             //    ClientId = "",
             //    ClientSecret = ""
-            //});
+            // });
         }
     }
 }

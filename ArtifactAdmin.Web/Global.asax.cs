@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-// --------------------------------------------------------------------------------------------------------------------
+﻿// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="Global.asax.cs" company="Thomas Cook Group">
 //   All rights reserved
 // </copyright>
@@ -12,6 +9,7 @@ using System.Linq;
 
 namespace ArtifactAdmin.Web
 {
+    using System;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;

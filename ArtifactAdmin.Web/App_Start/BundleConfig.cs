@@ -1,8 +1,16 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BundleConfig.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the BundleConfig type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace ArtifactAdmin.Web
 {
+    using System.Web.Optimization;
+    
     public class BundleConfig
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
@@ -17,7 +25,6 @@ namespace ArtifactAdmin.Web
             "~/Scripts/jquery-ui-{version}.js"));
             bundles.Add(new ScriptBundle("~/bundles/tablesorter").Include(
             "~/Scripts/jquery.tablesorter*"));
-
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

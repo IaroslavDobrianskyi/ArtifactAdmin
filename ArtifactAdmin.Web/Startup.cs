@@ -8,7 +8,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using Microsoft.Owin;
-using ArtifactAdmin.Web;
 
 [assembly: OwinStartup(typeof(ArtifactAdmin.Web.Startup))]
 
@@ -18,6 +17,7 @@ namespace ArtifactAdmin.Web
     using BL;
     using LightInject;
     using Owin;
+ 
     public partial class Startup
     {
         public void Configuration(IAppBuilder app)

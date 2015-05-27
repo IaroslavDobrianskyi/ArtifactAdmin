@@ -1,11 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="HomeController.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the HomeController type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace ArtifactAdmin.Web
 {
+    using System;
+    using System.Web.Mvc;
+
     public class HomeController : Controller
     {
         public ActionResult Index()

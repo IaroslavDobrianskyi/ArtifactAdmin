@@ -1,4 +1,12 @@
-﻿namespace ArtifactAdmin.DAL.Models
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GetDbSet.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the DbSet type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+namespace ArtifactAdmin.DAL.Models
 {
     using System;
     using System.Collections.Generic;

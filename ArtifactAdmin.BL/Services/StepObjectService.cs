@@ -30,7 +30,7 @@ namespace ArtifactAdmin.BL.Services
 
         public IEnumerable<StepObjectDto> GetAll()
         {
-            return Mapper.Map<List<StepObjectDto>>(this.stepObjectRepository.GetAll().Include(s=>s.StepObjectType1));
+            return Mapper.Map<List<StepObjectDto>>(this.stepObjectRepository.GetAll().Include(s => s.StepObjectType1));
         }
 
         public StepObjectDto GetById(int? id)

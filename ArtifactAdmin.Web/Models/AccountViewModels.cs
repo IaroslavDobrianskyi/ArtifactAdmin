@@ -1,7 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AccountViewModels.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the ExternalLoginConfirmationViewModel type.
+// </summary>
+// -------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -13,6 +21,7 @@ namespace ArtifactAdmin.Web.Models
     public class ExternalLoginListViewModel
     {
         public string Action { get; set; }
+        
         public string ReturnUrl { get; set; }
     }
 

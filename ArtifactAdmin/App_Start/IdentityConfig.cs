@@ -1,12 +1,20 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using ArtifactAdmin.DAL;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IdentityConfig.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the ApplicationUserManager type.
+// </summary>
+// -------------------------------------------------------------------------------------------------------------------
 
 namespace ArtifactAdmin.DAL
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
@@ -47,6 +55,7 @@ namespace ArtifactAdmin.DAL
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+
             return manager;
         }
     }

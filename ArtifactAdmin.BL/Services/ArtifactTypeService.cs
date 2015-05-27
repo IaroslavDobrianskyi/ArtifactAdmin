@@ -55,7 +55,7 @@ namespace ArtifactAdmin.BL.Services
         {
             var fileName = artifactTypeDto.Icon;
             string pathToIcon = App_Start.ImagePath.ImPath;
-            var path=Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon+ "ArtifactTypes"), fileName);
+            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "ArtifactTypes"), fileName);
             icon.SaveAs(path);
         }
 

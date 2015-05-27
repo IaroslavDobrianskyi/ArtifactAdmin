@@ -1,13 +1,21 @@
-﻿using System.Threading.Tasks;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using ArtifactAdmin.Web.Models;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IdentityConfig.cs" company="Artifact">
+//   All rights reserved
+// </copyright>
+// <summary>
+//   Defines the ApplicationUserManagerr type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace ArtifactAdmin.Web
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
+    using System.Threading.Tasks;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.Owin;
+    using Models;
 
     public class ApplicationUserManager : UserManager<ApplicationUser>
     {
@@ -36,11 +44,13 @@ namespace ArtifactAdmin.Web
             };
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug in here.
-            manager.RegisterTwoFactorProvider("PhoneCode", new PhoneNumberTokenProvider<ApplicationUser>
+            manager.RegisterTwoFactorProvider("PhoneCode", 
+                new PhoneNumberTokenProvider<ApplicationUser>
             {
                 MessageFormat = "Your security code is: {0}"
             });
-            manager.RegisterTwoFactorProvider("EmailCode", new EmailTokenProvider<ApplicationUser>
+            manager.RegisterTwoFactorProvider("EmailCode", 
+                new EmailTokenProvider<ApplicationUser>
             {
                 Subject = "Security Code",
                 BodyFormat = "Your security code is: {0}"
@@ -52,6 +62,7 @@ namespace ArtifactAdmin.Web
             {
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
+
             return manager;
         }
     }

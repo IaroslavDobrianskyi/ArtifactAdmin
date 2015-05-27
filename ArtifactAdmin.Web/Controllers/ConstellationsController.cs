@@ -76,7 +76,7 @@ namespace ArtifactAdmin.Web.Controllers
                         return View(constellation);
                     }
 
-                    this.constellationService.SaveIcon(constellation,Icon);
+                    this.constellationService.SaveIcon(constellation, Icon);
                     return RedirectToAction("Index");
             }
 
