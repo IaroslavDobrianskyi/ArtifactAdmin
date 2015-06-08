@@ -49,14 +49,6 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<ConstellationDto>(constellation);
         }
 
-        public void SaveIcon(ConstellationDto constellationDto, HttpPostedFileBase icon)
-        {
-            var fileName = constellationDto.Icon;
-            var pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "Constellations"), fileName);
-            icon.SaveAs(path);
-        }
-
         public ConstellationDto Update(ConstellationDto constellationDto)
         {
             var constellation = Mapper.Map<Constellation>(constellationDto);
@@ -68,15 +60,6 @@ namespace ArtifactAdmin.BL.Services
         {
             var constellation = this.constellationRepository.GetAll()
                                     .FirstOrDefault(s => s.id == id);
-            string fileName = constellation.Icon;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "Constellations"), fileName);
-            FileInfo file = new FileInfo(path);
-            if (file.Exists)
-            {
-               file.Delete(); 
-            }
-
             this.constellationRepository.Delete(constellation);
         }
     }

@@ -7,7 +7,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace ArtifactAdmin.BL.App_Start
+namespace ArtifactAdmin.Web.App_Start
 {
     using System;
     using System.Web.Configuration;

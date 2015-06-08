@@ -21,8 +21,6 @@ namespace ArtifactAdmin.BL.Interfaces
 
         ArtifactTypeDto Create(ArtifactTypeDto artifactTypeDto, HttpPostedFileBase icon);
 
-        void SaveIcon(ArtifactTypeDto artifactTypeDto, HttpPostedFileBase icon);
-
         ArtifactTypeDto Update(ArtifactTypeDto artifactTypeDto);
 
         void Delete(int? id);

@@ -21,8 +21,6 @@ namespace ArtifactAdmin.BL.Interfaces
 
         TalentDto Create(TalentDto talentDto, HttpPostedFileBase icon);
 
-        void SaveIcon(TalentDto talentDto, HttpPostedFileBase icon);
-        
         TalentDto Update(TalentDto talentDto);
 
         void Delete(int? id);

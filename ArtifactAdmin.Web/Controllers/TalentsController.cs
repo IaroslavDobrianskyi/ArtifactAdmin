@@ -76,7 +76,13 @@ namespace ArtifactAdmin.Web.Controllers
                     return View(talent);
                 }
 
-                this.talentService.SaveIcon(talent, Icon);
+                var result=FileHelper.SaveIcon(talent.Icon, "Talents", Icon);
+                if (string.IsNullOrEmpty(result))
+                {
+                    ViewBag.Error = "Помилка при збереженні іконки";
+                    return View(talent);
+
+                }
                 return RedirectToAction("Index");
             }
 
@@ -153,6 +159,7 @@ namespace ArtifactAdmin.Web.Controllers
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             var talent = this.talentService.GetById(id);
+            var fileName = talent.Icon;
             try
             {
             this.talentService.Delete(id);
@@ -163,7 +170,7 @@ namespace ArtifactAdmin.Web.Controllers
                 ViewBag.ErrMes = e.Message;
                 return View(talent);
             }
-
+            FileHelper.DeleteIcon(fileName, "Talents");
             return RedirectToAction("Index");
         }
     }

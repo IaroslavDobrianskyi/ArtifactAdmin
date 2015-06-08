@@ -21,8 +21,6 @@ namespace ArtifactAdmin.BL.Interfaces
         
         ConstellationDto Create(ConstellationDto constellationDto, HttpPostedFileBase icon);
 
-        void SaveIcon(ConstellationDto constellationDto, HttpPostedFileBase icon);
-        
         ConstellationDto Update(ConstellationDto constellationDto);
 
         void Delete(int? id);

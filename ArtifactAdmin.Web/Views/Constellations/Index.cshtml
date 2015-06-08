@@ -32,7 +32,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <img src="@(@ArtifactAdmin.BL.App_Start.ImagePath.ImPath+"Constellations/"+@item.Icon)" id="icon" width=" 160 " height=" 120">
+                    <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath+"Constellations/"+@item.Icon)" id="icon" width=" 160 " height=" 120">
                 </td>
                 <td>
                     @Html.TextAreaFor(modelItem => item.Description, new { @readonly = true, width="255px", height="118px" })

@@ -49,14 +49,6 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<TalentDto>(talent);
         }
 
-        public void SaveIcon(TalentDto talentDto, HttpPostedFileBase icon)
-        {
-            var fileName = talentDto.Icon;
-            var pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "Talents"), fileName);
-            icon.SaveAs(path);
-        }
-
         public TalentDto Update(TalentDto talentDto)
         {
             var talent = Mapper.Map<Talent>(talentDto);
@@ -68,15 +60,6 @@ namespace ArtifactAdmin.BL.Services
         {
             var talent = this.talentRepository.GetAll()
                              .FirstOrDefault(s => s.id == id);
-            string fileName = talent.Icon;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "Talent"), fileName);
-            FileInfo file = new FileInfo(path);
-            if (file.Exists)
-            {
-                file.Delete();
-            }
-
             this.talentRepository.Delete(talent);
         }
     }

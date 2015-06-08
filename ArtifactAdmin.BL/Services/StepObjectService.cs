@@ -50,14 +50,6 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<StepObjectDto>(stepObject);
         }
 
-        public void SaveIcon(StepObjectDto stepObjectDto, HttpPostedFileBase icon)
-        {
-            var fileName = stepObjectDto.Icon;
-            var pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "StepObjects"), fileName);
-            icon.SaveAs(path);
-        }
-
         public StepObjectDto Update(StepObjectDto stepObjectDto)
         {
             var stepObject = Mapper.Map<StepObject>(stepObjectDto);
@@ -68,15 +60,6 @@ namespace ArtifactAdmin.BL.Services
         public void Delete(int? id)
         {
             var stepObject = this.stepObjectRepository.GetAll().FirstOrDefault(s => s.id == id);
-            string fileName = stepObject.Icon;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "StepObjects"), fileName);
-            FileInfo file = new FileInfo(path);
-            if (file.Exists)
-            {
-                file.Delete();
-            }
-
             this.stepObjectRepository.Delete(stepObject);
         }
     }

@@ -21,8 +21,6 @@ namespace ArtifactAdmin.BL.Interfaces
 
         StepObjectDto Create(StepObjectDto stepObjectDto, HttpPostedFileBase icon);
 
-        void SaveIcon(StepObjectDto stepObjectDto, HttpPostedFileBase icon);
-        
         StepObjectDto Update(StepObjectDto stepObjectDto);
 
         void Delete(int? id);

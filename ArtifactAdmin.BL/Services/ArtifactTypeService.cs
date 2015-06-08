@@ -51,14 +51,6 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<ArtifactTypeDto>(artifactType);
         }
 
-        public void SaveIcon(ArtifactTypeDto artifactTypeDto, HttpPostedFileBase icon)
-        {
-            var fileName = artifactTypeDto.Icon;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "ArtifactTypes"), fileName);
-            icon.SaveAs(path);
-        }
-
         public ArtifactTypeDto Update(ArtifactTypeDto artifactTypeDto)
         {
             var artifactType = Mapper.Map<ArtifactType>(artifactTypeDto);
@@ -70,15 +62,6 @@ namespace ArtifactAdmin.BL.Services
         {
             var artifactType = this.artifactTypeRepository.GetAll()
                                    .FirstOrDefault(s => s.id == id);
-            string fileName = artifactType.Icon;
-            string pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + "ArtifactTypes"), fileName);
-            FileInfo file = new FileInfo(path);
-            if (file.Exists)
-            {
-                file.Delete();
-            }
-
             this.artifactTypeRepository.Delete(artifactType);
         }
     }

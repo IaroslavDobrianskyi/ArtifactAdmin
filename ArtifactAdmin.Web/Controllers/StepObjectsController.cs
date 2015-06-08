@@ -80,7 +80,13 @@ namespace ArtifactAdmin.Web.Controllers
                     return View(stepObject);
                 }
 
-                this.stepObjectService.SaveIcon(stepObject, Icon);
+                var result = FileHelper.SaveIcon(stepObject.Icon, "StepObjects", Icon);
+                if(string.IsNullOrEmpty(result))
+                {
+                    ViewBag.Error = "Помилка при збереженні іконки";
+                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+                    return View(stepObject);
+                }
                 return RedirectToAction("Index");
             }
 
@@ -161,6 +167,7 @@ namespace ArtifactAdmin.Web.Controllers
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             var stepObject = this.stepObjectService.GetById(id);
+            var fileName = stepObject.Icon;
             try
             {
                 this.stepObjectService.Delete(id);
@@ -172,7 +179,7 @@ namespace ArtifactAdmin.Web.Controllers
                 ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
                 return View(stepObject);
             }
-
+            FileHelper.DeleteIcon(fileName, "StepObjects");
             return RedirectToAction("Index");
         }
     }

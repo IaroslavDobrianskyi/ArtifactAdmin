@@ -76,8 +76,13 @@ namespace ArtifactAdmin.Web.Controllers
                         return View(constellation);
                     }
 
-                    this.constellationService.SaveIcon(constellation, Icon);
-                    return RedirectToAction("Index");
+                var result = FileHelper.SaveIcon(constellation.Icon, "Constellations", Icon);
+                if (string.IsNullOrEmpty(result))
+                {
+                    ViewBag.Error = "Помилка при збереженні іконки";
+                    return View(constellation);
+                }
+                return RedirectToAction("Index");
             }
 
             return View(constellation);
@@ -153,6 +158,7 @@ namespace ArtifactAdmin.Web.Controllers
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             var constellation = this.constellationService.GetById(id);
+            var fileName = constellation.Icon;
             try
             {
                 this.constellationService.Delete(id);
@@ -163,7 +169,7 @@ namespace ArtifactAdmin.Web.Controllers
                 ViewBag.ErrMes = e.Message;
                 return View(constellation);
             }
-
+            FileHelper.DeleteIcon(fileName, "Constellations");
             return RedirectToAction("Index");
         }
     }
