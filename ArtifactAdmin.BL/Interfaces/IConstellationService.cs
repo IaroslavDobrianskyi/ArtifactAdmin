@@ -19,9 +19,9 @@ namespace ArtifactAdmin.BL.Interfaces
 
         ConstellationDto GetById(int? id);
         
-        ConstellationDto Create(ConstellationDto constellationDto, HttpPostedFileBase icon);
+        ConstellationDto Create(ConstellationDto constellationDto, string fileName);
 
-        ConstellationDto Update(ConstellationDto constellationDto);
+        ConstellationDto Update(ConstellationDto constellationDto, string fileName);
 
         void Delete(int? id);
     }

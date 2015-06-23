@@ -38,5 +38,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
         [Display(Name = "Тип")]
         public virtual StepObjectTypeDto StepObjectType1 { get; set; }
+        
+        public string NewIcon { get; set; }
     }
 }

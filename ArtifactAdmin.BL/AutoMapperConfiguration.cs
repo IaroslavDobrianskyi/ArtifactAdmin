@@ -41,6 +41,15 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<Talent, TalentDto>();
             Mapper.CreateMap<TalentDto, Talent>();
+
+            Mapper.CreateMap<MapObject, MapObjectDto>();
+            Mapper.CreateMap<MapObjectDto, MapObject>();
+
+            Mapper.CreateMap<MapZone, MapZoneDto>();
+            Mapper.CreateMap<MapZoneDto, MapZone>();
+
+            Mapper.CreateMap<MapObjectProbability, MapObjectProbabilityDto>();
+            Mapper.CreateMap<MapObjectProbabilityDto, MapObjectProbability>();
         } 
     }
 }

@@ -40,19 +40,17 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<ArtifactTypeDto>(this.artifactTypeRepository.GetAll().FirstOrDefault(s => s.id == id));
         }
 
-        public ArtifactTypeDto Create(ArtifactTypeDto artifactTypeDto, HttpPostedFileBase icon)
+        public ArtifactTypeDto Create(ArtifactTypeDto artifactTypeDto, string fileName)
         {
-            var fileName = Path.GetFileName(icon.FileName);
-            fileName = Guid.NewGuid()
-                           .ToString() + '_' + fileName;
             artifactTypeDto.Icon = fileName;
             var artifactType = Mapper.Map<ArtifactType>(artifactTypeDto);
             this.artifactTypeRepository.Insert(artifactType);
             return Mapper.Map<ArtifactTypeDto>(artifactType);
         }
 
-        public ArtifactTypeDto Update(ArtifactTypeDto artifactTypeDto)
+        public ArtifactTypeDto Update(ArtifactTypeDto artifactTypeDto, string fileName)
         {
+            artifactTypeDto.Icon = fileName;
             var artifactType = Mapper.Map<ArtifactType>(artifactTypeDto);
             this.artifactTypeRepository.Update(artifactType);
             return Mapper.Map<ArtifactTypeDto>(artifactType);

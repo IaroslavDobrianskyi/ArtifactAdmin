@@ -23,7 +23,7 @@ namespace ArtifactAdmin.DAL.Models
     
         public int id { get; set; }
         public string Name { get; set; }
-        public double PredispositionResult { get; set; }
+        public double PredispositionResult { internal get; set; }
     
         public virtual ICollection<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
         public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }

@@ -1,0 +1,142 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewMapZoneDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Змінити</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    string Id = "MapObject1.id";
+    string Name = "MapObject1.Name";
+    <div class="form-horizontal">
+        <h4>Зони карти</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.MapZone.id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MapZone.ZoneName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.MapZone.ZoneName, new { htmlAttributes = new { @class = "form-control", rows = "2", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.MapZone.ZoneName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MapZone.Color, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <dl class="dl-horizontal">
+                    <dt>@Html.EditorFor(model => model.MapZone.Color, new { htmlAttributes = new { @class = "form-control" } })</dt>
+                    <dd id="back" style="background: @Html.DisplayFor(model => model.MapZone.Color); width:280px"></dd>
+                </dl>
+                    @Html.ValidationMessageFor(model => model.MapZone.Color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="newColor ">Змінити колір:</label>
+                <div class="col-md-10">
+                    <input class="form-control" type="color" id="newColor" onchange="javascript:NewObjectColor()">
+                </div>
+        </div>
+        <table class="table">
+            <colgroup>
+                <col style="width:300px" />
+                <col style="width:150px" />
+                <col style="width:100px" />
+                <col style="width:300px" />
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.ListBoxFor(model => model.MapObject, new SelectList(Model.MapObject, "id", "Name"), new { size = 8, style = "width:250px" })
+                </td>
+                <td>
+                    <label for="OneProbability ">Введіть ймовірність</label><br />
+                    <input type="text" id="OneProbability" value="0.25" />
+                </td>
+                <td style="text-align:center">
+                    <input type="button" id="add" value=">"
+                           onclick="javascript: MoveToSel();" />
+                    <br />
+                    <input type="button" id="rem" value="<"
+                           onclick="javascript: MoveToObj();" />
+                </td>
+                <td>
+                    @Html.ListBoxFor(model => model.SelectedMapObject, new MultiSelectList(Model.SelectedMapObject, Id, Name), new { size = 8, style = "width:250px" })
+                    @Html.ListBoxFor(model => model.Probability, new MultiSelectList(Model.Probability, "Probability", "Probability"), new { size = 8, style = "width:100px" })
+                </td>
+            </tr>
+        </table>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll()" />
+                </div>
+            </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    function MoveToSel() {
+        var From = document.getElementById("MapObject");
+        var ToSel = document.getElementById("SelectedMapObject");
+        var ToProbability = document.getElementById("Probability");
+        var SelID = '';
+        var SelText = '';
+        var SelProbability = document.getElementById("OneProbability").value.toString();
+        for (i = From.options.length - 1; i >= 0; i--) {
+            if (From.options[i].selected == true) {
+                SelID = From.options[i].value;
+                SelText = From.options[i].text;
+                var newRow = new Option(SelText, SelID);
+                ToSel.options[ToSel.length] = newRow;
+                newRow = new Option(SelProbability, SelProbability);
+                ToProbability[ToProbability.length] = newRow;
+                From.options[i] = null;
+            }
+        }
+    }
+    function MoveToObj() {
+        var From = document.getElementById("SelectedMapObject");
+        var ToObj = document.getElementById("MapObject");
+        var FromProbability = document.getElementById("Probability");
+        var SelID = '';
+        var SelText = '';
+        for (i = From.options.length - 1; i >= 0; i--) {
+            if (From.options[i].selected == true) {
+                SelID = From.options[i].value;
+                SelText = From.options[i].text;
+                var newRow = new Option(SelText, SelID);
+                ToObj.options[ToObj.length] = newRow;
+                FromProbability.options[i] = null;
+                From.options[i] = null;
+            }
+        }
+    }
+    function SelAll() {
+        var SP = document.getElementById("Probability");
+        var SO = document.getElementById("SelectedMapObject");
+        for (i = SO.options.length - 1; i >= 0; i--) {
+            SO.options[i].selected = true;
+        }
+        for (i = SP.options.length - 1; i >= 0; i--) {
+            SP.options[i].selected = true;
+        }
+    }
+    function NewObjectColor()
+    {
+        var newColor = document.getElementById("newColor");
+        var oldColor = document.getElementsByName("MapZone.Color");
+        document.getElementById("back").style.background = newColor.value;
+        oldColor[0].value = newColor.value;
+    }
+</script>
+}

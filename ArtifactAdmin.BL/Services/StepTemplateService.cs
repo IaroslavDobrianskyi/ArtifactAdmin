@@ -112,25 +112,64 @@ namespace ArtifactAdmin.BL.Services
                                                    .FirstOrDefault(s => s.id == id));
         }
 
-        public StepTemplateDto Create(StepTemplateDto stepTemplateDto, string[] obj)
+        public StepTemplateDto Create(StepTemplateDto stepTemplateDto, string[] stepObj)
         {
             var stepTemplate = Mapper.Map<StepTemplate>(stepTemplateDto);
-            this.stepTemplateRepository.InsertDependent(stepTemplate, obj);
+            this.stepTemplateRepository.InsertWithoutSave(stepTemplate);
+            if (stepObj != null)
+            {
+                CreateStepObjectStepTemplate(stepTemplate, stepObj);
+            }
+
+            this.stepTemplateRepository.SaveChanges();
             return Mapper.Map<StepTemplateDto>(stepTemplate);
         }
 
-        public StepTemplateDto Update(StepTemplateDto stepTewmplateDto, string[] obj)
+        public StepTemplateDto Update(StepTemplateDto stepTewmplateDto, string[] stepObj)
         {
             var stepTemplate = Mapper.Map<StepTemplate>(stepTewmplateDto);
-            this.stepTemplateRepository.UpdateDependent(stepTemplate, obj);
+            this.stepTemplateRepository.UpdateWithoutSave(stepTemplate);
+            DeleteStepObjectStepTemplate(stepTemplate);
+            if (stepObj != null)
+            {
+                CreateStepObjectStepTemplate(stepTemplate, stepObj);
+            }
+
+            this.stepTemplateRepository.SaveChanges();
             return Mapper.Map<StepTemplateDto>(stepTemplate);
+        }
+
+        public void CreateStepObjectStepTemplate(StepTemplate stepTemplate, string[] stepObj)
+        {
+            int stepObjLen = stepObj.Length;
+            int fidStepObj = 0;
+            for (int i = 0; i < stepObjLen; i++)
+            {
+                fidStepObj = Convert.ToInt32(stepObj[i].Substring(0, stepObj[i].IndexOf('.')));
+                this.stepObjectStepTemplateRepository.InsertWithoutSave(new StepObjectStepTemplate
+                {
+                    StepObject = fidStepObj,
+                    StepTemplate1 = stepTemplate
+                });
+            }
+        }
+
+        public void DeleteStepObjectStepTemplate(StepTemplate stepTemplate) 
+        {
+            var forDel = this.stepObjectStepTemplateRepository.GetAll().Where(p => p.StepTemplate == stepTemplate.id);
+            foreach (var step in forDel)
+            {
+                this.stepObjectStepTemplateRepository.DeleteWithOutSave(step);
+            }
         }
 
         public void Delete(int? id)
         {
             var stepTemplate = this.stepTemplateRepository.GetAll()
                                    .FirstOrDefault(s => s.id == id);
-            this.stepTemplateRepository.Delete(stepTemplate);
+            this.stepTemplateRepository.DeleteWithOutSave(stepTemplate);
+            DeleteStepObjectStepTemplate(stepTemplate);
+            this.stepTemplateRepository.SaveChanges();
         }
     }
 }

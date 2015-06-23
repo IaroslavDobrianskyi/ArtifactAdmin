@@ -61,6 +61,15 @@ namespace ValidationConstellation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Виберіть колір!.
+        /// </summary>
+        public static string RequiredColor {
+            get {
+                return ResourceManager.GetString("RequiredColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введіть опис!.
         /// </summary>
         public static string RequiredDescription {
@@ -102,6 +111,15 @@ namespace ValidationConstellation {
         public static string RequiredText {
             get {
                 return ResourceManager.GetString("RequiredText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введіть назву зони !.
+        /// </summary>
+        public static string RequiredZoneName {
+            get {
+                return ResourceManager.GetString("RequiredZoneName", resourceCulture);
             }
         }
         

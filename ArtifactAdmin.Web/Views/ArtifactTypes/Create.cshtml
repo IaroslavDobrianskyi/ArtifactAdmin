@@ -39,7 +39,7 @@
                
            })
                 
-                    <img src="#" id="icon" width=" 160 " height=" 120" hidden>
+                    <img src="#" id="ic" width=" 160 " height=" 120" hidden>
                 
                  @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
             </div>
@@ -69,12 +69,12 @@
     @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
     function ShowIcon(input) {
-        document.getElementById("icon").hidden = false;
+        document.getElementById("ic").hidden = false;
         if (input.files && input.files[0])
         {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#icon').attr('src', e.target.result);
+                $('#ic').attr('src', e.target.result);
             }
                 reader.readAsDataURL(input.files[0]);
             

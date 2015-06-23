@@ -42,5 +42,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
          ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Іконка")]
         public string Icon { get; set; }
+
+        public string NewIcon { get; set; }
     }
 }

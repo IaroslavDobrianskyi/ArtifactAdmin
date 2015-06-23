@@ -38,19 +38,17 @@ namespace ArtifactAdmin.BL.Services
                                              .FirstOrDefault(s => s.id == id));
         }
 
-        public TalentDto Create(TalentDto talentDto, HttpPostedFileBase icon)
+        public TalentDto Create(TalentDto talentDto, string fileName)
         {
-            var fileName = Path.GetFileName(icon.FileName);
-            fileName = Guid.NewGuid()
-                           .ToString() + '_' + fileName;
             talentDto.Icon = fileName;
             var talent = Mapper.Map<Talent>(talentDto);
             this.talentRepository.Insert(talent);
             return Mapper.Map<TalentDto>(talent);
         }
 
-        public TalentDto Update(TalentDto talentDto)
+        public TalentDto Update(TalentDto talentDto, string fileName)
         {
+            talentDto.Icon = fileName;
             var talent = Mapper.Map<Talent>(talentDto);
             this.talentRepository.Update(talent);
             return Mapper.Map<TalentDto>(talent);

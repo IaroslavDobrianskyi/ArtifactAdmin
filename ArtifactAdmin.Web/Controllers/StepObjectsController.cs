@@ -68,9 +68,17 @@ namespace ArtifactAdmin.Web.Controllers
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
+                var fileNameForSave = FileHelper.SaveIcon("StepObjects", Icon);
+                if (string.IsNullOrEmpty(fileNameForSave))
+                {
+                    ViewBag.Error = "Помилка при збереженні іконки";
+                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+                    return View(stepObject);
+                }
+
                 try
                 {
-                    this.stepObjectService.Create(stepObject, Icon);
+                    this.stepObjectService.Create(stepObject, fileNameForSave);
                 }
                 catch (Exception e)
                 {
@@ -80,13 +88,6 @@ namespace ArtifactAdmin.Web.Controllers
                     return View(stepObject);
                 }
 
-                var result = FileHelper.SaveIcon(stepObject.Icon, "StepObjects", Icon);
-                if(string.IsNullOrEmpty(result))
-                {
-                    ViewBag.Error = "Помилка при збереженні іконки";
-                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-                    return View(stepObject);
-                }
                 return RedirectToAction("Index");
             }
 
@@ -117,15 +118,27 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject)
+        public ActionResult Edit([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase NewIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
+                var oldfileName = stepObject.Icon;
+                var fileNameForSave = oldfileName;
+                if (NewIcon != null)
+                {
+                    fileNameForSave = FileHelper.SaveIcon("StepObjects", NewIcon);
+                    if (string.IsNullOrEmpty(fileNameForSave))
+                    {
+                        ViewBag.Error = "Помилка при збереженні іконки";
+                        return View(stepObject);
+                    }
+                }
+
                 try
                 {
-                    this.stepObjectService.Update(stepObject);
+                    this.stepObjectService.Update(stepObject, fileNameForSave);
                 }
                 catch (Exception e)
                 {
@@ -135,6 +148,7 @@ namespace ArtifactAdmin.Web.Controllers
                     return View(stepObject);
                 }
 
+                FileHelper.DeleteIcon(oldfileName, "StepObjects");
                 return RedirectToAction("Index");
             }
 
@@ -179,6 +193,7 @@ namespace ArtifactAdmin.Web.Controllers
                 ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
                 return View(stepObject);
             }
+
             FileHelper.DeleteIcon(fileName, "StepObjects");
             return RedirectToAction("Index");
         }

@@ -39,18 +39,17 @@ namespace ArtifactAdmin.BL.Services
                                                     .FirstOrDefault(s => s.id == id));
         }
 
-        public ConstellationDto Create(ConstellationDto constellationDto, HttpPostedFileBase icon)
+        public ConstellationDto Create(ConstellationDto constellationDto, string fileName)
         {
-            var fileName = Path.GetFileName(icon.FileName);
-            fileName = Guid.NewGuid().ToString() + '_' + fileName;
             constellationDto.Icon = fileName;
             var constellation = Mapper.Map<Constellation>(constellationDto);
             this.constellationRepository.Insert(constellation);
             return Mapper.Map<ConstellationDto>(constellation);
         }
 
-        public ConstellationDto Update(ConstellationDto constellationDto)
+        public ConstellationDto Update(ConstellationDto constellationDto, string fileName)
         {
+            constellationDto.Icon = fileName;
             var constellation = Mapper.Map<Constellation>(constellationDto);
             this.constellationRepository.Update(constellation);
             return Mapper.Map<ConstellationDto>(constellation);

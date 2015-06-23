@@ -1,27 +1,26 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IArtifactTypeService.cs" company="Artifact">
+// <copyright file="IMapObjectService.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the IArtifactTypeService interface.
+//   Defines the IMapObjectService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.BL.Interfaces
 {
     using System;
     using System.Collections.Generic;
-    using System.Web;
     using ModelsDTO;
 
-    public interface IArtifactTypeService
+    public interface IMapObjectService
     {
-        IEnumerable<ArtifactTypeDto> GetAll();
+        IEnumerable<MapObjectDto> GetAll();
         
-        ArtifactTypeDto GetById(int? id);
+        MapObjectDto GetById(int? id);
 
-        ArtifactTypeDto Create(ArtifactTypeDto artifactTypeDto, string fileName);
+        MapObjectDto Create(MapObjectDto mapObjectDto);
 
-        ArtifactTypeDto Update(ArtifactTypeDto artifactTypeDto, string fileName);
+        MapObjectDto Update(MapObjectDto mapObjectDto);
 
         void Delete(int? id);
     }

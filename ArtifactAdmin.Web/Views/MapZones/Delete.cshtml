@@ -1,0 +1,50 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewMapZoneDto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви дійсно хочете видалити цей запис?</h3>
+<div>
+    <h4>Зони карти</h4>
+    <hr />
+    @{string Id = "MapObject1.id";
+    string Name = "MapObject1.Name";
+    }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MapZone.ZoneName)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.MapZone.ZoneName, new { rows = "2", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapZone.Color)
+        </dt>
+
+        <dd style ="background: @Html.DisplayFor(model => model.MapZone.Color); width:280px">
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MapZone.MapObjectProbabilities)
+        </dt>
+        <dd>
+            @Html.ListBoxFor(model => model.SelectedMapObject, new SelectList(Model.SelectedMapObject, Id, Name),
+                    new { size = 8, style = "width:280px" })
+            @Html.ListBoxFor(model => model.SelectedMapObject, new SelectList(Model.SelectedMapObject, Id, "Probability"),
+                      new { size = 8, style = "width:280px" })
+        </dd>
+</dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+    }
+</div>

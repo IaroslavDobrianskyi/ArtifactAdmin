@@ -180,6 +180,8 @@
     <Compile Include="Controllers\BonusController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MapObjectsController.cs" />
+    <Compile Include="Controllers\MapZonesController.cs" />
     <Compile Include="Controllers\StepObjectsController.cs" />
     <Compile Include="Controllers\StepObjectTypesController.cs" />
     <Compile Include="Controllers\StepTemplatesController.cs" />
@@ -308,6 +310,16 @@
     <Content Include="Views\StepTemplates\Details.cshtml" />
     <Content Include="Views\StepTemplates\Edit.cshtml" />
     <Content Include="Views\StepTemplates\Index.cshtml" />
+    <Content Include="Views\MapObjects\Create.cshtml" />
+    <Content Include="Views\MapObjects\Delete.cshtml" />
+    <Content Include="Views\MapObjects\Details.cshtml" />
+    <Content Include="Views\MapObjects\Edit.cshtml" />
+    <Content Include="Views\MapObjects\Index.cshtml" />
+    <Content Include="Views\MapZones\Create.cshtml" />
+    <Content Include="Views\MapZones\Delete.cshtml" />
+    <Content Include="Views\MapZones\Details.cshtml" />
+    <Content Include="Views\MapZones\Edit.cshtml" />
+    <Content Include="Views\MapZones\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

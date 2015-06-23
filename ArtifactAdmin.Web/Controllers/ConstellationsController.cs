@@ -65,9 +65,16 @@ namespace ArtifactAdmin.Web.Controllers
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                    try
+                var fileNameForSave = FileHelper.SaveIcon("Constellations", Icon);
+                if (string.IsNullOrEmpty(fileNameForSave))
+                {
+                    ViewBag.Error = "Помилка при збереженні іконки";
+                    return View(constellation);
+                }
+
+                try
                     {
-                        this.constellationService.Create(constellation, Icon);
+                        this.constellationService.Create(constellation, fileNameForSave);
                     }
                     catch (Exception e)
                     {
@@ -76,12 +83,6 @@ namespace ArtifactAdmin.Web.Controllers
                         return View(constellation);
                     }
 
-                var result = FileHelper.SaveIcon(constellation.Icon, "Constellations", Icon);
-                if (string.IsNullOrEmpty(result))
-                {
-                    ViewBag.Error = "Помилка при збереженні іконки";
-                    return View(constellation);
-                }
                 return RedirectToAction("Index");
             }
 
@@ -110,15 +111,27 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,Icon,Description")] ConstellationDto constellation)
+        public ActionResult Edit([Bind(Include = "id,Name,Icon,Description")] ConstellationDto constellation, HttpPostedFileBase NewIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
+                var oldfileName = constellation.Icon;
+                var fileNameForSave = oldfileName;
+                if (NewIcon != null) 
+                {
+                    fileNameForSave = FileHelper.SaveIcon("Constellations", NewIcon);
+                    if (string.IsNullOrEmpty(fileNameForSave))
+                    {
+                        ViewBag.Error = "Помилка при збереженні іконки";
+                        return View(constellation);
+                    }
+                }
+
                 try
                 {
-                    this.constellationService.Update(constellation);
+                    this.constellationService.Update(constellation, fileNameForSave);
                 }
                 catch (Exception e)
                 {
@@ -127,6 +140,7 @@ namespace ArtifactAdmin.Web.Controllers
                     return View(constellation);
                 }
 
+                FileHelper.DeleteIcon(oldfileName, "Constellations");
                 return RedirectToAction("Index");
             }
 
@@ -169,6 +183,7 @@ namespace ArtifactAdmin.Web.Controllers
                 ViewBag.ErrMes = e.Message;
                 return View(constellation);
             }
+
             FileHelper.DeleteIcon(fileName, "Constellations");
             return RedirectToAction("Index");
         }

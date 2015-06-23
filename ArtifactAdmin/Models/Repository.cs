@@ -34,32 +34,9 @@ namespace ArtifactAdmin.DAL.Models
             this.artEntities.SaveChanges();
         }
 
-        public void InsertDependent(T entity, string[] obj)
+        public void InsertWithoutSave(T entity) 
         {
-            switch (entity.GetType().BaseType.Name)
-            {
-                case "StepTemplate":
-                    var st = artEntities.StepTemplates.Add(entity as StepTemplate);
-                    if (obj != null)
-                    {
-                        int objLen = obj.Length;
-                        int fidStepObj = 0;
-                        for (int i = 0; i < objLen; i++)
-                        {
-                            fidStepObj = Convert.ToInt32(obj[i].Substring(0, obj[i].IndexOf('.')));
-                            artEntities.StepObjectStepTemplates.Add(new StepObjectStepTemplate
-                                                                    {
-                                                                        StepObject = fidStepObj,
-                                                                        StepTemplate1 = st
-                                                                    });
-                        }
-                    }
-
-                    artEntities.SaveChanges();
-                    break;
-                default:
-                    break;
-            }
+            dataSet.Add(entity);
         }
 
         public void Update(T entity)
@@ -68,61 +45,22 @@ namespace ArtifactAdmin.DAL.Models
             artEntities.SaveChanges();
         }
 
-        public void UpdateDependent(T entity, string[] obj)
+        public void UpdateWithoutSave(T entity) 
         {
-            switch (entity.ToString())
-            {
-                case "ArtifactAdmin.DAL.Models.StepTemplate":
-                    var st = entity as StepTemplate;
-                    artEntities.Entry(entity).State = EntityState.Modified;
-                    var forDel = artEntities.StepObjectStepTemplates.Where(p => p.StepTemplate == st.id);
-                    foreach (var type in forDel)
-                    {
-                        artEntities.StepObjectStepTemplates.Remove(type);
-                    }
-
-                    if (obj != null)
-                    {
-                        int objLen = obj.Length;
-                        int fidStepObj = 0;
-                        for (int i = 0; i < objLen; i++)
-                        {
-                            fidStepObj = Convert.ToInt32(obj[i].Substring(0, obj[i].IndexOf('.')));
-                            artEntities.StepObjectStepTemplates.Add(new StepObjectStepTemplate
-                            {
-                                StepObject = fidStepObj,
-                                StepTemplate1 = st
-                            });
-                        }   
-                    }
-
-                    artEntities.SaveChanges();
-                    break;
-                default:
-                    break;
-            }
+            artEntities.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(T entity)
         {
-            switch (entity.GetType().BaseType.Name)
-            {
-                case "StepTemplate":
-                    var st = entity as StepTemplate;
-                    var forDel = artEntities.StepObjectStepTemplates.Where(p => p.StepTemplate == st.id);
-                    foreach (var type in forDel)
-                    {
-                        artEntities.StepObjectStepTemplates.Remove(type);
-                    }
-
-                    break;
-                default:
-                    break;
-            }
-
             artEntities.Entry(entity)
                                .State = EntityState.Deleted;
             artEntities.SaveChanges();
+        }
+
+        public void DeleteWithOutSave(T entity)
+        {
+            artEntities.Entry(entity)
+                              .State = EntityState.Deleted;
         }
 
         public void SaveChanges()

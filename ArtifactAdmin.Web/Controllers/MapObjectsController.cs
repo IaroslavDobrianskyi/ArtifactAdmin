@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="TalentsController.cs" company="Artifact">
+// <copyright file="MapObjectsController.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the TalentsController type.
+//   Defines the MapObjectsController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web.Controllers
@@ -14,23 +14,23 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
-    
-    public class TalentsController : Controller
-    {
-        private ITalentService talentService;
 
-        public TalentsController(ITalentService talentService)
+    public class MapObjectsController : Controller
+    {
+        private IMapObjectService mapObjectService;
+
+        public MapObjectsController(IMapObjectService mapObjectService) 
         {
-            this.talentService = talentService;
+            this.mapObjectService = mapObjectService;
         }
 
-        // GET: Talents
+        // GET: MapObjects
         public ActionResult Index()
         {
-            return View(this.talentService.GetAll());
+            return View(this.mapObjectService.GetAll());
         }
 
-        // GET: Talents/Details/5
+        // GET: MapObjects/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,58 +38,50 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var talent = this.talentService.GetById(id);
-            if (talent == null)
+            var mapObject = this.mapObjectService.GetById(id);
+            if (mapObject == null)
             {
                 return HttpNotFound();
             }
 
-            return View(talent);
+            return View(mapObject);
         }
 
-        // GET: Talents/Create
+        // GET: MapObjects/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Talents/Create
+        // POST: MapObjects/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")]
-            TalentDto talent, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "id,Name")] MapObjectDto mapObject)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileNameForSave = FileHelper.SaveIcon("Talents", Icon);
-                if (string.IsNullOrEmpty(fileNameForSave))
-                {
-                    ViewBag.Error = "Помилка при збереженні іконки";
-                    return View(talent);
-                }
-
                 try
                 {
-                    this.talentService.Create(talent, fileNameForSave);
+                    this.mapObjectService.Create(mapObject);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    return View(talent);
+                    return View(mapObject);
                 }
-                
+
                 return RedirectToAction("Index");
             }
 
-            return View(talent);
+            return View(mapObject);
         }
 
-        // GET: Talents/Edit/5
+        // GET: MapObjects/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -97,57 +89,44 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var talent = this.talentService.GetById(id);
-            if (talent == null)
+            var mapObject = this.mapObjectService.GetById(id);
+            if (mapObject == null)
             {
                 return HttpNotFound();
             }
 
-            return View(talent);
+            return View(mapObject);
         }
 
-        // POST: Talents/Edit/5
+        // POST: MapObjects/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Description,Name,MaxLevel,Modifier,BaseValue,BaseModifier,Icon")] TalentDto talent, HttpPostedFileBase NewIcon)
+        public ActionResult Edit([Bind(Include = "id,Name")] MapObjectDto mapObject)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var oldfileName = talent.Icon;
-                var fileNameForSave = oldfileName;
-                if (NewIcon != null)
-                {
-                    fileNameForSave = FileHelper.SaveIcon("Talents", NewIcon);
-                    if (string.IsNullOrEmpty(fileNameForSave))
-                    {
-                        ViewBag.Error = "Помилка при збереженні іконки";
-                        return View(talent);
-                    }
-                }
-
                 try
                 {
-                    this.talentService.Update(talent, fileNameForSave);
+                    this.mapObjectService.Update(mapObject);
                 }
-                catch (Exception e)
+                catch (Exception e) 
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(talent);
+                    return View(mapObject);
                 }
 
-                FileHelper.DeleteIcon(oldfileName, "ConstellationsTalents");
                 return RedirectToAction("Index");
             }
 
-            return View(talent);
+            return View(mapObject);
         }
 
-        // GET: Talents/Delete/5
+        // GET: MapObjects/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -155,36 +134,34 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var talent = this.talentService.GetById(id);
-            if (talent == null)
+            var mapObject = this.mapObjectService.GetById(id);
+            if (mapObject == null)
             {
                 return HttpNotFound();
             }
 
-            return View(talent);
+            return View(mapObject);
         }
 
-        // POST: Talents/Delete/5
+        // POST: MapObjects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var talent = this.talentService.GetById(id);
-            var fileName = talent.Icon;
+            var mapObject = this.mapObjectService.GetById(id);
             try
             {
-            this.talentService.Delete(id);
+                this.mapObjectService.Delete(id);
             }
-            catch (Exception e)
+            catch (Exception e) 
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                return View(talent);
+                return View(mapObject);
             }
 
-            FileHelper.DeleteIcon(fileName, "Talents");
             return RedirectToAction("Index");
         }
     }

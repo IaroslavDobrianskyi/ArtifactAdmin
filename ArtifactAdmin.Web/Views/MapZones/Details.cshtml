@@ -1,0 +1,45 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewMapZoneDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Зони карти</h4>
+    <hr />
+    @{string Id = "MapObject1.id";
+      string Name = "MapObject1.Name";
+     }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MapZone.ZoneName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapZone.ZoneName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapZone.Color)
+        </dt>
+
+        <dd style="background: @Html.DisplayFor(model => model.MapZone.Color); width:280px">
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.MapZone.MapObjectProbabilities)
+        </dt>
+        <dd>
+            @Html.ListBoxFor(model=>model.SelectedMapObject,new SelectList(Model.SelectedMapObject,Id,Name),
+                    new { size = 8, style = "width:280px" })
+            @Html.ListBoxFor(model=>model.SelectedMapObject,new SelectList(Model.SelectedMapObject,Id,"Probability"),
+                      new { size = 8, style = "width:280px" })
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.MapZone.id }) |
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

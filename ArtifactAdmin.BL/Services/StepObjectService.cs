@@ -39,19 +39,17 @@ namespace ArtifactAdmin.BL.Services
                                                  .FirstOrDefault(s => s.id == id));
         }
 
-        public StepObjectDto Create(StepObjectDto stepObjectDto, HttpPostedFileBase icon)
+        public StepObjectDto Create(StepObjectDto stepObjectDto, string fileName)
         {
-            var fileName = Path.GetFileName(icon.FileName);
-            fileName = Guid.NewGuid()
-                           .ToString() + "_" + fileName;
             stepObjectDto.Icon = fileName;
             var stepObject = Mapper.Map<StepObject>(stepObjectDto);
             this.stepObjectRepository.Insert(stepObject);
             return Mapper.Map<StepObjectDto>(stepObject);
         }
 
-        public StepObjectDto Update(StepObjectDto stepObjectDto)
+        public StepObjectDto Update(StepObjectDto stepObjectDto, string fileName)
         {
+            stepObjectDto.Icon = fileName;
             var stepObject = Mapper.Map<StepObject>(stepObjectDto);
             this.stepObjectRepository.Update(stepObject);
             return Mapper.Map<StepObjectDto>(stepObject);

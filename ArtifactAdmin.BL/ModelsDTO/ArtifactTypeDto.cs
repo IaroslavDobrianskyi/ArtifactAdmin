@@ -33,5 +33,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [StringLength(50, ErrorMessageResourceName = "StringLength",
             ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Descrioption { get; set; }
+
+        public string NewIcon { get; set; }
     }
 }

@@ -65,9 +65,16 @@ namespace ArtifactAdmin.Web.Controllers
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
+                var fileNameForSave = FileHelper.SaveIcon("ArtifactTypes", Icon);
+                if (string.IsNullOrEmpty(fileNameForSave))
+                {
+                    ViewBag.Error = "Помилка при збереженні іконки";
+                    return View(artifactType);
+                }
+
                 try
                 {
-                    this.artifactTypeService.Create(artifactType, Icon);
+                    this.artifactTypeService.Create(artifactType, fileNameForSave);
                 }
                 catch (Exception e)
                 {
@@ -75,13 +82,7 @@ namespace ArtifactAdmin.Web.Controllers
                     ViewBag.ErrMes = e.Message;
                     return View(artifactType);
                 }
-                
-                var result=FileHelper.SaveIcon(artifactType.Icon, "ArtifactTypes", Icon);
-                if (string.IsNullOrEmpty(result))
-                {
-                   ViewBag.Error = "Помилка при збереженні іконки";
-                   return View(artifactType);
-                }
+               
                 return RedirectToAction("Index");
             }
 
@@ -110,15 +111,27 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactTypeDto artifactType)
+        public ActionResult Edit([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactTypeDto artifactType, HttpPostedFileBase NewIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
+                var oldfileName = artifactType.Icon;
+                var fileNameForSave = oldfileName;
+                if (NewIcon != null)
+                {
+                    fileNameForSave = FileHelper.SaveIcon("ArtifactTypes", NewIcon);
+                    if (string.IsNullOrEmpty(fileNameForSave))
+                    {
+                        ViewBag.Error = "Помилка при збереженні іконки";
+                        return View(artifactType);
+                    }
+                }
+
                 try
                 {
-                    this.artifactTypeService.Update(artifactType);
+                    this.artifactTypeService.Update(artifactType, fileNameForSave);
                 }
                 catch (Exception e)
                 {
@@ -126,7 +139,8 @@ namespace ArtifactAdmin.Web.Controllers
                     ViewBag.ErrMes = e.Message;
                     return View(artifactType);
                 }
-                
+
+                FileHelper.DeleteIcon(oldfileName, "ArtifactTypes");
                 return RedirectToAction("Index");
             }
 
@@ -169,6 +183,7 @@ namespace ArtifactAdmin.Web.Controllers
                 ViewBag.ErrMes = e.Message;
                 return View(artifactType);
             }
+
             FileHelper.DeleteIcon(fileName, "ArtifactTypes");
             return RedirectToAction("Index");
         }

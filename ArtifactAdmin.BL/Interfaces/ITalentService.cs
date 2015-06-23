@@ -19,9 +19,9 @@ namespace ArtifactAdmin.BL.Interfaces
 
         TalentDto GetById(int? id);
 
-        TalentDto Create(TalentDto talentDto, HttpPostedFileBase icon);
+        TalentDto Create(TalentDto talentDto, string fileName);
 
-        TalentDto Update(TalentDto talentDto);
+        TalentDto Update(TalentDto talentDto, string fileName);
 
         void Delete(int? id);
     }
