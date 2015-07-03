@@ -45,6 +45,7 @@ namespace ArtifactAdmin.BL.Services
         public ViewMapZoneDto GetViewById(int? id)
         {
             var viewMapZoneDto = new ViewMapZoneDto();
+            viewMapZoneDto.OneProbability = "0.25";
             var listProbabilityObjects = new List<MapObjectProbabilityDto>();
             if (id != null)
             {

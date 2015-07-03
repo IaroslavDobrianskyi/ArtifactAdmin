@@ -34,7 +34,7 @@
         <AssociationConnector Association="artModel.FK_UserTalent_Talent1" />
         <AssociationConnector Association="artModel.FK_UserArtifact_User" />
         <AssociationConnector Association="artModel.FK_UserTalent_UserArtifact1" />
-        <EntityTypeShape EntityType="artModel.ActionDescription" Width="1.5" PointX="3" PointY="18.625" />
+        <EntityTypeShape EntityType="artModel.ActionDescription" Width="2.125" PointX="3" PointY="18.625" />
         <EntityTypeShape EntityType="artModel.ActionTemplate" Width="3" PointX="9.5" PointY="23.25" />
         <EntityTypeShape EntityType="artModel.ActionTemplateActionDescription" Width="3" PointX="18.25" PointY="21.125" />
         <EntityTypeShape EntityType="artModel.ActionTemplatePredisposition" Width="2.5" PointX="15.25" PointY="24.375" />
@@ -66,6 +66,7 @@
         <EntityTypeShape EntityType="artModel.Constellation" Width="1.5" PointX="0.75" PointY="5.25" />
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Constellation" />
         <AssociationConnector Association="artModel.FK_UserArtifact_Constellation" />
+        <AssociationConnector Association="artModel.FK_ActionDescription_ActionTemplate" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

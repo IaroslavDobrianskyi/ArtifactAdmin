@@ -14,17 +14,12 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ActionDescription
     {
-        public ActionDescription()
-        {
-            this.ActionTemplateActionDescriptions = new HashSet<ActionTemplateActionDescription>();
-        }
-    
         public int id { get; set; }
         public int ActionTemplate { get; set; }
         public Nullable<int> MapZone { get; set; }
         public string ActionText { get; set; }
     
         public virtual MapZone MapZone1 { get; set; }
-        public virtual ICollection<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
+        public virtual ActionTemplate ActionTemplate1 { get; set; }
     }
 }

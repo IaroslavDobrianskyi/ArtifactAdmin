@@ -19,7 +19,7 @@ namespace ArtifactAdmin.BL
         public static ServiceContainer RegisterAllDependencies()
         {
             var container = new ServiceContainer();
-            container.Register<IArtifactTypeService, ArtifactTypeService>(new PerContainerLifetime());
+            container.Register<IArtifactTypeService, ArtifactTypeService>(new PerScopeLifetime());
             container.Register<IBonusService, BonusService>(new PerScopeLifetime());
             container.Register<IConstellationService, ConstellationService>(new PerScopeLifetime());
             container.Register<IStepObjectService, StepObjectService>(new PerScopeLifetime());
@@ -28,6 +28,9 @@ namespace ArtifactAdmin.BL
             container.Register<IStepTemplateService, StepTemplateService>(new PerScopeLifetime());
             container.Register<IMapObjectService, MapObjectService>(new PerScopeLifetime());
             container.Register<IMapZoneService, MapZoneService>(new PerScopeLifetime());
+            container.Register<IActionTemplateService, ActionTemplateService>(new PerScopeLifetime());
+            container.Register<IActionDescriptionService, ActionDescriptionService>(new PerScopeLifetime());
+            container.Register<IStepActionTemplateService, StepActionTemplateService>(new PerScopeLifetime());
 
             container.Register((serviceFactory) => new artEntities(), new PerScopeLifetime());
             container.Register(typeof(IRepository<>), typeof(Repository<>));

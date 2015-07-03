@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     string Obj = "StepObjectDto.Name";
     <div class="form-horizontal">
-        <h4>Шаблон кроку</h4>
+        <h4>Шаблон кроку- об'єкти</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -45,7 +45,7 @@
          new { size = 8, style = "width:250px" })
                 </td>
                
-                <td>
+                <td style="text-align:center">
                     @Html.ListBoxFor(model => model.StepObjectType,
               new SelectList(Model.StepObjectType, "id", "Name"),
      new { size = 4, onclick = "javascript:AddTypObj();" })

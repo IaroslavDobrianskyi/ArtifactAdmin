@@ -9,7 +9,7 @@
 namespace ArtifactAdmin.BL.ModelsDTO
 {
     using System;
-    
+        
     public class MapObjectProbabilityDto
     {
         public int id { get; set; }

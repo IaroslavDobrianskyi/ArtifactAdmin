@@ -4,28 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Шаблон кроку - об'єкти</h2>
+<h2>Шаблон кроку-дії</h2>
 
 <p>
     @Html.ActionLink("Новий запис", "Create")
 </p>
-<table id="StepTemplate" class="tablesorter">
+<table id="StepAction" class="tablesorter">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StepText)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StepObjectStepTemplates)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StepText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StepTemplateActionTemplates)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
@@ -41,12 +41,13 @@
                     @Html.TextAreaFor(modelItem => item.Name, new { @readonly = true, rows = "1", cols = "50" })
                 </td>
                 <td>
-                    @if (item.StepObjectStepTemplates.Count == 0)
+                    @if (item.StepTemplateActionTemplates.Count == 0)
                     {
                         <span>---</span>
                     }
-                    else
-                    {<span>@item.StepObjectStepTemplates.Count </span>
+                    else 
+                    {
+                        <span>@item.StepTemplateActionTemplates.Count </span>
                     }
                 </td>
                 <td>
@@ -74,10 +75,10 @@
         </select>
     </form>
 </div>
-@section ScriptsSortStepTemplate{
+@section ScriptsSortStepActionTemplate{
     <script type="text/javascript">
     $(document).ready(function () {
-        $("#StepTemplate").tablesorter({ headers:{4:{sorter:false},3:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
+        $("#StepAction").tablesorter({ headers:{4:{sorter:false},3:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
         .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
     });
     </script>

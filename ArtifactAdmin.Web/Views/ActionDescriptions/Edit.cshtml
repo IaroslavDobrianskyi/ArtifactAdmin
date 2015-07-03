@@ -1,0 +1,84 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewActionDescriptionDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Змінити</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    string SelAction = Model.ActionDescriptionDto.ActionTemplate.ToString();
+    string SelZone = Model.ActionDescriptionDto.MapZone.ToString();
+    string Sel = "";
+    if (SelZone == "")
+    {
+        Sel="Виберіть зону карти";
+    }
+    <div class="form-horizontal">
+        <h4>Опис дій</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActionDescriptionDto.id)
+        @Html.HiddenFor(model => model.ActionDescriptionDto.ActionTemplate)
+        @Html.HiddenFor(model => model.ActionDescriptionDto.MapZone)
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionDescriptionDto.ActionTemplate1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ActionName, new SelectList(Model.ActionTemplateDto, "id", "Name", SelAction), htmlAttributes: new { @class = "form-control",
+                   onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_ActionTemplate'));"
+           })
+                @Html.ValidationMessageFor(model => model.ActionTemplateDto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionDescriptionDto.MapZone1.ZoneName,  htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NameZone, new SelectList(Model.MapZoneDto, "id", "ZoneName", SelZone), Sel, htmlAttributes: new { @class = "form-control",
+                onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_MapZone'))"
+           })
+                @Html.ValidationMessageFor(model => model.MapZoneDto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionDescriptionDto.ActionText, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.ActionDescriptionDto.ActionText, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.ActionDescriptionDto.ActionText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Записати" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    function SelId(Sel,HiddenId)
+    {
+        var SelId = "";
+        for (i = 0; i < Sel.options.length; i++)
+        {
+            if (Sel.options[i].selected == true)
+            {
+                SelId = Sel.options[i].value;
+                HiddenId.value = Number(SelId);
+                break;
+            }
+        }
+    }
+</script>
+}

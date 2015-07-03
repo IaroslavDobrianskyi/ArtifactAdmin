@@ -365,6 +365,10 @@
       <End Role="Constellation" EntitySet="Constellations" />
       <End Role="UserArtifact" EntitySet="UserArtifacts" />
     </AssociationSet>
+    <AssociationSet Name="FK_ActionDescription_ActionTemplate" Association="artModel.FK_ActionDescription_ActionTemplate">
+      <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+      <End Role="ActionDescription" EntitySet="ActionDescriptions" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ArtifactBonu">
     <Key>
@@ -506,7 +510,7 @@
     <Property Name="MapZone" Type="Int32" />
     <Property Name="ActionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="MapZone1" Relationship="artModel.FK_ActionDescription_MapZone" FromRole="ActionDescription" ToRole="MapZone" />
-    <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionDescription" FromRole="ActionDescription" ToRole="ActionTemplateActionDescription" />
+    <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionDescription_ActionTemplate" FromRole="ActionDescription" ToRole="ActionTemplate" />
   </EntityType>
   <EntityType Name="ActionTemplate">
     <Key>
@@ -518,6 +522,7 @@
     <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateActionDescription" />
     <NavigationProperty Name="ActionTemplatePredispositions" Relationship="artModel.FK_ActionTemplatePredisposition_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplatePredisposition" />
     <NavigationProperty Name="StepTemplateActionTemplates" Relationship="artModel.FK_StepTemplateActionTemplate_ActionTemplate" FromRole="ActionTemplate" ToRole="StepTemplateActionTemplate" />
+    <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionDescription" />
   </EntityType>
   <EntityType Name="ActionTemplateActionDescription">
     <Key>
@@ -851,6 +856,18 @@
       </Principal>
       <Dependent Role="UserArtifact">
         <PropertyRef Name="Constellation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionDescription_ActionTemplate">
+    <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="1" />
+    <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionTemplate">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActionDescription">
+        <PropertyRef Name="ActionTemplate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

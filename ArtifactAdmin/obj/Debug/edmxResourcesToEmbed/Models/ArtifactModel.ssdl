@@ -349,6 +349,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ActionDescription_ActionTemplate">
+    <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+    <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionTemplate">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ActionDescription">
+        <PropertyRef Name="ActionTemplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ActionDescription_MapZone">
     <End Role="MapZone" Type="Self.MapZone" Multiplicity="0..1" />
     <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="*" />
@@ -358,30 +370,6 @@
       </Principal>
       <Dependent Role="ActionDescription">
         <PropertyRef Name="MapZone" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ActionTemplateActionDescription_ActionDescription">
-    <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="1" />
-    <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ActionDescription">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="ActionTemplateActionDescription">
-        <PropertyRef Name="ActionDescription" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ActionTemplateActionDescription_ActionTemplate">
-    <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
-    <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ActionTemplate">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="ActionTemplateActionDescription">
-        <PropertyRef Name="ActionTemplate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -697,17 +685,13 @@
       <End Role="Step" EntitySet="Step" />
       <End Role="Action" EntitySet="Action" />
     </AssociationSet>
+    <AssociationSet Name="FK_ActionDescription_ActionTemplate" Association="Self.FK_ActionDescription_ActionTemplate">
+      <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+      <End Role="ActionDescription" EntitySet="ActionDescription" />
+    </AssociationSet>
     <AssociationSet Name="FK_ActionDescription_MapZone" Association="Self.FK_ActionDescription_MapZone">
       <End Role="MapZone" EntitySet="MapZone" />
       <End Role="ActionDescription" EntitySet="ActionDescription" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="Self.FK_ActionTemplateActionDescription_ActionDescription">
-      <End Role="ActionDescription" EntitySet="ActionDescription" />
-      <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ActionTemplateActionDescription_ActionTemplate" Association="Self.FK_ActionTemplateActionDescription_ActionTemplate">
-      <End Role="ActionTemplate" EntitySet="ActionTemplate" />
-      <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
     </AssociationSet>
     <AssociationSet Name="FK_ActionTemplatePredisposition_ActionTemplate" Association="Self.FK_ActionTemplatePredisposition_ActionTemplate">
       <End Role="ActionTemplate" EntitySet="ActionTemplate" />

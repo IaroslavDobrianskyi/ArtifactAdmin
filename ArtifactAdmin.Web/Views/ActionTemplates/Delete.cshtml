@@ -1,0 +1,32 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ActionTemplateDto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви дійсно хочете видалити цей запис?</h3>
+<div>
+    <h4>Шаблон дії</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Name, new { rows = "10", cols = "50", @readonly = true })
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+    }
+</div>

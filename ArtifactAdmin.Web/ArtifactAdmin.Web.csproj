@@ -176,12 +176,15 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActionDescriptionsController.cs" />
+    <Compile Include="Controllers\ActionTemplatesController.cs" />
     <Compile Include="Controllers\ArtifactTypesController.cs" />
     <Compile Include="Controllers\BonusController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapObjectsController.cs" />
     <Compile Include="Controllers\MapZonesController.cs" />
+    <Compile Include="Controllers\StepActionTemplatesController.cs" />
     <Compile Include="Controllers\StepObjectsController.cs" />
     <Compile Include="Controllers\StepObjectTypesController.cs" />
     <Compile Include="Controllers\StepTemplatesController.cs" />
@@ -320,6 +323,21 @@
     <Content Include="Views\MapZones\Details.cshtml" />
     <Content Include="Views\MapZones\Edit.cshtml" />
     <Content Include="Views\MapZones\Index.cshtml" />
+    <Content Include="Views\ActionTemplates\Create.cshtml" />
+    <Content Include="Views\ActionTemplates\Delete.cshtml" />
+    <Content Include="Views\ActionTemplates\Details.cshtml" />
+    <Content Include="Views\ActionTemplates\Edit.cshtml" />
+    <Content Include="Views\ActionTemplates\Index.cshtml" />
+    <Content Include="Views\ActionDescriptions\Create.cshtml" />
+    <Content Include="Views\ActionDescriptions\Delete.cshtml" />
+    <Content Include="Views\ActionDescriptions\Details.cshtml" />
+    <Content Include="Views\ActionDescriptions\Edit.cshtml" />
+    <Content Include="Views\ActionDescriptions\Index.cshtml" />
+    <Content Include="Views\StepActionTemplates\Create.cshtml" />
+    <Content Include="Views\StepActionTemplates\Delete.cshtml" />
+    <Content Include="Views\StepActionTemplates\Details.cshtml" />
+    <Content Include="Views\StepActionTemplates\Edit.cshtml" />
+    <Content Include="Views\StepActionTemplates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

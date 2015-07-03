@@ -40,6 +40,9 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public string Name { get; set; }
         
         [Display(Name = "Об'єкти кроку")]
-        public virtual ICollection<StepObjectStepTemplateDto> StepObjectStepTemplates { get; set; } 
+        public virtual ICollection<StepObjectStepTemplateDto> StepObjectStepTemplates { get; set; }
+
+        [Display(Name = "Дії кроку")]
+        public virtual ICollection<StepTemplateActionTemplateDto> StepTemplateActionTemplates { get; set; }
     }
 }

@@ -1,0 +1,98 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewStepActionTemplateDto
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Створити новий запис</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h4>Шаблон кроку-дії</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.StepTemplateDto.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.StepTemplateDto.Description, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.StepTemplateDto.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StepTemplateDto.StepText, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.StepTemplateDto.StepText, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.StepTemplateDto.StepText, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StepTemplateDto.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.StepTemplateDto.Name, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.StepTemplateDto.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <table class="table">
+            <tr>
+                <td>
+                    @Html.ListBoxFor(model => model.ActionTemplate, new MultiSelectList(Model.ActionTemplate, "id","Name"), new { size = 8, style = "width:250px" })
+               </td>
+
+                <td style="text-align:center">
+                    <input type="button" id="add" value=">"
+                           onclick="javascript: MoveObj(document.getElementById('ActionTemplate'), document.getElementById('selectedAction'));" />
+                    <br />
+                    <input type="button" id="rem" value="<"
+                           onclick="javascript: MoveObj(document.getElementById('selectedAction'), document.getElementById('ActionTemplate'));" />
+                </td>
+
+                <td>
+                    @Html.ListBoxFor(model => model.SelectedActionTemplate, new MultiSelectList(Model.SelectedActionTemplate, "id", "Name"),
+new {id="selectedAction", size = 8, style = "width:250px" })
+                </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll()" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    function MoveObj(From, To) {
+        var SelID = '';
+        var SelText = '';
+        // Move rows from SS1 to SS2 from bottom to top
+        for (i = From.options.length - 1; i >= 0; i--) {
+            if (From.options[i].selected == true) {
+                SelID = From.options[i].value;
+                SelText = From.options[i].text;
+                var newRow = new Option(SelText, SelID);
+                To.options[To.length] = newRow;
+                From.options[i] = null;
+            }
+        }
+    }
+    function SelAll()
+    {
+        var To = document.getElementById('selectedAction');
+        for (i = To.options.length - 1; i >= 0; i--)
+        {
+            To.options[i].selected = true;
+        }
+    }
+</script>
+}

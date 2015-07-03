@@ -61,6 +61,15 @@ namespace ValidationConstellation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Виберіть дію!.
+        /// </summary>
+        public static string RequiredActionTemplate {
+            get {
+                return ResourceManager.GetString("RequiredActionTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Виберіть колір!.
         /// </summary>
         public static string RequiredColor {

@@ -50,6 +50,15 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<MapObjectProbability, MapObjectProbabilityDto>();
             Mapper.CreateMap<MapObjectProbabilityDto, MapObjectProbability>();
+
+            Mapper.CreateMap<ActionTemplate, ActionTemplateDto>();
+            Mapper.CreateMap<ActionTemplateDto, ActionTemplate>();
+
+            Mapper.CreateMap<ActionDescription, ActionDescriptionDto>();
+            Mapper.CreateMap<ActionDescriptionDto, ActionDescription>();
+
+            Mapper.CreateMap<StepTemplateActionTemplate, StepTemplateActionTemplateDto>();
+            Mapper.CreateMap<StepTemplateActionTemplateDto, StepTemplateActionTemplate>();
         } 
     }
 }

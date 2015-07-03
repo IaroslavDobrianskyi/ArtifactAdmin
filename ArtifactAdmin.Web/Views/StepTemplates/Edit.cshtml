@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     string Obj = "StepObjectDto.Name";
     <div class="form-horizontal">
-        <h4>Шаблон кроку</h4>
+        <h4>Шаблон кроку - об'єкти</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.StepTemplate.id)
@@ -48,7 +48,7 @@
          new { size = 8, style = "width:250px" })
                 </td>
 
-                <td>
+                <td style="text-align:center">
                     @Html.ListBoxFor(model => model.StepObjectType,
                     new SelectList(Model.StepObjectType, "id", "Name"),
                     new { size = 4, onclick = "javascript:AddTypObj();" })
@@ -58,8 +58,8 @@
                            onclick="javascript: MoveObj(document.getElementById('StepObject'), document.getElementById('SelectedStepObject'));" />
                     <br />
                     <input type="button" id="rem" value="<"
-                           onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('StepObject'));"/>
-                 </td>
+                           onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('StepObject'));" />
+                </td>
                 
                 <td>
                     @Html.ListBoxFor(model => model.SelectedStepObject, new MultiSelectList(Model.SelectedStepObject, "IdObjType", Obj),

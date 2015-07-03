@@ -43,8 +43,10 @@
                     @Html.ListBoxFor(model => model.MapObject, new SelectList(Model.MapObject, "id", "Name"), new { size = 8, style = "width:250px" })
                 </td>
                 <td>
-                    <label for="OneProbability ">Введіть ймовірність</label><br />
-                    <input type="text" id="OneProbability" value="0.25" />
+                    @Html.LabelFor(model => model.OneProbability, htmlAttributes: new { @class = "control-label col-md-2" })<br />
+                    @Html.EditorFor(model => model.OneProbability, new { htmlAttributes = new { @class = "form-control", onchange="ValidateZeroProbability()"} })<br />
+                    @Html.ValidationMessageFor(model => model.OneProbability, "", new { @class = "text-danger" })
+                    <input type="text" class="text-danger" id="MessageError" value="" style="width:100%" hidden>
                 </td>
                 <td style="text-align:center">
                     <input type="button" id="add" value=">"
@@ -82,15 +84,18 @@
         var SelID = '';
         var SelText = '';
         var SelProbability = document.getElementById("OneProbability").value.toString();
-        for (i = From.options.length - 1; i >= 0; i--) {
-            if (From.options[i].selected == true) {
-                SelID = From.options[i].value;
-                SelText = From.options[i].text;
-                var newRow = new Option(SelText, SelID);
-                ToSel.options[ToSel.length] = newRow;
-                newRow = new Option(SelProbability, SelProbability);
-                ToProbability[ToProbability.length] = newRow;
-                From.options[i] = null;
+        var ValidateProbability = Number(SelProbability);
+        if (ValidateProbability > 0 & ValidateProbability < 1) {
+            for (i = From.options.length - 1; i >= 0; i--) {
+                if (From.options[i].selected == true) {
+                    SelID = From.options[i].value;
+                    SelText = From.options[i].text;
+                    var newRow = new Option(SelText, SelID);
+                    ToSel.options[ToSel.length] = newRow;
+                    newRow = new Option(SelProbability, SelProbability);
+                    ToProbability[ToProbability.length] = newRow;
+                    From.options[i] = null;
+                }
             }
         }
     }
@@ -121,6 +126,21 @@
         }
         for (i = SP.options.length - 1; i >= 0; i--) {
             SP.options[i].selected = true;
+        }
+    }
+    function ValidateZeroProbability()
+    {
+        var Val = document.getElementById("OneProbability").value.toString();
+        var Message = document.getElementById("MessageError");
+        if (Val.substring(0,3) == "0.0" & Number(Val)==0 )
+        {
+            Message.value = "Введіть число від 0 до 1 !";
+            Message.hidden = false;
+        }
+        else
+        {
+            Message.value = "";
+            Message.hidden = true;
         }
     }
     </script>
