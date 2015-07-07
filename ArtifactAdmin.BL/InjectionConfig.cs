@@ -31,7 +31,8 @@ namespace ArtifactAdmin.BL
             container.Register<IActionTemplateService, ActionTemplateService>(new PerScopeLifetime());
             container.Register<IActionDescriptionService, ActionDescriptionService>(new PerScopeLifetime());
             container.Register<IStepActionTemplateService, StepActionTemplateService>(new PerScopeLifetime());
-
+            container.Register<IActionTemplateResultService, ActionTemplateResultService>(new PerScopeLifetime());
+                
             container.Register((serviceFactory) => new artEntities(), new PerScopeLifetime());
             container.Register(typeof(IRepository<>), typeof(Repository<>));
             

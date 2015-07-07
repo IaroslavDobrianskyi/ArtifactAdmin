@@ -60,7 +60,8 @@
     @RenderSection("ScriptsSortActionTemplate", required: false)
     @RenderSection("ScriptsSortActionDescription", required: false)
     @RenderSection("ScriptsSortStepActionTemplate", required: false)
-    <script>
+    @RenderSection("ScriptsSortActionTemplateResult", required: false)
+        <script>
     $(function () {
         $("#accordion").accordion({
             collapsible: true,active:false

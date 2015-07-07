@@ -14,10 +14,19 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class Property
     {
+        public Property()
+        {
+            this.ActionProperties = new HashSet<ActionProperty>();
+            this.ActionTemplateProperties = new HashSet<ActionTemplateProperty>();
+        }
+    
         public int id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public long Mask { get; set; }
         public int Deviation { get; set; }
+    
+        public virtual ICollection<ActionProperty> ActionProperties { get; set; }
+        public virtual ICollection<ActionTemplateProperty> ActionTemplateProperties { get; set; }
     }
 }

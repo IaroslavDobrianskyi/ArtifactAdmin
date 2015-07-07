@@ -24,8 +24,10 @@ namespace ArtifactAdmin.DAL.Models
         public string Description { get; set; }
         public string StepText { get; set; }
         public string Name { get; set; }
+        public Nullable<int> Desire { get; set; }
     
         public virtual ICollection<StepObjectStepTemplate> StepObjectStepTemplates { get; set; }
         public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
+        public virtual Desire Desire1 { get; set; }
     }
 }

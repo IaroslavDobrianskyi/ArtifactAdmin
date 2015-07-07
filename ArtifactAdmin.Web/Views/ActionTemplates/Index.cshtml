@@ -15,6 +15,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BlockProbability)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActionTemplateResult1.ArtifactPosibility)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -24,6 +30,12 @@
             <tr>
                 <td>
                     @Html.TextAreaFor(modelItem => item.Name, new { @readonly = true, rows = "2", cols = "100" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BlockProbability)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActionTemplateResult1.ArtifactPosibility)
                 </td>
                 <td>
                     @Html.ActionLink("Змінити", "Edit", new { id = item.id }) |

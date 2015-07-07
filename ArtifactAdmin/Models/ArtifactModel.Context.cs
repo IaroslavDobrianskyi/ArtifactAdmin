@@ -25,7 +25,6 @@ namespace ArtifactAdmin.DAL.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<ActFlow> ActFlows { get; set; }
         public virtual DbSet<Action> Actions { get; set; }
         public virtual DbSet<Artifact> Artifacts { get; set; }
         public virtual DbSet<ArtifactType> ArtifactTypes { get; set; }
@@ -58,5 +57,23 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
         public virtual DbSet<ZoneCoordinat> ZoneCoordinats { get; set; }
         public virtual DbSet<Constellation> Constellations { get; set; }
+        public virtual DbSet<ActionCharacteristic> ActionCharacteristics { get; set; }
+        public virtual DbSet<ActionPredisposition> ActionPredispositions { get; set; }
+        public virtual DbSet<ActionProperty> ActionProperties { get; set; }
+        public virtual DbSet<ActionResult> ActionResults { get; set; }
+        public virtual DbSet<ActionResultDesire> ActionResultDesires { get; set; }
+        public virtual DbSet<ActionTemplateCharacteristic> ActionTemplateCharacteristics { get; set; }
+        public virtual DbSet<ActionTemplateProperty> ActionTemplateProperties { get; set; }
+        public virtual DbSet<ActionTemplateResult> ActionTemplateResults { get; set; }
+        public virtual DbSet<ActiveActionInFlow> ActiveActionInFlows { get; set; }
+        public virtual DbSet<CarrierDesire> CarrierDesires { get; set; }
+        public virtual DbSet<CarrierUserArtifact> CarrierUserArtifacts { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<Desire> Desires { get; set; }
+        public virtual DbSet<DesireActionTemplateResult> DesireActionTemplateResults { get; set; }
+        public virtual DbSet<DesireMapZone> DesireMapZones { get; set; }
+        public virtual DbSet<Log> Logs { get; set; }
+        public virtual DbSet<RaceDesire> RaceDesires { get; set; }
+        public virtual DbSet<UserArtifactClass> UserArtifactClasses { get; set; }
     }
 }

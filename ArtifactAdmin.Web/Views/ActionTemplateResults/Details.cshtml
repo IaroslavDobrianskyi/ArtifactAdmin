@@ -1,0 +1,50 @@
+﻿@model ArtifactAdmin.DAL.Models.ActionTemplateResult
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>>Детально</h2>
+
+<div>
+    <h4>Шаблон дії.Результат</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PredispositionResultModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PredispositionResultModifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperienceModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExperienceModifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtifactPosibility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtifactPosibility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoldModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoldModifier)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

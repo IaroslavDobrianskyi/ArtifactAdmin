@@ -4,9 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a39c2c007a9c4a65ad8d3560b59e47d0" Name="Diagram1" ZoomLevel="125">
-        <EntityTypeShape EntityType="artModel.ActFlow" Width="1.5" PointX="10.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="artModel.Action" Width="1.5" PointX="8" PointY="13.375" IsExpanded="true" />
+      <Diagram DiagramId="a39c2c007a9c4a65ad8d3560b59e47d0" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="artModel.Action" Width="1.5" PointX="8" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Artifact" Width="1.5" PointX="3.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.ArtifactType" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Bonu" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
@@ -16,10 +15,6 @@
         <EntityTypeShape EntityType="artModel.sysdiagram" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.Talent" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="artModel.UserArtifact" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
-        <AssociationConnector Association="artModel.FK_ActFlow_Action" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_ActFlow_Step" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_Step_ActFlow" ManuallyRouted="false" />
-        <AssociationConnector Association="artModel.FK_Action_Step" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_Artifact_ArtifactType" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_UserArtifact_Artifact" ManuallyRouted="false" />
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Bonus" ManuallyRouted="false" />
@@ -67,7 +62,61 @@
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Constellation" />
         <AssociationConnector Association="artModel.FK_UserArtifact_Constellation" />
         <AssociationConnector Association="artModel.FK_ActionDescription_ActionTemplate" />
-      </Diagram>
+        <EntityTypeShape EntityType="artModel.ActionCharacteristic" Width="1.5" PointX="17.25" PointY="5.25" />
+        <EntityTypeShape EntityType="artModel.ActionPredisposition" Width="1.5" PointX="19.5" PointY="19.375" />
+        <EntityTypeShape EntityType="artModel.ActionProperty" Width="1.5" PointX="14.25" PointY="5.75" />
+        <EntityTypeShape EntityType="artModel.ActionResult" Width="1.5" PointX="10.5" PointY="34.75" />
+        <EntityTypeShape EntityType="artModel.ActionResultDesire" Width="1.5" PointX="15.75" PointY="29.125" />
+        <EntityTypeShape EntityType="artModel.ActionTemplateCharacteristic" Width="1.5" PointX="19.5" PointY="16.5" />
+        <EntityTypeShape EntityType="artModel.ActionTemplateProperty" Width="1.5" PointX="19.5" PointY="10" />
+        <EntityTypeShape EntityType="artModel.ActionTemplateResult" Width="2.625" PointX="5.5" PointY="24.75" />
+        <EntityTypeShape EntityType="artModel.ActiveActionInFlow" Width="1.5" PointX="3.75" PointY="13.75" />
+        <EntityTypeShape EntityType="artModel.CarrierDesire" Width="1.5" PointX="17.125" PointY="14.125" />
+        <EntityTypeShape EntityType="artModel.CarrierUserArtifact" Width="1.5" PointX="17.125" PointY="8.75" />
+        <EntityTypeShape EntityType="artModel.Class" Width="1.5" PointX="11.25" PointY="31.75" />
+        <EntityTypeShape EntityType="artModel.Desire" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="artModel.DesireActionTemplateResult" Width="1.5" PointX="10.75" PointY="16" />
+        <EntityTypeShape EntityType="artModel.DesireMapZone" Width="1.5" PointX="3.25" PointY="29.125" />
+        <EntityTypeShape EntityType="artModel.Log" Width="1.5" PointX="8.5" PointY="0.75" />
+        <EntityTypeShape EntityType="artModel.RaceDesire" Width="1.5" PointX="19.875" PointY="13.125" />
+        <EntityTypeShape EntityType="artModel.UserArtifactClass" Width="1.5" PointX="13.5" PointY="1.625" />
+        <AssociationConnector Association="artModel.FK_Action_Step1" />
+        <AssociationConnector Association="artModel.FK_ActionCharacteristics_Action" />
+        <AssociationConnector Association="artModel.FK_ActionPredisposition_Action" />
+        <AssociationConnector Association="artModel.FK_ActionProperties_Action" />
+        <AssociationConnector Association="artModel.FK_ActionResult_Action" />
+        <AssociationConnector Association="artModel.FK_ActiveActionInFlow_Action" />
+        <AssociationConnector Association="artModel.FK_ActionCharacteristics_Characteristics" />
+        <AssociationConnector Association="artModel.FK_ActionDescription_Class1" />
+        <AssociationConnector Association="artModel.FK_ActionDescription_Race1" />
+        <AssociationConnector Association="artModel.FK_ActionPredisposition_Predisposition" />
+        <AssociationConnector Association="artModel.FK_ActionProperties_Properties" />
+        <AssociationConnector Association="artModel.FK_ActionResultDesire_ActionResult" />
+        <AssociationConnector Association="artModel.FK_ActionResultDesire_Desire" />
+        <AssociationConnector Association="artModel.FK_ActionTemplate_ActionTemplateResult" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateCharacteristics_ActionTemplate" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateProperties_ActionTemplate" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateCharacteristics_Characteristics" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateProperties_Properties" />
+        <AssociationConnector Association="artModel.FK_DesireActionTemplateResult_ActionTemplateResult" />
+        <AssociationConnector Association="artModel.FK_ActiveActionInFlow_Step" />
+        <AssociationConnector Association="artModel.FK_Step_ActiveActionInFlow" />
+        <AssociationConnector Association="artModel.FK_CarrierDesire_Carrier" />
+        <AssociationConnector Association="artModel.FK_CarrierUserArtifact_Carrier" />
+        <AssociationConnector Association="artModel.FK_CarrierDesire_Desire" />
+        <AssociationConnector Association="artModel.FK_CarrierUserArtifact_UserArtifact" />
+        <AssociationConnector Association="artModel.FK_UserArtifactClass_Class" />
+        <AssociationConnector Association="artModel.FK_DesireActionTemplateResult_Desire" />
+        <AssociationConnector Association="artModel.FK_DesireMapZone_Desire" />
+        <AssociationConnector Association="artModel.FK_RaceDesire_Desire" />
+        <AssociationConnector Association="artModel.FK_Step_Desire" />
+        <AssociationConnector Association="artModel.FK_StepTemplate_Desire" />
+        <AssociationConnector Association="artModel.FK_DesireMapZone_MapZone" />
+        <AssociationConnector Association="artModel.FK_Log_UserArtifact" />
+        <AssociationConnector Association="artModel.FK_RaceDesire_Race" />
+        <AssociationConnector Association="artModel.FK_UserArtifactClass_UserArtifact" />
+        <AssociationConnector Association="artModel.FK_Action_Step" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -10,6 +10,7 @@ namespace ArtifactAdmin.BL.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using AutoMapper;
     using DAL.Models;
@@ -19,17 +20,36 @@ namespace ArtifactAdmin.BL.Services
     public class ActionTemplateService : IActionTemplateService
     {
         private readonly IRepository<ActionTemplate> actionTemplateRepository;
+        private readonly IRepository<ActionTemplateResult> actionTemplateResultRepository;
 
-        public ActionTemplateService(IRepository<ActionTemplate> actionTemplateRepository) 
+        public ActionTemplateService(IRepository<ActionTemplate> actionTemplateRepository,
+            IRepository<ActionTemplateResult> actionTemplateResultRepository) 
         {
             this.actionTemplateRepository=actionTemplateRepository;
+            this.actionTemplateResultRepository = actionTemplateResultRepository;
         }
 
         public IEnumerable<ActionTemplateDto> GetAll()
         {
-            return Mapper.Map<List<ActionTemplateDto>>(this.actionTemplateRepository.GetAll());
+            return Mapper.Map<List<ActionTemplateDto>>(this.actionTemplateRepository.GetAll().Include(s => s.ActionTemplateResult1));
         }
 
+        public ViewActionTemplateDto GetViewById(int? id) 
+        {
+            var viewActionTemplateDto = new ViewActionTemplateDto();
+            viewActionTemplateDto.OneProbability = "0.25";
+            viewActionTemplateDto.ActionTemplateResults = Mapper.Map<List<ActionTemplateResultDto>>(this.actionTemplateResultRepository.GetAll());
+            if (id != null) 
+            {
+                viewActionTemplateDto.ActionTemplateDto = Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.id == id));
+                if (viewActionTemplateDto.ActionTemplateDto != null)
+                {
+                    viewActionTemplateDto.OneProbability = viewActionTemplateDto.ActionTemplateDto.BlockProbability.ToString();
+                }
+            }
+
+            return viewActionTemplateDto;
+        }
         public ActionTemplateDto GetById(int? id)
         {
             return Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.id == id));

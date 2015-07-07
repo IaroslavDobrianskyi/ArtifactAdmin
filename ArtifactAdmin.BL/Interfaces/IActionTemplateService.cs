@@ -16,6 +16,8 @@ namespace ArtifactAdmin.BL.Interfaces
     {
         IEnumerable<ActionTemplateDto> GetAll();
 
+        ViewActionTemplateDto GetViewById(int? id);
+        
         ActionTemplateDto GetById(int? id);
 
         ActionTemplateDto Create(ActionTemplateDto actionTemplateDto);

@@ -17,7 +17,21 @@
         <dd>
             @Html.TextAreaFor(model => model.Name, new { rows = "10", cols = "50", @readonly = true })
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BlockProbability)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.BlockProbability)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionTemplateResult1.ArtifactPosibility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ActionTemplateResult1.ArtifactPosibility)
+        </dd>
     </dl>
 </div>
 <p>

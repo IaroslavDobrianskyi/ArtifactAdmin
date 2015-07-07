@@ -17,6 +17,8 @@ namespace ArtifactAdmin.DAL.Models
         public Race()
         {
             this.Carriers = new HashSet<Carrier>();
+            this.ActionDescriptions = new HashSet<ActionDescription>();
+            this.RaceDesires = new HashSet<RaceDesire>();
         }
     
         public string Description { get; set; }
@@ -28,5 +30,7 @@ namespace ArtifactAdmin.DAL.Models
         public string Icon { get; set; }
     
         public virtual ICollection<Carrier> Carriers { get; set; }
+        public virtual ICollection<ActionDescription> ActionDescriptions { get; set; }
+        public virtual ICollection<RaceDesire> RaceDesires { get; set; }
     }
 }

@@ -17,6 +17,7 @@ namespace ArtifactAdmin.DAL.Models
         public Predisposition()
         {
             this.ActionTemplatePredispositions = new HashSet<ActionTemplatePredisposition>();
+            this.ActionPredispositions = new HashSet<ActionPredisposition>();
         }
     
         public int id { get; set; }
@@ -25,5 +26,6 @@ namespace ArtifactAdmin.DAL.Models
         public long Mask { get; set; }
     
         public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
+        public virtual ICollection<ActionPredisposition> ActionPredispositions { get; set; }
     }
 }

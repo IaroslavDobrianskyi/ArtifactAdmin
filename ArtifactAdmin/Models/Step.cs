@@ -16,16 +16,24 @@ namespace ArtifactAdmin.DAL.Models
     {
         public Step()
         {
-            this.ActFlows = new HashSet<ActFlow>();
             this.Actions = new HashSet<Action>();
+            this.ActiveActionInFlows = new HashSet<ActiveActionInFlow>();
         }
     
         public int id { get; set; }
-        public int idUser { get; set; }
-        public Nullable<int> idActFlow { get; set; }
+        public int UserArtifact { get; set; }
+        public Nullable<int> ActiveActionInFlow { get; set; }
+        public string Text { get; set; }
+        public string Name { get; set; }
+        public string Icon { get; set; }
+        public Nullable<int> XCoordinate { get; set; }
+        public Nullable<int> YCoordinate { get; set; }
+        public Nullable<int> Desire { get; set; }
+        public Nullable<bool> IsKey { get; set; }
     
-        public virtual ICollection<ActFlow> ActFlows { get; set; }
-        public virtual ActFlow ActFlow { get; set; }
         public virtual ICollection<Action> Actions { get; set; }
+        public virtual ICollection<ActiveActionInFlow> ActiveActionInFlows { get; set; }
+        public virtual ActiveActionInFlow ActiveActionInFlow1 { get; set; }
+        public virtual Desire Desire1 { get; set; }
     }
 }

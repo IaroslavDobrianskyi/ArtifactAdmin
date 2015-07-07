@@ -20,15 +20,21 @@ namespace ArtifactAdmin.DAL.Models
             this.ActionTemplatePredispositions = new HashSet<ActionTemplatePredisposition>();
             this.StepTemplateActionTemplates = new HashSet<StepTemplateActionTemplate>();
             this.ActionDescriptions = new HashSet<ActionDescription>();
+            this.ActionTemplateCharacteristics = new HashSet<ActionTemplateCharacteristic>();
+            this.ActionTemplateProperties = new HashSet<ActionTemplateProperty>();
         }
     
         public int id { get; set; }
         public string Name { get; set; }
-        public double PredispositionResult { internal get; set; }
+        public double BlockProbability { get; set; }
+        public int ActionTemplateResult { get; set; }
     
         public virtual ICollection<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
         public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
         public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
         public virtual ICollection<ActionDescription> ActionDescriptions { get; set; }
+        public virtual ActionTemplateResult ActionTemplateResult1 { get; set; }
+        public virtual ICollection<ActionTemplateCharacteristic> ActionTemplateCharacteristics { get; set; }
+        public virtual ICollection<ActionTemplateProperty> ActionTemplateProperties { get; set; }
     }
 }

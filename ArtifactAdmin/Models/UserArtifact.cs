@@ -17,6 +17,9 @@ namespace ArtifactAdmin.DAL.Models
         public UserArtifact()
         {
             this.UserArtifactTalents = new HashSet<UserArtifactTalent>();
+            this.CarrierUserArtifacts = new HashSet<CarrierUserArtifact>();
+            this.Logs = new HashSet<Log>();
+            this.UserArtifactClasses = new HashSet<UserArtifactClass>();
         }
     
         public int id { get; set; }
@@ -29,10 +32,15 @@ namespace ArtifactAdmin.DAL.Models
         public long ExperiencePoints { get; set; }
         public int ExperienceLevel { get; set; }
         public int User { get; set; }
+        public double BlockActionProbability { get; set; }
+        public int Carrier { get; set; }
     
         public virtual Artifact Artifact1 { get; set; }
         public virtual User User1 { get; set; }
         public virtual ICollection<UserArtifactTalent> UserArtifactTalents { get; set; }
         public virtual Constellation Constellation1 { get; set; }
+        public virtual ICollection<CarrierUserArtifact> CarrierUserArtifacts { get; set; }
+        public virtual ICollection<Log> Logs { get; set; }
+        public virtual ICollection<UserArtifactClass> UserArtifactClasses { get; set; }
     }
 }

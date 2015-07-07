@@ -14,9 +14,18 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class Characteristic
     {
+        public Characteristic()
+        {
+            this.ActionCharacteristics = new HashSet<ActionCharacteristic>();
+            this.ActionTemplateCharacteristics = new HashSet<ActionTemplateCharacteristic>();
+        }
+    
         public int id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public long Mask { get; set; }
+    
+        public virtual ICollection<ActionCharacteristic> ActionCharacteristics { get; set; }
+        public virtual ICollection<ActionTemplateCharacteristic> ActionTemplateCharacteristics { get; set; }
     }
 }

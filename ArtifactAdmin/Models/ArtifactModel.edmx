@@ -5,22 +5,27 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="artModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="ActFlow">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idUser" Type="int" Nullable="false" />
-          <Property Name="idStep" Type="int" />
-          <Property Name="idAction" Type="int" />
-        </EntityType>
         <EntityType Name="Action">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idUser" Type="int" Nullable="false" />
-          <Property Name="idStep" Type="int" Nullable="false" />
+          <Property Name="Step" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nchar" MaxLength="500" />
+          <Property Name="PredispositionResult" Type="float" />
+          <Property Name="ExperienceModifier" Type="float" />
+          <Property Name="Duration" Type="datetime" />
+          <Property Name="ActionChangeCost" Type="int" />
+          <Property Name="ActionImprovementCost" Type="int" />
+          <Property Name="Icon" Type="nchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="ActionCharacteristics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Characteristics" Type="int" Nullable="false" />
+          <Property Name="Action" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ActionDescription">
           <Key>
@@ -29,7 +34,47 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ActionTemplate" Type="int" Nullable="false" />
           <Property Name="MapZone" Type="int" />
-          <Property Name="ActionText" Type="nvarchar" MaxLength="500" />
+          <Property Name="ActionText" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Race" Type="int" />
+          <Property Name="Class" Type="int" />
+        </EntityType>
+        <EntityType Name="ActionPredisposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Predisposition" Type="int" Nullable="false" />
+          <Property Name="Action" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionProperties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Properties" Type="int" Nullable="false" />
+          <Property Name="Action" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Predisposition" Type="bigint" Nullable="false" />
+          <Property Name="Gold" Type="int" Nullable="false" />
+          <Property Name="Expirience" Type="int" Nullable="false" />
+          <Property Name="Artifact" Type="int" Nullable="false" />
+          <Property Name="SoulShard" Type="bit" Nullable="false" />
+          <Property Name="Killed" Type="bit" Nullable="false" />
+          <Property Name="Action" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionResultDesire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionResult" Type="int" Nullable="false" />
+          <Property Name="Desire" Type="int" Nullable="false" />
+          <Property Name="Modifier" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="ActionTemplate">
           <Key>
@@ -37,7 +82,8 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="PredispositionResult" Type="float" Nullable="false" />
+          <Property Name="BlockProbability" Type="float" Nullable="false" />
+          <Property Name="ActionTemplateResult" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ActionTemplateActionDescription">
           <Key>
@@ -46,6 +92,14 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ActionTemplate" Type="int" Nullable="false" />
           <Property Name="ActionDescription" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionTemplateCharacteristics">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionTemplate" Type="int" Nullable="false" />
+          <Property Name="Characteristics" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ActionTemplatePredisposition">
           <Key>
@@ -56,6 +110,33 @@
           <Property Name="Predisposition" Type="int" Nullable="false" />
           <Property Name="RequirementLow" Type="int" Nullable="false" />
           <Property Name="RequirementHigh" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionTemplateProperties">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActionTemplate" Type="int" Nullable="false" />
+          <Property Name="Properties" Type="int" Nullable="false" />
+          <Property Name="Appearance" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActionTemplateResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PredispositionResultModifier" Type="float" Nullable="false" />
+          <Property Name="ExperienceModifier" Type="float" Nullable="false" />
+          <Property Name="ArtifactPosibility" Type="float" Nullable="false" />
+          <Property Name="GoldModifier" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActiveActionInFlow">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Step" Type="int" Nullable="false" />
+          <Property Name="Action" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Artifact">
           <Key>
@@ -82,7 +163,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
-          <Property Name="Descrioption" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Descrioption" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Bonus">
           <Key>
@@ -105,6 +186,27 @@
           <Property Name="Characteristics" Type="bigint" Nullable="false" />
           <Property Name="DefaultPredisposition" Type="bigint" Nullable="false" />
         </EntityType>
+        <EntityType Name="CarrierDesire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CarrierId" Type="int" Nullable="false" />
+          <Property Name="DesireId" Type="int" Nullable="false" />
+          <Property Name="DesireMask" Type="bigint" Nullable="false" />
+          <Property Name="AddictionRequirement" Type="int" Nullable="false" />
+          <Property Name="IsSecret" Type="bit" Nullable="false" />
+          <Property Name="DefaultValue" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CarrierUserArtifact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Carrier" Type="int" Nullable="false" />
+          <Property Name="UserArtifact" Type="int" Nullable="false" />
+          <Property Name="Addiction" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Characteristics">
           <Key>
             <PropertyRef Name="id" />
@@ -113,6 +215,15 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Mask" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FibonacciSeed" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Constellation">
           <Key>
@@ -132,11 +243,48 @@
           <Property Name="Constallation" Type="int" Nullable="false" />
           <Property Name="Modifier" Type="float" Nullable="false" />
         </EntityType>
-        <EntityType Name="MapObject">
+        <EntityType Name="Desire">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DesireActionTemplateResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desire" Type="int" Nullable="false" />
+          <Property Name="ActionTemplateResult" Type="int" Nullable="false" />
+          <Property Name="Modifier" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DesireMapZone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desire" Type="int" Nullable="false" />
+          <Property Name="MapZone" Type="int" Nullable="false" />
+          <Property Name="Modifier" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShortLog" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ExtendedLog" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="UserArtifact" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapObject">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="MapObjectProbability">
@@ -187,6 +335,17 @@
           <Property Name="Properties" Type="bigint" Nullable="false" />
           <Property Name="Icon" Type="nvarchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="RaceDesire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaceId" Type="int" Nullable="false" />
+          <Property Name="DesireId" Type="int" Nullable="false" />
+          <Property Name="Probability" Type="float" Nullable="false" />
+          <Property Name="DefaultValue" Type="int" Nullable="false" />
+          <Property Name="Deviation" Type="int" />
+        </EntityType>
         <EntityType Name="Statistic">
           <Key>
             <PropertyRef Name="id" />
@@ -204,8 +363,15 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idUser" Type="int" Nullable="false" />
-          <Property Name="idActFlow" Type="int" />
+          <Property Name="UserArtifact" Type="int" Nullable="false" />
+          <Property Name="ActiveActionInFlow" Type="int" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" />
+          <Property Name="Icon" Type="nchar" MaxLength="200" />
+          <Property Name="XCoordinate" Type="int" />
+          <Property Name="YCoordinate" Type="int" />
+          <Property Name="Desire" Type="int" />
+          <Property Name="IsKey" Type="bit" />
         </EntityType>
         <EntityType Name="StepObject">
           <Key>
@@ -214,7 +380,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StepObjectType" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Description" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Icon" Type="nvarchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="StepObjectStepTemplate">
@@ -240,6 +406,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="StepText" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Desire" Type="int" />
         </EntityType>
         <EntityType Name="StepTemplateActionTemplate">
           <Key>
@@ -295,6 +462,18 @@
           <Property Name="ExperiencePoints" Type="bigint" Nullable="false" />
           <Property Name="ExperienceLevel" Type="int" Nullable="false" />
           <Property Name="User" Type="int" Nullable="false" />
+          <Property Name="BlockActionProbability" Type="float" Nullable="false" />
+          <Property Name="Carrier" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserArtifactClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Class" Type="int" Nullable="false" />
+          <Property Name="UserArtifact" Type="int" Nullable="false" />
+          <Property Name="Expirience" Type="int" Nullable="false" />
+          <Property Name="ClassLevel" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserArtifactTalent">
           <Key>
@@ -314,55 +493,51 @@
           <Property Name="x" Type="int" Nullable="false" />
           <Property Name="y" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_ActFlow_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Action">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ActFlow">
-              <PropertyRef Name="idAction" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ActFlow_Step">
-          <End Role="Step" Type="Self.Step" Multiplicity="0..1" />
-          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Step">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ActFlow">
-              <PropertyRef Name="idStep" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Action_Step">
-          <End Role="Step" Type="Self.Step" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Step" Type="Self.Step" Multiplicity="1" />
           <End Role="Action" Type="Self.Action" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Step">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Action">
-              <PropertyRef Name="idStep" />
+              <PropertyRef Name="Step" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ActionDescription_ActionTemplate">
-          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+        <Association Name="FK_ActionCharacteristics_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
+          <End Role="ActionCharacteristics" Type="Self.ActionCharacteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionCharacteristics">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionCharacteristics_Characteristics">
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="1" />
+          <End Role="ActionCharacteristics" Type="Self.ActionCharacteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionCharacteristics">
+              <PropertyRef Name="Characteristics" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionDescription_Class1">
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
           <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ActionTemplate">
+            <Principal Role="Class">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="ActionDescription">
-              <PropertyRef Name="ActionTemplate" />
+              <PropertyRef Name="Class" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -375,6 +550,162 @@
             </Principal>
             <Dependent Role="ActionDescription">
               <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionDescription_Race1">
+          <End Role="Race" Type="Self.Race" Multiplicity="0..1" />
+          <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionDescription">
+              <PropertyRef Name="Race" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionPredisposition_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
+          <End Role="ActionPredisposition" Type="Self.ActionPredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionPredisposition">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionPredisposition_Predisposition">
+          <End Role="Predisposition" Type="Self.Predisposition" Multiplicity="1" />
+          <End Role="ActionPredisposition" Type="Self.ActionPredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predisposition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionPredisposition">
+              <PropertyRef Name="Predisposition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionProperties_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
+          <End Role="ActionProperties" Type="Self.ActionProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionProperties">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionProperties_Properties">
+          <End Role="Properties" Type="Self.Properties" Multiplicity="1" />
+          <End Role="ActionProperties" Type="Self.ActionProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionProperties">
+              <PropertyRef Name="Properties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionResult_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
+          <End Role="ActionResult" Type="Self.ActionResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionResult">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionResultDesire_ActionResult">
+          <End Role="ActionResult" Type="Self.ActionResult" Multiplicity="1" />
+          <End Role="ActionResultDesire" Type="Self.ActionResultDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionResult">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionResultDesire">
+              <PropertyRef Name="ActionResult" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionResultDesire_Desire">
+          <End Role="Desire" Type="Self.Desire" Multiplicity="1" />
+          <End Role="ActionResultDesire" Type="Self.ActionResultDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionResultDesire">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplate_ActionTemplateResult">
+          <End Role="ActionTemplateResult" Type="Self.ActionTemplateResult" Multiplicity="1" />
+          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplateResult">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplate">
+              <PropertyRef Name="ActionTemplateResult" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateActionDescription_ActionDescription">
+          <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="1" />
+          <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionDescription">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateActionDescription">
+              <PropertyRef Name="ActionDescription" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateActionDescription_ActionTemplate">
+          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+          <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateActionDescription">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateCharacteristics_ActionTemplate">
+          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+          <End Role="ActionTemplateCharacteristics" Type="Self.ActionTemplateCharacteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateCharacteristics">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateCharacteristics_Characteristics">
+          <End Role="Characteristics" Type="Self.Characteristics" Multiplicity="1" />
+          <End Role="ActionTemplateCharacteristics" Type="Self.ActionTemplateCharacteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristics">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateCharacteristics">
+              <PropertyRef Name="Characteristics" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -399,6 +730,54 @@
             </Principal>
             <Dependent Role="ActionTemplatePredisposition">
               <PropertyRef Name="Predisposition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateProperties_ActionTemplate">
+          <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+          <End Role="ActionTemplateProperties" Type="Self.ActionTemplateProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateProperties">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateProperties_Properties">
+          <End Role="Properties" Type="Self.Properties" Multiplicity="1" />
+          <End Role="ActionTemplateProperties" Type="Self.ActionTemplateProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Properties">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateProperties">
+              <PropertyRef Name="Properties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveActionInFlow_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="1" />
+          <End Role="ActiveActionInFlow" Type="Self.ActiveActionInFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActiveActionInFlow">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveActionInFlow_Step">
+          <End Role="Step" Type="Self.Step" Multiplicity="1" />
+          <End Role="ActiveActionInFlow" Type="Self.ActiveActionInFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActiveActionInFlow">
+              <PropertyRef Name="Step" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -450,6 +829,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CarrierDesire_Carrier">
+          <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
+          <End Role="CarrierDesire" Type="Self.CarrierDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierDesire">
+              <PropertyRef Name="CarrierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierDesire_Desire">
+          <End Role="Desire" Type="Self.Desire" Multiplicity="1" />
+          <End Role="CarrierDesire" Type="Self.CarrierDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierDesire">
+              <PropertyRef Name="DesireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierUserArtifact_Carrier">
+          <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
+          <End Role="CarrierUserArtifact" Type="Self.CarrierUserArtifact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierUserArtifact">
+              <PropertyRef Name="Carrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierUserArtifact_UserArtifact">
+          <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
+          <End Role="CarrierUserArtifact" Type="Self.CarrierUserArtifact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierUserArtifact">
+              <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ConstellationBonus_Bonus">
           <End Role="Bonus" Type="Self.Bonus" Multiplicity="1" />
           <End Role="ConstellationBonus" Type="Self.ConstellationBonus" Multiplicity="*" />
@@ -471,6 +898,66 @@
             </Principal>
             <Dependent Role="ConstellationBonus">
               <PropertyRef Name="Constallation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireActionTemplateResult_ActionTemplateResult">
+          <End Role="ActionTemplateResult" Type="Self.ActionTemplateResult" Multiplicity="1" />
+          <End Role="DesireActionTemplateResult" Type="Self.DesireActionTemplateResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplateResult">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireActionTemplateResult">
+              <PropertyRef Name="ActionTemplateResult" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireActionTemplateResult_Desire">
+          <End Role="Desire" Type="Self.Desire" Multiplicity="1" />
+          <End Role="DesireActionTemplateResult" Type="Self.DesireActionTemplateResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireActionTemplateResult">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireMapZone_Desire">
+          <End Role="Desire" Type="Self.Desire" Multiplicity="1" />
+          <End Role="DesireMapZone" Type="Self.DesireMapZone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireMapZone">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireMapZone_MapZone">
+          <End Role="MapZone" Type="Self.MapZone" Multiplicity="1" />
+          <End Role="DesireMapZone" Type="Self.DesireMapZone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireMapZone">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_UserArtifact">
+          <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="UserArtifact" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -498,15 +985,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Step_ActFlow">
-          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="0..1" />
+        <Association Name="FK_RaceDesire_Desire">
+          <End Role="Desire" Type="Self.Desire" Multiplicity="1" />
+          <End Role="RaceDesire" Type="Self.RaceDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RaceDesire">
+              <PropertyRef Name="DesireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceDesire_Race">
+          <End Role="Race" Type="Self.Race" Multiplicity="1" />
+          <End Role="RaceDesire" Type="Self.RaceDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RaceDesire">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Step_ActiveActionInFlow">
+          <End Role="ActiveActionInFlow" Type="Self.ActiveActionInFlow" Multiplicity="0..1" />
           <End Role="Step" Type="Self.Step" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="ActFlow">
+            <Principal Role="ActiveActionInFlow">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Step">
-              <PropertyRef Name="idActFlow" />
+              <PropertyRef Name="ActiveActionInFlow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Step_Desire">
+          <End Role="Desire" Type="Self.Desire" Multiplicity="0..1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="Desire" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -535,9 +1058,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_StepObjectStepTemplate_StepTemplate">
-          <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1" />
           <End Role="StepObjectStepTemplate" Type="Self.StepObjectStepTemplate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="StepTemplate">
@@ -545,6 +1066,18 @@
             </Principal>
             <Dependent Role="StepObjectStepTemplate">
               <PropertyRef Name="StepTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepTemplate_Desire">
+          <End Role="Desire" Type="Self.Desire" Multiplicity="0..1" />
+          <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepTemplate">
+              <PropertyRef Name="Desire" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -608,6 +1141,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserArtifactClass_Class">
+          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="UserArtifactClass" Type="Self.UserArtifactClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserArtifactClass">
+              <PropertyRef Name="Class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserArtifactClass_UserArtifact">
+          <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
+          <End Role="UserArtifactClass" Type="Self.UserArtifactClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserArtifactClass">
+              <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserTalent_Talent">
           <End Role="Talent" Type="Self.Talent" Multiplicity="1" />
           <End Role="UserArtifactTalent" Type="Self.UserArtifactTalent" Multiplicity="*" />
@@ -645,26 +1202,42 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="artModelStoreContainer">
-          <EntitySet Name="ActFlow" EntityType="Self.ActFlow" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionCharacteristics" EntityType="Self.ActionCharacteristics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActionDescription" EntityType="Self.ActionDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionPredisposition" EntityType="Self.ActionPredisposition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionProperties" EntityType="Self.ActionProperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionResult" EntityType="Self.ActionResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionResultDesire" EntityType="Self.ActionResultDesire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActionTemplate" EntityType="Self.ActionTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActionTemplateActionDescription" EntityType="Self.ActionTemplateActionDescription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionTemplateCharacteristics" EntityType="Self.ActionTemplateCharacteristics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActionTemplatePredisposition" EntityType="Self.ActionTemplatePredisposition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionTemplateProperties" EntityType="Self.ActionTemplateProperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActionTemplateResult" EntityType="Self.ActionTemplateResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActiveActionInFlow" EntityType="Self.ActiveActionInFlow" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Artifact" EntityType="Self.Artifact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtifactBonus" EntityType="Self.ArtifactBonus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ArtifactType" EntityType="Self.ArtifactType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Bonus" EntityType="Self.Bonus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Carrier" EntityType="Self.Carrier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarrierDesire" EntityType="Self.CarrierDesire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarrierUserArtifact" EntityType="Self.CarrierUserArtifact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Characteristics" EntityType="Self.Characteristics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Class" EntityType="Self.Class" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Constellation" EntityType="Self.Constellation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConstellationBonus" EntityType="Self.ConstellationBonus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Desire" EntityType="Self.Desire" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesireActionTemplateResult" EntityType="Self.DesireActionTemplateResult" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DesireMapZone" EntityType="Self.DesireMapZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MapObject" EntityType="Self.MapObject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MapObjectProbability" EntityType="Self.MapObjectProbability" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MapZone" EntityType="Self.MapZone" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Predisposition" EntityType="Self.Predisposition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RaceDesire" EntityType="Self.RaceDesire" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StepObject" EntityType="Self.StepObject" Schema="dbo" store:Type="Tables" />
@@ -676,27 +1249,80 @@
           <EntitySet Name="Talent" EntityType="Self.Talent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserArtifact" EntityType="Self.UserArtifact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserArtifactClass" EntityType="Self.UserArtifactClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserArtifactTalent" EntityType="Self.UserArtifactTalent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ZoneCoordinats" EntityType="Self.ZoneCoordinats" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
-            <End Role="Action" EntitySet="Action" />
-            <End Role="ActFlow" EntitySet="ActFlow" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActFlow_Step" Association="Self.FK_ActFlow_Step">
-            <End Role="Step" EntitySet="Step" />
-            <End Role="ActFlow" EntitySet="ActFlow" />
-          </AssociationSet>
           <AssociationSet Name="FK_Action_Step" Association="Self.FK_Action_Step">
             <End Role="Step" EntitySet="Step" />
             <End Role="Action" EntitySet="Action" />
           </AssociationSet>
-          <AssociationSet Name="FK_ActionDescription_ActionTemplate" Association="Self.FK_ActionDescription_ActionTemplate">
-            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+          <AssociationSet Name="FK_ActionCharacteristics_Action" Association="Self.FK_ActionCharacteristics_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActionCharacteristics" EntitySet="ActionCharacteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionCharacteristics_Characteristics" Association="Self.FK_ActionCharacteristics_Characteristics">
+            <End Role="Characteristics" EntitySet="Characteristics" />
+            <End Role="ActionCharacteristics" EntitySet="ActionCharacteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionDescription_Class1" Association="Self.FK_ActionDescription_Class1">
+            <End Role="Class" EntitySet="Class" />
             <End Role="ActionDescription" EntitySet="ActionDescription" />
           </AssociationSet>
           <AssociationSet Name="FK_ActionDescription_MapZone" Association="Self.FK_ActionDescription_MapZone">
             <End Role="MapZone" EntitySet="MapZone" />
             <End Role="ActionDescription" EntitySet="ActionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionDescription_Race1" Association="Self.FK_ActionDescription_Race1">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="ActionDescription" EntitySet="ActionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionPredisposition_Action" Association="Self.FK_ActionPredisposition_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActionPredisposition" EntitySet="ActionPredisposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionPredisposition_Predisposition" Association="Self.FK_ActionPredisposition_Predisposition">
+            <End Role="Predisposition" EntitySet="Predisposition" />
+            <End Role="ActionPredisposition" EntitySet="ActionPredisposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionProperties_Action" Association="Self.FK_ActionProperties_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActionProperties" EntitySet="ActionProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionProperties_Properties" Association="Self.FK_ActionProperties_Properties">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="ActionProperties" EntitySet="ActionProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionResult_Action" Association="Self.FK_ActionResult_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActionResult" EntitySet="ActionResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionResultDesire_ActionResult" Association="Self.FK_ActionResultDesire_ActionResult">
+            <End Role="ActionResult" EntitySet="ActionResult" />
+            <End Role="ActionResultDesire" EntitySet="ActionResultDesire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionResultDesire_Desire" Association="Self.FK_ActionResultDesire_Desire">
+            <End Role="Desire" EntitySet="Desire" />
+            <End Role="ActionResultDesire" EntitySet="ActionResultDesire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplate_ActionTemplateResult" Association="Self.FK_ActionTemplate_ActionTemplateResult">
+            <End Role="ActionTemplateResult" EntitySet="ActionTemplateResult" />
+            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="Self.FK_ActionTemplateActionDescription_ActionDescription">
+            <End Role="ActionDescription" EntitySet="ActionDescription" />
+            <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateActionDescription_ActionTemplate" Association="Self.FK_ActionTemplateActionDescription_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+            <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateCharacteristics_ActionTemplate" Association="Self.FK_ActionTemplateCharacteristics_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+            <End Role="ActionTemplateCharacteristics" EntitySet="ActionTemplateCharacteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateCharacteristics_Characteristics" Association="Self.FK_ActionTemplateCharacteristics_Characteristics">
+            <End Role="Characteristics" EntitySet="Characteristics" />
+            <End Role="ActionTemplateCharacteristics" EntitySet="ActionTemplateCharacteristics" />
           </AssociationSet>
           <AssociationSet Name="FK_ActionTemplatePredisposition_ActionTemplate" Association="Self.FK_ActionTemplatePredisposition_ActionTemplate">
             <End Role="ActionTemplate" EntitySet="ActionTemplate" />
@@ -705,6 +1331,22 @@
           <AssociationSet Name="FK_ActionTemplatePredisposition_Predisposition" Association="Self.FK_ActionTemplatePredisposition_Predisposition">
             <End Role="Predisposition" EntitySet="Predisposition" />
             <End Role="ActionTemplatePredisposition" EntitySet="ActionTemplatePredisposition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateProperties_ActionTemplate" Association="Self.FK_ActionTemplateProperties_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+            <End Role="ActionTemplateProperties" EntitySet="ActionTemplateProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateProperties_Properties" Association="Self.FK_ActionTemplateProperties_Properties">
+            <End Role="Properties" EntitySet="Properties" />
+            <End Role="ActionTemplateProperties" EntitySet="ActionTemplateProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveActionInFlow_Action" Association="Self.FK_ActiveActionInFlow_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActiveActionInFlow" EntitySet="ActiveActionInFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveActionInFlow_Step" Association="Self.FK_ActiveActionInFlow_Step">
+            <End Role="Step" EntitySet="Step" />
+            <End Role="ActiveActionInFlow" EntitySet="ActiveActionInFlow" />
           </AssociationSet>
           <AssociationSet Name="FK_Artifact_ArtifactType" Association="Self.FK_Artifact_ArtifactType">
             <End Role="ArtifactType" EntitySet="ArtifactType" />
@@ -722,6 +1364,22 @@
             <End Role="Race" EntitySet="Race" />
             <End Role="Carrier" EntitySet="Carrier" />
           </AssociationSet>
+          <AssociationSet Name="FK_CarrierDesire_Carrier" Association="Self.FK_CarrierDesire_Carrier">
+            <End Role="Carrier" EntitySet="Carrier" />
+            <End Role="CarrierDesire" EntitySet="CarrierDesire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierDesire_Desire" Association="Self.FK_CarrierDesire_Desire">
+            <End Role="Desire" EntitySet="Desire" />
+            <End Role="CarrierDesire" EntitySet="CarrierDesire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierUserArtifact_Carrier" Association="Self.FK_CarrierUserArtifact_Carrier">
+            <End Role="Carrier" EntitySet="Carrier" />
+            <End Role="CarrierUserArtifact" EntitySet="CarrierUserArtifact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierUserArtifact_UserArtifact" Association="Self.FK_CarrierUserArtifact_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifact" />
+            <End Role="CarrierUserArtifact" EntitySet="CarrierUserArtifact" />
+          </AssociationSet>
           <AssociationSet Name="FK_ConstellationBonus_Bonus" Association="Self.FK_ConstellationBonus_Bonus">
             <End Role="Bonus" EntitySet="Bonus" />
             <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
@@ -729,6 +1387,26 @@
           <AssociationSet Name="FK_ConstellationBonus_Constellation" Association="Self.FK_ConstellationBonus_Constellation">
             <End Role="Constellation" EntitySet="Constellation" />
             <End Role="ConstellationBonus" EntitySet="ConstellationBonus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireActionTemplateResult_ActionTemplateResult" Association="Self.FK_DesireActionTemplateResult_ActionTemplateResult">
+            <End Role="ActionTemplateResult" EntitySet="ActionTemplateResult" />
+            <End Role="DesireActionTemplateResult" EntitySet="DesireActionTemplateResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireActionTemplateResult_Desire" Association="Self.FK_DesireActionTemplateResult_Desire">
+            <End Role="Desire" EntitySet="Desire" />
+            <End Role="DesireActionTemplateResult" EntitySet="DesireActionTemplateResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireMapZone_Desire" Association="Self.FK_DesireMapZone_Desire">
+            <End Role="Desire" EntitySet="Desire" />
+            <End Role="DesireMapZone" EntitySet="DesireMapZone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireMapZone_MapZone" Association="Self.FK_DesireMapZone_MapZone">
+            <End Role="MapZone" EntitySet="MapZone" />
+            <End Role="DesireMapZone" EntitySet="DesireMapZone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_UserArtifact" Association="Self.FK_Log_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifact" />
+            <End Role="Log" EntitySet="Log" />
           </AssociationSet>
           <AssociationSet Name="FK_MapObjectProbability_MapObject" Association="Self.FK_MapObjectProbability_MapObject">
             <End Role="MapObject" EntitySet="MapObject" />
@@ -738,8 +1416,20 @@
             <End Role="MapZone" EntitySet="MapZone" />
             <End Role="MapObjectProbability" EntitySet="MapObjectProbability" />
           </AssociationSet>
-          <AssociationSet Name="FK_Step_ActFlow" Association="Self.FK_Step_ActFlow">
-            <End Role="ActFlow" EntitySet="ActFlow" />
+          <AssociationSet Name="FK_RaceDesire_Desire" Association="Self.FK_RaceDesire_Desire">
+            <End Role="Desire" EntitySet="Desire" />
+            <End Role="RaceDesire" EntitySet="RaceDesire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceDesire_Race" Association="Self.FK_RaceDesire_Race">
+            <End Role="Race" EntitySet="Race" />
+            <End Role="RaceDesire" EntitySet="RaceDesire" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_ActiveActionInFlow" Association="Self.FK_Step_ActiveActionInFlow">
+            <End Role="ActiveActionInFlow" EntitySet="ActiveActionInFlow" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_Desire" Association="Self.FK_Step_Desire">
+            <End Role="Desire" EntitySet="Desire" />
             <End Role="Step" EntitySet="Step" />
           </AssociationSet>
           <AssociationSet Name="FK_StepObject_StepObjectType" Association="Self.FK_StepObject_StepObjectType">
@@ -753,6 +1443,10 @@
           <AssociationSet Name="FK_StepObjectStepTemplate_StepTemplate" Association="Self.FK_StepObjectStepTemplate_StepTemplate">
             <End Role="StepTemplate" EntitySet="StepTemplate" />
             <End Role="StepObjectStepTemplate" EntitySet="StepObjectStepTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepTemplate_Desire" Association="Self.FK_StepTemplate_Desire">
+            <End Role="Desire" EntitySet="Desire" />
+            <End Role="StepTemplate" EntitySet="StepTemplate" />
           </AssociationSet>
           <AssociationSet Name="FK_StepTemplateActionTemplate_ActionTemplate" Association="Self.FK_StepTemplateActionTemplate_ActionTemplate">
             <End Role="ActionTemplate" EntitySet="ActionTemplate" />
@@ -774,6 +1468,14 @@
             <End Role="User" EntitySet="User" />
             <End Role="UserArtifact" EntitySet="UserArtifact" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserArtifactClass_Class" Association="Self.FK_UserArtifactClass_Class">
+            <End Role="Class" EntitySet="Class" />
+            <End Role="UserArtifactClass" EntitySet="UserArtifactClass" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserArtifactClass_UserArtifact" Association="Self.FK_UserArtifactClass_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifact" />
+            <End Role="UserArtifactClass" EntitySet="UserArtifactClass" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserTalent_Talent" Association="Self.FK_UserTalent_Talent">
             <End Role="Talent" EntitySet="Talent" />
             <End Role="UserArtifactTalent" EntitySet="UserArtifactTalent" />
@@ -791,27 +1493,25 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="artModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="ActFlow">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idUser" Type="Int32" Nullable="false" />
-          <Property Name="idStep" Type="Int32" />
-          <Property Name="idAction" Type="Int32" />
-          <NavigationProperty Name="Action" Relationship="Self.FK_ActFlow_Action" FromRole="ActFlow" ToRole="Action" />
-          <NavigationProperty Name="Step" Relationship="Self.FK_ActFlow_Step" FromRole="ActFlow" ToRole="Step" />
-          <NavigationProperty Name="Steps" Relationship="Self.FK_Step_ActFlow" FromRole="ActFlow" ToRole="Step" />
-        </EntityType>
         <EntityType Name="Action">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idUser" Type="Int32" Nullable="false" />
-          <Property Name="idStep" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ActFlows" Relationship="Self.FK_ActFlow_Action" FromRole="Action" ToRole="ActFlow" />
-          <NavigationProperty Name="Step" Relationship="Self.FK_Action_Step" FromRole="Action" ToRole="Step" />
+          <Property Name="Step" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="PredispositionResult" Type="Double" />
+          <Property Name="ExperienceModifier" Type="Double" />
+          <Property Name="Duration" Type="DateTime" Precision="3" />
+          <Property Name="ActionChangeCost" Type="Int32" />
+          <Property Name="ActionImprovementCost" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Step1" Relationship="artModel.FK_Action_Step" FromRole="Action" ToRole="Step" />
+          <NavigationProperty Name="ActionCharacteristics" Relationship="artModel.FK_ActionCharacteristics_Action" FromRole="Action" ToRole="ActionCharacteristic" />
+          <NavigationProperty Name="ActionPredispositions" Relationship="artModel.FK_ActionPredisposition_Action" FromRole="Action" ToRole="ActionPredisposition" />
+          <NavigationProperty Name="ActionProperties" Relationship="artModel.FK_ActionProperties_Action" FromRole="Action" ToRole="ActionProperty" />
+          <NavigationProperty Name="ActionResults" Relationship="artModel.FK_ActionResult_Action" FromRole="Action" ToRole="ActionResult" />
+          <NavigationProperty Name="ActiveActionInFlows" Relationship="artModel.FK_ActiveActionInFlow_Action" FromRole="Action" ToRole="ActiveActionInFlow" />
         </EntityType>
         <EntityType Name="Artifact">
           <Key>
@@ -832,7 +1532,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descrioption" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descrioption" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Artifacts" Relationship="Self.FK_Artifact_ArtifactType" FromRole="ArtifactType" ToRole="Artifact" />
         </EntityType>
         <EntityType Name="Bonu">
@@ -873,11 +1573,19 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idUser" Type="Int32" Nullable="false" />
-          <Property Name="idActFlow" Type="Int32" />
-          <NavigationProperty Name="ActFlows" Relationship="Self.FK_ActFlow_Step" FromRole="Step" ToRole="ActFlow" />
-          <NavigationProperty Name="ActFlow" Relationship="Self.FK_Step_ActFlow" FromRole="Step" ToRole="ActFlow" />
-          <NavigationProperty Name="Actions" Relationship="Self.FK_Action_Step" FromRole="Step" ToRole="Action" />
+          <Property Name="UserArtifact" Type="Int32" Nullable="false" />
+          <Property Name="ActiveActionInFlow" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />
+          <Property Name="XCoordinate" Type="Int32" />
+          <Property Name="YCoordinate" Type="Int32" />
+          <Property Name="Desire" Type="Int32" />
+          <Property Name="IsKey" Type="Boolean" />
+          <NavigationProperty Name="Actions" Relationship="artModel.FK_Action_Step" FromRole="Step" ToRole="Action" />
+          <NavigationProperty Name="ActiveActionInFlows" Relationship="artModel.FK_ActiveActionInFlow_Step" FromRole="Step" ToRole="ActiveActionInFlow" />
+          <NavigationProperty Name="ActiveActionInFlow1" Relationship="artModel.FK_Step_ActiveActionInFlow" FromRole="Step" ToRole="ActiveActionInFlow" />
+          <NavigationProperty Name="Desire1" Relationship="artModel.FK_Step_Desire" FromRole="Step" ToRole="Desire" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -921,59 +1629,12 @@
           <NavigationProperty Name="User1" Relationship="artModel.FK_UserArtifact_User" FromRole="UserArtifact" ToRole="User" />
           <NavigationProperty Name="UserArtifactTalents" Relationship="artModel.FK_UserTalent_UserArtifact1" FromRole="UserArtifact" ToRole="UserArtifactTalent" />
           <NavigationProperty Name="Constellation1" Relationship="artModel.FK_UserArtifact_Constellation" FromRole="UserArtifact" ToRole="Constellation" />
+          <Property Name="BlockActionProbability" Type="Double" Nullable="false" />
+          <Property Name="Carrier" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CarrierUserArtifacts" Relationship="artModel.FK_CarrierUserArtifact_UserArtifact" FromRole="UserArtifact" ToRole="CarrierUserArtifact" />
+          <NavigationProperty Name="Logs" Relationship="artModel.FK_Log_UserArtifact" FromRole="UserArtifact" ToRole="Log" />
+          <NavigationProperty Name="UserArtifactClasses" Relationship="artModel.FK_UserArtifactClass_UserArtifact" FromRole="UserArtifact" ToRole="UserArtifactClass" />
         </EntityType>
-        <Association Name="FK_ActFlow_Action">
-          <End Role="Action" Type="Self.Action" Multiplicity="0..1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Action">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ActFlow">
-              <PropertyRef Name="idAction" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ActFlow_Step">
-          <End Role="Step" Type="Self.Step" Multiplicity="0..1" />
-          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Step">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ActFlow">
-              <PropertyRef Name="idStep" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Step_ActFlow">
-          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="0..1" />
-          <End Role="Step" Type="Self.Step" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ActFlow">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Step">
-              <PropertyRef Name="idActFlow" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Action_Step">
-          <End Role="Step" Type="Self.Step" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Action" Type="Self.Action" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Step">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Action">
-              <PropertyRef Name="idStep" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Artifact_ArtifactType">
           <End Role="ArtifactType" Type="Self.ArtifactType" Multiplicity="1" />
           <End Role="Artifact" Type="Self.Artifact" Multiplicity="*" />
@@ -1011,7 +1672,6 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="artEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="ActFlows" EntityType="Self.ActFlow" />
           <EntitySet Name="Actions" EntityType="Self.Action" />
           <EntitySet Name="Artifacts" EntityType="Self.Artifact" />
           <EntitySet Name="ArtifactTypes" EntityType="Self.ArtifactType" />
@@ -1022,22 +1682,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Talents" EntityType="Self.Talent" />
           <EntitySet Name="UserArtifacts" EntityType="Self.UserArtifact" />
-          <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
-            <End Role="Action" EntitySet="Actions" />
-            <End Role="ActFlow" EntitySet="ActFlows" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActFlow_Step" Association="Self.FK_ActFlow_Step">
-            <End Role="Step" EntitySet="Steps" />
-            <End Role="ActFlow" EntitySet="ActFlows" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Step_ActFlow" Association="Self.FK_Step_ActFlow">
-            <End Role="ActFlow" EntitySet="ActFlows" />
-            <End Role="Step" EntitySet="Steps" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Action_Step" Association="Self.FK_Action_Step">
-            <End Role="Step" EntitySet="Steps" />
-            <End Role="Action" EntitySet="Actions" />
-          </AssociationSet>
           <AssociationSet Name="FK_Artifact_ArtifactType" Association="Self.FK_Artifact_ArtifactType">
             <End Role="ArtifactType" EntitySet="ArtifactTypes" />
             <End Role="Artifact" EntitySet="Artifacts" />
@@ -1160,6 +1804,164 @@
             <End Role="ActionTemplate" EntitySet="ActionTemplates" />
             <End Role="ActionDescription" EntitySet="ActionDescriptions" />
           </AssociationSet>
+          <EntitySet Name="ActionCharacteristics" EntityType="artModel.ActionCharacteristic" />
+          <EntitySet Name="ActionPredispositions" EntityType="artModel.ActionPredisposition" />
+          <EntitySet Name="ActionProperties" EntityType="artModel.ActionProperty" />
+          <EntitySet Name="ActionResults" EntityType="artModel.ActionResult" />
+          <EntitySet Name="ActionResultDesires" EntityType="artModel.ActionResultDesire" />
+          <EntitySet Name="ActionTemplateCharacteristics" EntityType="artModel.ActionTemplateCharacteristic" />
+          <EntitySet Name="ActionTemplateProperties" EntityType="artModel.ActionTemplateProperty" />
+          <EntitySet Name="ActionTemplateResults" EntityType="artModel.ActionTemplateResult" />
+          <EntitySet Name="ActiveActionInFlows" EntityType="artModel.ActiveActionInFlow" />
+          <EntitySet Name="CarrierDesires" EntityType="artModel.CarrierDesire" />
+          <EntitySet Name="CarrierUserArtifacts" EntityType="artModel.CarrierUserArtifact" />
+          <EntitySet Name="Classes" EntityType="artModel.Class" />
+          <EntitySet Name="Desires" EntityType="artModel.Desire" />
+          <EntitySet Name="DesireActionTemplateResults" EntityType="artModel.DesireActionTemplateResult" />
+          <EntitySet Name="DesireMapZones" EntityType="artModel.DesireMapZone" />
+          <EntitySet Name="Logs" EntityType="artModel.Log" />
+          <EntitySet Name="RaceDesires" EntityType="artModel.RaceDesire" />
+          <EntitySet Name="UserArtifactClasses" EntityType="artModel.UserArtifactClass" />
+          <AssociationSet Name="FK_Action_Step" Association="artModel.FK_Action_Step">
+            <End Role="Step" EntitySet="Steps" />
+            <End Role="Action" EntitySet="Actions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionCharacteristics_Action" Association="artModel.FK_ActionCharacteristics_Action">
+            <End Role="Action" EntitySet="Actions" />
+            <End Role="ActionCharacteristic" EntitySet="ActionCharacteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionPredisposition_Action" Association="artModel.FK_ActionPredisposition_Action">
+            <End Role="Action" EntitySet="Actions" />
+            <End Role="ActionPredisposition" EntitySet="ActionPredispositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionProperties_Action" Association="artModel.FK_ActionProperties_Action">
+            <End Role="Action" EntitySet="Actions" />
+            <End Role="ActionProperty" EntitySet="ActionProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionResult_Action" Association="artModel.FK_ActionResult_Action">
+            <End Role="Action" EntitySet="Actions" />
+            <End Role="ActionResult" EntitySet="ActionResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveActionInFlow_Action" Association="artModel.FK_ActiveActionInFlow_Action">
+            <End Role="Action" EntitySet="Actions" />
+            <End Role="ActiveActionInFlow" EntitySet="ActiveActionInFlows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionCharacteristics_Characteristics" Association="artModel.FK_ActionCharacteristics_Characteristics">
+            <End Role="Characteristic" EntitySet="Characteristics" />
+            <End Role="ActionCharacteristic" EntitySet="ActionCharacteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionDescription_Class1" Association="artModel.FK_ActionDescription_Class1">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="ActionDescription" EntitySet="ActionDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionDescription_Race1" Association="artModel.FK_ActionDescription_Race1">
+            <End Role="Race" EntitySet="Races" />
+            <End Role="ActionDescription" EntitySet="ActionDescriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionPredisposition_Predisposition" Association="artModel.FK_ActionPredisposition_Predisposition">
+            <End Role="Predisposition" EntitySet="Predispositions" />
+            <End Role="ActionPredisposition" EntitySet="ActionPredispositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionProperties_Properties" Association="artModel.FK_ActionProperties_Properties">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="ActionProperty" EntitySet="ActionProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionResultDesire_ActionResult" Association="artModel.FK_ActionResultDesire_ActionResult">
+            <End Role="ActionResult" EntitySet="ActionResults" />
+            <End Role="ActionResultDesire" EntitySet="ActionResultDesires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionResultDesire_Desire" Association="artModel.FK_ActionResultDesire_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="ActionResultDesire" EntitySet="ActionResultDesires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplate_ActionTemplateResult" Association="artModel.FK_ActionTemplate_ActionTemplateResult">
+            <End Role="ActionTemplateResult" EntitySet="ActionTemplateResults" />
+            <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateCharacteristics_ActionTemplate" Association="artModel.FK_ActionTemplateCharacteristics_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+            <End Role="ActionTemplateCharacteristic" EntitySet="ActionTemplateCharacteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateProperties_ActionTemplate" Association="artModel.FK_ActionTemplateProperties_ActionTemplate">
+            <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+            <End Role="ActionTemplateProperty" EntitySet="ActionTemplateProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateCharacteristics_Characteristics" Association="artModel.FK_ActionTemplateCharacteristics_Characteristics">
+            <End Role="Characteristic" EntitySet="Characteristics" />
+            <End Role="ActionTemplateCharacteristic" EntitySet="ActionTemplateCharacteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateProperties_Properties" Association="artModel.FK_ActionTemplateProperties_Properties">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="ActionTemplateProperty" EntitySet="ActionTemplateProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireActionTemplateResult_ActionTemplateResult" Association="artModel.FK_DesireActionTemplateResult_ActionTemplateResult">
+            <End Role="ActionTemplateResult" EntitySet="ActionTemplateResults" />
+            <End Role="DesireActionTemplateResult" EntitySet="DesireActionTemplateResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActiveActionInFlow_Step" Association="artModel.FK_ActiveActionInFlow_Step">
+            <End Role="Step" EntitySet="Steps" />
+            <End Role="ActiveActionInFlow" EntitySet="ActiveActionInFlows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_ActiveActionInFlow" Association="artModel.FK_Step_ActiveActionInFlow">
+            <End Role="ActiveActionInFlow" EntitySet="ActiveActionInFlows" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierDesire_Carrier" Association="artModel.FK_CarrierDesire_Carrier">
+            <End Role="Carrier" EntitySet="Carriers" />
+            <End Role="CarrierDesire" EntitySet="CarrierDesires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierUserArtifact_Carrier" Association="artModel.FK_CarrierUserArtifact_Carrier">
+            <End Role="Carrier" EntitySet="Carriers" />
+            <End Role="CarrierUserArtifact" EntitySet="CarrierUserArtifacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierDesire_Desire" Association="artModel.FK_CarrierDesire_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="CarrierDesire" EntitySet="CarrierDesires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierUserArtifact_UserArtifact" Association="artModel.FK_CarrierUserArtifact_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifacts" />
+            <End Role="CarrierUserArtifact" EntitySet="CarrierUserArtifacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserArtifactClass_Class" Association="artModel.FK_UserArtifactClass_Class">
+            <End Role="Class" EntitySet="Classes" />
+            <End Role="UserArtifactClass" EntitySet="UserArtifactClasses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireActionTemplateResult_Desire" Association="artModel.FK_DesireActionTemplateResult_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="DesireActionTemplateResult" EntitySet="DesireActionTemplateResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireMapZone_Desire" Association="artModel.FK_DesireMapZone_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="DesireMapZone" EntitySet="DesireMapZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceDesire_Desire" Association="artModel.FK_RaceDesire_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="RaceDesire" EntitySet="RaceDesires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_Desire" Association="artModel.FK_Step_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StepTemplate_Desire" Association="artModel.FK_StepTemplate_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="StepTemplate" EntitySet="StepTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DesireMapZone_MapZone" Association="artModel.FK_DesireMapZone_MapZone">
+            <End Role="MapZone" EntitySet="MapZones" />
+            <End Role="DesireMapZone" EntitySet="DesireMapZones" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Log_UserArtifact" Association="artModel.FK_Log_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifacts" />
+            <End Role="Log" EntitySet="Logs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RaceDesire_Race" Association="artModel.FK_RaceDesire_Race">
+            <End Role="Race" EntitySet="Races" />
+            <End Role="RaceDesire" EntitySet="RaceDesires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserArtifactClass_UserArtifact" Association="artModel.FK_UserArtifactClass_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifacts" />
+            <End Role="UserArtifactClass" EntitySet="UserArtifactClasses" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ArtifactBonu">
           <Key>
@@ -1185,6 +1987,8 @@
           <Property Name="Predisposition" Type="Int64" Nullable="false" />
           <Property Name="Characteristics" Type="Int64" Nullable="false" />
           <Property Name="DefaultPredisposition" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="CarrierDesires" Relationship="artModel.FK_CarrierDesire_Carrier" FromRole="Carrier" ToRole="CarrierDesire" />
+          <NavigationProperty Name="CarrierUserArtifacts" Relationship="artModel.FK_CarrierUserArtifact_Carrier" FromRole="Carrier" ToRole="CarrierUserArtifact" />
         </EntityType>
         <EntityType Name="Race">
           <Key>
@@ -1198,6 +2002,8 @@
           <Property Name="Predisposition" Type="Int64" Nullable="false" />
           <Property Name="Properties" Type="Int64" Nullable="false" />
           <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_Race1" FromRole="Race" ToRole="ActionDescription" />
+          <NavigationProperty Name="RaceDesires" Relationship="artModel.FK_RaceDesire_Race" FromRole="Race" ToRole="RaceDesire" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1299,9 +2105,13 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
           <Property Name="MapZone" Type="Int32" />
-          <Property Name="ActionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ActionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="MapZone1" Relationship="artModel.FK_ActionDescription_MapZone" FromRole="ActionDescription" ToRole="MapZone" />
           <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionDescription_ActionTemplate" FromRole="ActionDescription" ToRole="ActionTemplate" />
+          <Property Name="Race" Type="Int32" />
+          <Property Name="Class" Type="Int32" />
+          <NavigationProperty Name="Class1" Relationship="artModel.FK_ActionDescription_Class1" FromRole="ActionDescription" ToRole="Class" />
+          <NavigationProperty Name="Race1" Relationship="artModel.FK_ActionDescription_Race1" FromRole="ActionDescription" ToRole="Race" />
         </EntityType>
         <EntityType Name="ActionTemplate">
           <Key>
@@ -1309,11 +2119,15 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="PredispositionResult" Type="Double" Nullable="false" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
           <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateActionDescription" />
           <NavigationProperty Name="ActionTemplatePredispositions" Relationship="artModel.FK_ActionTemplatePredisposition_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplatePredisposition" />
           <NavigationProperty Name="StepTemplateActionTemplates" Relationship="artModel.FK_StepTemplateActionTemplate_ActionTemplate" FromRole="ActionTemplate" ToRole="StepTemplateActionTemplate" />
           <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionDescription" />
+          <Property Name="BlockProbability" Type="Double" Nullable="false" />
+          <Property Name="ActionTemplateResult" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActionTemplateResult1" Relationship="artModel.FK_ActionTemplate_ActionTemplateResult" FromRole="ActionTemplate" ToRole="ActionTemplateResult" />
+          <NavigationProperty Name="ActionTemplateCharacteristics" Relationship="artModel.FK_ActionTemplateCharacteristics_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateCharacteristic" />
+          <NavigationProperty Name="ActionTemplateProperties" Relationship="artModel.FK_ActionTemplateProperties_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateProperty" />
         </EntityType>
         <EntityType Name="ActionTemplateActionDescription">
           <Key>
@@ -1345,6 +2159,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Mask" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ActionCharacteristics" Relationship="artModel.FK_ActionCharacteristics_Characteristics" FromRole="Characteristic" ToRole="ActionCharacteristic" />
+          <NavigationProperty Name="ActionTemplateCharacteristics" Relationship="artModel.FK_ActionTemplateCharacteristics_Characteristics" FromRole="Characteristic" ToRole="ActionTemplateCharacteristic" />
         </EntityType>
         <EntityType Name="MapObject">
           <Key>
@@ -1375,6 +2191,7 @@
           <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_MapZone" FromRole="MapZone" ToRole="ActionDescription" />
           <NavigationProperty Name="MapObjectProbabilities" Relationship="artModel.FK_MapObjectProbability_MapZone" FromRole="MapZone" ToRole="MapObjectProbability" />
           <NavigationProperty Name="ZoneCoordinats" Relationship="artModel.FK_ZoneCoordinats_MapZone" FromRole="MapZone" ToRole="ZoneCoordinat" />
+          <NavigationProperty Name="DesireMapZones" Relationship="artModel.FK_DesireMapZone_MapZone" FromRole="MapZone" ToRole="DesireMapZone" />
         </EntityType>
         <EntityType Name="Predisposition">
           <Key>
@@ -1385,6 +2202,7 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Mask" Type="Int64" Nullable="false" />
           <NavigationProperty Name="ActionTemplatePredispositions" Relationship="artModel.FK_ActionTemplatePredisposition_Predisposition" FromRole="Predisposition" ToRole="ActionTemplatePredisposition" />
+          <NavigationProperty Name="ActionPredispositions" Relationship="artModel.FK_ActionPredisposition_Predisposition" FromRole="Predisposition" ToRole="ActionPredisposition" />
         </EntityType>
         <EntityType Name="Property">
           <Key>
@@ -1395,6 +2213,8 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Mask" Type="Int64" Nullable="false" />
           <Property Name="Deviation" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActionProperties" Relationship="artModel.FK_ActionProperties_Properties" FromRole="Property" ToRole="ActionProperty" />
+          <NavigationProperty Name="ActionTemplateProperties" Relationship="artModel.FK_ActionTemplateProperties_Properties" FromRole="Property" ToRole="ActionTemplateProperty" />
         </EntityType>
         <EntityType Name="StepObject">
           <Key>
@@ -1403,7 +2223,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StepObjectType" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Icon" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="StepObjectType1" Relationship="artModel.FK_StepObject_StepObjectType" FromRole="StepObject" ToRole="StepObjectType" />
           <NavigationProperty Name="StepObjectStepTemplates" Relationship="artModel.FK_StepObjectStepTemplate_StepObject" FromRole="StepObject" ToRole="StepObjectStepTemplate" />
@@ -1436,6 +2256,8 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="StepObjectStepTemplates" Relationship="artModel.FK_StepObjectStepTemplate_StepTemplate" FromRole="StepTemplate" ToRole="StepObjectStepTemplate" />
           <NavigationProperty Name="StepTemplateActionTemplates" Relationship="artModel.FK_StepTemplateActionTemplate_StepTemplate" FromRole="StepTemplate" ToRole="StepTemplateActionTemplate" />
+          <Property Name="Desire" Type="Int32" />
+          <NavigationProperty Name="Desire1" Relationship="artModel.FK_StepTemplate_Desire" FromRole="StepTemplate" ToRole="Desire" />
         </EntityType>
         <EntityType Name="StepTemplateActionTemplate">
           <Key>
@@ -1662,28 +2484,654 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ActionCharacteristic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Characteristics" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionCharacteristics_Action" FromRole="ActionCharacteristic" ToRole="Action" />
+          <NavigationProperty Name="Characteristic" Relationship="artModel.FK_ActionCharacteristics_Characteristics" FromRole="ActionCharacteristic" ToRole="Characteristic" />
+        </EntityType>
+        <EntityType Name="ActionPredisposition">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Predisposition" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionPredisposition_Action" FromRole="ActionPredisposition" ToRole="Action" />
+          <NavigationProperty Name="Predisposition1" Relationship="artModel.FK_ActionPredisposition_Predisposition" FromRole="ActionPredisposition" ToRole="Predisposition" />
+        </EntityType>
+        <EntityType Name="ActionProperty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Properties" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionProperties_Action" FromRole="ActionProperty" ToRole="Action" />
+          <NavigationProperty Name="Property" Relationship="artModel.FK_ActionProperties_Properties" FromRole="ActionProperty" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="ActionResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Predisposition" Type="Int64" Nullable="false" />
+          <Property Name="Gold" Type="Int32" Nullable="false" />
+          <Property Name="Expirience" Type="Int32" Nullable="false" />
+          <Property Name="Artifact" Type="Int32" Nullable="false" />
+          <Property Name="SoulShard" Type="Boolean" Nullable="false" />
+          <Property Name="Killed" Type="Boolean" Nullable="false" />
+          <Property Name="Action" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionResult_Action" FromRole="ActionResult" ToRole="Action" />
+          <NavigationProperty Name="ActionResultDesires" Relationship="artModel.FK_ActionResultDesire_ActionResult" FromRole="ActionResult" ToRole="ActionResultDesire" />
+        </EntityType>
+        <EntityType Name="ActionResultDesire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionResult" Type="Int32" Nullable="false" />
+          <Property Name="Desire" Type="Int32" Nullable="false" />
+          <Property Name="Modifier" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ActionResult1" Relationship="artModel.FK_ActionResultDesire_ActionResult" FromRole="ActionResultDesire" ToRole="ActionResult" />
+          <NavigationProperty Name="Desire1" Relationship="artModel.FK_ActionResultDesire_Desire" FromRole="ActionResultDesire" ToRole="Desire" />
+        </EntityType>
+        <EntityType Name="ActionTemplateCharacteristic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
+          <Property Name="Characteristics" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionTemplateCharacteristics_ActionTemplate" FromRole="ActionTemplateCharacteristic" ToRole="ActionTemplate" />
+          <NavigationProperty Name="Characteristic" Relationship="artModel.FK_ActionTemplateCharacteristics_Characteristics" FromRole="ActionTemplateCharacteristic" ToRole="Characteristic" />
+        </EntityType>
+        <EntityType Name="ActionTemplateProperty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
+          <Property Name="Properties" Type="Int32" Nullable="false" />
+          <Property Name="Appearance" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionTemplateProperties_ActionTemplate" FromRole="ActionTemplateProperty" ToRole="ActionTemplate" />
+          <NavigationProperty Name="Property" Relationship="artModel.FK_ActionTemplateProperties_Properties" FromRole="ActionTemplateProperty" ToRole="Property" />
+        </EntityType>
+        <EntityType Name="ActionTemplateResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PredispositionResultModifier" Type="Double" Nullable="false" />
+          <Property Name="ExperienceModifier" Type="Double" Nullable="false" />
+          <Property Name="ArtifactPosibility" Type="Double" Nullable="false" />
+          <Property Name="GoldModifier" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ActionTemplates" Relationship="artModel.FK_ActionTemplate_ActionTemplateResult" FromRole="ActionTemplateResult" ToRole="ActionTemplate" />
+          <NavigationProperty Name="DesireActionTemplateResults" Relationship="artModel.FK_DesireActionTemplateResult_ActionTemplateResult" FromRole="ActionTemplateResult" ToRole="DesireActionTemplateResult" />
+        </EntityType>
+        <EntityType Name="ActiveActionInFlow">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Step" Type="Int32" Nullable="false" />
+          <Property Name="Action" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Action1" Relationship="artModel.FK_ActiveActionInFlow_Action" FromRole="ActiveActionInFlow" ToRole="Action" />
+          <NavigationProperty Name="Step1" Relationship="artModel.FK_ActiveActionInFlow_Step" FromRole="ActiveActionInFlow" ToRole="Step" />
+          <NavigationProperty Name="Steps" Relationship="artModel.FK_Step_ActiveActionInFlow" FromRole="ActiveActionInFlow" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="CarrierDesire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarrierId" Type="Int32" Nullable="false" />
+          <Property Name="DesireId" Type="Int32" Nullable="false" />
+          <Property Name="DesireMask" Type="Int64" Nullable="false" />
+          <Property Name="AddictionRequirement" Type="Int32" Nullable="false" />
+          <Property Name="IsSecret" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultValue" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carrier" Relationship="artModel.FK_CarrierDesire_Carrier" FromRole="CarrierDesire" ToRole="Carrier" />
+          <NavigationProperty Name="Desire" Relationship="artModel.FK_CarrierDesire_Desire" FromRole="CarrierDesire" ToRole="Desire" />
+        </EntityType>
+        <EntityType Name="CarrierUserArtifact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Carrier" Type="Int32" Nullable="false" />
+          <Property Name="UserArtifact" Type="Int32" Nullable="false" />
+          <Property Name="Addiction" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carrier1" Relationship="artModel.FK_CarrierUserArtifact_Carrier" FromRole="CarrierUserArtifact" ToRole="Carrier" />
+          <NavigationProperty Name="UserArtifact1" Relationship="artModel.FK_CarrierUserArtifact_UserArtifact" FromRole="CarrierUserArtifact" ToRole="UserArtifact" />
+        </EntityType>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FibonacciSeed" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_Class1" FromRole="Class" ToRole="ActionDescription" />
+          <NavigationProperty Name="UserArtifactClasses" Relationship="artModel.FK_UserArtifactClass_Class" FromRole="Class" ToRole="UserArtifactClass" />
+        </EntityType>
+        <EntityType Name="Desire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ActionResultDesires" Relationship="artModel.FK_ActionResultDesire_Desire" FromRole="Desire" ToRole="ActionResultDesire" />
+          <NavigationProperty Name="CarrierDesires" Relationship="artModel.FK_CarrierDesire_Desire" FromRole="Desire" ToRole="CarrierDesire" />
+          <NavigationProperty Name="DesireActionTemplateResults" Relationship="artModel.FK_DesireActionTemplateResult_Desire" FromRole="Desire" ToRole="DesireActionTemplateResult" />
+          <NavigationProperty Name="DesireMapZones" Relationship="artModel.FK_DesireMapZone_Desire" FromRole="Desire" ToRole="DesireMapZone" />
+          <NavigationProperty Name="RaceDesires" Relationship="artModel.FK_RaceDesire_Desire" FromRole="Desire" ToRole="RaceDesire" />
+          <NavigationProperty Name="Steps" Relationship="artModel.FK_Step_Desire" FromRole="Desire" ToRole="Step" />
+          <NavigationProperty Name="StepTemplates" Relationship="artModel.FK_StepTemplate_Desire" FromRole="Desire" ToRole="StepTemplate" />
+        </EntityType>
+        <EntityType Name="DesireActionTemplateResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desire" Type="Int32" Nullable="false" />
+          <Property Name="ActionTemplateResult" Type="Int32" Nullable="false" />
+          <Property Name="Modifier" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ActionTemplateResult1" Relationship="artModel.FK_DesireActionTemplateResult_ActionTemplateResult" FromRole="DesireActionTemplateResult" ToRole="ActionTemplateResult" />
+          <NavigationProperty Name="Desire1" Relationship="artModel.FK_DesireActionTemplateResult_Desire" FromRole="DesireActionTemplateResult" ToRole="Desire" />
+        </EntityType>
+        <EntityType Name="DesireMapZone">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desire" Type="Int32" Nullable="false" />
+          <Property Name="MapZone" Type="Int32" Nullable="false" />
+          <Property Name="Modifier" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Desire1" Relationship="artModel.FK_DesireMapZone_Desire" FromRole="DesireMapZone" ToRole="Desire" />
+          <NavigationProperty Name="MapZone1" Relationship="artModel.FK_DesireMapZone_MapZone" FromRole="DesireMapZone" ToRole="MapZone" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShortLog" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ExtendedLog" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserArtifact" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UserArtifact1" Relationship="artModel.FK_Log_UserArtifact" FromRole="Log" ToRole="UserArtifact" />
+        </EntityType>
+        <EntityType Name="RaceDesire">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaceId" Type="Int32" Nullable="false" />
+          <Property Name="DesireId" Type="Int32" Nullable="false" />
+          <Property Name="Probability" Type="Double" Nullable="false" />
+          <Property Name="DefaultValue" Type="Int32" Nullable="false" />
+          <Property Name="Deviation" Type="Int32" />
+          <NavigationProperty Name="Desire" Relationship="artModel.FK_RaceDesire_Desire" FromRole="RaceDesire" ToRole="Desire" />
+          <NavigationProperty Name="Race" Relationship="artModel.FK_RaceDesire_Race" FromRole="RaceDesire" ToRole="Race" />
+        </EntityType>
+        <EntityType Name="UserArtifactClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Class" Type="Int32" Nullable="false" />
+          <Property Name="UserArtifact" Type="Int32" Nullable="false" />
+          <Property Name="Expirience" Type="Int32" Nullable="false" />
+          <Property Name="ClassLevel" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Class1" Relationship="artModel.FK_UserArtifactClass_Class" FromRole="UserArtifactClass" ToRole="Class" />
+          <NavigationProperty Name="UserArtifact1" Relationship="artModel.FK_UserArtifactClass_UserArtifact" FromRole="UserArtifactClass" ToRole="UserArtifact" />
+        </EntityType>
+        <Association Name="FK_Action_Step">
+          <End Type="artModel.Step" Role="Step" Multiplicity="1" />
+          <End Type="artModel.Action" Role="Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Action">
+              <PropertyRef Name="Step" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionCharacteristics_Action">
+          <End Type="artModel.Action" Role="Action" Multiplicity="1" />
+          <End Type="artModel.ActionCharacteristic" Role="ActionCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionCharacteristic">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionPredisposition_Action">
+          <End Type="artModel.Action" Role="Action" Multiplicity="1" />
+          <End Type="artModel.ActionPredisposition" Role="ActionPredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionPredisposition">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionProperties_Action">
+          <End Type="artModel.Action" Role="Action" Multiplicity="1" />
+          <End Type="artModel.ActionProperty" Role="ActionProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionProperty">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionResult_Action">
+          <End Type="artModel.Action" Role="Action" Multiplicity="1" />
+          <End Type="artModel.ActionResult" Role="ActionResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionResult">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveActionInFlow_Action">
+          <End Type="artModel.Action" Role="Action" Multiplicity="1" />
+          <End Type="artModel.ActiveActionInFlow" Role="ActiveActionInFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActiveActionInFlow">
+              <PropertyRef Name="Action" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionCharacteristics_Characteristics">
+          <End Type="artModel.Characteristic" Role="Characteristic" Multiplicity="1" />
+          <End Type="artModel.ActionCharacteristic" Role="ActionCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionCharacteristic">
+              <PropertyRef Name="Characteristics" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionDescription_Class1">
+          <End Type="artModel.Class" Role="Class" Multiplicity="0..1" />
+          <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionDescription">
+              <PropertyRef Name="Class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionDescription_Race1">
+          <End Type="artModel.Race" Role="Race" Multiplicity="0..1" />
+          <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionDescription">
+              <PropertyRef Name="Race" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionPredisposition_Predisposition">
+          <End Type="artModel.Predisposition" Role="Predisposition" Multiplicity="1" />
+          <End Type="artModel.ActionPredisposition" Role="ActionPredisposition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Predisposition">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionPredisposition">
+              <PropertyRef Name="Predisposition" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionProperties_Properties">
+          <End Type="artModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="artModel.ActionProperty" Role="ActionProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionProperty">
+              <PropertyRef Name="Properties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionResultDesire_ActionResult">
+          <End Type="artModel.ActionResult" Role="ActionResult" Multiplicity="1" />
+          <End Type="artModel.ActionResultDesire" Role="ActionResultDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionResult">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionResultDesire">
+              <PropertyRef Name="ActionResult" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionResultDesire_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="1" />
+          <End Type="artModel.ActionResultDesire" Role="ActionResultDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionResultDesire">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplate_ActionTemplateResult">
+          <End Type="artModel.ActionTemplateResult" Role="ActionTemplateResult" Multiplicity="1" />
+          <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplateResult">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplate">
+              <PropertyRef Name="ActionTemplateResult" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateCharacteristics_ActionTemplate">
+          <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="1" />
+          <End Type="artModel.ActionTemplateCharacteristic" Role="ActionTemplateCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateCharacteristic">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateProperties_ActionTemplate">
+          <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="1" />
+          <End Type="artModel.ActionTemplateProperty" Role="ActionTemplateProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplate">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateProperty">
+              <PropertyRef Name="ActionTemplate" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateCharacteristics_Characteristics">
+          <End Type="artModel.Characteristic" Role="Characteristic" Multiplicity="1" />
+          <End Type="artModel.ActionTemplateCharacteristic" Role="ActionTemplateCharacteristic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Characteristic">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateCharacteristic">
+              <PropertyRef Name="Characteristics" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateProperties_Properties">
+          <End Type="artModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="artModel.ActionTemplateProperty" Role="ActionTemplateProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActionTemplateProperty">
+              <PropertyRef Name="Properties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireActionTemplateResult_ActionTemplateResult">
+          <End Type="artModel.ActionTemplateResult" Role="ActionTemplateResult" Multiplicity="1" />
+          <End Type="artModel.DesireActionTemplateResult" Role="DesireActionTemplateResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActionTemplateResult">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireActionTemplateResult">
+              <PropertyRef Name="ActionTemplateResult" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActiveActionInFlow_Step">
+          <End Type="artModel.Step" Role="Step" Multiplicity="1" />
+          <End Type="artModel.ActiveActionInFlow" Role="ActiveActionInFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActiveActionInFlow">
+              <PropertyRef Name="Step" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Step_ActiveActionInFlow">
+          <End Type="artModel.ActiveActionInFlow" Role="ActiveActionInFlow" Multiplicity="0..1" />
+          <End Type="artModel.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActiveActionInFlow">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="ActiveActionInFlow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierDesire_Carrier">
+          <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
+          <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierDesire">
+              <PropertyRef Name="CarrierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierUserArtifact_Carrier">
+          <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
+          <End Type="artModel.CarrierUserArtifact" Role="CarrierUserArtifact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierUserArtifact">
+              <PropertyRef Name="Carrier" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierDesire_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="1" />
+          <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierDesire">
+              <PropertyRef Name="DesireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierUserArtifact_UserArtifact">
+          <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="1" />
+          <End Type="artModel.CarrierUserArtifact" Role="CarrierUserArtifact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CarrierUserArtifact">
+              <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserArtifactClass_Class">
+          <End Type="artModel.Class" Role="Class" Multiplicity="1" />
+          <End Type="artModel.UserArtifactClass" Role="UserArtifactClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Class">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserArtifactClass">
+              <PropertyRef Name="Class" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireActionTemplateResult_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="1" />
+          <End Type="artModel.DesireActionTemplateResult" Role="DesireActionTemplateResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireActionTemplateResult">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireMapZone_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="1" />
+          <End Type="artModel.DesireMapZone" Role="DesireMapZone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireMapZone">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceDesire_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="1" />
+          <End Type="artModel.RaceDesire" Role="RaceDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RaceDesire">
+              <PropertyRef Name="DesireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Step_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="0..1" />
+          <End Type="artModel.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StepTemplate_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="0..1" />
+          <End Type="artModel.StepTemplate" Role="StepTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="StepTemplate">
+              <PropertyRef Name="Desire" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DesireMapZone_MapZone">
+          <End Type="artModel.MapZone" Role="MapZone" Multiplicity="1" />
+          <End Type="artModel.DesireMapZone" Role="DesireMapZone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapZone">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DesireMapZone">
+              <PropertyRef Name="MapZone" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Log_UserArtifact">
+          <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="1" />
+          <End Type="artModel.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RaceDesire_Race">
+          <End Type="artModel.Race" Role="Race" Multiplicity="1" />
+          <End Type="artModel.RaceDesire" Role="RaceDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Race">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RaceDesire">
+              <PropertyRef Name="RaceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserArtifactClass_UserArtifact">
+          <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="1" />
+          <End Type="artModel.UserArtifactClass" Role="UserArtifactClass" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserArtifactClass">
+              <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="artModelStoreContainer" CdmEntityContainer="artEntities">
-          <EntitySetMapping Name="ActFlows">
-            <EntityTypeMapping TypeName="artModel.ActFlow">
-              <MappingFragment StoreEntitySet="ActFlow">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idUser" ColumnName="idUser" />
-                <ScalarProperty Name="idStep" ColumnName="idStep" />
-                <ScalarProperty Name="idAction" ColumnName="idAction" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Actions">
             <EntityTypeMapping TypeName="artModel.Action">
               <MappingFragment StoreEntitySet="Action">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="ActionImprovementCost" ColumnName="ActionImprovementCost" />
+                <ScalarProperty Name="ActionChangeCost" ColumnName="ActionChangeCost" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="ExperienceModifier" ColumnName="ExperienceModifier" />
+                <ScalarProperty Name="PredispositionResult" ColumnName="PredispositionResult" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idUser" ColumnName="idUser" />
-                <ScalarProperty Name="idStep" ColumnName="idStep" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1742,10 +3190,17 @@
           <EntitySetMapping Name="Steps">
             <EntityTypeMapping TypeName="artModel.Step">
               <MappingFragment StoreEntitySet="Step">
+                <ScalarProperty Name="IsKey" ColumnName="IsKey" />
+                <ScalarProperty Name="Desire" ColumnName="Desire" />
+                <ScalarProperty Name="YCoordinate" ColumnName="YCoordinate" />
+                <ScalarProperty Name="XCoordinate" ColumnName="XCoordinate" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ActiveActionInFlow" ColumnName="ActiveActionInFlow" />
+                <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idUser" ColumnName="idUser" />
-                <ScalarProperty Name="idActFlow" ColumnName="idActFlow" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
@@ -1776,6 +3231,8 @@
           <EntitySetMapping Name="UserArtifacts">
             <EntityTypeMapping TypeName="artModel.UserArtifact">
               <MappingFragment StoreEntitySet="UserArtifact">
+                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+                <ScalarProperty Name="BlockActionProbability" ColumnName="BlockActionProbability" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Artifact" ColumnName="Artifact" />
@@ -1849,6 +3306,8 @@
           <EntitySetMapping Name="ActionDescriptions">
             <EntityTypeMapping TypeName="artModel.ActionDescription">
               <MappingFragment StoreEntitySet="ActionDescription">
+                <ScalarProperty Name="Class" ColumnName="Class" />
+                <ScalarProperty Name="Race" ColumnName="Race" />
                 <ScalarProperty Name="ActionText" ColumnName="ActionText" />
                 <ScalarProperty Name="MapZone" ColumnName="MapZone" />
                 <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
@@ -1859,7 +3318,8 @@
           <EntitySetMapping Name="ActionTemplates">
             <EntityTypeMapping TypeName="artModel.ActionTemplate">
               <MappingFragment StoreEntitySet="ActionTemplate">
-                <ScalarProperty Name="PredispositionResult" ColumnName="PredispositionResult" />
+                <ScalarProperty Name="ActionTemplateResult" ColumnName="ActionTemplateResult" />
+                <ScalarProperty Name="BlockProbability" ColumnName="BlockProbability" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -1974,6 +3434,7 @@
           <EntitySetMapping Name="StepTemplates">
             <EntityTypeMapping TypeName="artModel.StepTemplate">
               <MappingFragment StoreEntitySet="StepTemplate">
+                <ScalarProperty Name="Desire" ColumnName="Desire" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="StepText" ColumnName="StepText" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -2006,6 +3467,193 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Icon" ColumnName="Icon" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionCharacteristics">
+            <EntityTypeMapping TypeName="artModel.ActionCharacteristic">
+              <MappingFragment StoreEntitySet="ActionCharacteristics">
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionPredispositions">
+            <EntityTypeMapping TypeName="artModel.ActionPredisposition">
+              <MappingFragment StoreEntitySet="ActionPredisposition">
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionProperties">
+            <EntityTypeMapping TypeName="artModel.ActionProperty">
+              <MappingFragment StoreEntitySet="ActionProperties">
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Properties" ColumnName="Properties" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionResults">
+            <EntityTypeMapping TypeName="artModel.ActionResult">
+              <MappingFragment StoreEntitySet="ActionResult">
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Killed" ColumnName="Killed" />
+                <ScalarProperty Name="SoulShard" ColumnName="SoulShard" />
+                <ScalarProperty Name="Artifact" ColumnName="Artifact" />
+                <ScalarProperty Name="Expirience" ColumnName="Expirience" />
+                <ScalarProperty Name="Gold" ColumnName="Gold" />
+                <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionResultDesires">
+            <EntityTypeMapping TypeName="artModel.ActionResultDesire">
+              <MappingFragment StoreEntitySet="ActionResultDesire">
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="Desire" ColumnName="Desire" />
+                <ScalarProperty Name="ActionResult" ColumnName="ActionResult" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionTemplateCharacteristics">
+            <EntityTypeMapping TypeName="artModel.ActionTemplateCharacteristic">
+              <MappingFragment StoreEntitySet="ActionTemplateCharacteristics">
+                <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+                <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionTemplateProperties">
+            <EntityTypeMapping TypeName="artModel.ActionTemplateProperty">
+              <MappingFragment StoreEntitySet="ActionTemplateProperties">
+                <ScalarProperty Name="Appearance" ColumnName="Appearance" />
+                <ScalarProperty Name="Properties" ColumnName="Properties" />
+                <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActionTemplateResults">
+            <EntityTypeMapping TypeName="artModel.ActionTemplateResult">
+              <MappingFragment StoreEntitySet="ActionTemplateResult">
+                <ScalarProperty Name="GoldModifier" ColumnName="GoldModifier" />
+                <ScalarProperty Name="ArtifactPosibility" ColumnName="ArtifactPosibility" />
+                <ScalarProperty Name="ExperienceModifier" ColumnName="ExperienceModifier" />
+                <ScalarProperty Name="PredispositionResultModifier" ColumnName="PredispositionResultModifier" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveActionInFlows">
+            <EntityTypeMapping TypeName="artModel.ActiveActionInFlow">
+              <MappingFragment StoreEntitySet="ActiveActionInFlow">
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Step" ColumnName="Step" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarrierDesires">
+            <EntityTypeMapping TypeName="artModel.CarrierDesire">
+              <MappingFragment StoreEntitySet="CarrierDesire">
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="IsSecret" ColumnName="IsSecret" />
+                <ScalarProperty Name="AddictionRequirement" ColumnName="AddictionRequirement" />
+                <ScalarProperty Name="DesireMask" ColumnName="DesireMask" />
+                <ScalarProperty Name="DesireId" ColumnName="DesireId" />
+                <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarrierUserArtifacts">
+            <EntityTypeMapping TypeName="artModel.CarrierUserArtifact">
+              <MappingFragment StoreEntitySet="CarrierUserArtifact">
+                <ScalarProperty Name="Addiction" ColumnName="Addiction" />
+                <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+                <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classes">
+            <EntityTypeMapping TypeName="artModel.Class">
+              <MappingFragment StoreEntitySet="Class">
+                <ScalarProperty Name="FibonacciSeed" ColumnName="FibonacciSeed" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Desires">
+            <EntityTypeMapping TypeName="artModel.Desire">
+              <MappingFragment StoreEntitySet="Desire">
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesireActionTemplateResults">
+            <EntityTypeMapping TypeName="artModel.DesireActionTemplateResult">
+              <MappingFragment StoreEntitySet="DesireActionTemplateResult">
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="ActionTemplateResult" ColumnName="ActionTemplateResult" />
+                <ScalarProperty Name="Desire" ColumnName="Desire" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DesireMapZones">
+            <EntityTypeMapping TypeName="artModel.DesireMapZone">
+              <MappingFragment StoreEntitySet="DesireMapZone">
+                <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+                <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+                <ScalarProperty Name="Desire" ColumnName="Desire" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="artModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ExtendedLog" ColumnName="ExtendedLog" />
+                <ScalarProperty Name="ShortLog" ColumnName="ShortLog" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RaceDesires">
+            <EntityTypeMapping TypeName="artModel.RaceDesire">
+              <MappingFragment StoreEntitySet="RaceDesire">
+                <ScalarProperty Name="Deviation" ColumnName="Deviation" />
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="Probability" ColumnName="Probability" />
+                <ScalarProperty Name="DesireId" ColumnName="DesireId" />
+                <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserArtifactClasses">
+            <EntityTypeMapping TypeName="artModel.UserArtifactClass">
+              <MappingFragment StoreEntitySet="UserArtifactClass">
+                <ScalarProperty Name="ClassLevel" ColumnName="ClassLevel" />
+                <ScalarProperty Name="Expirience" ColumnName="Expirience" />
+                <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+                <ScalarProperty Name="Class" ColumnName="Class" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

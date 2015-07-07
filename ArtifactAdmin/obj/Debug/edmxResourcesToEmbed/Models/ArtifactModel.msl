@@ -1,22 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="artModelStoreContainer" CdmEntityContainer="artEntities">
-    <EntitySetMapping Name="ActFlows">
-      <EntityTypeMapping TypeName="artModel.ActFlow">
-        <MappingFragment StoreEntitySet="ActFlow">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="idUser" ColumnName="idUser" />
-          <ScalarProperty Name="idStep" ColumnName="idStep" />
-          <ScalarProperty Name="idAction" ColumnName="idAction" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Actions">
       <EntityTypeMapping TypeName="artModel.Action">
         <MappingFragment StoreEntitySet="Action">
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="ActionImprovementCost" ColumnName="ActionImprovementCost" />
+          <ScalarProperty Name="ActionChangeCost" ColumnName="ActionChangeCost" />
+          <ScalarProperty Name="Duration" ColumnName="Duration" />
+          <ScalarProperty Name="ExperienceModifier" ColumnName="ExperienceModifier" />
+          <ScalarProperty Name="PredispositionResult" ColumnName="PredispositionResult" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Step" ColumnName="Step" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="idUser" ColumnName="idUser" />
-          <ScalarProperty Name="idStep" ColumnName="idStep" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -75,9 +71,16 @@
     <EntitySetMapping Name="Steps">
       <EntityTypeMapping TypeName="artModel.Step">
         <MappingFragment StoreEntitySet="Step">
+          <ScalarProperty Name="IsKey" ColumnName="IsKey" />
+          <ScalarProperty Name="Desire" ColumnName="Desire" />
+          <ScalarProperty Name="YCoordinate" ColumnName="YCoordinate" />
+          <ScalarProperty Name="XCoordinate" ColumnName="XCoordinate" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="ActiveActionInFlow" ColumnName="ActiveActionInFlow" />
+          <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="idUser" ColumnName="idUser" />
-          <ScalarProperty Name="idActFlow" ColumnName="idActFlow" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -109,6 +112,8 @@
     <EntitySetMapping Name="UserArtifacts">
       <EntityTypeMapping TypeName="artModel.UserArtifact">
         <MappingFragment StoreEntitySet="UserArtifact">
+          <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+          <ScalarProperty Name="BlockActionProbability" ColumnName="BlockActionProbability" />
           <ScalarProperty Name="User" ColumnName="User" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Artifact" ColumnName="Artifact" />
@@ -182,6 +187,8 @@
     <EntitySetMapping Name="ActionDescriptions">
       <EntityTypeMapping TypeName="artModel.ActionDescription">
         <MappingFragment StoreEntitySet="ActionDescription">
+          <ScalarProperty Name="Class" ColumnName="Class" />
+          <ScalarProperty Name="Race" ColumnName="Race" />
           <ScalarProperty Name="ActionText" ColumnName="ActionText" />
           <ScalarProperty Name="MapZone" ColumnName="MapZone" />
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
@@ -192,7 +199,8 @@
     <EntitySetMapping Name="ActionTemplates">
       <EntityTypeMapping TypeName="artModel.ActionTemplate">
         <MappingFragment StoreEntitySet="ActionTemplate">
-          <ScalarProperty Name="PredispositionResult" ColumnName="PredispositionResult" />
+          <ScalarProperty Name="ActionTemplateResult" ColumnName="ActionTemplateResult" />
+          <ScalarProperty Name="BlockProbability" ColumnName="BlockProbability" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -307,6 +315,7 @@
     <EntitySetMapping Name="StepTemplates">
       <EntityTypeMapping TypeName="artModel.StepTemplate">
         <MappingFragment StoreEntitySet="StepTemplate">
+          <ScalarProperty Name="Desire" ColumnName="Desire" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StepText" ColumnName="StepText" />
           <ScalarProperty Name="Description" ColumnName="Description" />
@@ -339,6 +348,193 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionCharacteristics">
+      <EntityTypeMapping TypeName="artModel.ActionCharacteristic">
+        <MappingFragment StoreEntitySet="ActionCharacteristics">
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionPredispositions">
+      <EntityTypeMapping TypeName="artModel.ActionPredisposition">
+        <MappingFragment StoreEntitySet="ActionPredisposition">
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionProperties">
+      <EntityTypeMapping TypeName="artModel.ActionProperty">
+        <MappingFragment StoreEntitySet="ActionProperties">
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Properties" ColumnName="Properties" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionResults">
+      <EntityTypeMapping TypeName="artModel.ActionResult">
+        <MappingFragment StoreEntitySet="ActionResult">
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Killed" ColumnName="Killed" />
+          <ScalarProperty Name="SoulShard" ColumnName="SoulShard" />
+          <ScalarProperty Name="Artifact" ColumnName="Artifact" />
+          <ScalarProperty Name="Expirience" ColumnName="Expirience" />
+          <ScalarProperty Name="Gold" ColumnName="Gold" />
+          <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionResultDesires">
+      <EntityTypeMapping TypeName="artModel.ActionResultDesire">
+        <MappingFragment StoreEntitySet="ActionResultDesire">
+          <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+          <ScalarProperty Name="Desire" ColumnName="Desire" />
+          <ScalarProperty Name="ActionResult" ColumnName="ActionResult" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTemplateCharacteristics">
+      <EntityTypeMapping TypeName="artModel.ActionTemplateCharacteristic">
+        <MappingFragment StoreEntitySet="ActionTemplateCharacteristics">
+          <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
+          <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTemplateProperties">
+      <EntityTypeMapping TypeName="artModel.ActionTemplateProperty">
+        <MappingFragment StoreEntitySet="ActionTemplateProperties">
+          <ScalarProperty Name="Appearance" ColumnName="Appearance" />
+          <ScalarProperty Name="Properties" ColumnName="Properties" />
+          <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTemplateResults">
+      <EntityTypeMapping TypeName="artModel.ActionTemplateResult">
+        <MappingFragment StoreEntitySet="ActionTemplateResult">
+          <ScalarProperty Name="GoldModifier" ColumnName="GoldModifier" />
+          <ScalarProperty Name="ArtifactPosibility" ColumnName="ArtifactPosibility" />
+          <ScalarProperty Name="ExperienceModifier" ColumnName="ExperienceModifier" />
+          <ScalarProperty Name="PredispositionResultModifier" ColumnName="PredispositionResultModifier" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActiveActionInFlows">
+      <EntityTypeMapping TypeName="artModel.ActiveActionInFlow">
+        <MappingFragment StoreEntitySet="ActiveActionInFlow">
+          <ScalarProperty Name="Action" ColumnName="Action" />
+          <ScalarProperty Name="Step" ColumnName="Step" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarrierDesires">
+      <EntityTypeMapping TypeName="artModel.CarrierDesire">
+        <MappingFragment StoreEntitySet="CarrierDesire">
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="IsSecret" ColumnName="IsSecret" />
+          <ScalarProperty Name="AddictionRequirement" ColumnName="AddictionRequirement" />
+          <ScalarProperty Name="DesireMask" ColumnName="DesireMask" />
+          <ScalarProperty Name="DesireId" ColumnName="DesireId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarrierUserArtifacts">
+      <EntityTypeMapping TypeName="artModel.CarrierUserArtifact">
+        <MappingFragment StoreEntitySet="CarrierUserArtifact">
+          <ScalarProperty Name="Addiction" ColumnName="Addiction" />
+          <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+          <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Classes">
+      <EntityTypeMapping TypeName="artModel.Class">
+        <MappingFragment StoreEntitySet="Class">
+          <ScalarProperty Name="FibonacciSeed" ColumnName="FibonacciSeed" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Desires">
+      <EntityTypeMapping TypeName="artModel.Desire">
+        <MappingFragment StoreEntitySet="Desire">
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DesireActionTemplateResults">
+      <EntityTypeMapping TypeName="artModel.DesireActionTemplateResult">
+        <MappingFragment StoreEntitySet="DesireActionTemplateResult">
+          <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+          <ScalarProperty Name="ActionTemplateResult" ColumnName="ActionTemplateResult" />
+          <ScalarProperty Name="Desire" ColumnName="Desire" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DesireMapZones">
+      <EntityTypeMapping TypeName="artModel.DesireMapZone">
+        <MappingFragment StoreEntitySet="DesireMapZone">
+          <ScalarProperty Name="Modifier" ColumnName="Modifier" />
+          <ScalarProperty Name="MapZone" ColumnName="MapZone" />
+          <ScalarProperty Name="Desire" ColumnName="Desire" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="artModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ExtendedLog" ColumnName="ExtendedLog" />
+          <ScalarProperty Name="ShortLog" ColumnName="ShortLog" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RaceDesires">
+      <EntityTypeMapping TypeName="artModel.RaceDesire">
+        <MappingFragment StoreEntitySet="RaceDesire">
+          <ScalarProperty Name="Deviation" ColumnName="Deviation" />
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="Probability" ColumnName="Probability" />
+          <ScalarProperty Name="DesireId" ColumnName="DesireId" />
+          <ScalarProperty Name="RaceId" ColumnName="RaceId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserArtifactClasses">
+      <EntityTypeMapping TypeName="artModel.UserArtifactClass">
+        <MappingFragment StoreEntitySet="UserArtifactClass">
+          <ScalarProperty Name="ClassLevel" ColumnName="ClassLevel" />
+          <ScalarProperty Name="Expirience" ColumnName="Expirience" />
+          <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
+          <ScalarProperty Name="Class" ColumnName="Class" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

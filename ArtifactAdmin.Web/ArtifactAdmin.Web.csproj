@@ -177,6 +177,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ActionDescriptionsController.cs" />
+    <Compile Include="Controllers\ActionTemplateResultsController.cs" />
     <Compile Include="Controllers\ActionTemplatesController.cs" />
     <Compile Include="Controllers\ArtifactTypesController.cs" />
     <Compile Include="Controllers\BonusController.cs" />
@@ -338,6 +339,11 @@
     <Content Include="Views\StepActionTemplates\Details.cshtml" />
     <Content Include="Views\StepActionTemplates\Edit.cshtml" />
     <Content Include="Views\StepActionTemplates\Index.cshtml" />
+    <Content Include="Views\ActionTemplateResults\Create.cshtml" />
+    <Content Include="Views\ActionTemplateResults\Delete.cshtml" />
+    <Content Include="Views\ActionTemplateResults\Details.cshtml" />
+    <Content Include="Views\ActionTemplateResults\Edit.cshtml" />
+    <Content Include="Views\ActionTemplateResults\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

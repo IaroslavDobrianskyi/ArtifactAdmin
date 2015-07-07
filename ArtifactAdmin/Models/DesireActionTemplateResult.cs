@@ -12,20 +12,14 @@ namespace ArtifactAdmin.DAL.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ActFlow
+    public partial class DesireActionTemplateResult
     {
-        public ActFlow()
-        {
-            this.Steps = new HashSet<Step>();
-        }
-    
         public int id { get; set; }
-        public int idUser { get; set; }
-        public Nullable<int> idStep { get; set; }
-        public Nullable<int> idAction { get; set; }
+        public int Desire { get; set; }
+        public int ActionTemplateResult { get; set; }
+        public double Modifier { get; set; }
     
-        public virtual Action Action { get; set; }
-        public virtual Step Step { get; set; }
-        public virtual ICollection<Step> Steps { get; set; }
+        public virtual ActionTemplateResult ActionTemplateResult1 { get; set; }
+        public virtual Desire Desire1 { get; set; }
     }
 }

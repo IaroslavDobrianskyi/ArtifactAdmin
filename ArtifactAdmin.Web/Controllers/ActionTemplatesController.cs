@@ -47,7 +47,7 @@ namespace ArtifactAdmin.Web.Controllers
         // GET: ActionTemplates/Create
         public ActionResult Create()
         {
-            return View();
+            return View(this.actionTemplateService.GetViewById(null));
         }
 
         // POST: ActionTemplates/Create
@@ -55,7 +55,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name")] ActionTemplateDto actionTemplateDto)
+        public ActionResult Create([Bind(Include = "id,Name,BlockProbability,ActionTemplateResult")] ActionTemplateDto actionTemplateDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -69,13 +69,13 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    return View(actionTemplateDto);
+                    return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
                 }
                
                 return RedirectToAction("Index");
             }
 
-            return View(actionTemplateDto);
+            return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
         }
 
         // GET: ActionTemplates/Edit/5
@@ -85,12 +85,12 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var actionTemplateDto = this.actionTemplateService.GetById(id);
-            if (actionTemplateDto == null)
+            var viewActionTemplateDto = this.actionTemplateService.GetViewById(id);
+            if (viewActionTemplateDto == null)
             {
                 return HttpNotFound();
             }
-            return View(actionTemplateDto);
+            return View(viewActionTemplateDto);
         }
 
         // POST: ActionTemplates/Edit/5
@@ -98,7 +98,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name")] ActionTemplateDto actionTemplateDto)
+        public ActionResult Edit([Bind(Include = "id,Name,BlockProbability,ActionTemplateResult")] ActionTemplateDto actionTemplateDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -112,13 +112,13 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(actionTemplateDto);
+                    return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
                 }
                 
                 return RedirectToAction("Index");
             }
 
-            return View(actionTemplateDto);
+            return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
         }
 
         // GET: ActionTemplates/Delete/5

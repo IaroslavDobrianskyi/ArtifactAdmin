@@ -16,14 +16,28 @@ namespace ArtifactAdmin.DAL.Models
     {
         public Action()
         {
-            this.ActFlows = new HashSet<ActFlow>();
+            this.ActionCharacteristics = new HashSet<ActionCharacteristic>();
+            this.ActionPredispositions = new HashSet<ActionPredisposition>();
+            this.ActionProperties = new HashSet<ActionProperty>();
+            this.ActionResults = new HashSet<ActionResult>();
+            this.ActiveActionInFlows = new HashSet<ActiveActionInFlow>();
         }
     
         public int id { get; set; }
-        public int idUser { get; set; }
-        public int idStep { get; set; }
+        public int Step { get; set; }
+        public string Text { get; set; }
+        public Nullable<double> PredispositionResult { get; set; }
+        public Nullable<double> ExperienceModifier { get; set; }
+        public Nullable<System.DateTime> Duration { get; set; }
+        public Nullable<int> ActionChangeCost { get; set; }
+        public Nullable<int> ActionImprovementCost { get; set; }
+        public string Icon { get; set; }
     
-        public virtual ICollection<ActFlow> ActFlows { get; set; }
-        public virtual Step Step { get; set; }
+        public virtual Step Step1 { get; set; }
+        public virtual ICollection<ActionCharacteristic> ActionCharacteristics { get; set; }
+        public virtual ICollection<ActionPredisposition> ActionPredispositions { get; set; }
+        public virtual ICollection<ActionProperty> ActionProperties { get; set; }
+        public virtual ICollection<ActionResult> ActionResults { get; set; }
+        public virtual ICollection<ActiveActionInFlow> ActiveActionInFlows { get; set; }
     }
 }

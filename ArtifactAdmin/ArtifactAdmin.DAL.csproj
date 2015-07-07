@@ -164,13 +164,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\ActFlow.cs">
-      <DependentUpon>ArtifactModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Action.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActionCharacteristic.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActionDescription.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionPredisposition.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionProperty.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionResult.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionResultDesire.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ActionTemplate.cs">
@@ -179,7 +191,19 @@
     <Compile Include="Models\ActionTemplateActionDescription.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActionTemplateCharacteristic.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActionTemplatePredisposition.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionTemplateProperty.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActionTemplateResult.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ActiveActionInFlow.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Artifact.cs">
@@ -212,7 +236,16 @@
     <Compile Include="Models\Carrier.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CarrierDesire.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CarrierUserArtifact.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Characteristic.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Class.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Constellation.cs">
@@ -221,9 +254,21 @@
     <Compile Include="Models\ConstellationBonu.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Desire.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DesireActionTemplateResult.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DesireMapZone.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetDbSet.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IRepository.cs" />
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MapObject.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -240,6 +285,9 @@
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Race.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RaceDesire.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repository.cs" />
@@ -274,6 +322,9 @@
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserArtifact.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserArtifactClass.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserArtifactTalent.cs">

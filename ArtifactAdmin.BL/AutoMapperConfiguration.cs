@@ -59,6 +59,12 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<StepTemplateActionTemplate, StepTemplateActionTemplateDto>();
             Mapper.CreateMap<StepTemplateActionTemplateDto, StepTemplateActionTemplate>();
+
+            Mapper.CreateMap<ActionTemplateResult,ActionTemplateResultDto>();
+            Mapper.CreateMap<ActionTemplateResultDto, ActionTemplateResult>();
+
+            Mapper.CreateMap<DesireActionTemplateResult, DesireActionTemplateResultDto>();
+            Mapper.CreateMap<DesireActionTemplateResultDto, DesireActionTemplateResult>();
         } 
     }
 }

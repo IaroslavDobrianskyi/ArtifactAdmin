@@ -14,6 +14,12 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class Carrier
     {
+        public Carrier()
+        {
+            this.CarrierDesires = new HashSet<CarrierDesire>();
+            this.CarrierUserArtifacts = new HashSet<CarrierUserArtifact>();
+        }
+    
         public int id { get; set; }
         public int Race { get; set; }
         public int ExperienceLevel { get; set; }
@@ -24,5 +30,7 @@ namespace ArtifactAdmin.DAL.Models
         public long DefaultPredisposition { get; set; }
     
         public virtual Race Race1 { get; set; }
+        public virtual ICollection<CarrierDesire> CarrierDesires { get; set; }
+        public virtual ICollection<CarrierUserArtifact> CarrierUserArtifacts { get; set; }
     }
 }

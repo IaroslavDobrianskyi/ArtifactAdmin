@@ -1,0 +1,56 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ActionTemplateResultDto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Шаблон дії.Результат</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PredispositionResultModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PredispositionResultModifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperienceModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExperienceModifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ArtifactPosibility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArtifactPosibility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoldModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoldModifier)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+    }
+</div>

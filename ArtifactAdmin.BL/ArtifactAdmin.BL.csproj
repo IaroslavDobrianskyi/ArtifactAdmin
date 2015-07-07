@@ -111,6 +111,7 @@
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="InjectionConfig.cs" />
     <Compile Include="Interfaces\IActionDescriptionService.cs" />
+    <Compile Include="Interfaces\IActionTemplateResultService.cs" />
     <Compile Include="Interfaces\IActionTemplateService.cs" />
     <Compile Include="Interfaces\IArtifactTypeService.cs" />
     <Compile Include="Interfaces\IBonusService.cs" />
@@ -124,9 +125,11 @@
     <Compile Include="Interfaces\ITalentService.cs" />
     <Compile Include="ModelsDTO\ActionDescriptionDto.cs" />
     <Compile Include="ModelsDTO\ActionTemplateDto.cs" />
+    <Compile Include="ModelsDTO\ActionTemplateResultDto.cs" />
     <Compile Include="ModelsDTO\ArtifactTypeDto.cs" />
     <Compile Include="ModelsDTO\BonusDto.cs" />
     <Compile Include="ModelsDTO\ConstellationDto.cs" />
+    <Compile Include="ModelsDTO\DesireActionTemplateResultDto.cs" />
     <Compile Include="ModelsDTO\MapObjectDto.cs" />
     <Compile Include="ModelsDTO\MapObjectProbabilityDto.cs" />
     <Compile Include="ModelsDTO\MapZoneDto.cs" />
@@ -137,12 +140,14 @@
     <Compile Include="ModelsDTO\StepTemplateDto.cs" />
     <Compile Include="ModelsDTO\TalentDto.cs" />
     <Compile Include="ModelsDTO\ViewActionDescriptionDto.cs" />
+    <Compile Include="ModelsDTO\ViewActionTemplateDto.cs" />
     <Compile Include="ModelsDTO\ViewMapZoneDto.cs" />
     <Compile Include="ModelsDTO\ViewStepActionTemplateDto.cs" />
     <Compile Include="ModelsDTO\ViewStepObjectDto.cs" />
     <Compile Include="ModelsDTO\ViewStepTemplateDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ActionDescriptionService.cs" />
+    <Compile Include="Services\ActionTemplateResultService.cs" />
     <Compile Include="Services\ActionTemplateService.cs" />
     <Compile Include="Services\ArtifactTypeService.cs" />
     <Compile Include="Services\BonusService.cs" />

@@ -36,11 +36,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewActionDescriptionDto = this.actionDescriptionService.GetViewById(id);
             if (viewActionDescriptionDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(viewActionDescriptionDto);
         }
 
@@ -89,6 +91,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewActionDescriptionDto = this.actionDescriptionService.GetViewById(id);
             if (viewActionDescriptionDto == null)
             {
@@ -115,6 +118,7 @@ namespace ArtifactAdmin.Web.Controllers
                     this.actionDescriptionService.Update(actionDescriptionDto);
                         
                 }
+
                 catch (Exception e) 
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
@@ -137,6 +141,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var actionDescriptionDto = this.actionDescriptionService.GetById(id);
             if (actionDescriptionDto == null)
             {

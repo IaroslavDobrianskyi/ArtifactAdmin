@@ -1,4 +1,4 @@
-﻿@model ArtifactAdmin.BL.ModelsDTO.ActionTemplateDto
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewActionTemplateDto
 
 @{
     ViewBag.Title = "Create";
@@ -15,14 +15,36 @@
         <h4>Шаблон дії</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActionTemplateDto.ActionTemplateResult)
+        @Html.HiddenFor(model => model.ActionTemplateDto.BlockProbability)
         <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ActionTemplateDto.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                @Html.TextAreaFor(model => model.ActionTemplateDto.Name, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.ActionTemplateDto.Name, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.OneProbability, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.OneProbability, new { htmlAttributes = new { @class = "form-control", onchange = "ValidateProbability()" } })
+                @Html.ValidationMessageFor(model => model.OneProbability, "", new { @class = "text-danger" })
+                <input type="text" class="text-danger" id="MessageError" value="" style="width:100%" hidden>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionTemplateDto.ActionTemplateResult1.ArtifactPosibility, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ArtifactPosibility"), "Виберіть результат",
+                new
+                {
+                    @class = "form-control",
+                    onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"
+                })
+                @*@Html.ValidationMessageFor(model => model.ActionTemplateDto, "", new { @class = "text-danger" })*@
+                @Html.ValidationMessageFor(model => model.ActionTemplateDto.ActionTemplateResult, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Записати" class="btn btn-default" />
@@ -37,4 +59,42 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    function SelId(Sel,HiddenId)
+    {
+        var SelId = "";
+        for (i = 0; i < Sel.options.length; i++)
+        {
+            if (Sel.options[i].selected == true)
+            {
+                SelId = Sel.options[i].value;
+                HiddenId.value = Number(SelId);
+                break;
+            }
+        }
+    }
+    function ValidateProbability() {
+        var Val = document.getElementById("OneProbability").value.toString();
+        var ValidateProbability = Number(Val);
+        var Message = document.getElementById("MessageError");
+        if (Val.substring(0, 3) == "0.0" & Number(Val) == 0) {
+            Message.value = "Введіть число від 0 до 1 !";
+            Message.hidden = false;
+        }
+        else {
+            if (ValidateProbability > 0 & ValidateProbability < 1)
+            {
+                document.getElementById("ActionTemplateDto_BlockProbability").value = ValidateProbability;
+                Message.value = "";
+                Message.hidden = true;
+            }
+            //else
+            //{
+            //    Message.value = "Введіть число від 0 до 1 !";
+            //    Message.hidden = false;
+            //}
+        }
+    }
+</script>
 }
+

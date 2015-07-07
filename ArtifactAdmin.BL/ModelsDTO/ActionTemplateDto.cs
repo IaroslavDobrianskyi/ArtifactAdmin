@@ -21,6 +21,11 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [StringLength(200, ErrorMessageResourceName = "StringLength",
   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Name { get; set; }
-        public double PredispositionResult { internal get; set; }
+
+        public double BlockProbability { get; set; }
+
+        public int ActionTemplateResult { get; set; }
+
+        public virtual ActionTemplateResultDto ActionTemplateResult1 { get; set; }
     }
 }
