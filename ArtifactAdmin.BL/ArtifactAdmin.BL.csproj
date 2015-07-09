@@ -116,8 +116,10 @@
     <Compile Include="Interfaces\IArtifactTypeService.cs" />
     <Compile Include="Interfaces\IBonusService.cs" />
     <Compile Include="Interfaces\IConstellationService.cs" />
+    <Compile Include="Interfaces\IDesireService.cs" />
     <Compile Include="Interfaces\IMapObjectService.cs" />
     <Compile Include="Interfaces\IMapZoneService.cs" />
+    <Compile Include="Interfaces\IRaceService.cs" />
     <Compile Include="Interfaces\IStepActionTemplateService.cs" />
     <Compile Include="Interfaces\IStepObjectService.cs" />
     <Compile Include="Interfaces\IStepObjectTypeService.cs" />
@@ -130,9 +132,11 @@
     <Compile Include="ModelsDTO\BonusDto.cs" />
     <Compile Include="ModelsDTO\ConstellationDto.cs" />
     <Compile Include="ModelsDTO\DesireActionTemplateResultDto.cs" />
+    <Compile Include="ModelsDTO\DesireDto.cs" />
     <Compile Include="ModelsDTO\MapObjectDto.cs" />
     <Compile Include="ModelsDTO\MapObjectProbabilityDto.cs" />
     <Compile Include="ModelsDTO\MapZoneDto.cs" />
+    <Compile Include="ModelsDTO\RaceDto.cs" />
     <Compile Include="ModelsDTO\StepObjectDto.cs" />
     <Compile Include="ModelsDTO\StepObjectStepTemplateDto.cs" />
     <Compile Include="ModelsDTO\StepObjectTypeDto.cs" />
@@ -152,8 +156,10 @@
     <Compile Include="Services\ArtifactTypeService.cs" />
     <Compile Include="Services\BonusService.cs" />
     <Compile Include="Services\ConstellationService.cs" />
+    <Compile Include="Services\DesireService.cs" />
     <Compile Include="Services\MapObjectService.cs" />
     <Compile Include="Services\MapZoneService.cs" />
+    <Compile Include="Services\RaceService.cs" />
     <Compile Include="Services\StepActionTemplateService.cs" />
     <Compile Include="Services\StepObjectService.cs" />
     <Compile Include="Services\StepObjectTypeService.cs" />

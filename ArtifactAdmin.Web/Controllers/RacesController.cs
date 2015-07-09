@@ -1,11 +1,11 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StepObjectsController.cs" company="Artifact">
+// <copyright file="RacesController.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the StepObjectsController type.
+//   Defines the RacesController type.
 // </summary>
-// -------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
@@ -15,189 +15,171 @@ namespace ArtifactAdmin.Web.Controllers
     using BL.Interfaces;
     using BL.ModelsDTO;
 
-    public class StepObjectsController : Controller
+    public class RacesController : Controller
     {
-        private IStepObjectService stepObjectService;
-        private IStepObjectTypeService stepObjectTypeService;
+        private IRaceService raceService;
 
-        public StepObjectsController(IStepObjectService stepObjectService, IStepObjectTypeService stepObjectTypeService)
+        public RacesController(IRaceService raceService) 
         {
-            this.stepObjectService = stepObjectService;
-            this.stepObjectTypeService = stepObjectTypeService;
+            this.raceService = raceService;
         }
 
-        // GET: StepObjects
+        // GET: Races
         public ActionResult Index()
         {
-            return View(this.stepObjectService.GetAll());
+            return View(this.raceService.GetAll());
         }
 
-        // GET: StepObjects/Details/5
+        // GET: Races/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
-            var stepObject = this.stepObjectService.GetById(id);
-
-            if (stepObject == null)
+            var race = this.raceService.GetById(id);
+            if (race == null)
             {
                 return HttpNotFound();
             }
-            
-            return View(stepObject);
+            return View(race);
         }
 
-        // GET: StepObjects/Create
+        // GET: Races/Create
         public ActionResult Create()
         {
-            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name");
             return View();
         }
 
-        // POST: StepObjects/Create
+        // POST: Races/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "Description,id,Characreristics,CharacteristicsLevelModifier,Predisposition,Properties,Icon")] RaceDto race, HttpPostedFileBase Icon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileNameForSave = FileHelper.SaveIcon("StepObjects", Icon);
+                var fileNameForSave = FileHelper.SaveIcon("Races", Icon);
                 if (string.IsNullOrEmpty(fileNameForSave))
                 {
                     ViewBag.Error = "Помилка при збереженні іконки";
-                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-                    return View(stepObject);
+                    return View(race);
                 }
 
                 try
                 {
-                    this.stepObjectService.Create(stepObject, fileNameForSave);
+                    this.raceService.Create(race, fileNameForSave);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-                    return View(stepObject);
+                    return View(race);
                 }
-
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-            return View(stepObject);
+            return View(race);
         }
 
-        // GET: StepObjects/Edit/5
+        // GET: Races/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var stepObject = this.stepObjectService.GetById(id);
-            if (stepObject == null)
+            var race = this.raceService.GetById(id);
+            if (race == null)
             {
                 return HttpNotFound();
             }
-
-            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-            return View(stepObject);
+            return View(race);
         }
 
-        // POST: StepObjects/Edit/5
+        // POST: Races/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase NewIcon)
+        public ActionResult Edit([Bind(Include = "Description,id,Characreristics,CharacteristicsLevelModifier,Predisposition,Properties,Icon")] RaceDto race, HttpPostedFileBase NewIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var oldfileName = stepObject.Icon;
+                var oldfileName = race.Icon;
                 var fileNameForSave = oldfileName;
                 if (NewIcon != null)
                 {
-                    fileNameForSave = FileHelper.SaveIcon("StepObjects", NewIcon);
+                    fileNameForSave = FileHelper.SaveIcon("Races", NewIcon);
                     if (string.IsNullOrEmpty(fileNameForSave))
                     {
                         ViewBag.Error = "Помилка при збереженні іконки";
-                        return View(stepObject);
+                        return View(race);
                     }
                 }
 
-                try
+                try 
                 {
-                    this.stepObjectService.Update(stepObject, fileNameForSave);
+                    this.raceService.Update(race, fileNameForSave);
                 }
-                catch (Exception e)
+                catch (Exception e) 
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-                    return View(stepObject);
+                    return View(race);
                 }
 
                 if (oldfileName != fileNameForSave)
                 {
-                    FileHelper.DeleteIcon(oldfileName, "StepObjects");
+                    FileHelper.DeleteIcon(oldfileName, "Races");
                 }
+
                 return RedirectToAction("Index");
             }
-
-            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-            return View(stepObject);
+            return View(race);
         }
 
-        // GET: StepObjects/Delete/5
+        // GET: Races/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var stepObject = this.stepObjectService.GetById(id);
-            if (stepObject == null)
+            var race = this.raceService.GetById(id);
+            if (race == null)
             {
                 return HttpNotFound();
             }
-
-            return View(stepObject);
+            return View(race);
         }
 
-        // POST: StepObjects/Delete/5
+        // POST: Races/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var stepObject = this.stepObjectService.GetById(id);
-            var fileName = stepObject.Icon;
-            try
+            var race = this.raceService.GetById(id);
+            var fileName = race.Icon;
+            try 
             {
-                this.stepObjectService.Delete(id);
+                this.raceService.Delete(id);
             }
             catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
-                return View(stepObject);
+                return View(race);
             }
 
-            FileHelper.DeleteIcon(fileName, "StepObjects");
+            FileHelper.DeleteIcon(fileName, "Races");
             return RedirectToAction("Index");
         }
     }

@@ -23,29 +23,34 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRepository<StepObjectType> stepObjectTypeRepository;
         private readonly IRepository<StepObjectStepTemplate> stepObjectStepTemplateRepository;
         private readonly IRepository<StepTemplateActionTemplate> stepTemplateActionTemplateRepository;
-        private readonly IRepository<StepObject> stepObjectRepository; 
+        private readonly IRepository<StepObject> stepObjectRepository;
+        private readonly IRepository<Desire> desireRepository;
 
         public StepTemplateService(IRepository<StepTemplate> stepTemplateRepository,
              IRepository<StepObjectType> stepObjectTypeRepository, 
             IRepository<StepObjectStepTemplate> stepObjectStepTemplateRepository, 
             IRepository<StepTemplateActionTemplate> stepTemplateActionTemplateRepository,
-            IRepository<StepObject> stepObjectRepository)
+            IRepository<StepObject> stepObjectRepository,
+            IRepository<Desire> desireRepository)
         {
             this.stepTemplateRepository = stepTemplateRepository;
             this.stepObjectTypeRepository = stepObjectTypeRepository;
             this.stepObjectStepTemplateRepository = stepObjectStepTemplateRepository;
             this.stepTemplateActionTemplateRepository = stepTemplateActionTemplateRepository;
             this.stepObjectRepository = stepObjectRepository;
+            this.desireRepository = desireRepository;
         }
 
         public IEnumerable<StepTemplateDto> GetAll()
         {
-            return Mapper.Map<List<StepTemplateDto>>(this.stepTemplateRepository.GetAll().Include(s => s.StepObjectStepTemplates));
+            return Mapper.Map<List<StepTemplateDto>>(this.stepTemplateRepository.GetAll().Include(s => s.StepObjectStepTemplates).
+                Include(s=>s.Desire1));
         }
 
         public ViewStepTemplateDto GetViewById(int? id)
         {
             var viewStepTemplateDto = new ViewStepTemplateDto();
+            viewStepTemplateDto.DesireDto = Mapper.Map<List<DesireDto>>(this.desireRepository.GetAll());
             viewStepTemplateDto.StepObjectType =
                 Mapper.Map<List<StepObjectTypeDto>>(this.stepObjectTypeRepository.GetAll());
              viewStepTemplateDto.StepObjectType.Add(null);
@@ -111,7 +116,7 @@ namespace ArtifactAdmin.BL.Services
 
         public StepTemplateDto GetById(int? id)
         {
-            return Mapper.Map<StepTemplateDto>(this.stepTemplateRepository.GetAll()
+            return Mapper.Map<StepTemplateDto>(this.stepTemplateRepository.GetAll().Include(s=>s.Desire1)
                                                    .FirstOrDefault(s => s.id == id));
         }
 

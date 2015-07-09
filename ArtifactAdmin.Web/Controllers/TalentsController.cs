@@ -140,7 +140,10 @@ namespace ArtifactAdmin.Web.Controllers
                     return View(talent);
                 }
 
-                FileHelper.DeleteIcon(oldfileName, "ConstellationsTalents");
+                if (oldfileName != fileNameForSave)
+                {
+                    FileHelper.DeleteIcon(oldfileName, "ConstellationsTalents");
+                }
                 return RedirectToAction("Index");
             }
 

@@ -327,7 +327,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Characreristics" Type="bigint" Nullable="false" />
           <Property Name="CharacteristicsLevelModifier" Type="bigint" Nullable="false" />
@@ -1995,7 +1995,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Carriers" Relationship="artModel.FK_Carrier_Race" FromRole="Race" ToRole="Carrier" />
           <Property Name="Characreristics" Type="Int64" Nullable="false" />
           <Property Name="CharacteristicsLevelModifier" Type="Int64" Nullable="false" />

@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ArtifactTypesController.cs" company="Artifact">
+// <copyright file="DesiresController cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the ArtifactTypesController type.
+//   Defines the DesiresController  type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web.Controllers
@@ -15,142 +15,138 @@ namespace ArtifactAdmin.Web.Controllers
     using BL.Interfaces;
     using BL.ModelsDTO;
 
-    public class ArtifactTypesController : Controller
+    public class DesiresController : Controller
     {
-        private IArtifactTypeService artifactTypeService;
-
-        public ArtifactTypesController(IArtifactTypeService artifactTypeService)
+        private IDesireService desireService;
+        public DesiresController(IDesireService desireService) 
         {
-            this.artifactTypeService = artifactTypeService;
+            this.desireService = desireService;
         }
 
-        // GET: ArtifactTypes
+        // GET: Desires
         public ActionResult Index()
         {
-            return View(this.artifactTypeService.GetAll());
+            return View(this.desireService.GetAll());
         }
 
-        // GET: ArtifactTypes/Details/5
+        // GET: Desires/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
-            var artifactType = this.artifactTypeService.GetById(id);
 
-            if (artifactType == null)
+            var desireDto = this.desireService.GetById(id);
+            if (desireDto == null)
             {
                 return HttpNotFound();
             }
 
-            return View(artifactType);
+            return View(desireDto);
         }
 
-        // GET: ArtifactTypes/Create
+        // GET: Desires/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: ArtifactTypes/Create
+        // POST: Desires/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactTypeDto artifactType, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "id,Name,Description,Icon")] DesireDto desire, HttpPostedFileBase Icon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileNameForSave = FileHelper.SaveIcon("ArtifactTypes", Icon);
-                if (string.IsNullOrEmpty(fileNameForSave))
+                var fileNameForSave = FileHelper.SaveIcon("Desires", Icon);
+                if (string.IsNullOrEmpty(fileNameForSave)) 
                 {
                     ViewBag.Error = "Помилка при збереженні іконки";
-                    return View(artifactType);
+                    return View(desire);
                 }
 
-                try
+                try 
                 {
-                    this.artifactTypeService.Create(artifactType, fileNameForSave);
+                    this.desireService.Create(desire, fileNameForSave);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    return View(artifactType);
+                    return View(desire);
                 }
-               
+
                 return RedirectToAction("Index");
             }
 
-            return View(artifactType);
+            return View(desire);
         }
 
-        // GET: ArtifactTypes/Edit/5
+        // GET: Desires/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var artifactType = this.artifactTypeService.GetById(id);
-            if (artifactType == null)
+            var desireDto = this.desireService.GetById(id); ;
+            if (desireDto == null)
             {
                 return HttpNotFound();
             }
-
-            return View(artifactType);
+            return View(desireDto);
         }
 
-        // POST: ArtifactTypes/Edit/5
+        // POST: Desires/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,Icon,Descrioption")] ArtifactTypeDto artifactType, HttpPostedFileBase NewIcon)
+        public ActionResult Edit([Bind(Include = "id,Name,Description,Icon")] DesireDto desire, HttpPostedFileBase NewIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var oldfileName = artifactType.Icon;
-                var fileNameForSave = oldfileName;
-                if (NewIcon != null)
+                var oldFileNAme = desire.Icon;
+                var fileNameForSave = oldFileNAme;
+                if (NewIcon != null) 
                 {
-                    fileNameForSave = FileHelper.SaveIcon("ArtifactTypes", NewIcon);
-                    if (string.IsNullOrEmpty(fileNameForSave))
+                    fileNameForSave = FileHelper.SaveIcon("Desires", NewIcon);
+                    if (string.IsNullOrEmpty(fileNameForSave)) 
                     {
                         ViewBag.Error = "Помилка при збереженні іконки";
-                        return View(artifactType);
+                        return View(desire);
                     }
                 }
 
                 try
                 {
-                    this.artifactTypeService.Update(artifactType, fileNameForSave);
+                    this.desireService.Update(desire, fileNameForSave);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(artifactType);
+                    return View(desire);
                 }
 
-                if (oldfileName != fileNameForSave)
+                if (oldFileNAme != fileNameForSave)
                 {
-                    FileHelper.DeleteIcon(oldfileName, "ArtifactTypes");
+                    FileHelper.DeleteIcon(oldFileNAme, "Desires");
                 }
                 return RedirectToAction("Index");
             }
 
-            return View(artifactType);
+            return View(desire);
         }
 
-        // GET: ArtifactTypes/Delete/5
+        // GET: Desires/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -158,36 +154,36 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var artifactType = this.artifactTypeService.GetById(id);
-            if (artifactType == null)
+            var desireDto = this.desireService.GetById(id);
+            if (desireDto == null)
             {
                 return HttpNotFound();
             }
 
-            return View(artifactType);
+            return View(desireDto);
         }
 
-        // POST: ArtifactTypes/Delete/5
+        // POST: Desires/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var artifactType = this.artifactTypeService.GetById(id);
-            var fileName = artifactType.Icon;
+            var desireDto = this.desireService.GetById(id);
+            var fileName = desireDto.Icon;
             try
             {
-                this.artifactTypeService.Delete(id);
+                this.desireService.Delete(id);
             }
-            catch (Exception e)
+            catch (Exception e) 
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                return View(artifactType);
+                return View(desireDto);
             }
 
-            FileHelper.DeleteIcon(fileName, "ArtifactTypes");
+            FileHelper.DeleteIcon(fileName, "Desires");
             return RedirectToAction("Index");
         }
     }

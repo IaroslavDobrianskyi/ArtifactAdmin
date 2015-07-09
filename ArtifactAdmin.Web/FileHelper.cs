@@ -27,8 +27,19 @@ namespace ArtifactAdmin.Web
         {
             var fileName = Path.GetFileName(icon.FileName);
             fileName = Guid.NewGuid().ToString() + '_' + fileName;
-            var pathToIcon = App_Start.ImagePath.ImPath;
-            var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + folder), fileName);
+            var pathToIcon = HttpContext.Current.Server.MapPath(App_Start.ImagePath.ImPath + folder);
+            try
+            {
+                if (!Directory.Exists(pathToIcon.ToString()))
+                {
+                    Directory.CreateDirectory(pathToIcon.ToString());
+                }
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+             var path = Path.Combine(pathToIcon, fileName);
             try
             {
                 icon.SaveAs(path);

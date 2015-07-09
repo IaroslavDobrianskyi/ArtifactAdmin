@@ -30,13 +30,15 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Display(Name = "Текст")]
         
         public string StepText { get; set; }
+
+        public Nullable<int> Desire { get; set; }
         
         [Required(ErrorMessageResourceName = "RequiredName",
   ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Назва")]
         [StringLength(200, ErrorMessageResourceName = "StringLength",
     ErrorMessageResourceType = typeof(ValidationStrings))]
-        
+
         public string Name { get; set; }
         
         [Display(Name = "Об'єкти кроку")]
@@ -44,5 +46,8 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
         [Display(Name = "Дії кроку")]
         public virtual ICollection<StepTemplateActionTemplateDto> StepTemplateActionTemplates { get; set; }
+        
+        [Display(Name="Бажання")]
+        public virtual DesireDto Desire1 { get; set; }
     }
 }

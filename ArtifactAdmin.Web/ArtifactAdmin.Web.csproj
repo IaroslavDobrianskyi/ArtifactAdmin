@@ -182,9 +182,11 @@
     <Compile Include="Controllers\ArtifactTypesController.cs" />
     <Compile Include="Controllers\BonusController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
+    <Compile Include="Controllers\DesiresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapObjectsController.cs" />
     <Compile Include="Controllers\MapZonesController.cs" />
+    <Compile Include="Controllers\RacesController.cs" />
     <Compile Include="Controllers\StepActionTemplatesController.cs" />
     <Compile Include="Controllers\StepObjectsController.cs" />
     <Compile Include="Controllers\StepObjectTypesController.cs" />
@@ -344,6 +346,16 @@
     <Content Include="Views\ActionTemplateResults\Details.cshtml" />
     <Content Include="Views\ActionTemplateResults\Edit.cshtml" />
     <Content Include="Views\ActionTemplateResults\Index.cshtml" />
+    <Content Include="Views\Desires\Create.cshtml" />
+    <Content Include="Views\Desires\Delete.cshtml" />
+    <Content Include="Views\Desires\Details.cshtml" />
+    <Content Include="Views\Desires\Edit.cshtml" />
+    <Content Include="Views\Desires\Index.cshtml" />
+    <Content Include="Views\Races\Create.cshtml" />
+    <Content Include="Views\Races\Delete.cshtml" />
+    <Content Include="Views\Races\Details.cshtml" />
+    <Content Include="Views\Races\Edit.cshtml" />
+    <Content Include="Views\Races\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

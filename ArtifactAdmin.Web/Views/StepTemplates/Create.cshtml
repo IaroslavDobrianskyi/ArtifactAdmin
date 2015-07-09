@@ -15,6 +15,7 @@
         <h4>Шаблон кроку- об'єкти</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model=>model.StepTemplate.Desire)
         <div class="form-group">
             @Html.LabelFor(model => model.StepTemplate.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -38,6 +39,16 @@
                 @Html.ValidationMessageFor(model => model.StepTemplate.Name, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StepTemplate.Desire1.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(m=>m.DesireDto, new SelectList(Model.DesireDto,"id","Name"),"Виберіть бажання",
+                new { @class = "form-control",
+                      onchange = "javascript:SelId(this,document.getElementById('StepTemplate_Desire'));"} )
+                @Html.ValidationMessageFor(model => model.StepTemplate.Desire, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <table class="table">
             <tr>
                 <td>
@@ -52,10 +63,10 @@
                     <span id="TypeMes" class="alert-warning"></span>
                     <br />
                     <input type="button" id="add" value=">"
-                           onclick="javascript: MoveObj(document.getElementById('StepObject'),document.getElementById('selectedStepObject'));" />
+                           onclick="javascript: MoveObj(document.getElementById('StepObject'),document.getElementById('SelectedStepObject'));" />
                     <br />
                     <input type="button" id="rem" value="<"
-                           onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('stepObject'));" />
+                           onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('StepObject'));" />
                 </td>
                 <td>
                     @Html.ListBoxFor(model => model.SelectedStepObject, new MultiSelectList(Model.SelectedStepObject, "idObjType", Obj),
@@ -162,6 +173,16 @@ new { size = 8, style = "width:250px" })
         }
         for (i = SO.options.length - 1; i >= 0; i--) {
             SO.options[i].selected = true;
+        }
+    }
+    function SelId(Sel, HiddenId) {
+        var SelId = "";
+        for (i = 0; i < Sel.options.length; i++) {
+            if (Sel.options[i].selected == true) {
+                SelId = Sel.options[i].value;
+                HiddenId.value = Number(SelId);
+                break;
+            }
         }
     }
 </script>

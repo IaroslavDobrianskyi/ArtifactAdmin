@@ -1,0 +1,42 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.DesireDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Бажання</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Name, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Description, new { rows = "10", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Icon)
+        </dt>
+
+        <dd>
+            <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath+"Desires/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

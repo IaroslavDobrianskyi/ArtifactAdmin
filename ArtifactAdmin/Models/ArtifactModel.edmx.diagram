@@ -72,7 +72,7 @@
         <EntityTypeShape EntityType="artModel.ActionTemplateResult" Width="2.625" PointX="5.5" PointY="24.75" />
         <EntityTypeShape EntityType="artModel.ActiveActionInFlow" Width="1.5" PointX="3.75" PointY="13.75" />
         <EntityTypeShape EntityType="artModel.CarrierDesire" Width="1.5" PointX="17.125" PointY="14.125" />
-        <EntityTypeShape EntityType="artModel.CarrierUserArtifact" Width="1.5" PointX="17.125" PointY="8.75" />
+        <EntityTypeShape EntityType="artModel.CarrierUserArtifact" Width="1.875" PointX="17.125" PointY="8.75" />
         <EntityTypeShape EntityType="artModel.Class" Width="1.5" PointX="11.25" PointY="31.75" />
         <EntityTypeShape EntityType="artModel.Desire" Width="1.5" PointX="0.75" PointY="16.75" />
         <EntityTypeShape EntityType="artModel.DesireActionTemplateResult" Width="1.5" PointX="10.75" PointY="16" />

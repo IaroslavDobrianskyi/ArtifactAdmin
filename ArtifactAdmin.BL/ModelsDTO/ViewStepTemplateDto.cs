@@ -20,5 +20,9 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public List<ViewStepObjectDto> StepObject { get; set; }
 
         public List<ViewStepObjectDto> SelectedStepObject { get; set; }
+
+        public List<DesireDto> DesireDto { get; set; }
+
+        public string NameDesire { get; set; }
     }
 }

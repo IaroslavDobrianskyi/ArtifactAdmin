@@ -34,7 +34,12 @@
         <dd>
             @Html.TextAreaFor(model => model.Name, new { rows = "5", cols = "50", @readonly = true })
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model=>model.Desire1.Name)
+        </dt>
+        <dd>
+            @Html.TextAreaFor(model => model.Desire1.Name, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
     </dl>
 
     @using (Html.BeginForm()) {

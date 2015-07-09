@@ -1,0 +1,72 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.RaceDto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви дійсно хочете видалити цей запис?</h3>
+<div>
+    <h4>Раси</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Description, new { rows = "10", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Characreristics)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Characreristics)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CharacteristicsLevelModifier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CharacteristicsLevelModifier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Predisposition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Predisposition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Properties)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Properties)
+        </dd>
+
+        <dt>
+            <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath+"Races/"+@Model.Icon)" id="icon" width=" 160 " height=" 120">
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icon)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+    }
+</div>

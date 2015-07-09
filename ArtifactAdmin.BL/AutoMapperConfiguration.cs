@@ -65,6 +65,12 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<DesireActionTemplateResult, DesireActionTemplateResultDto>();
             Mapper.CreateMap<DesireActionTemplateResultDto, DesireActionTemplateResult>();
+
+            Mapper.CreateMap<Desire, DesireDto>();
+            Mapper.CreateMap<DesireDto, Desire>();
+
+            Mapper.CreateMap<Race, RaceDto>();
+            Mapper.CreateMap<RaceDto, Race>();
         } 
     }
 }
