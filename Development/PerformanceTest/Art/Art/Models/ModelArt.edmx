@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="artModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActFlow">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idStep" Type="int" />
+          <Property Name="idAction" Type="int" />
+        </EntityType>
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idStep" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="kStep" Type="int" Nullable="false" />
+          <Property Name="kAct" Type="int" Nullable="false" />
+          <Property Name="time" Type="int" />
+          <Property Name="nStep" Type="int" Nullable="false" />
+          <Property Name="nAct" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idUser" Type="int" Nullable="false" />
+          <Property Name="idActFlow" Type="int" />
+        </EntityType>
+        <Association Name="FK_ActFlow_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActFlow">
+              <PropertyRef Name="idAction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActFlow_Step">
+          <End Role="Step" Type="Self.Step" Multiplicity="0..1" />
+          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActFlow">
+              <PropertyRef Name="idStep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Action_Step">
+          <End Role="Step" Type="Self.Step" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Action" Type="Self.Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Action">
+              <PropertyRef Name="idStep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Step_ActFlow">
+          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="0..1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActFlow">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="idActFlow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetChain" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="id" Type="int" />
+                <Property Name="idUser" Type="int" />
+                <Property Name="idStep" Type="int" />
+                <Property Name="idAction" Type="int" />
+                <Property Name="aid" Type="int" />
+                <Property Name="row_num" Type="bigint" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <EntityContainer Name="artModelStoreContainer">
+          <EntitySet Name="ActFlow" EntityType="Self.ActFlow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Step" EntityType="Self.Step" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
+            <End Role="Action" EntitySet="Action" />
+            <End Role="ActFlow" EntitySet="ActFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActFlow_Step" Association="Self.FK_ActFlow_Step">
+            <End Role="Step" EntitySet="Step" />
+            <End Role="ActFlow" EntitySet="ActFlow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Action_Step" Association="Self.FK_Action_Step">
+            <End Role="Step" EntitySet="Step" />
+            <End Role="Action" EntitySet="Action" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_ActFlow" Association="Self.FK_Step_ActFlow">
+            <End Role="ActFlow" EntitySet="ActFlow" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="artModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="GetChain_Result">
+          <Property Name="id" Type="Int32" />
+          <Property Name="idUser" Type="Int32" />
+          <Property Name="idStep" Type="Int32" />
+          <Property Name="idAction" Type="Int32" />
+          <Property Name="aid" Type="Int32" />
+          <Property Name="row_num" Type="Int64" />
+        </ComplexType>
+        <EntityType Name="ActFlow">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idStep" Type="Int32" />
+          <Property Name="idAction" Type="Int32" />
+          <NavigationProperty Name="Action" Relationship="Self.FK_ActFlow_Action" FromRole="ActFlow" ToRole="Action" />
+          <NavigationProperty Name="Step" Relationship="Self.FK_ActFlow_Step" FromRole="ActFlow" ToRole="Step" />
+          <NavigationProperty Name="Steps" Relationship="Self.FK_Step_ActFlow" FromRole="ActFlow" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="Action">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idStep" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ActFlows" Relationship="Self.FK_ActFlow_Action" FromRole="Action" ToRole="ActFlow" />
+          <NavigationProperty Name="Step" Relationship="Self.FK_Action_Step" FromRole="Action" ToRole="Step" />
+        </EntityType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="kStep" Type="Int32" Nullable="false" />
+          <Property Name="kAct" Type="Int32" Nullable="false" />
+          <Property Name="time" Type="Int32" />
+          <Property Name="nStep" Type="Int32" Nullable="false" />
+          <Property Name="nAct" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Step">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idActFlow" Type="Int32" />
+          <NavigationProperty Name="ActFlows" Relationship="Self.FK_ActFlow_Step" FromRole="Step" ToRole="ActFlow" />
+          <NavigationProperty Name="ActFlow" Relationship="Self.FK_Step_ActFlow" FromRole="Step" ToRole="ActFlow" />
+          <NavigationProperty Name="Actions" Relationship="Self.FK_Action_Step" FromRole="Step" ToRole="Action" />
+        </EntityType>
+        <Association Name="FK_ActFlow_Action">
+          <End Role="Action" Type="Self.Action" Multiplicity="0..1" />
+          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Action">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActFlow">
+              <PropertyRef Name="idAction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActFlow_Step">
+          <End Role="Step" Type="Self.Step" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ActFlow">
+              <PropertyRef Name="idStep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Step_ActFlow">
+          <End Role="ActFlow" Type="Self.ActFlow" Multiplicity="0..1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActFlow">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="idActFlow" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Action_Step">
+          <End Role="Step" Type="Self.Step" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Action" Type="Self.Action" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Action">
+              <PropertyRef Name="idStep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ArtEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActFlows" EntityType="Self.ActFlow" />
+          <EntitySet Name="Actions" EntityType="Self.Action" />
+          <EntitySet Name="Statistics" EntityType="Self.Statistic" />
+          <EntitySet Name="Steps" EntityType="Self.Step" />
+          <AssociationSet Name="FK_ActFlow_Action" Association="Self.FK_ActFlow_Action">
+            <End Role="Action" EntitySet="Actions" />
+            <End Role="ActFlow" EntitySet="ActFlows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActFlow_Step" Association="Self.FK_ActFlow_Step">
+            <End Role="Step" EntitySet="Steps" />
+            <End Role="ActFlow" EntitySet="ActFlows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_ActFlow" Association="Self.FK_Step_ActFlow">
+            <End Role="ActFlow" EntitySet="ActFlows" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Action_Step" Association="Self.FK_Action_Step">
+            <End Role="Step" EntitySet="Steps" />
+            <End Role="Action" EntitySet="Actions" />
+          </AssociationSet>
+          <FunctionImport Name="GetChain" ReturnType="Collection(artModel.GetChain_Result)" IsComposable="true">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="artModelStoreContainer" CdmEntityContainer="ArtEntities">
+          <EntitySetMapping Name="ActFlows">
+            <EntityTypeMapping TypeName="artModel.ActFlow">
+              <MappingFragment StoreEntitySet="ActFlow">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idStep" ColumnName="idStep" />
+                <ScalarProperty Name="idAction" ColumnName="idAction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actions">
+            <EntityTypeMapping TypeName="artModel.Action">
+              <MappingFragment StoreEntitySet="Action">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idStep" ColumnName="idStep" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statistics">
+            <EntityTypeMapping TypeName="artModel.Statistic">
+              <MappingFragment StoreEntitySet="Statistic">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="kStep" ColumnName="kStep" />
+                <ScalarProperty Name="kAct" ColumnName="kAct" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="nStep" ColumnName="nStep" />
+                <ScalarProperty Name="nAct" ColumnName="nAct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Steps">
+            <EntityTypeMapping TypeName="artModel.Step">
+              <MappingFragment StoreEntitySet="Step">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idActFlow" ColumnName="idActFlow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="artModel.Store.GetChain" FunctionImportName="GetChain">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="artModel.GetChain_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="idStep" ColumnName="idStep" />
+                <ScalarProperty Name="idAction" ColumnName="idAction" />
+                <ScalarProperty Name="aid" ColumnName="aid" />
+                <ScalarProperty Name="row_num" ColumnName="row_num" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
