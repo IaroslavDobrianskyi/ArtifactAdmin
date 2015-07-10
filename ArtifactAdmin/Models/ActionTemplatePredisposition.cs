@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ActionTemplatePredisposition
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int ActionTemplate { get; set; }
         public int Predisposition { get; set; }
         public int RequirementLow { get; set; }

@@ -22,7 +22,7 @@ namespace ArtifactAdmin.DAL.Models
         }
     
         public string Description { get; set; }
-        public int id { get; set; }
+        public int Id { get; set; }
         public long Characreristics { get; set; }
         public long CharacteristicsLevelModifier { get; set; }
         public long Predisposition { get; set; }

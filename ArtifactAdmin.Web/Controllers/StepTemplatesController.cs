@@ -74,14 +74,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.id);
+                    viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
                     return View(viewStepTemplateDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.id);
+            viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
             return View(viewStepTemplateDto);
         }
 
@@ -122,14 +122,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.id);
+                    viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
                     return View(viewStepTemplateDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.id);
+            viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
             return View(viewStepTemplateDto);
         }
 

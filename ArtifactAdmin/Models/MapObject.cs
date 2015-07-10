@@ -19,7 +19,7 @@ namespace ArtifactAdmin.DAL.Models
             this.MapObjectProbabilities = new HashSet<MapObjectProbability>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<MapObjectProbability> MapObjectProbabilities { get; set; }

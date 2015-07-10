@@ -22,7 +22,7 @@ namespace ArtifactAdmin.DAL.Models
             this.DesireMapZones = new HashSet<DesireMapZone>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string ZoneName { get; set; }
         public string Color { get; set; }
     

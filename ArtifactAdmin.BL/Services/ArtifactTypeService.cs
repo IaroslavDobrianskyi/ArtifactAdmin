@@ -36,8 +36,8 @@ namespace ArtifactAdmin.BL.Services
         public ArtifactTypeDto GetById(int? id)
         {
             var artifactType = this.artifactTypeRepository.GetAll()
-                                   .FirstOrDefault(s => s.id == id);
-            return Mapper.Map<ArtifactTypeDto>(this.artifactTypeRepository.GetAll().FirstOrDefault(s => s.id == id));
+                                   .FirstOrDefault(s => s.Id == id);
+            return Mapper.Map<ArtifactTypeDto>(this.artifactTypeRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
 
         public ArtifactTypeDto Create(ArtifactTypeDto artifactTypeDto, string fileName)
@@ -59,7 +59,7 @@ namespace ArtifactAdmin.BL.Services
         public void Delete(int? id)
         {
             var artifactType = this.artifactTypeRepository.GetAll()
-                                   .FirstOrDefault(s => s.id == id);
+                                   .FirstOrDefault(s => s.Id == id);
             this.artifactTypeRepository.Delete(artifactType);
         }
     }

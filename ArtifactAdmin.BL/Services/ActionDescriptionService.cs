@@ -36,8 +36,7 @@ namespace ArtifactAdmin.BL.Services
 
         public IEnumerable<ActionDescriptionDto> GetAll()
         {
-            return Mapper.Map<List<ActionDescriptionDto>>(this.actionDescriptionRepository.GetAll().
-                Include(s => s.ActionTemplate1).Include(s => s.MapZone1)); 
+            return Mapper.Map<List<ActionDescriptionDto>>(this.actionDescriptionRepository.GetAll().Include(s => s.ActionTemplate1).Include(s => s.MapZone1)); 
         }
 
         public ViewActionDescriptionDto GetViewById(int? id) 
@@ -47,8 +46,7 @@ namespace ArtifactAdmin.BL.Services
             viewActionDescriptionDto.ActionTemplateDto = Mapper.Map<List<ActionTemplateDto>>(this.actionTemplateRepository.GetAll());
             if (id != null)
             {
-                viewActionDescriptionDto.ActionDescriptionDto = Mapper.Map<ActionDescriptionDto>(this.actionDescriptionRepository.GetAll().
-                    FirstOrDefault(s => s.id == id));
+                viewActionDescriptionDto.ActionDescriptionDto = Mapper.Map<ActionDescriptionDto>(this.actionDescriptionRepository.GetAll().FirstOrDefault(s => s.Id == id));
             }
             
             return viewActionDescriptionDto;
@@ -56,8 +54,8 @@ namespace ArtifactAdmin.BL.Services
 
         public ActionDescriptionDto GetById(int? id)
         {
-            return Mapper.Map<ActionDescriptionDto>(this.actionDescriptionRepository.GetAll().
-                Include(s => s.ActionTemplate1).Include(s => s.MapZone1).FirstOrDefault(s=>s.id==id));
+            return Mapper.Map<ActionDescriptionDto>(this.actionDescriptionRepository.GetAll()
+                .Include(s => s.ActionTemplate1).Include(s => s.MapZone1).FirstOrDefault(s => s.Id == id));
         }
 
         public ActionDescriptionDto Create(ActionDescriptionDto actionDescriptionDto)
@@ -76,7 +74,7 @@ namespace ArtifactAdmin.BL.Services
 
         public void Delete(int? id)
         {
-            var actionDescription=this.actionDescriptionRepository.GetAll().FirstOrDefault(s=>s.id==id);
+            var actionDescription = this.actionDescriptionRepository.GetAll().FirstOrDefault(s => s.Id == id);
             this.actionDescriptionRepository.Delete(actionDescription);
         }
     }

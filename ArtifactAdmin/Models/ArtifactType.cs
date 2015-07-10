@@ -19,7 +19,7 @@ namespace ArtifactAdmin.DAL.Models
             this.Artifacts = new HashSet<Artifact>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Icon { get; set; }
         public string Descrioption { get; set; }

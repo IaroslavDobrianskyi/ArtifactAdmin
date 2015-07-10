@@ -20,7 +20,7 @@ namespace ArtifactAdmin.DAL.Models
             this.DesireActionTemplateResults = new HashSet<DesireActionTemplateResult>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public double PredispositionResultModifier { get; set; }
         public double ExperienceModifier { get; set; }
         public double ArtifactPosibility { get; set; }

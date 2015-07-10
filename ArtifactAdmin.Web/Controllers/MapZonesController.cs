@@ -13,9 +13,11 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
+
     public class MapZonesController : Controller
     {
         private IMapZoneService mapZoneService;
+
         public MapZonesController(IMapZoneService mapZoneService) 
         {
             this.mapZoneService = mapZoneService;
@@ -34,11 +36,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewMapZoneDto = this.mapZoneService.GetViewById(id);
             if (viewMapZoneDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(viewMapZoneDto);
         }
 
@@ -69,14 +73,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.id);
+                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
                     return View(viewMapZoneDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.id);
+            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
             return View(viewMapZoneDto);
         }
 
@@ -87,11 +91,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewMapZoneDto = this.mapZoneService.GetViewById(id);
             if (viewMapZoneDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(viewMapZoneDto);
         }
 
@@ -115,14 +121,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.id);
+                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
                     return View(viewMapZoneDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.id);
+            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
             return View(viewMapZoneDto);
         }
 
@@ -133,11 +139,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewMapZoneDto = this.mapZoneService.GetViewById(id);
             if (viewMapZoneDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(viewMapZoneDto);
         }
 

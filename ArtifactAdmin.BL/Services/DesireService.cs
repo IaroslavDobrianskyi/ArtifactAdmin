@@ -26,6 +26,7 @@ namespace ArtifactAdmin.BL.Services
         {
             this.desireRepository = desireRepository;
         }
+
         public IEnumerable<DesireDto> GetAll()
         {
             return Mapper.Map<List<DesireDto>>(this.desireRepository.GetAll());
@@ -33,7 +34,7 @@ namespace ArtifactAdmin.BL.Services
 
         public DesireDto GetById(int? id)
         {
-            return Mapper.Map<DesireDto>(this.desireRepository.GetAll().FirstOrDefault(s => s.id == id));
+            return Mapper.Map<DesireDto>(this.desireRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
 
         public DesireDto Create(DesireDto desireDto, string fileName)
@@ -54,7 +55,7 @@ namespace ArtifactAdmin.BL.Services
 
         public void Delete(int? id)
         {
-            var desire = this.desireRepository.GetAll().FirstOrDefault(s => s.id == id);
+            var desire = this.desireRepository.GetAll().FirstOrDefault(s => s.Id == id);
             this.desireRepository.Delete(desire);
         }
     }

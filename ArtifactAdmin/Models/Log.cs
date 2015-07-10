@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class Log
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public string ShortLog { get; set; }
         public string ExtendedLog { get; set; }
         public System.DateTime Date { get; set; }

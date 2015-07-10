@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class UserArtifactTalent
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int UserArtifact { get; set; }
         public int UserTalent { get; set; }
         public int TalentLevel { get; set; }

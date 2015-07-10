@@ -13,13 +13,13 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
     public class ActionDescriptionDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredActionTemplate",
     ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
        public int ActionTemplate { get; set; }
 
-        public Nullable<int> MapZone { get; set; }
+        public int? MapZone { get; set; }
 
         [Display(Name = "Опис")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",

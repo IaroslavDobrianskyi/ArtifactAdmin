@@ -22,7 +22,7 @@ namespace ArtifactAdmin.DAL.Models
             this.UserArtifactClasses = new HashSet<UserArtifactClass>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Artifact { get; set; }
         public string Description { get; set; }
         public int Constellation { get; set; }

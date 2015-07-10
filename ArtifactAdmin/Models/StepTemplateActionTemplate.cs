@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class StepTemplateActionTemplate
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int StepTemplate { get; set; }
         public int ActionTemplate { get; set; }
     

@@ -115,6 +115,7 @@
     <Compile Include="Interfaces\IActionTemplateService.cs" />
     <Compile Include="Interfaces\IArtifactTypeService.cs" />
     <Compile Include="Interfaces\IBonusService.cs" />
+    <Compile Include="Interfaces\IClassService.cs" />
     <Compile Include="Interfaces\IConstellationService.cs" />
     <Compile Include="Interfaces\IDesireService.cs" />
     <Compile Include="Interfaces\IMapObjectService.cs" />
@@ -130,6 +131,8 @@
     <Compile Include="ModelsDTO\ActionTemplateResultDto.cs" />
     <Compile Include="ModelsDTO\ArtifactTypeDto.cs" />
     <Compile Include="ModelsDTO\BonusDto.cs" />
+    <Compile Include="ModelsDTO\ClassDto.cs" />
+    <Compile Include="Services\ClassService.cs" />
     <Compile Include="ModelsDTO\ConstellationDto.cs" />
     <Compile Include="ModelsDTO\DesireActionTemplateResultDto.cs" />
     <Compile Include="ModelsDTO\DesireDto.cs" />

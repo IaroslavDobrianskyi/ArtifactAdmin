@@ -14,7 +14,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
    
     public class MapZoneDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredZoneName",
    ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
@@ -30,7 +30,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Color { get; set; }
 
-        [Display(Name="Об'єкти та імовірності")]
+        [Display(Name = "Об'єкти та імовірності")]
         public virtual ICollection<MapObjectProbabilityDto> MapObjectProbabilities { get; set; }
     }
 }

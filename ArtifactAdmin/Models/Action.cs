@@ -23,7 +23,7 @@ namespace ArtifactAdmin.DAL.Models
             this.ActiveActionInFlows = new HashSet<ActiveActionInFlow>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Step { get; set; }
         public string Text { get; set; }
         public Nullable<double> PredispositionResult { get; set; }

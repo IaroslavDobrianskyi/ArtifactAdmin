@@ -20,7 +20,7 @@ namespace ArtifactAdmin.DAL.Models
             this.CarrierUserArtifacts = new HashSet<CarrierUserArtifact>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Race { get; set; }
         public int ExperienceLevel { get; set; }
         public int ExperiencePoints { get; set; }

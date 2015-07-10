@@ -39,7 +39,7 @@ namespace ArtifactAdmin.BL.Services
 
         public MapZoneDto GetById(int? id)
         {
-            return Mapper.Map<MapZoneDto>(this.mapZoneRepository.GetAll().FirstOrDefault(s => s.id == id));
+            return Mapper.Map<MapZoneDto>(this.mapZoneRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
 
         public ViewMapZoneDto GetViewById(int? id)
@@ -49,7 +49,7 @@ namespace ArtifactAdmin.BL.Services
             var listProbabilityObjects = new List<MapObjectProbabilityDto>();
             if (id != null)
             {
-                viewMapZoneDto.MapZone = Mapper.Map<MapZoneDto>(this.mapZoneRepository.GetAll().FirstOrDefault(s => s.id == id));
+                viewMapZoneDto.MapZone = Mapper.Map<MapZoneDto>(this.mapZoneRepository.GetAll().FirstOrDefault(s => s.Id == id));
                 listProbabilityObjects = Mapper.Map<List<MapObjectProbabilityDto>>(this.mapObjectProbabilityRepository.GetAll()
                     .Include(s => s.MapObject1)
                     .Where(p => p.MapZone == id));
@@ -62,23 +62,23 @@ namespace ArtifactAdmin.BL.Services
             {
                 viewMapZoneDto.MapObject = allObjects;
             }
-
             else 
             {
                 viewMapZoneDto.MapObject = new List<MapObjectDto>();
                 viewMapZoneDto.SelectedMapObject = listProbabilityObjects;
                 viewMapZoneDto.Probability = listProbabilityObjects;
-                foreach (var obj in allObjects )
+                foreach (var obj in allObjects)
                 {
                     bool sel = false;
                     foreach (var probability in listProbabilityObjects) 
                     {
-                        if (obj.id == probability.MapObject) 
+                        if (obj.Id == probability.MapObject) 
                         {
                             sel = true;
                             break;
                         }
                     }
+
                     if (!sel)
                     {
                         viewMapZoneDto.MapObject.Add(obj);
@@ -105,19 +105,19 @@ namespace ArtifactAdmin.BL.Services
         public void CreateMapObjectProbability(MapZone mapZone, string[] obj, string[] probability)
         {
             int objLength = obj.Length;
-            int idObj = 0;
+            int objId = 0;
             double objProbability = 0;
             for (int i = 0; i < objLength; i++) 
             {
                 objProbability = Convert.ToDouble(probability[i]);
                 if (objProbability > 0 & objProbability < 1) 
                 {
-                    idObj=Convert.ToInt32(obj[i]);
+                    objId = Convert.ToInt32(obj[i]);
                     this.mapObjectProbabilityRepository.InsertWithoutSave(new MapObjectProbability
                     {
-                        MapObject=idObj,
-                        MapZone1=mapZone,
-                        Probability=objProbability
+                        MapObject = objId,
+                        MapZone1 = mapZone,
+                        Probability = objProbability
                     });
                 }
             }
@@ -139,15 +139,16 @@ namespace ArtifactAdmin.BL.Services
 
         public void DeleteMapObjectProbability(MapZone mapZone) 
         {
-            var forDel = this.mapObjectProbabilityRepository.GetAll().Where(p => p.MapZone == mapZone.id);
+            var forDel = this.mapObjectProbabilityRepository.GetAll().Where(p => p.MapZone == mapZone.Id);
             foreach (var obj in forDel) 
             {
                 this.mapObjectProbabilityRepository.DeleteWithOutSave(obj);
             }
         }
+
         public void Delete(int? id)
         {
-            var mapZone = this.mapZoneRepository.GetAll().FirstOrDefault(s => s.id == id);
+            var mapZone = this.mapZoneRepository.GetAll().FirstOrDefault(s => s.Id == id);
             this.mapZoneRepository.DeleteWithOutSave(mapZone);
             DeleteMapObjectProbability(mapZone);
             this.mapZoneRepository.SaveChanges();

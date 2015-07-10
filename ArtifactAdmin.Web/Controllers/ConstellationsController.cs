@@ -144,6 +144,7 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     FileHelper.DeleteIcon(oldfileName, "Constellations");
                 }
+
                 return RedirectToAction("Index");
             }
 

@@ -15,7 +15,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
     public class StepTemplateDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredDescription",
        ErrorMessageResourceType = typeof(ValidationStrings))]
@@ -31,7 +31,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         
         public string StepText { get; set; }
 
-        public Nullable<int> Desire { get; set; }
+        public int? Desire { get; set; }
         
         [Required(ErrorMessageResourceName = "RequiredName",
   ErrorMessageResourceType = typeof(ValidationStrings))]
@@ -47,7 +47,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Display(Name = "Дії кроку")]
         public virtual ICollection<StepTemplateActionTemplateDto> StepTemplateActionTemplates { get; set; }
         
-        [Display(Name="Бажання")]
+        [Display(Name = "Бажання")]
         public virtual DesireDto Desire1 { get; set; }
     }
 }

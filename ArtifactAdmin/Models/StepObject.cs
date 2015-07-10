@@ -19,7 +19,7 @@ namespace ArtifactAdmin.DAL.Models
             this.StepObjectStepTemplates = new HashSet<StepObjectStepTemplate>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public int StepObjectType { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

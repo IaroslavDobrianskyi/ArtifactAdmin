@@ -25,7 +25,7 @@ namespace ArtifactAdmin.BL.Services
         public ActionTemplateService(IRepository<ActionTemplate> actionTemplateRepository,
             IRepository<ActionTemplateResult> actionTemplateResultRepository) 
         {
-            this.actionTemplateRepository=actionTemplateRepository;
+            this.actionTemplateRepository = actionTemplateRepository;
             this.actionTemplateResultRepository = actionTemplateResultRepository;
         }
 
@@ -41,7 +41,7 @@ namespace ArtifactAdmin.BL.Services
             viewActionTemplateDto.ActionTemplateResults = Mapper.Map<List<ActionTemplateResultDto>>(this.actionTemplateResultRepository.GetAll());
             if (id != null) 
             {
-                viewActionTemplateDto.ActionTemplateDto = Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.id == id));
+                viewActionTemplateDto.ActionTemplateDto = Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.Id == id));
                 if (viewActionTemplateDto.ActionTemplateDto != null)
                 {
                     viewActionTemplateDto.OneProbability = viewActionTemplateDto.ActionTemplateDto.BlockProbability.ToString();
@@ -50,9 +50,10 @@ namespace ArtifactAdmin.BL.Services
 
             return viewActionTemplateDto;
         }
+
         public ActionTemplateDto GetById(int? id)
         {
-            return Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.id == id));
+            return Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
 
         public ActionTemplateDto Create(ActionTemplateDto actionTemplateDto)
@@ -71,7 +72,7 @@ namespace ArtifactAdmin.BL.Services
 
         public void Delete(int? id)
         {
-            var actionTemplate = this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.id == id);
+            var actionTemplate = this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.Id == id);
             this.actionTemplateRepository.Delete(actionTemplate);
         }
     }

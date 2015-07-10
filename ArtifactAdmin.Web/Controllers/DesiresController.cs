@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="DesiresController cs" company="Artifact">
+// <copyright file="DesiresController.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
@@ -18,6 +18,7 @@ namespace ArtifactAdmin.Web.Controllers
     public class DesiresController : Controller
     {
         private IDesireService desireService;
+        
         public DesiresController(IDesireService desireService) 
         {
             this.desireService = desireService;
@@ -94,11 +95,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var desireDto = this.desireService.GetById(id); ;
+
+            var desireDto = this.desireService.GetById(id);
             if (desireDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(desireDto);
         }
 
@@ -140,6 +143,7 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     FileHelper.DeleteIcon(oldFileNAme, "Desires");
                 }
+
                 return RedirectToAction("Index");
             }
 

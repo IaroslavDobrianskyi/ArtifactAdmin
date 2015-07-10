@@ -18,7 +18,7 @@ namespace ArtifactAdmin.BL.Services
     using Interfaces;
     using ModelsDTO;
 
-    public class RaceService: IRaceService
+    public class RaceService : IRaceService
     {
         private readonly IRepository<Race> raceRepository;
 
@@ -34,7 +34,7 @@ namespace ArtifactAdmin.BL.Services
 
         public RaceDto GetById(int? id)
         {
-            return Mapper.Map<RaceDto>(this.raceRepository.GetAll().FirstOrDefault(s => s.id == id));
+            return Mapper.Map<RaceDto>(this.raceRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
 
         public RaceDto Create(RaceDto raceDto, string fileName)
@@ -55,9 +55,8 @@ namespace ArtifactAdmin.BL.Services
 
         public void Delete(int? id)
         {
-            var race = this.raceRepository.GetAll().FirstOrDefault(s => s.id == id);
+            var race = this.raceRepository.GetAll().FirstOrDefault(s => s.Id == id);
             this.raceRepository.Delete(race);
-
         }
     }
 }

@@ -36,7 +36,7 @@ namespace ArtifactAdmin.BL.Services
         public ConstellationDto GetById(int? id)
         {
             return Mapper.Map<ConstellationDto>(this.constellationRepository.GetAll()
-                                                    .FirstOrDefault(s => s.id == id));
+                                                    .FirstOrDefault(s => s.Id == id));
         }
 
         public ConstellationDto Create(ConstellationDto constellationDto, string fileName)
@@ -58,7 +58,7 @@ namespace ArtifactAdmin.BL.Services
         public void Delete(int? id)
         {
             var constellation = this.constellationRepository.GetAll()
-                                    .FirstOrDefault(s => s.id == id);
+                                    .FirstOrDefault(s => s.Id == id);
             this.constellationRepository.Delete(constellation);
         }
     }

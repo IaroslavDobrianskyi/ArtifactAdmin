@@ -60,7 +60,7 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<StepTemplateActionTemplate, StepTemplateActionTemplateDto>();
             Mapper.CreateMap<StepTemplateActionTemplateDto, StepTemplateActionTemplate>();
 
-            Mapper.CreateMap<ActionTemplateResult,ActionTemplateResultDto>();
+            Mapper.CreateMap<ActionTemplateResult, ActionTemplateResultDto>();
             Mapper.CreateMap<ActionTemplateResultDto, ActionTemplateResult>();
 
             Mapper.CreateMap<DesireActionTemplateResult, DesireActionTemplateResultDto>();
@@ -71,6 +71,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<Race, RaceDto>();
             Mapper.CreateMap<RaceDto, Race>();
+
+            Mapper.CreateMap<Class, ClassDto>();
+            Mapper.CreateMap<ClassDto, Class>();
         } 
     }
 }

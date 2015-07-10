@@ -144,6 +144,7 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     FileHelper.DeleteIcon(oldfileName, "ArtifactTypes");
                 }
+
                 return RedirectToAction("Index");
             }
 

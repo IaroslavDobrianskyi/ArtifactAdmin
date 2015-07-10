@@ -35,7 +35,7 @@ namespace ArtifactAdmin.BL.Services
         public TalentDto GetById(int? id)
         {
             return Mapper.Map<TalentDto>(this.talentRepository.GetAll()
-                                             .FirstOrDefault(s => s.id == id));
+                                             .FirstOrDefault(s => s.Id == id));
         }
 
         public TalentDto Create(TalentDto talentDto, string fileName)
@@ -57,7 +57,7 @@ namespace ArtifactAdmin.BL.Services
         public void Delete(int? id)
         {
             var talent = this.talentRepository.GetAll()
-                             .FirstOrDefault(s => s.id == id);
+                             .FirstOrDefault(s => s.Id == id);
             this.talentRepository.Delete(talent);
         }
     }

@@ -24,7 +24,7 @@ namespace ArtifactAdmin.DAL.Models
             this.ActionTemplateProperties = new HashSet<ActionTemplateProperty>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public double BlockProbability { get; set; }
         public int ActionTemplateResult { get; set; }

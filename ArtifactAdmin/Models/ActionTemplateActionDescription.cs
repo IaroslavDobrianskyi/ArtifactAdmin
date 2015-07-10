@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ActionTemplateActionDescription
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int ActionTemplate { get; set; }
         public int ActionDescription { get; set; }
     

@@ -36,7 +36,7 @@ namespace ArtifactAdmin.BL.Services
         public StepObjectDto GetById(int? id)
         {
             return Mapper.Map<StepObjectDto>(this.stepObjectRepository.GetAll()
-                                                 .FirstOrDefault(s => s.id == id));
+                                                 .FirstOrDefault(s => s.Id == id));
         }
 
         public StepObjectDto Create(StepObjectDto stepObjectDto, string fileName)
@@ -57,7 +57,7 @@ namespace ArtifactAdmin.BL.Services
 
         public void Delete(int? id)
         {
-            var stepObject = this.stepObjectRepository.GetAll().FirstOrDefault(s => s.id == id);
+            var stepObject = this.stepObjectRepository.GetAll().FirstOrDefault(s => s.Id == id);
             this.stepObjectRepository.Delete(stepObject);
         }
     }

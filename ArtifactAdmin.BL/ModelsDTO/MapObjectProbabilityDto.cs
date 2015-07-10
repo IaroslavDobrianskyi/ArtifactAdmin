@@ -12,7 +12,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         
     public class MapObjectProbabilityDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public int MapObject { get; set; }
 

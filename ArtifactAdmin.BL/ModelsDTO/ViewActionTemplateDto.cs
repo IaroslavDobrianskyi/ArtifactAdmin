@@ -11,6 +11,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     public class ViewActionTemplateDto
     {
         public ActionTemplateDto ActionTemplateDto { get; set; }

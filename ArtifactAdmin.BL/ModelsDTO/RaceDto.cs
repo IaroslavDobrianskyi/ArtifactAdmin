@@ -20,7 +20,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
             ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Description { get; set; }
         
-        public int id { get; set; }
+        public int Id { get; set; }
         
         [Required]
         public long Characreristics { get; set; }

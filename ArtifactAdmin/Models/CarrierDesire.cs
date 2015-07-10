@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class CarrierDesire
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int CarrierId { get; set; }
         public int DesireId { get; set; }
         public long DesireMask { get; set; }

@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class RaceDesire
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int RaceId { get; set; }
         public int DesireId { get; set; }
         public double Probability { get; set; }

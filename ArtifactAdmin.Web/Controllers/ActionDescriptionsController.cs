@@ -73,14 +73,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    viewActioDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.id);
+                    viewActioDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.Id);
                     return View(viewActioDescriptionDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewActioDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.id);
+            viewActioDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.Id);
             return View(viewActioDescriptionDto);
         }
 
@@ -110,27 +110,25 @@ namespace ArtifactAdmin.Web.Controllers
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var viewActionDescriptionDto=new ViewActionDescriptionDto();
+            var viewActionDescriptionDto = new ViewActionDescriptionDto();
             if (ModelState.IsValid)
             {
                 try
                 {
                     this.actionDescriptionService.Update(actionDescriptionDto);
-                        
                 }
-
                 catch (Exception e) 
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    viewActionDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.id);
+                    viewActionDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.Id);
                     return View(viewActionDescriptionDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewActionDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.id);
+            viewActionDescriptionDto = this.actionDescriptionService.GetViewById(actionDescriptionDto.Id);
             return View(actionDescriptionDto);
         }
 
@@ -147,6 +145,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(actionDescriptionDto);
         }
 

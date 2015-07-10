@@ -20,7 +20,7 @@ namespace ArtifactAdmin.DAL.Models
             this.UserArtifactClasses = new HashSet<UserArtifactClass>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Description { get; set; }
         public string Icon { get; set; }
         public int FibonacciSeed { get; set; }

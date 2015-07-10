@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class UserArtifactClass
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Class { get; set; }
         public int UserArtifact { get; set; }
         public int Expirience { get; set; }

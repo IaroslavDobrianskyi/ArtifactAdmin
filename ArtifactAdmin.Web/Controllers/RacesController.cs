@@ -37,11 +37,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var race = this.raceService.GetById(id);
             if (race == null)
             {
                 return HttpNotFound();
             }
+
             return View(race);
         }
 
@@ -79,6 +81,7 @@ namespace ArtifactAdmin.Web.Controllers
                     ViewBag.ErrMes = e.Message;
                     return View(race);
                 }
+
                 return RedirectToAction("Index");
             }
 
@@ -92,11 +95,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var race = this.raceService.GetById(id);
             if (race == null)
             {
                 return HttpNotFound();
             }
+
             return View(race);
         }
 
@@ -141,6 +146,7 @@ namespace ArtifactAdmin.Web.Controllers
 
                 return RedirectToAction("Index");
             }
+
             return View(race);
         }
 
@@ -151,11 +157,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var race = this.raceService.GetById(id);
             if (race == null)
             {
                 return HttpNotFound();
             }
+
             return View(race);
         }
 

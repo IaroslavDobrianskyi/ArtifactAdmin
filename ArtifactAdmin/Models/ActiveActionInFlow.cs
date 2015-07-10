@@ -19,7 +19,7 @@ namespace ArtifactAdmin.DAL.Models
             this.Steps = new HashSet<Step>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Step { get; set; }
         public int Action { get; set; }
     

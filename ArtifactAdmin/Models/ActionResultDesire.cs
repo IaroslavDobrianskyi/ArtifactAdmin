@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ActionResultDesire
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int ActionResult { get; set; }
         public int Desire { get; set; }
         public double Modifier { get; set; }

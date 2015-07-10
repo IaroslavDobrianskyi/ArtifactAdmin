@@ -20,7 +20,7 @@ namespace ArtifactAdmin.DAL.Models
             this.ArtifactBonus = new HashSet<ArtifactBonu>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int ArtifactType { get; set; }
         public string Icon { get; set; }

@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ActionDescription
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int ActionTemplate { get; set; }
         public Nullable<int> MapZone { get; set; }
         public string ActionText { get; set; }

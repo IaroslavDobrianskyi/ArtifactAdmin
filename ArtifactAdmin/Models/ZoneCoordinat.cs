@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ZoneCoordinat
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int MapZone { get; set; }
         public int x { get; set; }
         public int y { get; set; }

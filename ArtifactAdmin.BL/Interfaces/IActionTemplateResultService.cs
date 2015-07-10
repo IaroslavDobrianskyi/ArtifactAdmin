@@ -23,6 +23,5 @@ namespace ArtifactAdmin.BL.Interfaces
         ActionTemplateResultDto Update(ActionTemplateResultDto actionTemplateResultDto);
 
         void Delete(int? id);
-
     }
 }

@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="IConstellationService.cs" company="Artifact">
+// <copyright file="IRaceService.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the IConstellationService interface.
+//   Defines the IRaceService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.BL.Interfaces
@@ -24,6 +24,5 @@ namespace ArtifactAdmin.BL.Interfaces
         RaceDto Update(RaceDto raceDto, string fileName);
 
         void Delete(int? id);
-
     }
 }

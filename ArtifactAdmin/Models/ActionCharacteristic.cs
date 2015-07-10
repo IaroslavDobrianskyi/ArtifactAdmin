@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ActionCharacteristic
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Characteristics { get; set; }
         public int Action { get; set; }
     

@@ -36,11 +36,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(id);
             if (viewStepActionTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(viewStepActionTemplateDto);
         }
 
@@ -70,14 +72,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.id);
+                    viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.Id);
                     return View(viewStepActionTemplateDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.id);
+            viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.Id);
             return View(viewStepActionTemplateDto);
         }
 
@@ -88,11 +90,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(id);
             if (viewStepActionTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(viewStepActionTemplateDto);
         }
 
@@ -116,14 +120,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.id);
+                    viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.Id);
                     return View(viewStepActionTemplateDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.id);
+            viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.Id);
             return View(viewStepActionTemplateDto);
         }
 
@@ -134,11 +138,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var stepTemplateDto = this.stepActionTemplateService.GetById(id);
             if (stepTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(stepTemplateDto);
         }
 

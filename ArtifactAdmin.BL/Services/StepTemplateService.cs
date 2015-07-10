@@ -43,8 +43,8 @@ namespace ArtifactAdmin.BL.Services
 
         public IEnumerable<StepTemplateDto> GetAll()
         {
-            return Mapper.Map<List<StepTemplateDto>>(this.stepTemplateRepository.GetAll().Include(s => s.StepObjectStepTemplates).
-                Include(s=>s.Desire1));
+            return Mapper.Map<List<StepTemplateDto>>(this.stepTemplateRepository.GetAll().Include(s => s.StepObjectStepTemplates)
+                .Include(s => s.Desire1));
         }
 
         public ViewStepTemplateDto GetViewById(int? id)
@@ -58,7 +58,7 @@ namespace ArtifactAdmin.BL.Services
             if (id != null)
             {
                 viewStepTemplateDto.StepTemplate = Mapper.Map<StepTemplateDto>(this.stepTemplateRepository.GetAll()
-                                                                                   .FirstOrDefault(s => s.id == id));
+                                                                                   .FirstOrDefault(s => s.Id == id));
             
                 var listObjects = Mapper.Map<List<StepObjectStepTemplateDto>>(this.stepObjectStepTemplateRepository.GetAll()
                                                                         .Include(s => s.StepObject1)
@@ -116,8 +116,8 @@ namespace ArtifactAdmin.BL.Services
 
         public StepTemplateDto GetById(int? id)
         {
-            return Mapper.Map<StepTemplateDto>(this.stepTemplateRepository.GetAll().Include(s=>s.Desire1)
-                                                   .FirstOrDefault(s => s.id == id));
+            return Mapper.Map<StepTemplateDto>(this.stepTemplateRepository.GetAll().Include(s => s.Desire1)
+                                                   .FirstOrDefault(s => s.Id == id));
         }
 
         public StepTemplateDto Create(StepTemplateDto stepTemplateDto, string[] stepObj)
@@ -164,13 +164,13 @@ namespace ArtifactAdmin.BL.Services
 
         public void DeleteFKStepTemplate(StepTemplate stepTemplate) 
         {
-            var forDelAction = this.stepTemplateActionTemplateRepository.GetAll().Where(p => p.StepTemplate == stepTemplate.id);
+            var forDelAction = this.stepTemplateActionTemplateRepository.GetAll().Where(p => p.StepTemplate == stepTemplate.Id);
             foreach (var action in forDelAction)
             {
                 this.stepTemplateActionTemplateRepository.DeleteWithOutSave(action);
             }
 
-            var forDelObj = this.stepObjectStepTemplateRepository.GetAll().Where(p => p.StepTemplate == stepTemplate.id);
+            var forDelObj = this.stepObjectStepTemplateRepository.GetAll().Where(p => p.StepTemplate == stepTemplate.Id);
             foreach (var step in forDelObj)
             {
                 this.stepObjectStepTemplateRepository.DeleteWithOutSave(step);
@@ -179,16 +179,17 @@ namespace ArtifactAdmin.BL.Services
 
         public void DeleteStepObjectTemplate(StepTemplate stepTemplate) 
         {
-            var forDelObj = this.stepObjectStepTemplateRepository.GetAll().Where(p => p.StepTemplate == stepTemplate.id);
+            var forDelObj = this.stepObjectStepTemplateRepository.GetAll().Where(p => p.StepTemplate == stepTemplate.Id);
             foreach (var step in forDelObj)
             {
                 this.stepObjectStepTemplateRepository.DeleteWithOutSave(step);
             }
         }
+
         public void Delete(int? id)
         {
             var stepTemplate = this.stepTemplateRepository.GetAll()
-                                   .FirstOrDefault(s => s.id == id);
+                                   .FirstOrDefault(s => s.Id == id);
             this.stepTemplateRepository.DeleteWithOutSave(stepTemplate);
             DeleteFKStepTemplate(stepTemplate);
             this.stepTemplateRepository.SaveChanges();

@@ -13,7 +13,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
     
     public class ArtifactTypeDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         
         [Required(ErrorMessageResourceName = "RequiredName",
             ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]

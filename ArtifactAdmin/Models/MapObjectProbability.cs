@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class MapObjectProbability
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int MapObject { get; set; }
         public int MapZone { get; set; }
         public double Probability { get; set; }

@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ConstellationBonu
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Bonus { get; set; }
         public int Constallation { get; set; }
         public double Modifier { get; set; }

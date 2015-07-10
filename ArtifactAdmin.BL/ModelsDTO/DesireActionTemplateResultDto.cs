@@ -12,12 +12,15 @@ namespace ArtifactAdmin.BL.ModelsDTO
     
     public class DesireActionTemplateResultDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+
         public int Desire { get; set; }
+
         public int ActionTemplateResult { get; set; }
+
         public double Modifier { get; set; }
 
         public virtual ActionTemplateResultDto ActionTemplateResult1 { get; set; }
-        //public virtual Desire Desire1 { get; set; }
+        //////public virtual Desire Desire1 { get; set; }
     }
 }

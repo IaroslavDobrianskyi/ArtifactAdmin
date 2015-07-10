@@ -33,7 +33,7 @@ namespace ArtifactAdmin.BL.Services
 
         public MapObjectDto GetById(int? id)
         {
-            return Mapper.Map<MapObjectDto>(this.mapObjectRepository.GetAll().FirstOrDefault(s => s.id == id));
+            return Mapper.Map<MapObjectDto>(this.mapObjectRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
 
         public MapObjectDto Create(MapObjectDto mapObjectDto)
@@ -52,7 +52,7 @@ namespace ArtifactAdmin.BL.Services
 
         public void Delete(int? id)
         {
-            var mapObjects = this.mapObjectRepository.GetAll().FirstOrDefault(s => s.id == id);
+            var mapObjects = this.mapObjectRepository.GetAll().FirstOrDefault(s => s.Id == id);
             this.mapObjectRepository.Delete(mapObjects);
         }
     }

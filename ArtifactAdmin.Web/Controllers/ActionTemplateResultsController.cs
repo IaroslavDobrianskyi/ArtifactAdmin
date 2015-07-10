@@ -36,11 +36,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var actionTemplateResult = this.actionTemplateResultService.GetById(id);
             if (actionTemplateResult == null)
             {
                 return HttpNotFound();
             }
+
             return View(actionTemplateResult);
         }
 
@@ -71,6 +73,7 @@ namespace ArtifactAdmin.Web.Controllers
                     ViewBag.ErrMes = e.Message;
                     return View(actionTemplateResultDto);
                 }
+
                 return RedirectToAction("Index");
             }
 
@@ -84,11 +87,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var actionTemplateResult = this.actionTemplateResultService.GetById(id);
             if (actionTemplateResult == null)
             {
                 return HttpNotFound();
             }
+
             return View(actionTemplateResult);
         }
 
@@ -113,8 +118,10 @@ namespace ArtifactAdmin.Web.Controllers
                     ViewBag.ErrMes = e.Message;
                     return View(actionTemplateResultDto);
                 }
+
                 return RedirectToAction("Index");
             }
+
             return View(actionTemplateResultDto);
         }
 
@@ -125,11 +132,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var actionTemplateResult = this.actionTemplateResultService.GetById(id) ;
+
+            var actionTemplateResult = this.actionTemplateResultService.GetById(id);
             if (actionTemplateResult == null)
             {
                 return HttpNotFound();
             }
+
             return View(actionTemplateResult);
         }
 
@@ -140,7 +149,7 @@ namespace ArtifactAdmin.Web.Controllers
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var actionTemplateResult =this.actionTemplateResultService.GetById(id);
+            var actionTemplateResult = this.actionTemplateResultService.GetById(id);
             try
             {
                 this.actionTemplateResultService.Delete(id);
@@ -151,6 +160,7 @@ namespace ArtifactAdmin.Web.Controllers
                 ViewBag.ErrMes = e.Message;
                 return View(actionTemplateResult);
             }
+
             return RedirectToAction("Index");
         }
     }

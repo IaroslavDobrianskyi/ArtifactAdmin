@@ -14,7 +14,7 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class CarrierUserArtifact
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int Carrier { get; set; }
         public int UserArtifact { get; set; }
         public int Addiction { get; set; }

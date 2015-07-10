@@ -36,11 +36,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var actionTemplateDto = this.actionTemplateService.GetById(id);
             if (actionTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(actionTemplateDto);
         }
 
@@ -69,13 +71,13 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
+                    return View(this.actionTemplateService.GetViewById(actionTemplateDto.Id));
                 }
                
                 return RedirectToAction("Index");
             }
 
-            return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
+            return View(this.actionTemplateService.GetViewById(actionTemplateDto.Id));
         }
 
         // GET: ActionTemplates/Edit/5
@@ -85,11 +87,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var viewActionTemplateDto = this.actionTemplateService.GetViewById(id);
             if (viewActionTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(viewActionTemplateDto);
         }
 
@@ -112,13 +116,13 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
+                    return View(this.actionTemplateService.GetViewById(actionTemplateDto.Id));
                 }
                 
                 return RedirectToAction("Index");
             }
 
-            return View(this.actionTemplateService.GetViewById(actionTemplateDto.id));
+            return View(this.actionTemplateService.GetViewById(actionTemplateDto.Id));
         }
 
         // GET: ActionTemplates/Delete/5
@@ -128,11 +132,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var actionTemplateDto = this.actionTemplateService.GetById(id);
             if (actionTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(actionTemplateDto);
         }
 

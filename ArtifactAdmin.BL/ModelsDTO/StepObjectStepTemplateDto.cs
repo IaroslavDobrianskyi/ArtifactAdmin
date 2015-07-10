@@ -12,7 +12,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
     
     public class StepObjectStepTemplateDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         
         public int StepObject { get; set; }
         

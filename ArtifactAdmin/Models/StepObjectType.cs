@@ -19,7 +19,7 @@ namespace ArtifactAdmin.DAL.Models
             this.StepObjects = new HashSet<StepObject>();
         }
     
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
     
         public virtual ICollection<StepObject> StepObjects { get; set; }

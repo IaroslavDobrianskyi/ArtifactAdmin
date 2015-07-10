@@ -152,6 +152,7 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     FileHelper.DeleteIcon(oldfileName, "StepObjects");
                 }
+
                 return RedirectToAction("Index");
             }
 

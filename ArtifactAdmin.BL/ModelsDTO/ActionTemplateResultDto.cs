@@ -14,10 +14,14 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
     public class ActionTemplateResultDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+
         public double PredispositionResultModifier { get; set; }
+
         public double ExperienceModifier { get; set; }
+
         public double ArtifactPosibility { get; set; }
+
         public double GoldModifier { get; set; }
 
         public virtual ICollection<ActionTemplateDto> ActionTemplates { get; set; }

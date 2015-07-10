@@ -33,7 +33,7 @@ namespace ArtifactAdmin.BL.Services
 public StepObjectTypeDto GetById(int? id)
 {
     return Mapper.Map<StepObjectTypeDto>(this.stepObjectTypeRoRepository.GetAll()
-                                             .FirstOrDefault(s => s.id == id));
+                                             .FirstOrDefault(s => s.Id == id));
 }
 
 public StepObjectTypeDto Create(StepObjectTypeDto stepObjectTypeDto)
@@ -53,7 +53,7 @@ public StepObjectTypeDto Update(StepObjectTypeDto stepObjectTypeDto)
 public void Delete(int? id)
 {
     var stepObjectType = this.stepObjectTypeRoRepository.GetAll()
-                             .FirstOrDefault(s => s.id == id);
+                             .FirstOrDefault(s => s.Id == id);
     this.stepObjectTypeRoRepository.Delete(stepObjectType);
 }
 }

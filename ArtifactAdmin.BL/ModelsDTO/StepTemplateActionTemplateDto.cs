@@ -12,11 +12,14 @@ namespace ArtifactAdmin.BL.ModelsDTO
     
     public class StepTemplateActionTemplateDto
     {
-        public int id { get; set; }
+        public int Id { get; set; }
+
         public int StepTemplate { get; set; }
+
         public int ActionTemplate { get; set; }
 
         public virtual ActionTemplateDto ActionTemplate1 { get; set; }
+
         public virtual StepTemplateDto StepTemplate1 { get; set; }
     }
 }
