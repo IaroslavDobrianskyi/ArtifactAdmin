@@ -58,13 +58,13 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Description,id,Characreristics,CharacteristicsLevelModifier,Predisposition,Properties,Icon")] RaceDto race, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "Description,Id,Characreristics,CharacteristicsLevelModifier,Predisposition,Properties,Icon")] RaceDto race, HttpPostedFileBase icon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileNameForSave = FileHelper.SaveIcon("Races", Icon);
+                var fileNameForSave = FileHelper.SaveIcon("Races", icon);
                 if (string.IsNullOrEmpty(fileNameForSave))
                 {
                     ViewBag.Error = "Помилка при збереженні іконки";
@@ -110,7 +110,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Description,id,Characreristics,CharacteristicsLevelModifier,Predisposition,Properties,Icon")] RaceDto race, HttpPostedFileBase NewIcon)
+        public ActionResult Edit([Bind(Include = "Description,Id,Characreristics,CharacteristicsLevelModifier,Predisposition,Properties,Icon")] RaceDto race, HttpPostedFileBase newIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -118,9 +118,9 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 var oldfileName = race.Icon;
                 var fileNameForSave = oldfileName;
-                if (NewIcon != null)
+                if (newIcon != null)
                 {
-                    fileNameForSave = FileHelper.SaveIcon("Races", NewIcon);
+                    fileNameForSave = FileHelper.SaveIcon("Races", newIcon);
                     if (string.IsNullOrEmpty(fileNameForSave))
                     {
                         ViewBag.Error = "Помилка при збереженні іконки";

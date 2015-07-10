@@ -59,7 +59,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Description,StepText,Name,Desire")] StepTemplateDto stepTemplate, string[] SelectedStepObject)
+        public ActionResult Create([Bind(Include = "Id,Description,StepText,Name,Desire")] StepTemplateDto stepTemplate, string[] selectedStepObject)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -68,7 +68,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.stepTemplateService.Create(stepTemplate, SelectedStepObject);
+                    this.stepTemplateService.Create(stepTemplate, selectedStepObject);
                 }
                 catch (Exception e)
                 {
@@ -107,7 +107,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Description,StepText,Name,Desire")] StepTemplateDto stepTemplate, string[] SelectedStepObject)
+        public ActionResult Edit([Bind(Include = "Id,Description,StepText,Name,Desire")] StepTemplateDto stepTemplate, string[] selectedStepObject)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -116,7 +116,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.stepTemplateService.Update(stepTemplate, SelectedStepObject);
+                    this.stepTemplateService.Update(stepTemplate, selectedStepObject);
                 }
                 catch (Exception e)
                 {

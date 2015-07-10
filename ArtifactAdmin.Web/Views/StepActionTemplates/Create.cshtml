@@ -40,7 +40,7 @@
         <table class="table">
             <tr>
                 <td>
-                    @Html.ListBoxFor(model => model.ActionTemplate, new MultiSelectList(Model.ActionTemplate, "id","Name"), new { size = 8, style = "width:250px" })
+                    @Html.ListBoxFor(model => model.ActionTemplate, new MultiSelectList(Model.ActionTemplate, "Id","Name"), new { size = 8, style = "width:250px" })
                </td>
 
                 <td style="text-align:center">
@@ -52,7 +52,7 @@
                 </td>
 
                 <td>
-                    @Html.ListBoxFor(model => model.SelectedActionTemplate, new MultiSelectList(Model.SelectedActionTemplate, "id", "Name"),
+                    @Html.ListBoxFor(model => model.SelectedActionTemplate, new MultiSelectList(Model.SelectedActionTemplate, "Id", "Name"),
 new {id="selectedAction", size = 8, style = "width:250px" })
                 </td>
             </tr>

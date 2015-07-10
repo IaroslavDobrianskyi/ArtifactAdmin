@@ -2,9 +2,9 @@
 <Schema Namespace="artModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="Action">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Step" Type="Int32" Nullable="false" />
     <Property Name="Text" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
     <Property Name="PredispositionResult" Type="Double" />
@@ -22,9 +22,9 @@
   </EntityType>
   <EntityType Name="Artifact">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ArtifactType" Type="Int32" Nullable="false" />
     <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
@@ -34,9 +34,9 @@
   </EntityType>
   <EntityType Name="ArtifactType">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Icon" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Descrioption" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
@@ -54,9 +54,9 @@
   </EntityType>
   <EntityType Name="ConstellationBonu">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Bonus" Type="Int32" Nullable="false" />
     <Property Name="Constallation" Type="Int32" Nullable="false" />
     <Property Name="Modifier" Type="Double" Nullable="false" />
@@ -77,9 +77,9 @@
   </EntityType>
   <EntityType Name="Step">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserArtifact" Type="Int32" Nullable="false" />
     <Property Name="ActiveActionInFlow" Type="Int32" />
     <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -106,9 +106,9 @@
   </EntityType>
   <EntityType Name="Talent">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MaxLevel" Type="Int32" Nullable="false" />
@@ -120,9 +120,9 @@
   </EntityType>
   <EntityType Name="UserArtifact">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Artifact" Type="Int32" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Constellation" Type="Int32" Nullable="false" />
@@ -147,7 +147,7 @@
     <End Role="Artifact" Type="Self.Artifact" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ArtifactType">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Artifact">
         <PropertyRef Name="ArtifactType" />
@@ -159,7 +159,7 @@
     <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Artifact">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserArtifact">
         <PropertyRef Name="Artifact" />
@@ -472,9 +472,9 @@
   </EntityContainer>
   <EntityType Name="ArtifactBonu">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Artifact" Type="Int32" Nullable="false" />
     <Property Name="Bonus" Type="Int32" Nullable="false" />
     <Property Name="Modifier" Type="Double" Nullable="false" />
@@ -483,9 +483,9 @@
   </EntityType>
   <EntityType Name="Carrier">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Race" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Race1" Relationship="artModel.FK_Carrier_Race" FromRole="Carrier" ToRole="Race" />
     <Property Name="ExperienceLevel" Type="Int32" Nullable="false" />
@@ -499,10 +499,10 @@
   </EntityType>
   <EntityType Name="Race">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <NavigationProperty Name="Carriers" Relationship="artModel.FK_Carrier_Race" FromRole="Race" ToRole="Carrier" />
     <Property Name="Characreristics" Type="Int64" Nullable="false" />
     <Property Name="CharacteristicsLevelModifier" Type="Int64" Nullable="false" />
@@ -514,19 +514,19 @@
   </EntityType>
   <EntityType Name="User">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="UserArtifacts" Relationship="artModel.FK_UserArtifact_User" FromRole="User" ToRole="UserArtifact" />
+    <NavigationProperty Name="UserArtifacts" Relationship="artModel.FK_UserArtifact_User" FromRole="User" ToRole="UserArtifact" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
   </EntityType>
   <EntityType Name="UserArtifactTalent">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserArtifact" Type="Int32" Nullable="false" />
     <Property Name="UserTalent" Type="Int32" Nullable="false" />
     <Property Name="TalentLevel" Type="Int32" Nullable="false" />
@@ -538,7 +538,7 @@
     <End Type="artModel.ArtifactBonu" Role="ArtifactBonu" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Artifact">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ArtifactBonu">
         <PropertyRef Name="Artifact" />
@@ -562,7 +562,7 @@
     <End Type="artModel.Carrier" Role="Carrier" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Race">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Carrier">
         <PropertyRef Name="Race" />
@@ -574,7 +574,7 @@
     <End Type="artModel.UserArtifactTalent" Role="UserArtifactTalent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Talent">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserArtifactTalent">
         <PropertyRef Name="UserTalent" />
@@ -586,7 +586,7 @@
     <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserArtifact">
         <PropertyRef Name="User" />
@@ -598,7 +598,7 @@
     <End Type="artModel.UserArtifactTalent" Role="UserArtifactTalent" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserArtifact">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserArtifactTalent">
         <PropertyRef Name="UserArtifact" />
@@ -607,9 +607,9 @@
   </Association>
   <EntityType Name="ActionDescription">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
     <Property Name="MapZone" Type="Int32" />
     <Property Name="ActionText" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
@@ -622,9 +622,9 @@
   </EntityType>
   <EntityType Name="ActionTemplate">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateActionDescription" />
     <NavigationProperty Name="ActionTemplatePredispositions" Relationship="artModel.FK_ActionTemplatePredisposition_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplatePredisposition" />
@@ -638,9 +638,9 @@
   </EntityType>
   <EntityType Name="ActionTemplateActionDescription">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
     <Property Name="ActionDescription" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ActionDescription1" Relationship="artModel.FK_ActionTemplateActionDescription_ActionDescription" FromRole="ActionTemplateActionDescription" ToRole="ActionDescription" />
@@ -648,9 +648,9 @@
   </EntityType>
   <EntityType Name="ActionTemplatePredisposition">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
     <Property Name="Predisposition" Type="Int32" Nullable="false" />
     <Property Name="RequirementLow" Type="Int32" Nullable="false" />
@@ -660,9 +660,9 @@
   </EntityType>
   <EntityType Name="Characteristic">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Mask" Type="Int64" Nullable="false" />
@@ -671,17 +671,17 @@
   </EntityType>
   <EntityType Name="MapObject">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="MapObjectProbabilities" Relationship="artModel.FK_MapObjectProbability_MapObject" FromRole="MapObject" ToRole="MapObjectProbability" />
   </EntityType>
   <EntityType Name="MapObjectProbability">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="MapObject" Type="Int32" Nullable="false" />
     <Property Name="MapZone" Type="Int32" Nullable="false" />
     <Property Name="Probability" Type="Double" Nullable="false" />
@@ -690,9 +690,9 @@
   </EntityType>
   <EntityType Name="MapZone">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ZoneName" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="Color" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
     <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_MapZone" FromRole="MapZone" ToRole="ActionDescription" />
@@ -702,9 +702,9 @@
   </EntityType>
   <EntityType Name="Predisposition">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Mask" Type="Int64" Nullable="false" />
@@ -713,9 +713,9 @@
   </EntityType>
   <EntityType Name="Property">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Mask" Type="Int64" Nullable="false" />
@@ -725,9 +725,9 @@
   </EntityType>
   <EntityType Name="StepObject">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StepObjectType" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -737,9 +737,9 @@
   </EntityType>
   <EntityType Name="StepObjectStepTemplate">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StepObject" Type="Int32" Nullable="false" />
     <Property Name="StepTemplate" Type="Int32" Nullable="false" />
     <NavigationProperty Name="StepObject1" Relationship="artModel.FK_StepObjectStepTemplate_StepObject" FromRole="StepObjectStepTemplate" ToRole="StepObject" />
@@ -747,17 +747,17 @@
   </EntityType>
   <EntityType Name="StepObjectType">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="StepObjects" Relationship="artModel.FK_StepObject_StepObjectType" FromRole="StepObjectType" ToRole="StepObject" />
   </EntityType>
   <EntityType Name="StepTemplate">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="StepText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
@@ -768,9 +768,9 @@
   </EntityType>
   <EntityType Name="StepTemplateActionTemplate">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="StepTemplate" Type="Int32" Nullable="false" />
     <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_StepTemplateActionTemplate_ActionTemplate" FromRole="StepTemplateActionTemplate" ToRole="ActionTemplate" />
@@ -778,9 +778,9 @@
   </EntityType>
   <EntityType Name="ZoneCoordinat">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="MapZone" Type="Int32" Nullable="false" />
     <Property Name="x" Type="Int32" Nullable="false" />
     <Property Name="y" Type="Int32" Nullable="false" />
@@ -791,7 +791,7 @@
     <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MapZone">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionDescription">
         <PropertyRef Name="MapZone" />
@@ -803,7 +803,7 @@
     <End Type="artModel.ActionTemplateActionDescription" Role="ActionTemplateActionDescription" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionDescription">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplateActionDescription">
         <PropertyRef Name="ActionDescription" />
@@ -815,7 +815,7 @@
     <End Type="artModel.ActionTemplateActionDescription" Role="ActionTemplateActionDescription" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplateActionDescription">
         <PropertyRef Name="ActionTemplate" />
@@ -827,7 +827,7 @@
     <End Type="artModel.ActionTemplatePredisposition" Role="ActionTemplatePredisposition" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplatePredisposition">
         <PropertyRef Name="ActionTemplate" />
@@ -839,7 +839,7 @@
     <End Type="artModel.StepTemplateActionTemplate" Role="StepTemplateActionTemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StepTemplateActionTemplate">
         <PropertyRef Name="ActionTemplate" />
@@ -851,7 +851,7 @@
     <End Type="artModel.ActionTemplatePredisposition" Role="ActionTemplatePredisposition" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Predisposition">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplatePredisposition">
         <PropertyRef Name="Predisposition" />
@@ -863,7 +863,7 @@
     <End Type="artModel.MapObjectProbability" Role="MapObjectProbability" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MapObject">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="MapObjectProbability">
         <PropertyRef Name="MapObject" />
@@ -875,7 +875,7 @@
     <End Type="artModel.MapObjectProbability" Role="MapObjectProbability" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MapZone">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="MapObjectProbability">
         <PropertyRef Name="MapZone" />
@@ -887,7 +887,7 @@
     <End Type="artModel.ZoneCoordinat" Role="ZoneCoordinat" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MapZone">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ZoneCoordinat">
         <PropertyRef Name="MapZone" />
@@ -899,7 +899,7 @@
     <End Type="artModel.StepObject" Role="StepObject" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StepObjectType">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StepObject">
         <PropertyRef Name="StepObjectType" />
@@ -911,7 +911,7 @@
     <End Type="artModel.StepObjectStepTemplate" Role="StepObjectStepTemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StepObject">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StepObjectStepTemplate">
         <PropertyRef Name="StepObject" />
@@ -925,7 +925,7 @@
     <End Type="artModel.StepObjectStepTemplate" Role="StepObjectStepTemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StepTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StepObjectStepTemplate">
         <PropertyRef Name="StepTemplate" />
@@ -937,7 +937,7 @@
     <End Type="artModel.StepTemplateActionTemplate" Role="StepTemplateActionTemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="StepTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StepTemplateActionTemplate">
         <PropertyRef Name="StepTemplate" />
@@ -946,9 +946,9 @@
   </Association>
   <EntityType Name="Constellation">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
     <Property Name="Icon" Type="String" Nullable="false" MaxLength="250" FixedLength="true" Unicode="true" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
@@ -960,7 +960,7 @@
     <End Type="artModel.ConstellationBonu" Role="ConstellationBonu" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Constellation">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ConstellationBonu">
         <PropertyRef Name="Constallation" />
@@ -972,7 +972,7 @@
     <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Constellation">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserArtifact">
         <PropertyRef Name="Constellation" />
@@ -984,7 +984,7 @@
     <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionDescription">
         <PropertyRef Name="ActionTemplate" />
@@ -993,9 +993,9 @@
   </Association>
   <EntityType Name="ActionCharacteristic">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Characteristics" Type="Int32" Nullable="false" />
     <Property Name="Action" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionCharacteristics_Action" FromRole="ActionCharacteristic" ToRole="Action" />
@@ -1003,9 +1003,9 @@
   </EntityType>
   <EntityType Name="ActionPredisposition">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Predisposition" Type="Int32" Nullable="false" />
     <Property Name="Action" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionPredisposition_Action" FromRole="ActionPredisposition" ToRole="Action" />
@@ -1013,9 +1013,9 @@
   </EntityType>
   <EntityType Name="ActionProperty">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Properties" Type="Int32" Nullable="false" />
     <Property Name="Action" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionProperties_Action" FromRole="ActionProperty" ToRole="Action" />
@@ -1023,9 +1023,9 @@
   </EntityType>
   <EntityType Name="ActionResult">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Predisposition" Type="Int64" Nullable="false" />
     <Property Name="Gold" Type="Int32" Nullable="false" />
     <Property Name="Expirience" Type="Int32" Nullable="false" />
@@ -1038,9 +1038,9 @@
   </EntityType>
   <EntityType Name="ActionResultDesire">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ActionResult" Type="Int32" Nullable="false" />
     <Property Name="Desire" Type="Int32" Nullable="false" />
     <Property Name="Modifier" Type="Double" Nullable="false" />
@@ -1049,9 +1049,9 @@
   </EntityType>
   <EntityType Name="ActionTemplateCharacteristic">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
     <Property Name="Characteristics" Type="Int32" Nullable="false" />
     <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionTemplateCharacteristics_ActionTemplate" FromRole="ActionTemplateCharacteristic" ToRole="ActionTemplate" />
@@ -1059,9 +1059,9 @@
   </EntityType>
   <EntityType Name="ActionTemplateProperty">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ActionTemplate" Type="Int32" Nullable="false" />
     <Property Name="Properties" Type="Int32" Nullable="false" />
     <Property Name="Appearance" Type="Boolean" Nullable="false" />
@@ -1070,9 +1070,9 @@
   </EntityType>
   <EntityType Name="ActionTemplateResult">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PredispositionResultModifier" Type="Double" Nullable="false" />
     <Property Name="ExperienceModifier" Type="Double" Nullable="false" />
     <Property Name="ArtifactPosibility" Type="Double" Nullable="false" />
@@ -1082,9 +1082,9 @@
   </EntityType>
   <EntityType Name="ActiveActionInFlow">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Step" Type="Int32" Nullable="false" />
     <Property Name="Action" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Action1" Relationship="artModel.FK_ActiveActionInFlow_Action" FromRole="ActiveActionInFlow" ToRole="Action" />
@@ -1093,9 +1093,9 @@
   </EntityType>
   <EntityType Name="CarrierDesire">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CarrierId" Type="Int32" Nullable="false" />
     <Property Name="DesireId" Type="Int32" Nullable="false" />
     <Property Name="DesireMask" Type="Int64" Nullable="false" />
@@ -1107,9 +1107,9 @@
   </EntityType>
   <EntityType Name="CarrierUserArtifact">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Carrier" Type="Int32" Nullable="false" />
     <Property Name="UserArtifact" Type="Int32" Nullable="false" />
     <Property Name="Addiction" Type="Int32" Nullable="false" />
@@ -1118,9 +1118,9 @@
   </EntityType>
   <EntityType Name="Class">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Icon" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="FibonacciSeed" Type="Int32" Nullable="false" />
@@ -1129,9 +1129,9 @@
   </EntityType>
   <EntityType Name="Desire">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Icon" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1145,9 +1145,9 @@
   </EntityType>
   <EntityType Name="DesireActionTemplateResult">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Desire" Type="Int32" Nullable="false" />
     <Property Name="ActionTemplateResult" Type="Int32" Nullable="false" />
     <Property Name="Modifier" Type="Double" Nullable="false" />
@@ -1156,9 +1156,9 @@
   </EntityType>
   <EntityType Name="DesireMapZone">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Desire" Type="Int32" Nullable="false" />
     <Property Name="MapZone" Type="Int32" Nullable="false" />
     <Property Name="Modifier" Type="Double" Nullable="false" />
@@ -1167,9 +1167,9 @@
   </EntityType>
   <EntityType Name="Log">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ShortLog" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ExtendedLog" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
@@ -1178,9 +1178,9 @@
   </EntityType>
   <EntityType Name="RaceDesire">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RaceId" Type="Int32" Nullable="false" />
     <Property Name="DesireId" Type="Int32" Nullable="false" />
     <Property Name="Probability" Type="Double" Nullable="false" />
@@ -1191,9 +1191,9 @@
   </EntityType>
   <EntityType Name="UserArtifactClass">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Class" Type="Int32" Nullable="false" />
     <Property Name="UserArtifact" Type="Int32" Nullable="false" />
     <Property Name="Expirience" Type="Int32" Nullable="false" />
@@ -1206,7 +1206,7 @@
     <End Type="artModel.Action" Role="Action" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Step">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Action">
         <PropertyRef Name="Step" />
@@ -1218,7 +1218,7 @@
     <End Type="artModel.ActionCharacteristic" Role="ActionCharacteristic" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Action">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionCharacteristic">
         <PropertyRef Name="Action" />
@@ -1230,7 +1230,7 @@
     <End Type="artModel.ActionPredisposition" Role="ActionPredisposition" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Action">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionPredisposition">
         <PropertyRef Name="Action" />
@@ -1242,7 +1242,7 @@
     <End Type="artModel.ActionProperty" Role="ActionProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Action">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionProperty">
         <PropertyRef Name="Action" />
@@ -1254,7 +1254,7 @@
     <End Type="artModel.ActionResult" Role="ActionResult" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Action">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionResult">
         <PropertyRef Name="Action" />
@@ -1266,7 +1266,7 @@
     <End Type="artModel.ActiveActionInFlow" Role="ActiveActionInFlow" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Action">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActiveActionInFlow">
         <PropertyRef Name="Action" />
@@ -1278,7 +1278,7 @@
     <End Type="artModel.ActionCharacteristic" Role="ActionCharacteristic" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Characteristic">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionCharacteristic">
         <PropertyRef Name="Characteristics" />
@@ -1290,7 +1290,7 @@
     <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionDescription">
         <PropertyRef Name="Class" />
@@ -1302,7 +1302,7 @@
     <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Race">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionDescription">
         <PropertyRef Name="Race" />
@@ -1314,7 +1314,7 @@
     <End Type="artModel.ActionPredisposition" Role="ActionPredisposition" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Predisposition">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionPredisposition">
         <PropertyRef Name="Predisposition" />
@@ -1326,7 +1326,7 @@
     <End Type="artModel.ActionProperty" Role="ActionProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Property">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionProperty">
         <PropertyRef Name="Properties" />
@@ -1338,7 +1338,7 @@
     <End Type="artModel.ActionResultDesire" Role="ActionResultDesire" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionResult">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionResultDesire">
         <PropertyRef Name="ActionResult" />
@@ -1350,7 +1350,7 @@
     <End Type="artModel.ActionResultDesire" Role="ActionResultDesire" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Desire">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionResultDesire">
         <PropertyRef Name="Desire" />
@@ -1362,7 +1362,7 @@
     <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplateResult">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplate">
         <PropertyRef Name="ActionTemplateResult" />
@@ -1374,7 +1374,7 @@
     <End Type="artModel.ActionTemplateCharacteristic" Role="ActionTemplateCharacteristic" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplateCharacteristic">
         <PropertyRef Name="ActionTemplate" />
@@ -1386,7 +1386,7 @@
     <End Type="artModel.ActionTemplateProperty" Role="ActionTemplateProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplate">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplateProperty">
         <PropertyRef Name="ActionTemplate" />
@@ -1398,7 +1398,7 @@
     <End Type="artModel.ActionTemplateCharacteristic" Role="ActionTemplateCharacteristic" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Characteristic">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplateCharacteristic">
         <PropertyRef Name="Characteristics" />
@@ -1410,7 +1410,7 @@
     <End Type="artModel.ActionTemplateProperty" Role="ActionTemplateProperty" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Property">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActionTemplateProperty">
         <PropertyRef Name="Properties" />
@@ -1422,7 +1422,7 @@
     <End Type="artModel.DesireActionTemplateResult" Role="DesireActionTemplateResult" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActionTemplateResult">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="DesireActionTemplateResult">
         <PropertyRef Name="ActionTemplateResult" />
@@ -1434,7 +1434,7 @@
     <End Type="artModel.ActiveActionInFlow" Role="ActiveActionInFlow" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Step">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="ActiveActionInFlow">
         <PropertyRef Name="Step" />
@@ -1446,7 +1446,7 @@
     <End Type="artModel.Step" Role="Step" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="ActiveActionInFlow">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Step">
         <PropertyRef Name="ActiveActionInFlow" />
@@ -1458,7 +1458,7 @@
     <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Carrier">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CarrierDesire">
         <PropertyRef Name="CarrierId" />
@@ -1470,7 +1470,7 @@
     <End Type="artModel.CarrierUserArtifact" Role="CarrierUserArtifact" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Carrier">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CarrierUserArtifact">
         <PropertyRef Name="Carrier" />
@@ -1482,7 +1482,7 @@
     <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Desire">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CarrierDesire">
         <PropertyRef Name="DesireId" />
@@ -1494,7 +1494,7 @@
     <End Type="artModel.CarrierUserArtifact" Role="CarrierUserArtifact" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserArtifact">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CarrierUserArtifact">
         <PropertyRef Name="UserArtifact" />
@@ -1506,7 +1506,7 @@
     <End Type="artModel.UserArtifactClass" Role="UserArtifactClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Class">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserArtifactClass">
         <PropertyRef Name="Class" />
@@ -1518,7 +1518,7 @@
     <End Type="artModel.DesireActionTemplateResult" Role="DesireActionTemplateResult" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Desire">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="DesireActionTemplateResult">
         <PropertyRef Name="Desire" />
@@ -1530,7 +1530,7 @@
     <End Type="artModel.DesireMapZone" Role="DesireMapZone" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Desire">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="DesireMapZone">
         <PropertyRef Name="Desire" />
@@ -1542,7 +1542,7 @@
     <End Type="artModel.RaceDesire" Role="RaceDesire" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Desire">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="RaceDesire">
         <PropertyRef Name="DesireId" />
@@ -1554,7 +1554,7 @@
     <End Type="artModel.Step" Role="Step" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Desire">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Step">
         <PropertyRef Name="Desire" />
@@ -1566,7 +1566,7 @@
     <End Type="artModel.StepTemplate" Role="StepTemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Desire">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="StepTemplate">
         <PropertyRef Name="Desire" />
@@ -1578,7 +1578,7 @@
     <End Type="artModel.DesireMapZone" Role="DesireMapZone" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="MapZone">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="DesireMapZone">
         <PropertyRef Name="MapZone" />
@@ -1590,7 +1590,7 @@
     <End Type="artModel.Log" Role="Log" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserArtifact">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="Log">
         <PropertyRef Name="UserArtifact" />
@@ -1602,7 +1602,7 @@
     <End Type="artModel.RaceDesire" Role="RaceDesire" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Race">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="RaceDesire">
         <PropertyRef Name="RaceId" />
@@ -1614,7 +1614,7 @@
     <End Type="artModel.UserArtifactClass" Role="UserArtifactClass" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="UserArtifact">
-        <PropertyRef Name="id" />
+        <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="UserArtifactClass">
         <PropertyRef Name="UserArtifact" />

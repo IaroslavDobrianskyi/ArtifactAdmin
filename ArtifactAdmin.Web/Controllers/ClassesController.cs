@@ -1,11 +1,12 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ConstellationsController.cs" company="Artifact">
+// <copyright file="ClassesController.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the ConstellationsController type.
+//   Defines the ClassesController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
@@ -15,81 +16,80 @@ namespace ArtifactAdmin.Web.Controllers
     using BL.Interfaces;
     using BL.ModelsDTO;
 
-    public class ConstellationsController : Controller
+    public class ClassesController : Controller
     {
-        private IConstellationService constellationService;
+        private IClassService classService;
 
-        public ConstellationsController(IConstellationService constellationService)
+        public ClassesController(IClassService classService) 
         {
-            this.constellationService = constellationService;
+            this.classService = classService;
         }
 
-        // GET: Constellations
+        // GET: Classes
         public ActionResult Index()
         {
-            return View(this.constellationService.GetAll());
+            return View(this.classService.GetAll());
         }
 
-        // GET: Constellations/Details/5
+        // GET: Classes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-        
-           var constellation = this.constellationService.GetById(id);
-           
-            if (constellation == null)
+
+            var clas = this.classService.GetById(id);
+            if (clas == null)
             {
                 return HttpNotFound();
             }
 
-            return View(constellation);
+            return View(clas);
         }
 
-        // GET: Constellations/Create
+        // GET: Classes/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Constellations/Create
+        // POST: Classes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Icon,Description")] ConstellationDto constellation, HttpPostedFileBase icon)
+        public ActionResult Create([Bind(Include = "Id,Description,Icon,FibonacciSeed")] ClassDto clas, HttpPostedFileBase icon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileNameForSave = FileHelper.SaveIcon("Constellations", icon);
+                var fileNameForSave = FileHelper.SaveIcon("Classes", icon);
                 if (string.IsNullOrEmpty(fileNameForSave))
                 {
                     ViewBag.Error = "Помилка при збереженні іконки";
-                    return View(constellation);
+                    return View(clas);
                 }
 
                 try
-                    {
-                        this.constellationService.Create(constellation, fileNameForSave);
-                    }
-                    catch (Exception e)
-                    {
-                        ViewBag.Error = "Помилка при створенні нового запису";
-                        ViewBag.ErrMes = e.Message;
-                        return View(constellation);
-                    }
+                {
+                    this.classService.Create(clas, fileNameForSave);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Error = "Помилка при створенні нового запису";
+                    ViewBag.ErrMes = e.Message;
+                    return View(clas);
+                }
 
                 return RedirectToAction("Index");
             }
 
-            return View(constellation);
+            return View(clas);
         }
 
-        // GET: Constellations/Edit/5
+        // GET: Classes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -97,61 +97,61 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var constellation = this.constellationService.GetById(id);
-            if (constellation == null)
+            var clas = this.classService.GetById(id);
+            if (clas == null)
             {
                 return HttpNotFound();
             }
 
-            return View(constellation);
+            return View(clas);
         }
 
-        // POST: Constellations/Edit/5
+        // POST: Classes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Icon,Description")] ConstellationDto constellation, HttpPostedFileBase newIcon)
+        public ActionResult Edit([Bind(Include = "Id,Description,Icon,FibonacciSeed")] ClassDto clas, HttpPostedFileBase newIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var oldfileName = constellation.Icon;
+                var oldfileName = clas.Icon;
                 var fileNameForSave = oldfileName;
-                if (newIcon != null) 
+                if (newIcon != null)
                 {
-                    fileNameForSave = FileHelper.SaveIcon("Constellations", newIcon);
+                    fileNameForSave = FileHelper.SaveIcon("Classes", newIcon);
                     if (string.IsNullOrEmpty(fileNameForSave))
                     {
                         ViewBag.Error = "Помилка при збереженні іконки";
-                        return View(constellation);
+                        return View(clas);
                     }
                 }
 
-                try
+                try 
                 {
-                    this.constellationService.Update(constellation, fileNameForSave);
+                    this.classService.Update(clas, fileNameForSave);
                 }
-                catch (Exception e)
+                catch (Exception e) 
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(constellation);
+                    return View(clas);
                 }
 
                 if (oldfileName != fileNameForSave)
                 {
-                    FileHelper.DeleteIcon(oldfileName, "Constellations");
+                    FileHelper.DeleteIcon(oldfileName, "Classes");
                 }
 
                 return RedirectToAction("Index");
             }
 
-            return View(constellation);
+            return View(clas);
         }
 
-        // GET: Constellations/Delete/5
+        // GET: Classes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -159,36 +159,36 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var constellation = this.constellationService.GetById(id);
-            if (constellation == null)
+            var clas = this.classService.GetById(id);
+            if (clas == null)
             {
                 return HttpNotFound();
             }
 
-            return View(constellation);
+            return View(clas);
         }
 
-        // POST: Constellations/Delete/5
+        // POST: Classes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var constellation = this.constellationService.GetById(id);
-            var fileName = constellation.Icon;
-            try
+            var clas = this.classService.GetById(id);
+            var fileName = clas.Icon;
+            try 
             {
-                this.constellationService.Delete(id);
+                this.classService.Delete(id);
             }
             catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                return View(constellation);
+                return View(clas);
             }
 
-            FileHelper.DeleteIcon(fileName, "Constellations");
+            FileHelper.DeleteIcon(fileName, "Classes");
             return RedirectToAction("Index");
         }
     }

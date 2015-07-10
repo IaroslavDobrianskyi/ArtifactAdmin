@@ -21,7 +21,7 @@
         <h4>Опис дій</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ActionDescriptionDto.id)
+        @Html.HiddenFor(model => model.ActionDescriptionDto.Id)
         @Html.HiddenFor(model => model.ActionDescriptionDto.ActionTemplate)
         @Html.HiddenFor(model => model.ActionDescriptionDto.MapZone)
         <div class="form-group">

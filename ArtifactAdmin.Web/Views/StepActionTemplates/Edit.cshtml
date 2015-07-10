@@ -14,7 +14,7 @@
         <h4>Шаблон кроку-дії</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.StepTemplateDto.id)
+        @Html.HiddenFor(model => model.StepTemplateDto.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.StepTemplateDto.Description, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -42,7 +42,7 @@
         <table class="table">
             <tr>
                 <td>
-                    @Html.ListBoxFor(model => model.ActionTemplate, new MultiSelectList(Model.ActionTemplate, "id", "Name"), new { size = 8, style = "width:250px" })
+                    @Html.ListBoxFor(model => model.ActionTemplate, new MultiSelectList(Model.ActionTemplate, "Id", "Name"), new { size = 8, style = "width:250px" })
                 </td>
 
                 <td style="text-align:center">
@@ -54,7 +54,7 @@
                 </td>
 
                 <td>
-                    @Html.ListBoxFor(model => model.SelectedActionTemplate, new MultiSelectList(Model.SelectedActionTemplate, "id", "Name"),
+                    @Html.ListBoxFor(model => model.SelectedActionTemplate, new MultiSelectList(Model.SelectedActionTemplate, "Id", "Name"),
 new { id = "selectedAction", size = 8, style = "width:250px" })
                 </td>
             </tr>

@@ -24,7 +24,6 @@
                 new { @class = "form-control",
                       onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_ActionTemplate'));"
            })
-                @*@Html.ValidationMessageFor(model => model.ActionTemplateDto, "", new { @class = "text-danger" })*@
                 @Html.ValidationMessageFor(model => model.ActionDescriptionDto.ActionTemplate, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -2013,7 +2013,7 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserArtifacts" Relationship="artModel.FK_UserArtifact_User" FromRole="User" ToRole="UserArtifact" />
+          <NavigationProperty Name="UserArtifacts" Relationship="artModel.FK_UserArtifact_User" FromRole="User" ToRole="UserArtifact" a:SetterAccess="Private" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         </EntityType>
         <EntityType Name="UserArtifactTalent">
           <Key>

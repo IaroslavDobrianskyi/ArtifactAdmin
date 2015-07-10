@@ -57,7 +57,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier")] ActionTemplateResultDto actionTemplateResultDto)
+        public ActionResult Create([Bind(Include = "Id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier")] ActionTemplateResultDto actionTemplateResultDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -102,7 +102,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier")] ActionTemplateResultDto actionTemplateResultDto)
+        public ActionResult Edit([Bind(Include = "Id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier")] ActionTemplateResultDto actionTemplateResultDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;

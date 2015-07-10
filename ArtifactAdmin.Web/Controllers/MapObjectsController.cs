@@ -58,7 +58,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name")] MapObjectDto mapObject)
+        public ActionResult Create([Bind(Include = "Id,Name")] MapObjectDto mapObject)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -103,7 +103,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name")] MapObjectDto mapObject)
+        public ActionResult Edit([Bind(Include = "Id,Name")] MapObjectDto mapObject)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;

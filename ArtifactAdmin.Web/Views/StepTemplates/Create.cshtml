@@ -43,7 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StepTemplate.Desire1.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m=>m.DesireDto, new SelectList(Model.DesireDto,"id","Name"),"Виберіть бажання",
+                @Html.DropDownListFor(m=>m.DesireDto, new SelectList(Model.DesireDto,"Id","Name"),"Виберіть бажання",
                 new { @class = "form-control",
                       onchange = "javascript:SelId(this,document.getElementById('StepTemplate_Desire'));"} )
                 @Html.ValidationMessageFor(model => model.StepTemplate.Desire, "", new { @class = "text-danger" })
@@ -58,7 +58,7 @@
                
                 <td style="text-align:center">
                     @Html.ListBoxFor(model => model.StepObjectType,
-              new SelectList(Model.StepObjectType, "id", "Name"),
+              new SelectList(Model.StepObjectType, "Id", "Name"),
      new { size = 4, onclick = "javascript:AddTypObj();" })
                     <span id="TypeMes" class="alert-warning"></span>
                     <br />

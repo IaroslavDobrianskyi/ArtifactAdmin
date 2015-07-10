@@ -39,12 +39,12 @@
         </dt>
 
         <dd>
-            @Html.ListBoxFor(model=>model.SelectedActionTemplate,new SelectList(Model.SelectedActionTemplate, "id","Name"  ),
+            @Html.ListBoxFor(model=>model.SelectedActionTemplate,new SelectList(Model.SelectedActionTemplate, "Id","Name"  ),
                      new { size = 8, style = "width:280px" })
         </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Змінити", "Edit", new { id = Model.StepTemplateDto.id }) |
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.StepTemplateDto.Id }) |
     @Html.ActionLink("Повернутись до списку", "Index")
 </p>

@@ -58,7 +58,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,ZoneName,Color")] MapZoneDto mapZone, string[] SelectedMapObject, string[] Probability)
+        public ActionResult Create([Bind(Include = "Id,ZoneName,Color")] MapZoneDto mapZone, string[] selectedMapObject, string[] probability)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -67,7 +67,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.mapZoneService.Create(mapZone, SelectedMapObject, Probability);
+                    this.mapZoneService.Create(mapZone, selectedMapObject, probability);
                 }
                 catch (Exception e)
                 {
@@ -106,7 +106,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,ZoneName,Color")] MapZoneDto mapZone, string[] SelectedMapObject, string[] Probability)
+        public ActionResult Edit([Bind(Include = "Id,ZoneName,Color")] MapZoneDto mapZone, string[] selectedMapObject, string[] probability)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -115,7 +115,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.mapZoneService.Update(mapZone, SelectedMapObject, Probability);
+                    this.mapZoneService.Update(mapZone, selectedMapObject, probability);
                 }
                 catch (Exception e) 
                 {

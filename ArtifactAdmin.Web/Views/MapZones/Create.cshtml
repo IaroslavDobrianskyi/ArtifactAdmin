@@ -40,7 +40,7 @@
             </colgroup>
             <tr>
                 <td>
-                    @Html.ListBoxFor(model => model.MapObject, new SelectList(Model.MapObject, "id", "Name"), new { size = 8, style = "width:250px" })
+                    @Html.ListBoxFor(model => model.MapObject, new SelectList(Model.MapObject, "Id", "Name"), new { size = 8, style = "width:250px" })
                 </td>
                 <td>
                     @Html.LabelFor(model => model.OneProbability, htmlAttributes: new { @class = "control-label col-md-2" })<br />

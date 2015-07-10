@@ -12,14 +12,14 @@
           <ScalarProperty Name="PredispositionResult" ColumnName="PredispositionResult" />
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="Step" ColumnName="Step" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Artifacts">
       <EntityTypeMapping TypeName="artModel.Artifact">
         <MappingFragment StoreEntitySet="Artifact">
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="ArtifactType" ColumnName="ArtifactType" />
           <ScalarProperty Name="Icon" ColumnName="Icon" />
@@ -29,7 +29,7 @@
     <EntitySetMapping Name="ArtifactTypes">
       <EntityTypeMapping TypeName="artModel.ArtifactType">
         <MappingFragment StoreEntitySet="ArtifactType">
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="Descrioption" ColumnName="Descrioption" />
@@ -48,7 +48,7 @@
     <EntitySetMapping Name="ConstellationBonus">
       <EntityTypeMapping TypeName="artModel.ConstellationBonu">
         <MappingFragment StoreEntitySet="ConstellationBonus">
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
           <ScalarProperty Name="Bonus" ColumnName="Bonus" />
           <ScalarProperty Name="Constallation" ColumnName="Constallation" />
           <ScalarProperty Name="Modifier" ColumnName="Modifier" />
@@ -80,7 +80,7 @@
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="ActiveActionInFlow" ColumnName="ActiveActionInFlow" />
           <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -101,7 +101,7 @@
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="BaseModifier" ColumnName="BaseModifier" />
           <ScalarProperty Name="BaseValue" ColumnName="BaseValue" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="MaxLevel" ColumnName="MaxLevel" />
@@ -115,7 +115,7 @@
           <ScalarProperty Name="Carrier" ColumnName="Carrier" />
           <ScalarProperty Name="BlockActionProbability" ColumnName="BlockActionProbability" />
           <ScalarProperty Name="User" ColumnName="User" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
           <ScalarProperty Name="Artifact" ColumnName="Artifact" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Constellation" ColumnName="Constellation" />
@@ -133,7 +133,7 @@
           <ScalarProperty Name="Modifier" ColumnName="Modifier" />
           <ScalarProperty Name="Bonus" ColumnName="Bonus" />
           <ScalarProperty Name="Artifact" ColumnName="Artifact" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -147,7 +147,7 @@
           <ScalarProperty Name="ExperiencePoints" ColumnName="ExperiencePoints" />
           <ScalarProperty Name="ExperienceLevel" ColumnName="ExperienceLevel" />
           <ScalarProperty Name="Race" ColumnName="Race" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -159,7 +159,7 @@
           <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
           <ScalarProperty Name="CharacteristicsLevelModifier" ColumnName="CharacteristicsLevelModifier" />
           <ScalarProperty Name="Characreristics" ColumnName="Characreristics" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
           <ScalarProperty Name="Description" ColumnName="Description" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -170,7 +170,7 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -180,7 +180,7 @@
           <ScalarProperty Name="TalentLevel" ColumnName="TalentLevel" />
           <ScalarProperty Name="UserTalent" ColumnName="UserTalent" />
           <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -192,7 +192,7 @@
           <ScalarProperty Name="ActionText" ColumnName="ActionText" />
           <ScalarProperty Name="MapZone" ColumnName="MapZone" />
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -202,7 +202,7 @@
           <ScalarProperty Name="ActionTemplateResult" ColumnName="ActionTemplateResult" />
           <ScalarProperty Name="BlockProbability" ColumnName="BlockProbability" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -211,7 +211,7 @@
         <MappingFragment StoreEntitySet="ActionTemplateActionDescription">
           <ScalarProperty Name="ActionDescription" ColumnName="ActionDescription" />
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -222,7 +222,7 @@
           <ScalarProperty Name="RequirementLow" ColumnName="RequirementLow" />
           <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -232,7 +232,7 @@
           <ScalarProperty Name="Mask" ColumnName="Mask" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -240,7 +240,7 @@
       <EntityTypeMapping TypeName="artModel.MapObject">
         <MappingFragment StoreEntitySet="MapObject">
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -250,7 +250,7 @@
           <ScalarProperty Name="Probability" ColumnName="Probability" />
           <ScalarProperty Name="MapZone" ColumnName="MapZone" />
           <ScalarProperty Name="MapObject" ColumnName="MapObject" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -259,7 +259,7 @@
         <MappingFragment StoreEntitySet="MapZone">
           <ScalarProperty Name="Color" ColumnName="Color" />
           <ScalarProperty Name="ZoneName" ColumnName="ZoneName" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -269,7 +269,7 @@
           <ScalarProperty Name="Mask" ColumnName="Mask" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -280,7 +280,7 @@
           <ScalarProperty Name="Mask" ColumnName="Mask" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -291,7 +291,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StepObjectType" ColumnName="StepObjectType" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -300,7 +300,7 @@
         <MappingFragment StoreEntitySet="StepObjectStepTemplate">
           <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
           <ScalarProperty Name="StepObject" ColumnName="StepObject" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -308,7 +308,7 @@
       <EntityTypeMapping TypeName="artModel.StepObjectType">
         <MappingFragment StoreEntitySet="StepObjectType">
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -319,7 +319,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StepText" ColumnName="StepText" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -328,7 +328,7 @@
         <MappingFragment StoreEntitySet="StepTemplateActionTemplate">
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
           <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -338,7 +338,7 @@
           <ScalarProperty Name="y" ColumnName="y" />
           <ScalarProperty Name="x" ColumnName="x" />
           <ScalarProperty Name="MapZone" ColumnName="MapZone" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -348,7 +348,7 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -357,7 +357,7 @@
         <MappingFragment StoreEntitySet="ActionCharacteristics">
           <ScalarProperty Name="Action" ColumnName="Action" />
           <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -366,7 +366,7 @@
         <MappingFragment StoreEntitySet="ActionPredisposition">
           <ScalarProperty Name="Action" ColumnName="Action" />
           <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -375,7 +375,7 @@
         <MappingFragment StoreEntitySet="ActionProperties">
           <ScalarProperty Name="Action" ColumnName="Action" />
           <ScalarProperty Name="Properties" ColumnName="Properties" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -389,7 +389,7 @@
           <ScalarProperty Name="Expirience" ColumnName="Expirience" />
           <ScalarProperty Name="Gold" ColumnName="Gold" />
           <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -399,7 +399,7 @@
           <ScalarProperty Name="Modifier" ColumnName="Modifier" />
           <ScalarProperty Name="Desire" ColumnName="Desire" />
           <ScalarProperty Name="ActionResult" ColumnName="ActionResult" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -408,7 +408,7 @@
         <MappingFragment StoreEntitySet="ActionTemplateCharacteristics">
           <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -418,7 +418,7 @@
           <ScalarProperty Name="Appearance" ColumnName="Appearance" />
           <ScalarProperty Name="Properties" ColumnName="Properties" />
           <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -429,7 +429,7 @@
           <ScalarProperty Name="ArtifactPosibility" ColumnName="ArtifactPosibility" />
           <ScalarProperty Name="ExperienceModifier" ColumnName="ExperienceModifier" />
           <ScalarProperty Name="PredispositionResultModifier" ColumnName="PredispositionResultModifier" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -438,7 +438,7 @@
         <MappingFragment StoreEntitySet="ActiveActionInFlow">
           <ScalarProperty Name="Action" ColumnName="Action" />
           <ScalarProperty Name="Step" ColumnName="Step" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -451,7 +451,7 @@
           <ScalarProperty Name="DesireMask" ColumnName="DesireMask" />
           <ScalarProperty Name="DesireId" ColumnName="DesireId" />
           <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -461,7 +461,7 @@
           <ScalarProperty Name="Addiction" ColumnName="Addiction" />
           <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
           <ScalarProperty Name="Carrier" ColumnName="Carrier" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -471,7 +471,7 @@
           <ScalarProperty Name="FibonacciSeed" ColumnName="FibonacciSeed" />
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -481,7 +481,7 @@
           <ScalarProperty Name="Icon" ColumnName="Icon" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -491,7 +491,7 @@
           <ScalarProperty Name="Modifier" ColumnName="Modifier" />
           <ScalarProperty Name="ActionTemplateResult" ColumnName="ActionTemplateResult" />
           <ScalarProperty Name="Desire" ColumnName="Desire" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -501,7 +501,7 @@
           <ScalarProperty Name="Modifier" ColumnName="Modifier" />
           <ScalarProperty Name="MapZone" ColumnName="MapZone" />
           <ScalarProperty Name="Desire" ColumnName="Desire" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -512,7 +512,7 @@
           <ScalarProperty Name="Date" ColumnName="Date" />
           <ScalarProperty Name="ExtendedLog" ColumnName="ExtendedLog" />
           <ScalarProperty Name="ShortLog" ColumnName="ShortLog" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -524,7 +524,7 @@
           <ScalarProperty Name="Probability" ColumnName="Probability" />
           <ScalarProperty Name="DesireId" ColumnName="DesireId" />
           <ScalarProperty Name="RaceId" ColumnName="RaceId" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -535,7 +535,7 @@
           <ScalarProperty Name="Expirience" ColumnName="Expirience" />
           <ScalarProperty Name="UserArtifact" ColumnName="UserArtifact" />
           <ScalarProperty Name="Class" ColumnName="Class" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

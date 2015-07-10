@@ -10,13 +10,13 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    string Id = "MapObject1.id";
+    string Id = "MapObject1.Id";
     string Name = "MapObject1.Name";
     <div class="form-horizontal">
         <h4>Зони карти</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.MapZone.id)
+        @Html.HiddenFor(model => model.MapZone.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.MapZone.ZoneName, htmlAttributes: new { @class = "control-label col-md-2" })

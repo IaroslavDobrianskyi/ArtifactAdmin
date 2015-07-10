@@ -24,6 +24,6 @@ namespace ArtifactAdmin.DAL.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
     
-        public virtual ICollection<UserArtifact> UserArtifacts { get; set; }
+        public virtual ICollection<UserArtifact> UserArtifacts { get; private set; }
     }
 }

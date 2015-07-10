@@ -62,17 +62,17 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase icon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileNameForSave = FileHelper.SaveIcon("StepObjects", Icon);
+                var fileNameForSave = FileHelper.SaveIcon("StepObjects", icon);
                 if (string.IsNullOrEmpty(fileNameForSave))
                 {
                     ViewBag.Error = "Помилка при збереженні іконки";
-                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name", stepObject.StepObjectType);
                     return View(stepObject);
                 }
 
@@ -84,14 +84,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name", stepObject.StepObjectType);
                     return View(stepObject);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name", stepObject.StepObjectType);
             return View(stepObject);
         }
 
@@ -109,7 +109,7 @@ namespace ArtifactAdmin.Web.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name", stepObject.StepObjectType);
             return View(stepObject);
         }
 
@@ -118,7 +118,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase NewIcon)
+        public ActionResult Edit([Bind(Include = "Id,StepObjectType,Name,Description,Icon")] StepObjectDto stepObject, HttpPostedFileBase newIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -126,9 +126,9 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 var oldfileName = stepObject.Icon;
                 var fileNameForSave = oldfileName;
-                if (NewIcon != null)
+                if (newIcon != null)
                 {
-                    fileNameForSave = FileHelper.SaveIcon("StepObjects", NewIcon);
+                    fileNameForSave = FileHelper.SaveIcon("StepObjects", newIcon);
                     if (string.IsNullOrEmpty(fileNameForSave))
                     {
                         ViewBag.Error = "Помилка при збереженні іконки";
@@ -144,7 +144,7 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+                    ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name", stepObject.StepObjectType);
                     return View(stepObject);
                 }
 
@@ -156,7 +156,7 @@ namespace ArtifactAdmin.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+            ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name", stepObject.StepObjectType);
             return View(stepObject);
         }
 
@@ -194,7 +194,7 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "id", "Name", stepObject.StepObjectType);
+                ViewBag.StepObjectType = new SelectList(this.stepObjectTypeService.GetAll(), "Id", "Name", stepObject.StepObjectType);
                 return View(stepObject);
             }
 

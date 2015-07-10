@@ -58,13 +58,13 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Name,Description,Icon")] DesireDto desire, HttpPostedFileBase Icon)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Icon")] DesireDto desire, HttpPostedFileBase icon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
             if (ModelState.IsValid)
             {
-                var fileNameForSave = FileHelper.SaveIcon("Desires", Icon);
+                var fileNameForSave = FileHelper.SaveIcon("Desires", icon);
                 if (string.IsNullOrEmpty(fileNameForSave)) 
                 {
                     ViewBag.Error = "Помилка при збереженні іконки";
@@ -110,7 +110,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Name,Description,Icon")] DesireDto desire, HttpPostedFileBase NewIcon)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Icon")] DesireDto desire, HttpPostedFileBase newIcon)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -118,9 +118,9 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 var oldFileNAme = desire.Icon;
                 var fileNameForSave = oldFileNAme;
-                if (NewIcon != null) 
+                if (newIcon != null) 
                 {
-                    fileNameForSave = FileHelper.SaveIcon("Desires", NewIcon);
+                    fileNameForSave = FileHelper.SaveIcon("Desires", newIcon);
                     if (string.IsNullOrEmpty(fileNameForSave)) 
                     {
                         ViewBag.Error = "Помилка при збереженні іконки";
