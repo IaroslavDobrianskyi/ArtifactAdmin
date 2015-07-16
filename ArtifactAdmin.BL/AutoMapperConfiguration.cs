@@ -74,6 +74,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<Class, ClassDto>();
             Mapper.CreateMap<ClassDto, Class>();
+
+            Mapper.CreateMap<Characteristic, CharacteristicDto>();
+            Mapper.CreateMap<CharacteristicDto, Characteristic>();
         } 
     }
 }

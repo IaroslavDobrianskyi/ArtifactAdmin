@@ -181,6 +181,7 @@
     <Compile Include="Controllers\ActionTemplatesController.cs" />
     <Compile Include="Controllers\ArtifactTypesController.cs" />
     <Compile Include="Controllers\BonusController.cs" />
+    <Compile Include="Controllers\CharacteristicsController.cs" />
     <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
     <Compile Include="Controllers\DesiresController.cs" />
@@ -362,6 +363,11 @@
     <Content Include="Views\Classes\Details.cshtml" />
     <Content Include="Views\Classes\Edit.cshtml" />
     <Content Include="Views\Classes\Index.cshtml" />
+    <Content Include="Views\Characteristics\Create.cshtml" />
+    <Content Include="Views\Characteristics\Delete.cshtml" />
+    <Content Include="Views\Characteristics\Details.cshtml" />
+    <Content Include="Views\Characteristics\Edit.cshtml" />
+    <Content Include="Views\Characteristics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

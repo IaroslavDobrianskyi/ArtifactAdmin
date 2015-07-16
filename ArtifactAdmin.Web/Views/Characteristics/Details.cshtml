@@ -1,0 +1,58 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.CharacteristicDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Характеристики</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Description, new { rows = "10", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Mask)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mask)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Length)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Length)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Position)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Position)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

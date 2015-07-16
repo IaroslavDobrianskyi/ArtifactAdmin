@@ -10,6 +10,8 @@ namespace ArtifactAdmin.BL.ModelsDTO
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Validate;
+
     public class CharacteristicDto
     {
         public int Id { get; set; }
@@ -39,6 +41,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
       ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Початкова позиція")]
         [Range(0, 49)]
+        [UniquePosition]
         public int Position { get; set; }
     }
 }

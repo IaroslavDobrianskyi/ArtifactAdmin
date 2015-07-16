@@ -31,7 +31,7 @@ namespace ArtifactAdmin.BL.Services
             IRepository<MapZone> mapZoneRepository,
             IRepository<ActionTemplate> actionTemplateRepository,
             IRepository<Race> raceRepository,
-            IRepository<Class> classRepository ) 
+            IRepository<Class> classRepository) 
         {
             this.actionDescriptionRepository = actionDescriptionRepository;
             this.mapZoneRepository = mapZoneRepository;
@@ -43,7 +43,7 @@ namespace ArtifactAdmin.BL.Services
         public IEnumerable<ActionDescriptionDto> GetAll()
         {
             return Mapper.Map<List<ActionDescriptionDto>>(this.actionDescriptionRepository.GetAll().Include(s => s.ActionTemplate1).Include(s => s.MapZone1)
-                .Include(s=>s.Race1).Include(s=>s.Class1)); 
+                .Include(s => s.Race1).Include(s => s.Class1)); 
         }
 
         public ViewActionDescriptionDto GetViewById(int? id) 
@@ -62,13 +62,14 @@ namespace ArtifactAdmin.BL.Services
                 viewActionDescriptionDto.NameRace = viewActionDescriptionDto.ActionDescriptionDto.Race.ToString();
                 viewActionDescriptionDto.NameClass = viewActionDescriptionDto.ActionDescriptionDto.Class.ToString();
             }
+
             return viewActionDescriptionDto;
         }
 
         public ActionDescriptionDto GetById(int? id)
         {
             return Mapper.Map<ActionDescriptionDto>(this.actionDescriptionRepository.GetAll()
-                .Include(s => s.ActionTemplate1).Include(s => s.MapZone1).Include(s=>s.Race1).Include(s=>s.Class1).FirstOrDefault(s => s.Id == id));
+                .Include(s => s.ActionTemplate1).Include(s => s.MapZone1).Include(s => s.Race1).Include(s => s.Class1).FirstOrDefault(s => s.Id == id));
         }
 
         public ActionDescriptionDto Create(ActionDescriptionDto actionDescriptionDto)
