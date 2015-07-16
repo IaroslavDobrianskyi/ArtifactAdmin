@@ -115,7 +115,11 @@
     <Compile Include="Interfaces\IActionTemplateService.cs" />
     <Compile Include="Interfaces\IArtifactTypeService.cs" />
     <Compile Include="Interfaces\IBonusService.cs" />
+<<<<<<< HEAD
     <Compile Include="Interfaces\ICharacteristicService.cs" />
+=======
+    <Compile Include="Interfaces\ICarrierService.cs" />
+>>>>>>> a76361ce69b028f79d98541edefbe208d5a3d9a4
     <Compile Include="Interfaces\IClassService.cs" />
     <Compile Include="Interfaces\IConstellationService.cs" />
     <Compile Include="Interfaces\IDesireService.cs" />
@@ -134,7 +138,11 @@
     <Compile Include="ModelsDTO\BonusDto.cs" />
     <Compile Include="ModelsDTO\CharacteristicDto.cs" />
     <Compile Include="ModelsDTO\ClassDto.cs" />
+<<<<<<< HEAD
     <Compile Include="Services\CharacteristicService.cs" />
+=======
+    <Compile Include="Services\CarrierService.cs" />
+>>>>>>> a76361ce69b028f79d98541edefbe208d5a3d9a4
     <Compile Include="Services\ClassService.cs" />
     <Compile Include="ModelsDTO\ConstellationDto.cs" />
     <Compile Include="ModelsDTO\DesireActionTemplateResultDto.cs" />
