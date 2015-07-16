@@ -188,9 +188,6 @@
     <Compile Include="Models\ActionTemplate.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ActionTemplateActionDescription.cs">
-      <DependentUpon>ArtifactModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ActionTemplateCharacteristic.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -291,6 +288,9 @@
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\Setting.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Statistic.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>

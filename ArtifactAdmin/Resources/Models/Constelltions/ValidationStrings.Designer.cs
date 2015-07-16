@@ -97,6 +97,15 @@ namespace ValidationConstellation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введіть довжину рядка!.
+        /// </summary>
+        public static string RequiredLength {
+            get {
+                return ResourceManager.GetString("RequiredLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Виберіть хоч би один рядок в список!.
         /// </summary>
         public static string RequiredList {
@@ -106,11 +115,29 @@ namespace ValidationConstellation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Введіть маску!.
+        /// </summary>
+        public static string RequiredMask {
+            get {
+                return ResourceManager.GetString("RequiredMask", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Введіть назву!.
         /// </summary>
         public static string RequiredName {
             get {
                 return ResourceManager.GetString("RequiredName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введіть початкову позицію!.
+        /// </summary>
+        public static string RequiredPosition {
+            get {
+                return ResourceManager.GetString("RequiredPosition", resourceCulture);
             }
         }
         

@@ -19,8 +19,16 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
         public List<ActionTemplateDto> ActionTemplateDto { get; set; }
 
+        public List<RaceDto> RaceDto { get; set; }
+
+        public List<ClassDto> ClassDto { get; set; } 
+
         public string ActionName { get; set; }
 
         public string NameZone { get; set; }
+
+        public string NameRace { get; set; }
+
+        public string NameClass { get; set; }
     }
 }

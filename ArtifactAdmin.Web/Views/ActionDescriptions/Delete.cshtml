@@ -20,11 +20,26 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MapZone1.ZoneName)
+            @Html.DisplayNameFor(model => model.MapZone1)
         </dt>
 
         <dd>
-            @Html.TextAreaFor(model => model.MapZone1.ZoneName, new { rows = "2", cols = "50", @readonly = true })
+            @Html.TextAreaFor(model => model.MapZone1.ZoneName, new {rows = "2", cols = "50", @readonly = true})
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Race1)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Race1.Description, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Class1)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Class1.Description, new { rows = "5", cols = "50", @readonly = true })
         </dd>
 
         <dt>

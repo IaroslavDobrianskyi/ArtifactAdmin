@@ -1,4 +1,5 @@
-﻿@model ArtifactAdmin.BL.ModelsDTO.ViewActionDescriptionDto
+﻿@using Microsoft.Ajax.Utilities
+@model ArtifactAdmin.BL.ModelsDTO.ViewActionDescriptionDto
 
 @{
     ViewBag.Title = "Edit";
@@ -10,12 +11,20 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    string SelAction = Model.ActionDescriptionDto.ActionTemplate.ToString();
-    string SelZone = Model.ActionDescriptionDto.MapZone.ToString();
-    string Sel = "";
-    if (SelZone == "")
+    string selZone = "";
+    string selRace = "";
+    string selClass = "";
+    if (Model.NameZone.IsNullOrWhiteSpace())
     {
-        Sel="Виберіть зону карти";
+        selZone="Виберіть зону карти";
+    }
+    if (Model.NameRace.IsNullOrWhiteSpace())
+    {
+        selRace = "Виберіть расу";
+    }
+    if (Model.NameClass.IsNullOrWhiteSpace())
+    {
+        selClass = "Виберіть клас";
     }
     <div class="form-horizontal">
         <h4>Опис дій</h4>
@@ -24,10 +33,14 @@
         @Html.HiddenFor(model => model.ActionDescriptionDto.Id)
         @Html.HiddenFor(model => model.ActionDescriptionDto.ActionTemplate)
         @Html.HiddenFor(model => model.ActionDescriptionDto.MapZone)
+        @Html.HiddenFor(model => model.ActionDescriptionDto.Race)
+        @Html.HiddenFor(model => model.ActionDescriptionDto.Class)
         <div class="form-group">
             @Html.LabelFor(model => model.ActionDescriptionDto.ActionTemplate1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ActionName, new SelectList(Model.ActionTemplateDto, "id", "Name", SelAction), htmlAttributes: new { @class = "form-control",
+                @Html.DropDownListFor(model => model.ActionName, new SelectList(Model.ActionTemplateDto, "id", "Name", Model.ActionName), htmlAttributes: new
+           {
+               @class = "form-control",
                    onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_ActionTemplate'));"
            })
                 @Html.ValidationMessageFor(model => model.ActionTemplateDto, "", new { @class = "text-danger" })
@@ -35,12 +48,36 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ActionDescriptionDto.MapZone1.ZoneName,  htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ActionDescriptionDto.MapZone1,  htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.NameZone, new SelectList(Model.MapZoneDto, "id", "ZoneName", SelZone), Sel, htmlAttributes: new { @class = "form-control",
+                @Html.DropDownListFor(model => model.NameZone, new SelectList(Model.MapZoneDto, "id", "ZoneName", Model.NameZone), selZone, htmlAttributes: new { @class = "form-control",
                 onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_MapZone'))"
            })
                 @Html.ValidationMessageFor(model => model.MapZoneDto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionDescriptionDto.Race1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NameRace, new SelectList(Model.RaceDto, "id", "Description", Model.NameRace), selRace, htmlAttributes: new
+           {
+               @class = "form-control",
+               onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_Race'))"
+           })
+                @Html.ValidationMessageFor(model => model.RaceDto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionDescriptionDto.Class1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NameClass, new SelectList(Model.ClassDto, "id", "Description", Model.NameClass), selClass, htmlAttributes: new
+           {
+               @class = "form-control",
+               onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_Class'))"
+           })
+                @Html.ValidationMessageFor(model => model.ClassDto, "", new { @class = "text-danger" })
             </div>
         </div>
 

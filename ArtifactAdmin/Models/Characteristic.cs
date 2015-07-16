@@ -24,6 +24,8 @@ namespace ArtifactAdmin.DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public long Mask { get; set; }
+        public int Length { get; set; }
+        public int Position { get; set; }
     
         public virtual ICollection<ActionCharacteristic> ActionCharacteristics { get; set; }
         public virtual ICollection<ActionTemplateCharacteristic> ActionTemplateCharacteristics { get; set; }

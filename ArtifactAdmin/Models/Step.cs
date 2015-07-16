@@ -30,6 +30,7 @@ namespace ArtifactAdmin.DAL.Models
         public Nullable<int> YCoordinate { get; set; }
         public Nullable<int> Desire { get; set; }
         public Nullable<bool> IsKey { get; set; }
+        public Nullable<int> Duration { get; set; }
     
         public virtual ICollection<Action> Actions { get; set; }
         public virtual ICollection<ActiveActionInFlow> ActiveActionInFlows { get; set; }

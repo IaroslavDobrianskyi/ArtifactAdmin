@@ -17,6 +17,8 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ActionDescriptionDto.ActionTemplate)
        @Html.HiddenFor(model => model.ActionDescriptionDto.MapZone)
+        @Html.HiddenFor(model => model.ActionDescriptionDto.Race)
+        @Html.HiddenFor(model => model.ActionDescriptionDto.Class)
         <div class="form-group">
             @Html.LabelFor(model => model.ActionDescriptionDto.ActionTemplate1.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -29,12 +31,36 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ActionDescriptionDto.MapZone1.ZoneName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.ActionDescriptionDto.MapZone1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.MapZoneDto, new SelectList(Model.MapZoneDto,"id","ZoneName"), "Виберіть зону карти",htmlAttributes: new { @class = "form-control" ,
                 onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_MapZone'))"
            })
                 @Html.ValidationMessageFor(model => model.MapZoneDto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionDescriptionDto.Race1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NameRace, new SelectList(Model.RaceDto, "id", "Description"), "Виберіть расу", htmlAttributes: new
+           {
+               @class = "form-control",
+               onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_Race'))"
+           })
+                @Html.ValidationMessageFor(model => model.RaceDto, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ActionDescriptionDto.Class1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.NameClass, new SelectList(Model.ClassDto, "id", "Description"), "Виберіть клас", htmlAttributes: new
+           {
+               @class = "form-control",
+               onchange = "javascript:SelId(this,document.getElementById('ActionDescriptionDto_Class'))"
+           })
+                @Html.ValidationMessageFor(model => model.ClassDto, "", new { @class = "text-danger" })
             </div>
         </div>
 

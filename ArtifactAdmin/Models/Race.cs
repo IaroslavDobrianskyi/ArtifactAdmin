@@ -16,21 +16,21 @@ namespace ArtifactAdmin.DAL.Models
     {
         public Race()
         {
-            this.Carriers = new HashSet<Carrier>();
             this.ActionDescriptions = new HashSet<ActionDescription>();
+            this.Carriers = new HashSet<Carrier>();
             this.RaceDesires = new HashSet<RaceDesire>();
         }
     
-        public string Description { get; set; }
         public int Id { get; set; }
-        public long Characreristics { get; set; }
-        public long CharacteristicsLevelModifier { get; set; }
-        public long Predisposition { get; set; }
-        public long Properties { get; set; }
+        public string Description { get; set; }
+        public string Characreristics { get; set; }
+        public string CharacteristicsLevelModifier { get; set; }
+        public string Predisposition { get; set; }
+        public string Properties { get; set; }
         public string Icon { get; set; }
     
-        public virtual ICollection<Carrier> Carriers { get; set; }
         public virtual ICollection<ActionDescription> ActionDescriptions { get; set; }
+        public virtual ICollection<Carrier> Carriers { get; set; }
         public virtual ICollection<RaceDesire> RaceDesires { get; set; }
     }
 }

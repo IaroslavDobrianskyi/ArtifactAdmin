@@ -19,11 +19,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ActionDescriptionDto.MapZone1.ZoneName)
+            @Html.DisplayNameFor(model => model.ActionDescriptionDto.MapZone1)
         </dt>
 
         <dd>
             @Html.TextAreaFor(model => model.ActionDescriptionDto.MapZone1.ZoneName, new { rows = "2", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionDescriptionDto.Race1)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.ActionDescriptionDto.Race1.Description, new {rows = "5", cols = "50", @readonly = true})
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ActionDescriptionDto.Class1)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.ActionDescriptionDto.Class1.Description, new {rows = "5", cols = "50", @readonly = true})
         </dd>
 
         <dt>

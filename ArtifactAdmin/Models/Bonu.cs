@@ -16,15 +16,15 @@ namespace ArtifactAdmin.DAL.Models
     {
         public Bonu()
         {
-            this.ConstellationBonus = new HashSet<ConstellationBonu>();
             this.ArtifactBonus = new HashSet<ArtifactBonu>();
+            this.ConstellationBonus = new HashSet<ConstellationBonu>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
     
-        public virtual ICollection<ConstellationBonu> ConstellationBonus { get; set; }
         public virtual ICollection<ArtifactBonu> ArtifactBonus { get; set; }
+        public virtual ICollection<ConstellationBonu> ConstellationBonus { get; set; }
     }
 }

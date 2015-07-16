@@ -21,9 +21,9 @@ namespace ArtifactAdmin.DAL.Models
         public Nullable<int> Race { get; set; }
         public Nullable<int> Class { get; set; }
     
-        public virtual MapZone MapZone1 { get; set; }
-        public virtual ActionTemplate ActionTemplate1 { get; set; }
         public virtual Class Class1 { get; set; }
+        public virtual MapZone MapZone1 { get; set; }
         public virtual Race Race1 { get; set; }
+        public virtual ActionTemplate ActionTemplate1 { get; set; }
     }
 }

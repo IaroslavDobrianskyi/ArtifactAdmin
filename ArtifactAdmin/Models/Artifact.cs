@@ -16,17 +16,21 @@ namespace ArtifactAdmin.DAL.Models
     {
         public Artifact()
         {
-            this.UserArtifacts = new HashSet<UserArtifact>();
             this.ArtifactBonus = new HashSet<ArtifactBonu>();
+            this.UserArtifacts = new HashSet<UserArtifact>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public int ArtifactType { get; set; }
         public string Icon { get; set; }
+        public int TotalEnergyBase { get; set; }
+        public int TotalEnergyModifier { get; set; }
+        public int EnergyRegenRateBase { get; set; }
+        public int EnergyRegenRateBaseModifier { get; set; }
     
         public virtual ArtifactType ArtifactType1 { get; set; }
-        public virtual ICollection<UserArtifact> UserArtifacts { get; set; }
         public virtual ICollection<ArtifactBonu> ArtifactBonus { get; set; }
+        public virtual ICollection<UserArtifact> UserArtifacts { get; set; }
     }
 }

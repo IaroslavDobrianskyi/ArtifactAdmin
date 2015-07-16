@@ -131,6 +131,7 @@
     <Compile Include="ModelsDTO\ActionTemplateResultDto.cs" />
     <Compile Include="ModelsDTO\ArtifactTypeDto.cs" />
     <Compile Include="ModelsDTO\BonusDto.cs" />
+    <Compile Include="ModelsDTO\CharacteristicDto.cs" />
     <Compile Include="ModelsDTO\ClassDto.cs" />
     <Compile Include="Services\ClassService.cs" />
     <Compile Include="ModelsDTO\ConstellationDto.cs" />

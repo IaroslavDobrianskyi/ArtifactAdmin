@@ -24,10 +24,10 @@ namespace ArtifactAdmin.DAL.Models
         public int Race { get; set; }
         public int ExperienceLevel { get; set; }
         public int ExperiencePoints { get; set; }
-        public long Properties { get; set; }
-        public long Predisposition { get; set; }
-        public long Characteristics { get; set; }
-        public long DefaultPredisposition { get; set; }
+        public string Properties { get; set; }
+        public string Predisposition { get; set; }
+        public string Characteristics { get; set; }
+        public string DefaultPredisposition { get; set; }
     
         public virtual Race Race1 { get; set; }
         public virtual ICollection<CarrierDesire> CarrierDesires { get; set; }

@@ -23,16 +23,16 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public int Id { get; set; }
         
         [Required]
-        public long Characreristics { get; set; }
+        public string Characreristics { get; set; }
         
         [Required]
-        public long CharacteristicsLevelModifier { get; set; }
+        public string CharacteristicsLevelModifier { get; set; }
         
         [Required]
-        public long Predisposition { get; set; }
+        public string Predisposition { get; set; }
 
         [Required]
-        public long Properties { get; set; }
+        public string Properties { get; set; }
         
         [Display(Name = "Іконка")]
         public string Icon { get; set; }

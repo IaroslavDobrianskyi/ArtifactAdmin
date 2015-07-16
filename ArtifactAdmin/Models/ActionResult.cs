@@ -20,7 +20,7 @@ namespace ArtifactAdmin.DAL.Models
         }
     
         public int Id { get; set; }
-        public long Predisposition { get; set; }
+        public string Predisposition { get; set; }
         public int Gold { get; set; }
         public int Expirience { get; set; }
         public int Artifact { get; set; }

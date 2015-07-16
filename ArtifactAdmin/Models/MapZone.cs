@@ -17,9 +17,9 @@ namespace ArtifactAdmin.DAL.Models
         public MapZone()
         {
             this.ActionDescriptions = new HashSet<ActionDescription>();
+            this.DesireMapZones = new HashSet<DesireMapZone>();
             this.MapObjectProbabilities = new HashSet<MapObjectProbability>();
             this.ZoneCoordinats = new HashSet<ZoneCoordinat>();
-            this.DesireMapZones = new HashSet<DesireMapZone>();
         }
     
         public int Id { get; set; }
@@ -27,8 +27,8 @@ namespace ArtifactAdmin.DAL.Models
         public string Color { get; set; }
     
         public virtual ICollection<ActionDescription> ActionDescriptions { get; set; }
+        public virtual ICollection<DesireMapZone> DesireMapZones { get; set; }
         public virtual ICollection<MapObjectProbability> MapObjectProbabilities { get; set; }
         public virtual ICollection<ZoneCoordinat> ZoneCoordinats { get; set; }
-        public virtual ICollection<DesireMapZone> DesireMapZones { get; set; }
     }
 }

@@ -16,12 +16,11 @@ namespace ArtifactAdmin.DAL.Models
     {
         public ActionTemplate()
         {
-            this.ActionTemplateActionDescriptions = new HashSet<ActionTemplateActionDescription>();
+            this.ActionTemplateCharacteristics = new HashSet<ActionTemplateCharacteristic>();
             this.ActionTemplatePredispositions = new HashSet<ActionTemplatePredisposition>();
+            this.ActionTemplateProperties = new HashSet<ActionTemplateProperty>();
             this.StepTemplateActionTemplates = new HashSet<StepTemplateActionTemplate>();
             this.ActionDescriptions = new HashSet<ActionDescription>();
-            this.ActionTemplateCharacteristics = new HashSet<ActionTemplateCharacteristic>();
-            this.ActionTemplateProperties = new HashSet<ActionTemplateProperty>();
         }
     
         public int Id { get; set; }
@@ -29,12 +28,11 @@ namespace ArtifactAdmin.DAL.Models
         public double BlockProbability { get; set; }
         public int ActionTemplateResult { get; set; }
     
-        public virtual ICollection<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
-        public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
-        public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
-        public virtual ICollection<ActionDescription> ActionDescriptions { get; set; }
         public virtual ActionTemplateResult ActionTemplateResult1 { get; set; }
         public virtual ICollection<ActionTemplateCharacteristic> ActionTemplateCharacteristics { get; set; }
+        public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
         public virtual ICollection<ActionTemplateProperty> ActionTemplateProperties { get; set; }
+        public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
+        public virtual ICollection<ActionDescription> ActionDescriptions { get; set; }
     }
 }

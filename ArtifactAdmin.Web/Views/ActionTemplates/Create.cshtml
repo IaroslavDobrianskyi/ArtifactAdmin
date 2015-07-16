@@ -47,7 +47,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Записати" class="btn btn-default" />
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SetProbability()" />
             </div>
         </div>
     </div>
@@ -59,42 +59,41 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
-    function SelId(Sel,HiddenId)
-    {
-        var SelId = "";
-        for (i = 0; i < Sel.options.length; i++)
+    <script type="text/javascript">
+        function SelId(Sel, HiddenId){
+            var SelId = "";
+            for (i = 0; i < Sel.options.length; i++){
+                if (Sel.options[i].selected == true){
+                    SelId = Sel.options[i].value;
+                    HiddenId.value = Number(SelId);
+                    break;
+                }
+            }
+        }
+
+        function ValidateProbability(){
+            var Val = document.getElementById("OneProbability").value.toString();
+            var ValidateProbability = Number(Val);
+            var Message = document.getElementById("MessageError");
+            if (Val.substring(0, 3) == "0.0" & Number(Val) == 0){
+                Message.value = "Введіть число від 0 до 1 !";
+                Message.hidden = false;
+            }
+            else{
+                if (ValidateProbability > 0 & ValidateProbability < 1){
+                    document.getElementById("ActionTemplateDto_BlockProbability").value = ValidateProbability;
+                    Message.value = "";
+                    Message.hidden = true;
+                }
+            }
+        }
+
+        function SetProbability()
         {
-            if (Sel.options[i].selected == true)
-            {
-                SelId = Sel.options[i].value;
-                HiddenId.value = Number(SelId);
-                break;
+            if (document.getElementById("ActionTemplateDto_BlockProbability").value == 0){
+                document.getElementById("ActionTemplateDto_BlockProbability").value = 0.25;
             }
         }
-    }
-    function ValidateProbability() {
-        var Val = document.getElementById("OneProbability").value.toString();
-        var ValidateProbability = Number(Val);
-        var Message = document.getElementById("MessageError");
-        if (Val.substring(0, 3) == "0.0" & Number(Val) == 0) {
-            Message.value = "Введіть число від 0 до 1 !";
-            Message.hidden = false;
-        }
-        else {
-            if (ValidateProbability > 0 & ValidateProbability < 1)
-            {
-                document.getElementById("ActionTemplateDto_BlockProbability").value = ValidateProbability;
-                Message.value = "";
-                Message.hidden = true;
-            }
-            //else
-            //{
-            //    Message.value = "Введіть число від 0 до 1 !";
-            //    Message.hidden = false;
-            //}
-        }
-    }
-</script>
+    </script>
 }
 

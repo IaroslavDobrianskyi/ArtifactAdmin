@@ -16,16 +16,18 @@ namespace ArtifactAdmin.DAL.Models
     {
         public Predisposition()
         {
-            this.ActionTemplatePredispositions = new HashSet<ActionTemplatePredisposition>();
             this.ActionPredispositions = new HashSet<ActionPredisposition>();
+            this.ActionTemplatePredispositions = new HashSet<ActionTemplatePredisposition>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public long Mask { get; set; }
+        public int Length { get; set; }
+        public int Position { get; set; }
     
-        public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
         public virtual ICollection<ActionPredisposition> ActionPredispositions { get; set; }
+        public virtual ICollection<ActionTemplatePredisposition> ActionTemplatePredispositions { get; set; }
     }
 }

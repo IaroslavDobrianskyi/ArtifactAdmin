@@ -20,6 +20,6 @@ namespace ArtifactAdmin.DAL.Models
         public Nullable<int> time { get; set; }
         public Nullable<int> nStep { get; set; }
         public Nullable<int> nAct { get; set; }
-        public int id { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -129,11 +129,20 @@
   <data name="RequiredIcon" xml:space="preserve">
     <value>Виберіть іконку!</value>
   </data>
+  <data name="RequiredLength" xml:space="preserve">
+    <value>Введіть довжину рядка!</value>
+  </data>
   <data name="RequiredList" xml:space="preserve">
     <value>Виберіть хоч би один рядок в список!</value>
   </data>
+  <data name="RequiredMask" xml:space="preserve">
+    <value>Введіть маску!</value>
+  </data>
   <data name="RequiredName" xml:space="preserve">
     <value>Введіть назву!</value>
+  </data>
+  <data name="RequiredPosition" xml:space="preserve">
+    <value>Введіть початкову позицію!</value>
   </data>
   <data name="RequiredText" xml:space="preserve">
     <value>Введіть текст!</value>
