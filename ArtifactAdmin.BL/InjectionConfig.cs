@@ -35,7 +35,8 @@ namespace ArtifactAdmin.BL
             container.Register<IDesireService, DesireService>(new PerScopeLifetime());
             container.Register<IRaceService, RaceService>(new PerScopeLifetime());
             container.Register<IClassService, ClassService>(new PerScopeLifetime());
-            container.Register<ICharacteristicService,CharacteristicService>(new PerScopeLifetime());
+            container.Register<ICharacteristicService, CharacteristicService>(new PerScopeLifetime());
+            container.Register<IPredispositionService, PredispositionService>(new PerScopeLifetime());
                 
             container.Register((serviceFactory) => new artEntities(), new PerScopeLifetime());
             container.Register(typeof(IRepository<>), typeof(Repository<>));

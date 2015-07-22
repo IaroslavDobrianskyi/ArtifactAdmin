@@ -42,6 +42,22 @@ namespace ArtifactAdmin.BL.Services
                                                      .FirstOrDefault(s => s.Position == position));
         }
 
+        public CharacteristicDto GetMaxByPosition(int position)
+        {
+            return Mapper.Map<CharacteristicDto>(this.characteristicRepository.GetAll()
+                                                     .Where(s => s.Position < position)
+                                                     .OrderByDescending(s => s.Position)
+                                                     .FirstOrDefault());
+        }
+
+        public CharacteristicDto GetMinByPosition(int position)
+        {
+            return Mapper.Map<CharacteristicDto>(this.characteristicRepository.GetAll()
+                                                     .Where(s => s.Position > position)
+                                                     .OrderBy(s => s.Position)
+                                                     .FirstOrDefault());
+        }
+
         public CharacteristicDto Create(CharacteristicDto characteristicDto)
         {
             var characteristic = Mapper.Map<Characteristic>(characteristicDto);

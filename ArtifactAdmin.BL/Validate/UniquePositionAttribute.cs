@@ -10,35 +10,50 @@ namespace ArtifactAdmin.BL.Validate
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using Interfaces;
     using ModelsDTO;
 
     public class UniquePositionAttribute : ValidationAttribute
     {
-        //private IRepository<Characteristic> characteristicRepository { get; set; }
-        
-        //public ICharacteristicService CharacteristicService;
-
-        //public ControllerContext 
-        public UniquePositionAttribute()
-        {
-            //CharacteristicService=new CharacteristicService(characteristicRepository);
-        }
-   
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-        //    private readonly IRepository<Characteristic> characteristicRepository;
+            var newPosition = Convert.ToInt32(value);
+            int positionFoundId = -1;
+            int newId = 0;
+            var nameDto = validationContext.ObjectType.Name;
+            switch(nameDto)
+            {
+                case "CharacteristicDto":
+                    ICharacteristicService characteristicService = DependencyResolver.Current.GetService<ICharacteristicService>();
+                    CharacteristicDto characteristicDto = validationContext.ObjectInstance as CharacteristicDto;
+                    newId = characteristicDto.Id;
+                    CharacteristicDto characteristicFound = characteristicService.GetByPosition(newPosition);
+                    if (characteristicFound != null) 
+                    {
+                        positionFoundId = characteristicFound.Id;
+                    }
+                    break;
+                case "PredispositionDto":
+                    IPredispositionService predispositionService = DependencyResolver.Current.GetService<IPredispositionService>();
+                    PredispositionDto predispositionDto=validationContext.ObjectInstance as PredispositionDto;
+                    newId = predispositionDto.Id;
+                    PredispositionDto predispositionFound = predispositionService.GetByPosition(newPosition);
+                    if (predispositionFound != null)
+                    {
+                        positionFoundId = predispositionFound.Id;
+                    }
+                    break;
+                // case"PropertyDto":
+                //    dtoService = DependencyResolver.Current.GetService<IPropertyService>();
+                //    dto = validationContext.ObjectInstance as PropertyDto;
+                //    break;
+            }
 
-        //ICharacteristicService CharacteristicService = new CharacteristicService(IRepository<Characteristic> characteristicRepository);
-            int newPosition = Convert.ToInt32(value);
-            var Dto = validationContext.ObjectInstance as CharacteristicDto;
-            //if(newPosition != null)
-            //{
-            //    var positionFound = CharacteristicService.GetByPosition(newPosition);
-            //    if (positionFound != null && positionFound.Id != Dto.Id)
-            //    {
-            //        return new ValidationResult("Позиція "+ newPosition.ToString()+" вже використина!");
-            //    }
-            //}
+            if (positionFoundId != -1 && positionFoundId != newId)
+            {
+                    return new ValidationResult("Позиція " + newPosition + " вже використана!");
+            }
             
             return ValidationResult.Success;
         }

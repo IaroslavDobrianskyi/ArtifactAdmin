@@ -20,6 +20,10 @@ namespace ArtifactAdmin.BL.Interfaces
 
         CharacteristicDto GetByPosition(int position);
 
+        CharacteristicDto GetMaxByPosition(int position);
+
+        CharacteristicDto GetMinByPosition(int position);
+
         CharacteristicDto Create(CharacteristicDto characteristicDto);
 
         CharacteristicDto Update(CharacteristicDto characteristicDto);

@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CharacteristicDto.cs" company="Artifact">
+// <copyright file="PredispositionDto.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the CharacteristicDto type.
+//   Defines the PredispositionDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.BL.ModelsDTO
@@ -12,7 +12,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
     using System.ComponentModel.DataAnnotations;
     using Validate;
 
-    public class CharacteristicDto
+    public class PredispositionDto
     {
         public int Id { get; set; }
 
@@ -22,22 +22,26 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [StringLength(50, ErrorMessageResourceName = "StringLength",
   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Name { get; set; }
+
         [Required(ErrorMessageResourceName = "RequiredDescription",
         ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Опис")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",
   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Description { get; set; }
+
         [Required(ErrorMessageResourceName = "RequiredMask",
        ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Маска")]
         public long Mask { get; set; }
+
         [Required(ErrorMessageResourceName = "RequiredLength",
       ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Довжина рядка")]
         [Range(1, 50)]
         [AcceptableLength]
         public int Length { get; set; }
+
         [Required(ErrorMessageResourceName = "RequiredPosition",
       ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Початкова позиція")]

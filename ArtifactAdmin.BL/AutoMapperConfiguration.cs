@@ -77,6 +77,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<Characteristic, CharacteristicDto>();
             Mapper.CreateMap<CharacteristicDto, Characteristic>();
+
+            Mapper.CreateMap<Predisposition, PredispositionDto>();
+            Mapper.CreateMap<PredispositionDto, Predisposition>();
         } 
     }
 }

@@ -9,55 +9,52 @@
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
-    using System.Net; 
+    using System.Net;
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
-
-    public class CharacteristicsController : Controller
+    public class PredispositionsController : Controller
     {
-        private ICharacteristicService characteristicService;
+        private IPredispositionService predispositionService;
 
-        public CharacteristicsController(ICharacteristicService characteristicService)
+        public PredispositionsController(IPredispositionService predispositionService)
         {
-            this.characteristicService = characteristicService;
+            this.predispositionService = predispositionService;
         }
 
-        // GET: Characteristics
+        // GET: Predispositions
         public ActionResult Index()
         {
-            return View(this.characteristicService.GetAll());
+            return View(this.predispositionService.GetAll());
         }
 
-        // GET: Characteristics/Details/5
+        // GET: Predispositions/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var characteristicDto = this.characteristicService.GetById(id);
-            if (characteristicDto == null)
+            var predispositionDto = this.predispositionService.GetById(id);
+            if (predispositionDto == null)
             {
                 return HttpNotFound();
             }
-
-            return View(characteristicDto);
+            return View(predispositionDto);
         }
 
-        // GET: Characteristics/Create
+        // GET: Predispositions/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Characteristics/Create
+        // POST: Predispositions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Mask,Length,Position")] CharacteristicDto characteristicDto)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Mask,Length,Position")] PredispositionDto predispositionDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -65,44 +62,42 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.characteristicService.Create(characteristicDto);
+                    this.predispositionService.Create(predispositionDto);
                 }
                 catch (Exception e)
                 {
-                    ViewBag.Error = "Помилка при створенні нового запису";
+                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    return this.View(characteristicDto);
+                    return this.View(predispositionDto);
                 }
-
+           
                 return RedirectToAction("Index");
             }
 
-            return View(characteristicDto);
+            return View(predispositionDto);
         }
 
-        // GET: Characteristics/Edit/5
+        // GET: Predispositions/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var characteristicDto = this.characteristicService.GetById(id);
-            if (characteristicDto == null)
+            var predispositionDto =this.predispositionService.GetById(id);
+            if (predispositionDto == null)
             {
                 return HttpNotFound();
             }
-
-            return View(characteristicDto);
+            return View(predispositionDto);
         }
 
-        // POST: Characteristics/Edit/5
+        // POST: Predispositions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Mask,Length,Position")] CharacteristicDto characteristicDto)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Mask,Length,Position")] PredispositionDto predispositionDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -110,57 +105,52 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.characteristicService.Update(characteristicDto);
+                    this.predispositionService.Update(predispositionDto);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(characteristicDto);
+                    return View(predispositionDto);
                 }
-
                 return RedirectToAction("Index");
             }
-
-            return View(characteristicDto);
+            return View(predispositionDto);
         }
 
-        // GET: Characteristics/Delete/5
+        // GET: Predispositions/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var characteristicDto = this.characteristicService.GetById(id);
-            if (characteristicDto == null)
+            var predispositionDto = this.predispositionService.GetById(id);
+            if (predispositionDto == null)
             {
                 return HttpNotFound();
             }
-
-            return View(characteristicDto);
+            return View(predispositionDto);
         }
 
-        // POST: Characteristics/Delete/5
+        // POST: Predispositions/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var characteristicDto = this.characteristicService.GetById(id);
+            var predispositionDto = this.predispositionService.GetById(id);
             try
             {
-                this.characteristicService.Delete(id);
+                this.predispositionService.Delete(id);
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                ViewBag.Error = "Помилка при видаленні запису !";
+                 ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                return View(characteristicDto);
+                return View(predispositionDto);
             }
-
             return RedirectToAction("Index");
         }
     }
