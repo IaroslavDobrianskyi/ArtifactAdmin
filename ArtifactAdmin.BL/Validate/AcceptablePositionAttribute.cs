@@ -10,7 +10,6 @@ namespace ArtifactAdmin.BL.Validate
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Runtime.Remoting.Channels;
     using System.Web.Mvc;
     using Interfaces;
     using ModelsDTO;
@@ -43,13 +42,14 @@ namespace ArtifactAdmin.BL.Validate
                         prevPosition = prevCharacteristicDto.Position;
                         prevLength = prevCharacteristicDto.Length;
                     }
+
                     break;
                 case "PredispositionDto":
                     IPredispositionService predispositionService = DependencyResolver.Current.GetService<IPredispositionService>();
-                    PredispositionDto predispositionDto=validationContext.ObjectInstance as PredispositionDto;
+                    PredispositionDto predispositionDto = validationContext.ObjectInstance as PredispositionDto;
                     newLength = predispositionDto.Length;
                     PredispositionDto nextPredispositionDto = predispositionService.GetMinByPosition(newPosition);
-                    if(nextPredispositionDto != null)
+                    if (nextPredispositionDto != null)
                     {
                         nextPosition = nextPredispositionDto.Position;
                     }
@@ -60,13 +60,28 @@ namespace ArtifactAdmin.BL.Validate
                         prevPosition = prevPredispositionDto.Position;
                         prevLength = prevPredispositionDto.Length;
                     }
-                    break;
-             // case"PropertyDto":
-                //    dtoService = DependencyResolver.Current.GetService<IPropertyService>();
-                //    dto = validationContext.ObjectInstance as PropertyDto;
-                //    break;
 
+                    break;
+                case "PropertyDto":
+                    IPropertyService propertyService = DependencyResolver.Current.GetService<IPropertyService>();
+                    PropertyDto propertyDto = validationContext.ObjectInstance as PropertyDto;
+                    newLength = propertyDto.Length;
+                    PropertyDto nextPropertyDto = propertyService.GetMinByPosition(newPosition);
+                    if (nextPropertyDto != null)
+                    {
+                        nextPosition = nextPropertyDto.Position;
+                    }
+
+                    PropertyDto prevPropertyDto = propertyService.GetMaxByPosition(newPosition);
+                    if (prevPropertyDto != null)
+                    {
+                        prevPosition = prevPropertyDto.Position;
+                        prevLength = prevPropertyDto.Length;
+                    }
+
+                    break;
             }
+
             string errorMessage = string.Empty;
             if (newPosition != null)
             {
@@ -80,7 +95,7 @@ namespace ArtifactAdmin.BL.Validate
 
                 if (newLength != 0)
                 {
-                    if (nextPosition != 0 && (nextPosition - newLength) < (prevPosition+prevLength))
+                    if (nextPosition != 0 && (nextPosition - newLength) < (prevPosition + prevLength))
                     {
                         mistake = true;
                         errorMessage = errorMessage + "Позиція не може бути "

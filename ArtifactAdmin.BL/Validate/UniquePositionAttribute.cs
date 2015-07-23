@@ -22,7 +22,7 @@ namespace ArtifactAdmin.BL.Validate
             int positionFoundId = -1;
             int newId = 0;
             var nameDto = validationContext.ObjectType.Name;
-            switch(nameDto)
+            switch (nameDto)
             {
                 case "CharacteristicDto":
                     ICharacteristicService characteristicService = DependencyResolver.Current.GetService<ICharacteristicService>();
@@ -33,21 +33,30 @@ namespace ArtifactAdmin.BL.Validate
                     {
                         positionFoundId = characteristicFound.Id;
                     }
+
                     break;
                 case "PredispositionDto":
                     IPredispositionService predispositionService = DependencyResolver.Current.GetService<IPredispositionService>();
-                    PredispositionDto predispositionDto=validationContext.ObjectInstance as PredispositionDto;
+                    PredispositionDto predispositionDto = validationContext.ObjectInstance as PredispositionDto;
                     newId = predispositionDto.Id;
                     PredispositionDto predispositionFound = predispositionService.GetByPosition(newPosition);
                     if (predispositionFound != null)
                     {
                         positionFoundId = predispositionFound.Id;
                     }
+
                     break;
-                // case"PropertyDto":
-                //    dtoService = DependencyResolver.Current.GetService<IPropertyService>();
-                //    dto = validationContext.ObjectInstance as PropertyDto;
-                //    break;
+                case "PropertyDto":
+                    IPropertyService propertyService = DependencyResolver.Current.GetService<IPropertyService>();
+                    PropertyDto propertyDto = validationContext.ObjectInstance as PropertyDto;
+                    newId = propertyDto.Id;
+                    PropertyDto propertyFound = propertyService.GetByPosition(newPosition);
+                    if (propertyFound != null)
+                    {
+                        positionFoundId = propertyFound.Id;
+                    }
+
+                    break;
             }
 
             if (positionFoundId != -1 && positionFoundId != newId)

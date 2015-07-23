@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="PredispositionsController.cs" company="Artifact">
+// <copyright file="PropertisController.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the PredispositionsController type.
+//   Defines the PropertisController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web.Controllers
@@ -14,22 +14,22 @@ namespace ArtifactAdmin.Web.Controllers
     using BL.Interfaces;
     using BL.ModelsDTO;
 
-    public class PredispositionsController : Controller
+    public class PropertisController : Controller
     {
-        private IPredispositionService predispositionService;
+        private IPropertyService propertyService;
 
-        public PredispositionsController(IPredispositionService predispositionService)
+        public PropertisController(IPropertyService propertyService)
         {
-            this.predispositionService = predispositionService;
+            this.propertyService = propertyService;
         }
 
-        // GET: Predispositions
+        // GET: Properties
         public ActionResult Index()
         {
-            return View(this.predispositionService.GetAll());
+            return View(this.propertyService.GetAll());
         }
 
-        // GET: Predispositions/Details/5
+        // GET: Properties/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,27 +37,27 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var predispositionDto = this.predispositionService.GetById(id);
-            if (predispositionDto == null)
+            var propertyDto = this.propertyService.GetById(id);
+            if (propertyDto == null)
             {
                 return HttpNotFound();
             }
 
-            return View(predispositionDto);
+            return View(propertyDto);
         }
 
-        // GET: Predispositions/Create
+        // GET: Properties/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Predispositions/Create
+        // POST: Properties/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Mask,Length,Position")] PredispositionDto predispositionDto)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Length,Position,Deviation")] PropertyDto propertyDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -65,22 +65,22 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.predispositionService.Create(predispositionDto);
+                    this.propertyService.Create(propertyDto);
                 }
                 catch (Exception e)
                 {
-                     ViewBag.Error = "Помилка при створенні нового запису";
+                    ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    return this.View(predispositionDto);
+                    return this.View(propertyDto);
                 }
-           
+
                 return RedirectToAction("Index");
             }
 
-            return View(predispositionDto);
+            return View(propertyDto);
         }
 
-        // GET: Predispositions/Edit/5
+        // GET: Properties/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,21 +88,21 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var predispositionDto = this.predispositionService.GetById(id);
-            if (predispositionDto == null)
+            var propertyDto = this.propertyService.GetById(id);
+            if (propertyDto == null)
             {
                 return HttpNotFound();
             }
 
-            return View(predispositionDto);
+            return View(propertyDto);
         }
 
-        // POST: Predispositions/Edit/5
+        // POST: Properties/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Mask,Length,Position")] PredispositionDto predispositionDto)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Length,Position,Deviation")] PropertyDto propertyDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -110,22 +110,22 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.predispositionService.Update(predispositionDto);
+                    this.propertyService.Update(propertyDto);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(predispositionDto);
+                    return this.View(propertyDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            return View(predispositionDto);
+            return View(propertyDto);
         }
 
-        // GET: Predispositions/Delete/5
+        // GET: Properties/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -133,32 +133,32 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var predispositionDto = this.predispositionService.GetById(id);
-            if (predispositionDto == null)
+            var propertyDto = this.propertyService.GetById(id);
+            if (propertyDto == null)
             {
                 return HttpNotFound();
             }
 
-            return View(predispositionDto);
+            return View(propertyDto);
         }
 
-        // POST: Predispositions/Delete/5
+        // POST: Properties/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var predispositionDto = this.predispositionService.GetById(id);
+            var propertyDto = this.propertyService.GetById(id);
             try
             {
-                this.predispositionService.Delete(id);
+                this.propertyService.Delete(id);
             }
             catch (Exception e)
             {
-                 ViewBag.Error = "Помилка при видаленні запису !";
+                ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                return View(predispositionDto);
+                return View(propertyDto);
             }
 
             return RedirectToAction("Index");
