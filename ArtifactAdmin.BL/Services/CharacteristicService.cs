@@ -57,7 +57,7 @@ namespace ArtifactAdmin.BL.Services
                                                      .OrderBy(s => s.Position)
                                                      .FirstOrDefault());
         }
-
+        
         public CharacteristicDto Create(CharacteristicDto characteristicDto)
         {
             var characteristic = Mapper.Map<Characteristic>(characteristicDto);

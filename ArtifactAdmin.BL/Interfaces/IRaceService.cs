@@ -19,6 +19,8 @@ namespace ArtifactAdmin.BL.Interfaces
 
         RaceDto GetById(int? id);
 
+        RaceDto GetViewById(int? id);
+
         RaceDto Create(RaceDto raceDto, string fileName);
 
         RaceDto Update(RaceDto raceDto, string fileName);
