@@ -19,7 +19,7 @@ namespace ArtifactAdmin.BL.Validate
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             int newPosition = 0;
-            int newLength = 0;
+            int newLength = Convert.ToInt32(value);
             int nextPosition = 0;
             var nameDto = validationContext.ObjectType.Name;
             switch (nameDto)
@@ -28,28 +28,35 @@ namespace ArtifactAdmin.BL.Validate
                     ICharacteristicService characteristicService = DependencyResolver.Current.GetService<ICharacteristicService>();
                     CharacteristicDto characteristicDto = validationContext.ObjectInstance as CharacteristicDto;
                     newPosition = characteristicDto.Position;
-                    newLength = characteristicDto.Length;
                     CharacteristicDto nextCharacteristicDto = characteristicService.GetMinByPosition(newPosition);
                     if (nextCharacteristicDto != null)
                     {
                         nextPosition = nextCharacteristicDto.Position;
                     }
+
                     break;
                 case "PredispositionDto":
                     IPredispositionService predispositionService = DependencyResolver.Current.GetService<IPredispositionService>();
                     PredispositionDto predispositionDto = validationContext.ObjectInstance as PredispositionDto;
                     newPosition = predispositionDto.Position;
-                    newLength = predispositionDto.Length;
                     PredispositionDto nextPredispositionDto = predispositionService.GetMinByPosition(newPosition);
                     if (nextPredispositionDto != null)
                     {
                         nextPosition = nextPredispositionDto.Position;
                     }
+
                     break;
-                // case"PropertyDto":
-                //    dtoService = DependencyResolver.Current.GetService<IPropertyService>();
-                //    dto = validationContext.ObjectInstance as PropertyDto;
-                //    break;
+                case "PropertyDto":
+                    IPropertyService propertyService = DependencyResolver.Current.GetService<IPropertyService>();
+                    PropertyDto propertyDto = validationContext.ObjectInstance as PropertyDto;
+                    newPosition = propertyDto.Position;
+                    PropertyDto nextPropertyDto = propertyService.GetMinByPosition(newPosition);
+                    if (nextPropertyDto != null)
+                    {
+                        nextPosition = nextPropertyDto.Position;
+                    }
+
+                    break;
             }
 
             if (newPosition != null && newLength != null)

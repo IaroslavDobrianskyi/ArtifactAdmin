@@ -10,7 +10,6 @@ namespace ArtifactAdmin.BL.Services
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using AutoMapper;
     using DAL.Models;
@@ -38,12 +37,12 @@ namespace ArtifactAdmin.BL.Services
 
         public PredispositionDto GetByPosition(int position)
         {
-            return Mapper.Map<PredispositionDto>(this.predispositionRepository.GetAll().FirstOrDefault(s => s.Position == position));
+            return Mapper.Map<PredispositionDto>(this.predispositionRepository.GetAllNoTracking().FirstOrDefault(s => s.Position == position));
         }
 
         public PredispositionDto GetMaxByPosition(int position)
         {
-            return Mapper.Map<PredispositionDto>(this.predispositionRepository.GetAll()
+            return Mapper.Map<PredispositionDto>(this.predispositionRepository.GetAllNoTracking()
                                                      .Where(s => s.Position < position)
                                                      .OrderByDescending(s => s.Position)
                                                      .FirstOrDefault());
@@ -51,7 +50,7 @@ namespace ArtifactAdmin.BL.Services
 
         public PredispositionDto GetMinByPosition(int position)
         {
-            return Mapper.Map<PredispositionDto>(this.predispositionRepository.GetAll()
+            return Mapper.Map<PredispositionDto>(this.predispositionRepository.GetAllNoTracking()
                                                      .Where(s => s.Position > position)
                                                      .OrderBy(s => s.Position)
                                                      .FirstOrDefault());

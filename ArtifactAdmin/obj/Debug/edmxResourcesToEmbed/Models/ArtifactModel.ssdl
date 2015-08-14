@@ -61,6 +61,7 @@
     <Property Name="SoulShard" Type="bit" Nullable="false" />
     <Property Name="Killed" Type="bit" Nullable="false" />
     <Property Name="Action" Type="int" Nullable="false" />
+    <Property Name="Quest" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ActionResultDesire">
     <Key>
@@ -112,10 +113,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PredispositionResultModifier" Type="float" Nullable="false" />
+    <Property Name="PredispositionResultModifier" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ExperienceModifier" Type="float" Nullable="false" />
     <Property Name="ArtifactPosibility" Type="float" Nullable="false" />
     <Property Name="GoldModifier" Type="float" Nullable="false" />
+    <Property Name="QuestTemplate" Type="int" />
   </EntityType>
   <EntityType Name="ActiveActionInFlow">
     <Key>
@@ -277,7 +279,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="MapObjectProbability">
@@ -318,6 +320,41 @@
     <Property Name="Length" Type="int" Nullable="false" />
     <Property Name="Position" Type="int" Nullable="false" />
     <Property Name="Deviation" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Quest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Carrier" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuestStep">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Quest" Type="int" Nullable="false" />
+    <Property Name="Step" Type="int" Nullable="false" />
+    <Property Name="StepOrder" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QuestTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="500" />
+    <Property Name="Description" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="QuestTemplateStepTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StepTemplate" Type="int" Nullable="false" />
+    <Property Name="QuestTemaplate" Type="int" Nullable="false" />
+    <Property Name="StepOrder" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Race">
     <Key>
@@ -413,6 +450,8 @@
     <Property Name="StepText" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Desire" Type="int" />
+    <Property Name="IsNotVisibleInFlow" Type="bit" Nullable="false" />
+    <Property Name="IsQuestStarter" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="StepTemplateActionTemplate">
     <Key>
@@ -535,18 +574,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ActionDescription_ActionTemplate">
-    <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
-    <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ActionTemplate">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ActionDescription">
-        <PropertyRef Name="ActionTemplate" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_ActionDescription_Class1">
     <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
     <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="*" />
@@ -643,6 +670,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ActionResult_Quest">
+    <End Role="Quest" Type="Self.Quest" Multiplicity="1" />
+    <End Role="ActionResult" Type="Self.ActionResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quest">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionResult">
+        <PropertyRef Name="Quest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ActionResultDesire_ActionResult">
     <End Role="ActionResult" Type="Self.ActionResult" Multiplicity="1" />
     <End Role="ActionResultDesire" Type="Self.ActionResultDesire" Multiplicity="*" />
@@ -667,7 +706,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ActionTemplate_ActionTemplateResult">
+  <Association Name="FK_ActionTemplate_ActionTemplateResult1">
     <End Role="ActionTemplateResult" Type="Self.ActionTemplateResult" Multiplicity="1" />
     <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="*" />
     <ReferentialConstraint>
@@ -748,6 +787,18 @@
       </Principal>
       <Dependent Role="ActionTemplateProperties">
         <PropertyRef Name="Properties" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionTemplateResult_QuestTemplate">
+    <End Role="QuestTemplate" Type="Self.QuestTemplate" Multiplicity="0..1" />
+    <End Role="ActionTemplateResult" Type="Self.ActionTemplateResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionTemplateResult">
+        <PropertyRef Name="QuestTemplate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -976,6 +1027,66 @@
       </Principal>
       <Dependent Role="MapObjectProbability">
         <PropertyRef Name="MapZone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quest_Carrier">
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
+    <End Role="Quest" Type="Self.Quest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quest">
+        <PropertyRef Name="Carrier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestStep_Quest">
+    <End Role="Quest" Type="Self.Quest" Multiplicity="1" />
+    <End Role="QuestStep" Type="Self.QuestStep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quest">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestStep">
+        <PropertyRef Name="Quest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestStep_Step">
+    <End Role="Step" Type="Self.Step" Multiplicity="1" />
+    <End Role="QuestStep" Type="Self.QuestStep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Step">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestStep">
+        <PropertyRef Name="Step" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestTemplateStepTemplate_QuestTemplate">
+    <End Role="QuestTemplate" Type="Self.QuestTemplate" Multiplicity="1" />
+    <End Role="QuestTemplateStepTemplate" Type="Self.QuestTemplateStepTemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestTemplateStepTemplate">
+        <PropertyRef Name="QuestTemaplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestTemplateStepTemplate_StepTemplate">
+    <End Role="StepTemplate" Type="Self.StepTemplate" Multiplicity="1" />
+    <End Role="QuestTemplateStepTemplate" Type="Self.QuestTemplateStepTemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StepTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestTemplateStepTemplate">
+        <PropertyRef Name="StepTemplate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1229,6 +1340,10 @@
     <EntitySet Name="MapZone" EntityType="Self.MapZone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Predisposition" EntityType="Self.Predisposition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quest" EntityType="Self.Quest" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestStep" EntityType="Self.QuestStep" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestTemplate" EntityType="Self.QuestTemplate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuestTemplateStepTemplate" EntityType="Self.QuestTemplateStepTemplate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Race" EntityType="Self.Race" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RaceDesire" EntityType="Self.RaceDesire" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
@@ -1257,10 +1372,6 @@
     <AssociationSet Name="FK_ActionCharacteristics_Characteristics" Association="Self.FK_ActionCharacteristics_Characteristics">
       <End Role="Characteristics" EntitySet="Characteristics" />
       <End Role="ActionCharacteristics" EntitySet="ActionCharacteristics" />
-    </AssociationSet>
-    <AssociationSet Name="FK_ActionDescription_ActionTemplate" Association="Self.FK_ActionDescription_ActionTemplate">
-      <End Role="ActionTemplate" EntitySet="ActionTemplate" />
-      <End Role="ActionDescription" EntitySet="ActionDescription" />
     </AssociationSet>
     <AssociationSet Name="FK_ActionDescription_Class1" Association="Self.FK_ActionDescription_Class1">
       <End Role="Class" EntitySet="Class" />
@@ -1294,6 +1405,10 @@
       <End Role="Action" EntitySet="Action" />
       <End Role="ActionResult" EntitySet="ActionResult" />
     </AssociationSet>
+    <AssociationSet Name="FK_ActionResult_Quest" Association="Self.FK_ActionResult_Quest">
+      <End Role="Quest" EntitySet="Quest" />
+      <End Role="ActionResult" EntitySet="ActionResult" />
+    </AssociationSet>
     <AssociationSet Name="FK_ActionResultDesire_ActionResult" Association="Self.FK_ActionResultDesire_ActionResult">
       <End Role="ActionResult" EntitySet="ActionResult" />
       <End Role="ActionResultDesire" EntitySet="ActionResultDesire" />
@@ -1302,7 +1417,7 @@
       <End Role="Desire" EntitySet="Desire" />
       <End Role="ActionResultDesire" EntitySet="ActionResultDesire" />
     </AssociationSet>
-    <AssociationSet Name="FK_ActionTemplate_ActionTemplateResult" Association="Self.FK_ActionTemplate_ActionTemplateResult">
+    <AssociationSet Name="FK_ActionTemplate_ActionTemplateResult1" Association="Self.FK_ActionTemplate_ActionTemplateResult1">
       <End Role="ActionTemplateResult" EntitySet="ActionTemplateResult" />
       <End Role="ActionTemplate" EntitySet="ActionTemplate" />
     </AssociationSet>
@@ -1329,6 +1444,10 @@
     <AssociationSet Name="FK_ActionTemplateProperties_Properties" Association="Self.FK_ActionTemplateProperties_Properties">
       <End Role="Properties" EntitySet="Properties" />
       <End Role="ActionTemplateProperties" EntitySet="ActionTemplateProperties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionTemplateResult_QuestTemplate" Association="Self.FK_ActionTemplateResult_QuestTemplate">
+      <End Role="QuestTemplate" EntitySet="QuestTemplate" />
+      <End Role="ActionTemplateResult" EntitySet="ActionTemplateResult" />
     </AssociationSet>
     <AssociationSet Name="FK_ActiveActionInFlow_Action" Association="Self.FK_ActiveActionInFlow_Action">
       <End Role="Action" EntitySet="Action" />
@@ -1405,6 +1524,26 @@
     <AssociationSet Name="FK_MapObjectProbability_MapZone" Association="Self.FK_MapObjectProbability_MapZone">
       <End Role="MapZone" EntitySet="MapZone" />
       <End Role="MapObjectProbability" EntitySet="MapObjectProbability" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quest_Carrier" Association="Self.FK_Quest_Carrier">
+      <End Role="Carrier" EntitySet="Carrier" />
+      <End Role="Quest" EntitySet="Quest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestStep_Quest" Association="Self.FK_QuestStep_Quest">
+      <End Role="Quest" EntitySet="Quest" />
+      <End Role="QuestStep" EntitySet="QuestStep" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestStep_Step" Association="Self.FK_QuestStep_Step">
+      <End Role="Step" EntitySet="Step" />
+      <End Role="QuestStep" EntitySet="QuestStep" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestTemplateStepTemplate_QuestTemplate" Association="Self.FK_QuestTemplateStepTemplate_QuestTemplate">
+      <End Role="QuestTemplate" EntitySet="QuestTemplate" />
+      <End Role="QuestTemplateStepTemplate" EntitySet="QuestTemplateStepTemplate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestTemplateStepTemplate_StepTemplate" Association="Self.FK_QuestTemplateStepTemplate_StepTemplate">
+      <End Role="StepTemplate" EntitySet="StepTemplate" />
+      <End Role="QuestTemplateStepTemplate" EntitySet="QuestTemplateStepTemplate" />
     </AssociationSet>
     <AssociationSet Name="FK_RaceDesire_Desire" Association="Self.FK_RaceDesire_Desire">
       <End Role="Desire" EntitySet="Desire" />

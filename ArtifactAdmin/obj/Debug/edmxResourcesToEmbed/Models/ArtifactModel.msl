@@ -67,6 +67,7 @@
     <EntitySetMapping Name="ActionResults">
       <EntityTypeMapping TypeName="artModel.ActionResult">
         <MappingFragment StoreEntitySet="ActionResult">
+          <ScalarProperty Name="Quest" ColumnName="Quest" />
           <ScalarProperty Name="Action" ColumnName="Action" />
           <ScalarProperty Name="Killed" ColumnName="Killed" />
           <ScalarProperty Name="SoulShard" ColumnName="SoulShard" />
@@ -131,6 +132,7 @@
     <EntitySetMapping Name="ActionTemplateResults">
       <EntityTypeMapping TypeName="artModel.ActionTemplateResult">
         <MappingFragment StoreEntitySet="ActionTemplateResult">
+          <ScalarProperty Name="QuestTemplate" ColumnName="QuestTemplate" />
           <ScalarProperty Name="GoldModifier" ColumnName="GoldModifier" />
           <ScalarProperty Name="ArtifactPosibility" ColumnName="ArtifactPosibility" />
           <ScalarProperty Name="ExperienceModifier" ColumnName="ExperienceModifier" />
@@ -449,6 +451,8 @@
     <EntitySetMapping Name="StepTemplates">
       <EntityTypeMapping TypeName="artModel.StepTemplate">
         <MappingFragment StoreEntitySet="StepTemplate">
+          <ScalarProperty Name="IsQuestStarter" ColumnName="IsQuestStarter" />
+          <ScalarProperty Name="IsNotVisibleInFlow" ColumnName="IsNotVisibleInFlow" />
           <ScalarProperty Name="Desire" ColumnName="Desire" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="StepText" ColumnName="StepText" />
@@ -546,6 +550,45 @@
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Quests">
+      <EntityTypeMapping TypeName="artModel.Quest">
+        <MappingFragment StoreEntitySet="Quest">
+          <ScalarProperty Name="Carrier" ColumnName="Carrier" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestSteps">
+      <EntityTypeMapping TypeName="artModel.QuestStep">
+        <MappingFragment StoreEntitySet="QuestStep">
+          <ScalarProperty Name="StepOrder" ColumnName="StepOrder" />
+          <ScalarProperty Name="Step" ColumnName="Step" />
+          <ScalarProperty Name="Quest" ColumnName="Quest" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestTemplates">
+      <EntityTypeMapping TypeName="artModel.QuestTemplate">
+        <MappingFragment StoreEntitySet="QuestTemplate">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QuestTemplateStepTemplates">
+      <EntityTypeMapping TypeName="artModel.QuestTemplateStepTemplate">
+        <MappingFragment StoreEntitySet="QuestTemplateStepTemplate">
+          <ScalarProperty Name="StepOrder" ColumnName="StepOrder" />
+          <ScalarProperty Name="QuestTemaplate" ColumnName="QuestTemaplate" />
+          <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

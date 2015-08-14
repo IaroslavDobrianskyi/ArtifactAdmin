@@ -75,5 +75,9 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<UserArtifactTalent> UserArtifactTalents { get; set; }
         public virtual DbSet<ZoneCoordinat> ZoneCoordinats { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Quest> Quests { get; set; }
+        public virtual DbSet<QuestStep> QuestSteps { get; set; }
+        public virtual DbSet<QuestTemplate> QuestTemplates { get; set; }
+        public virtual DbSet<QuestTemplateStepTemplate> QuestTemplateStepTemplates { get; set; }
     }
 }

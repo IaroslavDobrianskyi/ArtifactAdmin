@@ -1,19 +1,21 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="ViewStepObjectDto.cs" company="Artifact">
+// <copyright file="ViewCharacteristic.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the ViewStepObjectDto type.
+//   Defines the ViewCharacteristic type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.BL.ModelsDTO
 {
     using System;
 
-    public class ViewStepObjectDto
+    public class ViewCharacteristic
     {
-        public StepObjectDto StepObjectDto { get; set; }
-        
-        public string IdObjType { get; set; }
+        public string Name { get; set; }
+
+        public string PositionLength { get; set; }
+
+        public int Value { get; set; }
     }
 }

@@ -8,14 +8,14 @@
 
 <div>
     <h4>Раси</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <hr/>
+     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Description)
         </dt>
 
         <dd>
-            @Html.TextAreaFor(model => model.Description, new { rows = "10", cols = "50", @readonly = true })
+            @Html.TextAreaFor(model => model.Description, new { rows = "5", cols = "100", @readonly = true })
         </dd>
 
         <dt>
@@ -23,7 +23,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Characreristics)
+            @Html.ListBoxFor(model => model.SelectedCharacteristics, new SelectList(Model.SelectedCharacteristics, "PositionLength", "Name"),
+                new{size=6,style="width:280px"})
+            @Html.ListBoxFor(model => model.SelectedCharacteristics, new SelectList(Model.SelectedCharacteristics, "PositionLength", "Value"),
+                new { size = 6, style = "width:280px" })
         </dd>
 
         <dt>
@@ -39,7 +42,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Predisposition)
+            @Html.ListBoxFor(model => model.SelectedPredispositions, new SelectList(Model.SelectedPredispositions, "PositionLength", "Name"),
+                new { size = 6, style = "width:280px" })
+            @Html.ListBoxFor(model => model.SelectedPredispositions, new SelectList(Model.SelectedPredispositions, "PositionLength", "Value"),
+                new { size = 6, style = "width:280px" })
         </dd>
 
         <dt>
@@ -47,7 +53,10 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Properties)
+            @Html.ListBoxFor(model => model.SelectedProperties, new SelectList(Model.SelectedProperties, "PositionLength", "Name"),
+                new { size = 6, style = "width:280px" })
+            @Html.ListBoxFor(model => model.SelectedProperties, new SelectList(Model.SelectedProperties, "PositionLength", "Value"),
+                new { size = 6, style = "width:280px" })
         </dd>
 
         <dt>

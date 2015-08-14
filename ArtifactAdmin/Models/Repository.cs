@@ -28,6 +28,11 @@ namespace ArtifactAdmin.DAL.Models
             return dataSet;
         }
 
+        public IQueryable<T> GetAllNoTracking()
+        {
+            return dataSet.AsNoTracking();
+        }
+
         public void Insert(T entity)
         {
             dataSet.Add(entity);

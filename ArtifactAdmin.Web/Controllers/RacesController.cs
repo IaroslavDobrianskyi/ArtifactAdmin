@@ -38,7 +38,7 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var race = this.raceService.GetById(id);
+            var race = this.raceService.GetViewById(id);
             if (race == null)
             {
                 return HttpNotFound();
@@ -50,7 +50,7 @@ namespace ArtifactAdmin.Web.Controllers
         // GET: Races/Create
         public ActionResult Create()
         {
-            return View();
+            return View(this.raceService.GetViewById(null));
         }
 
         // POST: Races/Create
@@ -96,7 +96,7 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var race = this.raceService.GetById(id);
+            var race = this.raceService.GetViewById(id);
             if (race == null)
             {
                 return HttpNotFound();

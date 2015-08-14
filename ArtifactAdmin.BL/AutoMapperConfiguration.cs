@@ -80,6 +80,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<Predisposition, PredispositionDto>();
             Mapper.CreateMap<PredispositionDto, Predisposition>();
+
+            Mapper.CreateMap<Property, PropertyDto>();
+            Mapper.CreateMap<PropertyDto, Property>();
         } 
     }
 }

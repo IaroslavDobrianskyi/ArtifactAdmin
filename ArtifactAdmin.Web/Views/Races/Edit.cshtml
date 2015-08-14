@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Змінити</h2>
+<h4>Змінити Раси</h4>
 
 
 @using (Html.BeginForm("Edit", "Races", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -12,25 +12,72 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Раси</h4>
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Characreristics, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Characreristics, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Characreristics, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <table class="table">
+        <colgroup>
+            <col style="width: 300px" />
+            <col style="width: 150px" />
+        </colgroup>
+        <tr>
+            <td>
+                @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.TextAreaFor(model => model.Description, new {htmlAttributes = new {@class = "form-control", rows = "2", cols = "250"}})
+                    @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+            </td>
+            <td>
+                @Html.LabelFor(model => model.Icon, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.HiddenFor(model => model.Icon, new {htmlAttributes = new {@class = "form-control"}})
+                    <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath + "Races/" + @Model.Icon)" id="ic" width=" 160 " height=" 120">
+                    @Html.EditorFor(model => model.NewIcon, new {htmlAttributes = new {@class = "file", @type = "file", @name = "file", @accept = "image/*", @onchange = "javascript:ShowIcon(this);"}})
+                    @Html.ValidationMessageFor(model => model.Icon, "", new {@class = "text-danger"})
+            </td>
+        </tr>
+    </table>
+    
+
+        <table class="table">
+        <colgroup>
+            <col style="width: 300px"/>
+            <col style="width: 150px"/>
+            <col style="width: 100px"/>
+            <col style="width: 300px"/>
+        </colgroup>
+                <tr>
+                    <td>
+                        @Html.ListBoxFor(model => model.AllCharacteristics, new SelectList(Model.AllCharacteristics, "PositionLength", "Name"),
+                new { size = 6, style = "width:250px" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.ValueCharacteristic, new { @class = "control-label col-md-2" })
+                        <br />
+                        @Html.EditorFor(model => model.ValueCharacteristic, new { htmlAttributes = new { @class = "form-control" } })
+                        <br />
+                        <span class="text-danger" id="MessageErrorChar" ></span>
+                    </td>
+                    <td style="text-align: center">
+                        <input type="button" id="addChar" value=">"
+                               onclick="javascript: MoveToSel(document.getElementById('AllCharacteristics'),
+    document.getElementById('SelectedCharacteristics'), document.getElementById('SelectedValues'),
+    document.getElementById('ValueCharacteristic').value.toString(), document.getElementById('MessageErrorChar'));" />
+                        <br />
+                        <input type="button" id="remChar" value="<"
+                               onclick="javascript: MoveToObj(document.getElementById('SelectedCharacteristics'),
+    document.getElementById('AllCharacteristics'), document.getElementById('SelectedValues'));" />
+                        <br />
+                    </td>
+                    <td>
+                        @Html.ListBoxFor(model => model.SelectedCharacteristics, new MultiSelectList(Model.SelectedCharacteristics, "PositionLength", "Name"),
+                new { size = 6, style = "width:250px" })
+                        @Html.ListBoxFor(model => model.SelectedValues, new MultiSelectList(Model.SelectedValues, "PositionLength", "Value"),
+                new { size = 6, style = "width:100px" })
+                        @Html.HiddenFor(model => model.Characreristics, new { @class = "IncludeHidden" })
+                        <br />
+                        @Html.ValidationMessageFor(model => model.Characreristics, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+        </table>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CharacteristicsLevelModifier, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -39,66 +86,201 @@
                 @Html.ValidationMessageFor(model => model.CharacteristicsLevelModifier, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Predisposition, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Predisposition, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Predisposition, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Properties, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Properties, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Properties, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Icon, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.HiddenFor(model => model.Icon, new { htmlAttributes = new { @class = "form-control" } })
-                <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath+"Races/"+@Model.Icon)" id="ic" width=" 160 " height=" 120">
-                @Html.EditorFor(model => model.NewIcon, new
-           {
-               htmlAttributes = new
-               {
-                   @class = "file",
-                   @type = "file",
-                   @name = "file",
-                   @accept = "image/*",
-                   @onchange = "javascript:ShowIcon(this);"
-               }
-           })
-                @Html.ValidationMessageFor(model => model.Icon, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        <table class="table">
+            <colgroup>
+                <col style="width: 300px" />
+                <col style="width: 150px" />
+                <col style="width: 100px" />
+                <col style="width: 300px" />
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.ListBoxFor(model => model.AllPredispositions, new SelectList(Model.AllPredispositions, "PositionLength", "Name"),
+                new { size = 6, style = "width:250px" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.ValuePredisposition, new { @class = "control-label col-md-2" })
+                    <br />
+                    @Html.EditorFor(model => model.ValuePredisposition, new { htmlAttributes = new { @class = "form-control" } })
+                    <br />
+                    <span class="text-danger" id="MessageErrorPred" ></span>
+                </td>
+                <td style="text-align: center">
+                    <input type="button" id="addPred" value=">"
+                           onclick="javascript: MoveToSel(document.getElementById('AllPredispositions'),
+    document.getElementById('SelectedPredispositions'), document.getElementById('SelectedValuesPredisposition'),
+    document.getElementById('ValuePredisposition').value.toString(), document.getElementById('MessageErrorPred'));" />
+                    <br />
+                    <input type="button" id="remPred" value="<"
+                           onclick="javascript: MoveToObj(document.getElementById('SelectedPredispositions'),
+    document.getElementById('AllPredispositions'), document.getElementById('SelectedValuesPredisposition'));" />
+                    <br />
+                </td>
+                <td>
+                    @Html.ListBoxFor(model => model.SelectedPredispositions, new MultiSelectList(Model.SelectedPredispositions, "PositionLength", "Name"),
+                new { size = 6, style = "width:250px" })
+                    @Html.ListBoxFor(model => model.SelectedValuesPredisposition, new MultiSelectList(Model.SelectedValuesPredisposition, "PositionLength", "Value"),
+                new { size = 6, style = "width:100px" })
+                    @Html.HiddenFor(model => model.Predisposition, new { @class = "IncludeHidden" })
+                    <br />
+                    @Html.ValidationMessageFor(model => model.Predisposition, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <colgroup>
+                <col style="width: 300px" />
+                <col style="width: 150px" />
+                <col style="width: 100px" />
+                <col style="width: 300px" />
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.ListBoxFor(model => model.AllProperties, new SelectList(Model.AllProperties, "PositionLength", "Name"),
+                new { size = 6, style = "width:250px" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.ValueProperty, new { @class = "control-label col-md-2" })
+                    <br />
+                    @Html.EditorFor(model => model.ValueProperty, new { htmlAttributes = new { @class = "form-control" } })
+                    <br />
+                    <span class="text-danger" id="MessageErrorProp" ></span>
+                </td>
+                <td style="text-align: center">
+                    <input type="button" id="addPred" value=">"
+                           onclick="javascript: MoveToSel(document.getElementById('AllProperties'),
+    document.getElementById('SelectedProperties'), document.getElementById('SelectedValuesProperties'),
+    document.getElementById('ValueProperty').value.toString(), document.getElementById('MessageErrorProp'));" />
+                    <br />
+                    <input type="button" id="remPred" value="<"
+                           onclick="javascript: MoveToObj(document.getElementById('SelectedProperties'),
+    document.getElementById('AllProperties'), document.getElementById('SelectedValuesProperties'));" />
+                    <br />
+                </td>
+                <td>
+                    @Html.ListBoxFor(model => model.SelectedProperties, new MultiSelectList(Model.SelectedProperties, "PositionLength", "Name"),
+                new { size = 6, style = "width:250px" })
+                    @Html.ListBoxFor(model => model.SelectedValuesProperties, new MultiSelectList(Model.SelectedValuesProperties, "PositionLength", "Value"),
+                new { size = 6, style = "width:100px" })
+                    @Html.HiddenFor(model => model.Properties, new { @class = "IncludeHidden" })
+                    <br />
+                    @Html.ValidationMessageFor(model => model.Properties, "", new { @class = "text-danger" })
+                </td>
+            </tr>
+        </table> 
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Записати" class="btn btn-default" />
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: GetStringValue(document.getElementById('SelectedValues'), document.getElementById('Characreristics')); GetStringValue(document.getElementById('SelectedValuesPredisposition'), document.getElementById('Predisposition')); GetStringValue(document.getElementById('SelectedValuesProperties'), document.getElementById('Properties'))" />
+                @Html.ActionLink("Повернутись до списку", "Index")
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Повернутись до списку", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
-    function ShowIcon(input) {
-        document.getElementById("ic").hidden = false;
-        if (input.files && input.files[0])
-        {
-            var reader = new FileReader();
-            reader.onload =  function(e) {$('#ic').attr('src', e.target.result); }
-        reader.readAsDataURL(input.files[0]);
+    <script type="text/javascript">
+        function ShowIcon(input){
+            document.getElementById("ic").hidden = false;
+            if (input.files && input.files[0]){
+                var reader = new FileReader();
+                reader.onload = function(e){
+                    $('#ic').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
             }
-            };
-</script>
+        };
+
+        function MoveToSel(From, ToSel, ToValue, SelValue, Message) {
+            // From = список всіх можливих
+            // ToSel = список вибраних по назві
+            // ToValue = список вибраних по значенн
+            // SelValue = елемент значення
+            // Message = повідомлення про помилку
+            var SelID = '';
+            var SelText = '';
+            var length = 0;
+            var maxValue = "";
+            var ValidateValue = Number(SelValue);
+            if (ValidateValue > 0) {
+                for (i = From.options.length - 1; i >= 0; i--) {
+                    if (From.options[i].selected == true) {
+                        SelID = From.options[i].value;
+                        SelText = From.options[i].text;
+                        length = parseInt(SelID.substring(SelID.indexOf(".") + 1));
+                        if (SelValue.length <= length) {
+                            var newRow = new Option(SelText, SelID);
+                            ToSel.options[ToSel.length] = newRow;
+                            newRow = new Option(SelValue, SelID);
+                            ToValue[ToValue.length] = newRow;
+                            From.options[i] = null;
+                            while (Message.firstChild) {
+                                Message.removeChild(Message.firstChild);
+                            }
+                        }
+                        else {
+                            for (maxValue = ''; maxValue.length < length; maxValue += '9') {
+                            }
+                            while (Message.firstChild) {
+                                Message.removeChild(Message.firstChild);
+                            }
+                            Message.appendChild(document.createTextNode("Для " + SelText + " введіть число від 1 до " + maxValue + " !"));
+                        }
+                    }
+                }
+            }
+            else {
+                while (Message.firstChild) {
+                    Message.removeChild(Message.firstChild);
+                }
+                Message.appendChild(document.createTextNode("Введіть число більше 0 !"));
+            }
+        }
+
+        function MoveToObj(from,toObj,fromValue){
+            // From = список вибраних по назві
+            // ToObj = список всіх можливих
+            // FromValue = список вибраних по значенню
+            var selId = '';
+            var selText = '';
+            for (i = from.options.length - 1; i >= 0; i--){
+                if (from.options[i].selected == true){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    toObj.options[toObj.length] = newRow;
+                    fromValue.options[i] = null;
+                    from.options[i] = null;
+                }
+            }
+        }
+
+        function GetStringValue(sP, newString){  
+            // sP - список вибраних елементів
+            // newString - рядок з цих елементів
+            var position = 0;
+            var length = 0;
+            var value = "";
+            var newValue = "";
+            var newChar = "";
+            var i = 0;
+            for (newChar = ''; newChar.length < 50; newChar += ' '){
+            }
+            for (i = 0; i < sP.options.length; i++){
+                position = parseInt(sP.options[i].value.substring(0, sP.options[i].value.indexOf(".")));
+                length = parseInt(sP.options[i].value.substring(sP.options[i].value.indexOf(".") + 1));
+                for (newValue = ""; newValue.length < length - sP.options[i].text.length; newValue += " "){
+                }
+                value = sP.options[i].text + newValue;
+                if (position > 0){
+                    newChar = newChar.substr(0, position) + value + newChar.substr(position + length);
+                }
+                else{
+                    newChar = newChar.replace(newChar.substr(position, length), value);
+                }
+            }
+            newString.value = newChar.replace(/\s*$/, "");
+        }
+    </script>
 }

@@ -126,6 +126,9 @@
   <data name="RequiredDescription" xml:space="preserve">
     <value>Введіть опис!</value>
   </data>
+  <data name="RequiredDeviation" xml:space="preserve">
+    <value>Введіть відхилення!</value>
+  </data>
   <data name="RequiredIcon" xml:space="preserve">
     <value>Виберіть іконку!</value>
   </data>

@@ -114,6 +114,17 @@
         <EntityTypeShape EntityType="artModel.User" Width="1.5" PointX="3.375" PointY="7.875" />
         <AssociationConnector Association="artModel.FK_UserArtifact_User" />
         <AssociationConnector Association="artModel.FK_ActionDescription_ActionTemplate" />
+        <EntityTypeShape EntityType="artModel.Quest" Width="1.5" PointX="9" PointY="43" />
+        <EntityTypeShape EntityType="artModel.QuestStep" Width="1.5" PointX="11.25" PointY="32.125" />
+        <EntityTypeShape EntityType="artModel.QuestTemplate" Width="1.5" PointX="4.5" PointY="28.25" />
+        <EntityTypeShape EntityType="artModel.QuestTemplateStepTemplate" Width="1.5" PointX="11.25" PointY="35.625" />
+        <AssociationConnector Association="artModel.FK_ActionResult_Quest" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateResult_QuestTemplate" />
+        <AssociationConnector Association="artModel.FK_Quest_Carrier" />
+        <AssociationConnector Association="artModel.FK_QuestStep_Quest" />
+        <AssociationConnector Association="artModel.FK_QuestStep_Step" />
+        <AssociationConnector Association="artModel.FK_QuestTemplateStepTemplate_QuestTemplate" />
+        <AssociationConnector Association="artModel.FK_QuestTemplateStepTemplate_StepTemplate" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

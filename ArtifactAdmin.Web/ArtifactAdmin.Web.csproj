@@ -189,6 +189,7 @@
     <Compile Include="Controllers\MapObjectsController.cs" />
     <Compile Include="Controllers\MapZonesController.cs" />
     <Compile Include="Controllers\PredispositionsController.cs" />
+    <Compile Include="Controllers\PropertisController.cs" />
     <Compile Include="Controllers\RacesController.cs" />
     <Compile Include="Controllers\StepActionTemplatesController.cs" />
     <Compile Include="Controllers\StepObjectsController.cs" />
@@ -374,6 +375,11 @@
     <Content Include="Views\Predispositions\Details.cshtml" />
     <Content Include="Views\Predispositions\Edit.cshtml" />
     <Content Include="Views\Predispositions\Index.cshtml" />
+    <Content Include="Views\Propertis\Create.cshtml" />
+    <Content Include="Views\Propertis\Delete.cshtml" />
+    <Content Include="Views\Propertis\Details.cshtml" />
+    <Content Include="Views\Propertis\Edit.cshtml" />
+    <Content Include="Views\Propertis\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
