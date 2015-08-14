@@ -26,8 +26,10 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRepository<Predisposition> predispositionRepository;
         private readonly IRepository<Property> propertyRepository;
 
-        public RaceService(IRepository<Race> raceRepository, IRepository<Characteristic> characteristicRepository,
-            IRepository<Predisposition> predispositionRepository, IRepository<Property> propertyRepository) 
+        public RaceService(IRepository<Race> raceRepository,
+            IRepository<Characteristic> characteristicRepository,
+            IRepository<Predisposition> predispositionRepository,
+            IRepository<Property> propertyRepository) 
         {
             this.raceRepository = raceRepository;
             this.characteristicRepository = characteristicRepository;
@@ -48,7 +50,7 @@ namespace ArtifactAdmin.BL.Services
         public RaceDto GetViewById(int? id)
         {
             var raceDto = new RaceDto();
-            var viewValueCharacteristic=new ViewValueCharacteristic();
+            var viewValueCharacteristic = new ViewValueCharacteristic();
             var viewValuePredisposition = new ViewValueCharacteristic();
             var viewValueProperties = new ViewValueCharacteristic();
             var allCharacteristic = this.characteristicRepository.GetAll().Select(
@@ -72,7 +74,7 @@ namespace ArtifactAdmin.BL.Services
                             Name = type.Name,
                             PositionLength = type.Position.ToString() + "." + type.Length.ToString()
                         }).ToList();
-            if(id != null)
+            if (id != null)
             {
                 raceDto = Mapper.Map<RaceDto>(this.raceRepository.GetAll()
                                                       .FirstOrDefault(s => s.Id == id));

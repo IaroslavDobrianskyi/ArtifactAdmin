@@ -37,7 +37,6 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Display(Name = "Введіть значення характеристики!")]
         public int ValueCharacteristic { get; set; }
 
-
         [Required]
         public string CharacteristicsLevelModifier { get; set; }
 
@@ -59,6 +58,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Властивості")]
         public string Properties { get; set; }
+
         public List<ViewCharacteristic> AllProperties { get; set; }
 
         public List<ViewCharacteristic> SelectedProperties { get; set; }

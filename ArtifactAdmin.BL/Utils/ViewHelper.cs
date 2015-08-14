@@ -31,6 +31,7 @@ namespace ArtifactAdmin.BL.Utils
                 {
                     specificValue += new String(' ', 50 - lengthSpecificValue);
                 }
+
                 int value;
                 int position;
                 int length;
@@ -49,12 +50,14 @@ namespace ArtifactAdmin.BL.Utils
                             selValue = true;
                         }
                     }
+
                     if (!selValue)
                     {
                         viewValueCharacteristic.Characteristics.Add(characteristic);
                     }
                 }
             }
+
             return viewValueCharacteristic;
         }
     }

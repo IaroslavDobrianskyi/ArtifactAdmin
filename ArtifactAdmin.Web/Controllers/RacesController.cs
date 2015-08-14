@@ -38,7 +38,7 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var race = this.raceService.GetViewById (id);
+            var race = this.raceService.GetViewById(id);
             if (race == null)
             {
                 return HttpNotFound();

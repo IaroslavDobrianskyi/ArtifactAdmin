@@ -90,7 +90,7 @@ namespace ArtifactAdmin.BL.Validate
             if (newPosition != null)
             {
                 var mistake = false;
-                if (prevLength != 0 && ((nextPosition != 0 && currentId != 0) || currentId==0 ) && (prevPosition + prevLength) > newPosition)
+                if (prevLength != 0 && ((nextPosition != 0 && currentId != 0) || currentId == 0) && (prevPosition + prevLength) > newPosition)
                 {
                     mistake = true;
                     errorMessage = "Позиція повина бути не менше від "
