@@ -293,6 +293,38 @@
       <End Role="ActionTemplate" EntitySet="ActionTemplates" />
       <End Role="ActionDescription" EntitySet="ActionDescriptions" />
     </AssociationSet>
+    <EntitySet Name="Quests" EntityType="artModel.Quest" />
+    <EntitySet Name="QuestSteps" EntityType="artModel.QuestStep" />
+    <EntitySet Name="QuestTemplates" EntityType="artModel.QuestTemplate" />
+    <EntitySet Name="QuestTemplateStepTemplates" EntityType="artModel.QuestTemplateStepTemplate" />
+    <AssociationSet Name="FK_ActionResult_Quest" Association="artModel.FK_ActionResult_Quest">
+      <End Role="Quest" EntitySet="Quests" />
+      <End Role="ActionResult" EntitySet="ActionResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionTemplateResult_QuestTemplate" Association="artModel.FK_ActionTemplateResult_QuestTemplate">
+      <End Role="QuestTemplate" EntitySet="QuestTemplates" />
+      <End Role="ActionTemplateResult" EntitySet="ActionTemplateResults" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quest_Carrier" Association="artModel.FK_Quest_Carrier">
+      <End Role="Carrier" EntitySet="Carriers" />
+      <End Role="Quest" EntitySet="Quests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestStep_Quest" Association="artModel.FK_QuestStep_Quest">
+      <End Role="Quest" EntitySet="Quests" />
+      <End Role="QuestStep" EntitySet="QuestSteps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestStep_Step" Association="artModel.FK_QuestStep_Step">
+      <End Role="Step" EntitySet="Steps" />
+      <End Role="QuestStep" EntitySet="QuestSteps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestTemplateStepTemplate_QuestTemplate" Association="artModel.FK_QuestTemplateStepTemplate_QuestTemplate">
+      <End Role="QuestTemplate" EntitySet="QuestTemplates" />
+      <End Role="QuestTemplateStepTemplate" EntitySet="QuestTemplateStepTemplates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuestTemplateStepTemplate_StepTemplate" Association="artModel.FK_QuestTemplateStepTemplate_StepTemplate">
+      <End Role="StepTemplate" EntitySet="StepTemplates" />
+      <End Role="QuestTemplateStepTemplate" EntitySet="QuestTemplateStepTemplates" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Action">
     <Key>
@@ -373,6 +405,8 @@
     <Property Name="Action" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Action1" Relationship="artModel.FK_ActionResult_Action" FromRole="ActionResult" ToRole="Action" />
     <NavigationProperty Name="ActionResultDesires" Relationship="artModel.FK_ActionResultDesire_ActionResult" FromRole="ActionResult" ToRole="ActionResultDesire" />
+    <Property Name="Quest" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Quest1" Relationship="artModel.FK_ActionResult_Quest" FromRole="ActionResult" ToRole="Quest" />
   </EntityType>
   <EntityType Name="ActionResultDesire">
     <Key>
@@ -438,12 +472,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PredispositionResultModifier" Type="Double" Nullable="false" />
+    <Property Name="PredispositionResultModifier" Type="String" Nullable="false" MaxLength="200" />
     <Property Name="ExperienceModifier" Type="Double" Nullable="false" />
     <Property Name="ArtifactPosibility" Type="Double" Nullable="false" />
     <Property Name="GoldModifier" Type="Double" Nullable="false" />
     <NavigationProperty Name="ActionTemplates" Relationship="artModel.FK_ActionTemplate_ActionTemplateResult" FromRole="ActionTemplateResult" ToRole="ActionTemplate" />
     <NavigationProperty Name="DesireActionTemplateResults" Relationship="artModel.FK_DesireActionTemplateResult_ActionTemplateResult" FromRole="ActionTemplateResult" ToRole="DesireActionTemplateResult" />
+    <Property Name="QuestTemplate" Type="Int32" />
+    <NavigationProperty Name="QuestTemplate1" Relationship="artModel.FK_ActionTemplateResult_QuestTemplate" FromRole="ActionTemplateResult" ToRole="QuestTemplate" />
   </EntityType>
   <EntityType Name="ActiveActionInFlow">
     <Key>
@@ -508,6 +544,7 @@
     <NavigationProperty Name="Race1" Relationship="artModel.FK_Carrier_Race" FromRole="Carrier" ToRole="Race" />
     <NavigationProperty Name="CarrierDesires" Relationship="artModel.FK_CarrierDesire_Carrier" FromRole="Carrier" ToRole="CarrierDesire" />
     <NavigationProperty Name="CarrierUserArtifacts" Relationship="artModel.FK_CarrierUserArtifact_Carrier" FromRole="Carrier" ToRole="CarrierUserArtifact" />
+    <NavigationProperty Name="Quests" Relationship="artModel.FK_Quest_Carrier" FromRole="Carrier" ToRole="Quest" />
   </EntityType>
   <EntityType Name="CarrierDesire">
     <Key>
@@ -754,6 +791,7 @@
     <NavigationProperty Name="ActiveActionInFlows" Relationship="artModel.FK_ActiveActionInFlow_Step" FromRole="Step" ToRole="ActiveActionInFlow" />
     <NavigationProperty Name="ActiveActionInFlow1" Relationship="artModel.FK_Step_ActiveActionInFlow" FromRole="Step" ToRole="ActiveActionInFlow" />
     <NavigationProperty Name="Desire1" Relationship="artModel.FK_Step_Desire" FromRole="Step" ToRole="Desire" />
+    <NavigationProperty Name="QuestSteps" Relationship="artModel.FK_QuestStep_Step" FromRole="Step" ToRole="QuestStep" />
   </EntityType>
   <EntityType Name="StepObject">
     <Key>
@@ -797,6 +835,9 @@
     <NavigationProperty Name="Desire1" Relationship="artModel.FK_StepTemplate_Desire" FromRole="StepTemplate" ToRole="Desire" />
     <NavigationProperty Name="StepObjectStepTemplates" Relationship="artModel.FK_StepObjectStepTemplate_StepTemplate" FromRole="StepTemplate" ToRole="StepObjectStepTemplate" />
     <NavigationProperty Name="StepTemplateActionTemplates" Relationship="artModel.FK_StepTemplateActionTemplate_StepTemplate" FromRole="StepTemplate" ToRole="StepTemplateActionTemplate" />
+    <Property Name="IsNotVisibleInFlow" Type="Boolean" Nullable="false" />
+    <Property Name="IsQuestStarter" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="QuestTemplateStepTemplates" Relationship="artModel.FK_QuestTemplateStepTemplate_StepTemplate" FromRole="StepTemplate" ToRole="QuestTemplateStepTemplate" />
   </EntityType>
   <EntityType Name="StepTemplateActionTemplate">
     <Key>
@@ -1592,6 +1633,134 @@
       </Principal>
       <Dependent Role="ActionDescription">
         <PropertyRef Name="ActionTemplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Quest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Carrier" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ActionResults" Relationship="artModel.FK_ActionResult_Quest" FromRole="Quest" ToRole="ActionResult" />
+    <NavigationProperty Name="Carrier1" Relationship="artModel.FK_Quest_Carrier" FromRole="Quest" ToRole="Carrier" />
+    <NavigationProperty Name="QuestSteps" Relationship="artModel.FK_QuestStep_Quest" FromRole="Quest" ToRole="QuestStep" />
+  </EntityType>
+  <EntityType Name="QuestStep">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Quest" Type="Int32" Nullable="false" />
+    <Property Name="Step" Type="Int32" Nullable="false" />
+    <Property Name="StepOrder" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Quest1" Relationship="artModel.FK_QuestStep_Quest" FromRole="QuestStep" ToRole="Quest" />
+    <NavigationProperty Name="Step1" Relationship="artModel.FK_QuestStep_Step" FromRole="QuestStep" ToRole="Step" />
+  </EntityType>
+  <EntityType Name="QuestTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="ActionTemplateResults" Relationship="artModel.FK_ActionTemplateResult_QuestTemplate" FromRole="QuestTemplate" ToRole="ActionTemplateResult" />
+    <NavigationProperty Name="QuestTemplateStepTemplates" Relationship="artModel.FK_QuestTemplateStepTemplate_QuestTemplate" FromRole="QuestTemplate" ToRole="QuestTemplateStepTemplate" />
+  </EntityType>
+  <EntityType Name="QuestTemplateStepTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StepTemplate" Type="Int32" Nullable="false" />
+    <Property Name="QuestTemaplate" Type="Int32" Nullable="false" />
+    <Property Name="StepOrder" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="QuestTemplate" Relationship="artModel.FK_QuestTemplateStepTemplate_QuestTemplate" FromRole="QuestTemplateStepTemplate" ToRole="QuestTemplate" />
+    <NavigationProperty Name="StepTemplate1" Relationship="artModel.FK_QuestTemplateStepTemplate_StepTemplate" FromRole="QuestTemplateStepTemplate" ToRole="StepTemplate" />
+  </EntityType>
+  <Association Name="FK_ActionResult_Quest">
+    <End Type="artModel.Quest" Role="Quest" Multiplicity="1" />
+    <End Type="artModel.ActionResult" Role="ActionResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quest">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionResult">
+        <PropertyRef Name="Quest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionTemplateResult_QuestTemplate">
+    <End Type="artModel.QuestTemplate" Role="QuestTemplate" Multiplicity="0..1" />
+    <End Type="artModel.ActionTemplateResult" Role="ActionTemplateResult" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionTemplateResult">
+        <PropertyRef Name="QuestTemplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quest_Carrier">
+    <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
+    <End Type="artModel.Quest" Role="Quest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Carrier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quest">
+        <PropertyRef Name="Carrier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestStep_Quest">
+    <End Type="artModel.Quest" Role="Quest" Multiplicity="1" />
+    <End Type="artModel.QuestStep" Role="QuestStep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Quest">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestStep">
+        <PropertyRef Name="Quest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestStep_Step">
+    <End Type="artModel.Step" Role="Step" Multiplicity="1" />
+    <End Type="artModel.QuestStep" Role="QuestStep" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Step">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestStep">
+        <PropertyRef Name="Step" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestTemplateStepTemplate_QuestTemplate">
+    <End Type="artModel.QuestTemplate" Role="QuestTemplate" Multiplicity="1" />
+    <End Type="artModel.QuestTemplateStepTemplate" Role="QuestTemplateStepTemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestTemplateStepTemplate">
+        <PropertyRef Name="QuestTemaplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuestTemplateStepTemplate_StepTemplate">
+    <End Type="artModel.StepTemplate" Role="StepTemplate" Multiplicity="1" />
+    <End Type="artModel.QuestTemplateStepTemplate" Role="QuestTemplateStepTemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StepTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuestTemplateStepTemplate">
+        <PropertyRef Name="StepTemplate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

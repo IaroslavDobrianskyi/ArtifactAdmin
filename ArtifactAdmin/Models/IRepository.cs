@@ -14,6 +14,8 @@ namespace ArtifactAdmin.DAL.Models
     public interface IRepository<T>
     {
         IQueryable<T> GetAll();
+
+        IQueryable<T> GetAllNoTracking();
         
         void Insert(T entity);
         

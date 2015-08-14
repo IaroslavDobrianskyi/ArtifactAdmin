@@ -18,6 +18,7 @@ namespace ArtifactAdmin.DAL.Models
         {
             this.CarrierDesires = new HashSet<CarrierDesire>();
             this.CarrierUserArtifacts = new HashSet<CarrierUserArtifact>();
+            this.Quests = new HashSet<Quest>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual Race Race1 { get; set; }
         public virtual ICollection<CarrierDesire> CarrierDesires { get; set; }
         public virtual ICollection<CarrierUserArtifact> CarrierUserArtifacts { get; set; }
+        public virtual ICollection<Quest> Quests { get; set; }
     }
 }

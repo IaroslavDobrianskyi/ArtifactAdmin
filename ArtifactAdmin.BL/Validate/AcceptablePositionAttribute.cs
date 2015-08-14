@@ -23,6 +23,7 @@ namespace ArtifactAdmin.BL.Validate
             int nextPosition = 0;
             int prevPosition = 0;
             int prevLength = 0;
+            int currentId = 0;
             var nameDto = validationContext.ObjectType.Name;
             switch (nameDto)
             {
@@ -30,6 +31,7 @@ namespace ArtifactAdmin.BL.Validate
                     ICharacteristicService characteristicService = DependencyResolver.Current.GetService<ICharacteristicService>();
                     CharacteristicDto characteristicDto = validationContext.ObjectInstance as CharacteristicDto;
                     newLength = characteristicDto.Length;
+                    currentId = characteristicDto.Id;
                     CharacteristicDto nextCharacteristicDto = characteristicService.GetMinByPosition(newPosition);
                     if (nextCharacteristicDto != null)
                     {
@@ -48,6 +50,7 @@ namespace ArtifactAdmin.BL.Validate
                     IPredispositionService predispositionService = DependencyResolver.Current.GetService<IPredispositionService>();
                     PredispositionDto predispositionDto = validationContext.ObjectInstance as PredispositionDto;
                     newLength = predispositionDto.Length;
+                    currentId = predispositionDto.Id;
                     PredispositionDto nextPredispositionDto = predispositionService.GetMinByPosition(newPosition);
                     if (nextPredispositionDto != null)
                     {
@@ -66,6 +69,7 @@ namespace ArtifactAdmin.BL.Validate
                     IPropertyService propertyService = DependencyResolver.Current.GetService<IPropertyService>();
                     PropertyDto propertyDto = validationContext.ObjectInstance as PropertyDto;
                     newLength = propertyDto.Length;
+                    currentId = propertyDto.Id;
                     PropertyDto nextPropertyDto = propertyService.GetMinByPosition(newPosition);
                     if (nextPropertyDto != null)
                     {
@@ -82,11 +86,11 @@ namespace ArtifactAdmin.BL.Validate
                     break;
             }
 
-            string errorMessage = string.Empty;
+            string errorMessage = string.Empty; 
             if (newPosition != null)
             {
                 var mistake = false;
-                if (prevLength != 0 && (prevPosition + prevLength) > newPosition)
+                if (prevLength != 0 && ((nextPosition != 0 && currentId != 0) || currentId==0 ) && (prevPosition + prevLength) > newPosition)
                 {
                     mistake = true;
                     errorMessage = "Позиція повина бути не менше від "

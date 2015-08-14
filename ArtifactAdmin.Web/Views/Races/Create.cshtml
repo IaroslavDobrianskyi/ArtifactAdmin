@@ -59,7 +59,7 @@
                             <br />
                             @Html.EditorFor(model => model.ValueCharacteristic, new { htmlAttributes = new { @class = "form-control" } })
                             <br />
-                            <textarea class="text-danger" id="MessageErrorChar" rows="2" cols="17" hidden></textarea>
+                            <span class="text-danger" id="MessageErrorChar" ></span>
                         </td>
                         <td style="text-align: center">
                             <input type="button" id="add" value=">"
@@ -77,7 +77,7 @@
                 new { size = 8, style = "width:250px" })
                             @Html.ListBoxFor(model => model.SelectedValues, new MultiSelectList(Model.SelectedValues, "PositionLength", "Value"),
                 new { size = 8, style = "width:100px" })
-                            @Html.HiddenFor(model => model.Characreristics)
+                            @Html.HiddenFor(model => model.Characreristics, new { @class = "IncludeHidden" })
                             <br />
                             @Html.ValidationMessageFor(model => model.Characreristics, "", new { @class = "text-danger" })
                         </td>
@@ -108,7 +108,7 @@
                         <br />
                         @Html.EditorFor(model => model.ValuePredisposition, new { htmlAttributes = new { @class = "form-control" } })
                         <br />
-                        <textarea class="text-danger" id="MessageErrorPred" rows="2" cols="17" hidden></textarea>
+                        <span class="text-danger" id="MessageErrorPred" ></span>
                     </td>
                     <td style="text-align: center">
                         <input type="button" id="addPred" value=">"
@@ -126,7 +126,7 @@
                 new { size = 6, style = "width:250px" })
                         @Html.ListBoxFor(model => model.SelectedValuesPredisposition, new MultiSelectList(Model.SelectedValuesPredisposition, "PositionLength", "Value"),
                 new { size = 6, style = "width:100px" })
-                        @Html.HiddenFor(model => model.Predisposition)
+                        @Html.HiddenFor(model => model.Predisposition, new { @class = "IncludeHidden" })
                         <br />
                         @Html.ValidationMessageFor(model => model.Predisposition, "", new { @class = "text-danger" })
                     </td>
@@ -150,7 +150,7 @@
                         <br />
                         @Html.EditorFor(model => model.ValueProperty, new { htmlAttributes = new { @class = "form-control" } })
                         <br />
-                        <textarea class="text-danger" id="MessageErrorProp" rows="2" cols="17" hidden></textarea>
+                        <span class="text-danger" id="MessageErrorProp" ></span>
                     </td>
                     <td style="text-align: center">
                         <input type="button" id="addPred" value=">"
@@ -168,7 +168,7 @@
                 new { size = 6, style = "width:250px" })
                         @Html.ListBoxFor(model => model.SelectedValuesProperties, new MultiSelectList(Model.SelectedValuesProperties, "PositionLength", "Value"),
                 new { size = 6, style = "width:100px" })
-                        @Html.HiddenFor(model => model.Properties)
+                        @Html.HiddenFor(model => model.Properties, new {@class="IncludeHidden"})
                         <br />
                         @Html.ValidationMessageFor(model => model.Properties, "", new { @class = "text-danger" })
                     </td>
@@ -221,22 +221,27 @@
                             newRow = new Option(SelValue, SelID);
                             ToValue[ToValue.length] = newRow;
                             From.options[i] = null;
-                            Message.value = "";
-                            Message.hidden = true;
+                            while (Message.firstChild) {
+                                Message.removeChild(Message.firstChild);
+                            }
                         }
                         else {
                             for (maxValue = ''; maxValue.length < length; maxValue += '9') {
                             }
-                            Message.value = "Для " + SelText + " введіть число від 1 до " + maxValue + " !";
-                            Message.hidden = false;
+                            while (Message.firstChild) {
+                                Message.removeChild(Message.firstChild);
+                            }
+                            Message.appendChild(document.createTextNode("Для " + SelText + " введіть число від 1 до " + maxValue + " !"));
                         }
                     }
                 }
             }
             else {
-                Message.value = "Введіть число більше 0 !";
-                Message.hidden = false;
-            }
+                while (Message.firstChild) {
+                    Message.removeChild(Message.firstChild);
+                }
+                Message.appendChild(document.createTextNode("Введіть число більше 0 !"));
+                }
         }
 
         function MoveToObj(from, toObj, fromValue) {

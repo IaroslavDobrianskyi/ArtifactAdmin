@@ -12,26 +12,19 @@ namespace ArtifactAdmin.DAL.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StepTemplate
+    public partial class QuestTemplate
     {
-        public StepTemplate()
+        public QuestTemplate()
         {
-            this.StepObjectStepTemplates = new HashSet<StepObjectStepTemplate>();
-            this.StepTemplateActionTemplates = new HashSet<StepTemplateActionTemplate>();
+            this.ActionTemplateResults = new HashSet<ActionTemplateResult>();
             this.QuestTemplateStepTemplates = new HashSet<QuestTemplateStepTemplate>();
         }
     
         public int Id { get; set; }
-        public string Description { get; set; }
-        public string StepText { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Desire { get; set; }
-        public bool IsNotVisibleInFlow { get; set; }
-        public bool IsQuestStarter { get; set; }
+        public string Description { get; set; }
     
-        public virtual Desire Desire1 { get; set; }
-        public virtual ICollection<StepObjectStepTemplate> StepObjectStepTemplates { get; set; }
-        public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
+        public virtual ICollection<ActionTemplateResult> ActionTemplateResults { get; set; }
         public virtual ICollection<QuestTemplateStepTemplate> QuestTemplateStepTemplates { get; set; }
     }
 }

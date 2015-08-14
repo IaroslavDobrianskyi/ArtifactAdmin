@@ -21,12 +21,14 @@ namespace ArtifactAdmin.DAL.Models
         }
     
         public int Id { get; set; }
-        public double PredispositionResultModifier { get; set; }
+        public string PredispositionResultModifier { get; set; }
         public double ExperienceModifier { get; set; }
         public double ArtifactPosibility { get; set; }
         public double GoldModifier { get; set; }
+        public Nullable<int> QuestTemplate { get; set; }
     
         public virtual ICollection<ActionTemplate> ActionTemplates { get; set; }
         public virtual ICollection<DesireActionTemplateResult> DesireActionTemplateResults { get; set; }
+        public virtual QuestTemplate QuestTemplate1 { get; set; }
     }
 }

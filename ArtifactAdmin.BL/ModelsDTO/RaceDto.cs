@@ -23,7 +23,8 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredList",
+           ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Характеристики")]
         public string Characreristics { get; set; }
 
@@ -40,7 +41,8 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Required]
         public string CharacteristicsLevelModifier { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredList",
+           ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Схильності")]
         public string Predisposition { get; set; }
 
@@ -53,7 +55,8 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Display(Name = "Введіть значення схильності!")]
         public int ValuePredisposition { get; set; }
 
-        [Required]
+        [Required(ErrorMessageResourceName = "RequiredList",
+           ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         [Display(Name = "Властивості")]
         public string Properties { get; set; }
         public List<ViewCharacteristic> AllProperties { get; set; }

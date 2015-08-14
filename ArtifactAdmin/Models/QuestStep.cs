@@ -12,25 +12,14 @@ namespace ArtifactAdmin.DAL.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ActionResult
+    public partial class QuestStep
     {
-        public ActionResult()
-        {
-            this.ActionResultDesires = new HashSet<ActionResultDesire>();
-        }
-    
         public int Id { get; set; }
-        public string Predisposition { get; set; }
-        public int Gold { get; set; }
-        public int Expirience { get; set; }
-        public int Artifact { get; set; }
-        public bool SoulShard { get; set; }
-        public bool Killed { get; set; }
-        public int Action { get; set; }
         public int Quest { get; set; }
+        public int Step { get; set; }
+        public int StepOrder { get; set; }
     
-        public virtual Action Action1 { get; set; }
-        public virtual ICollection<ActionResultDesire> ActionResultDesires { get; set; }
         public virtual Quest Quest1 { get; set; }
+        public virtual Step Step1 { get; set; }
     }
 }

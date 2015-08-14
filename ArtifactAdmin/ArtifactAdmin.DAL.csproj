@@ -281,6 +281,18 @@
     <Compile Include="Models\Property.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Quest.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestStep.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestTemplate.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QuestTemplateStepTemplate.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Race.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>

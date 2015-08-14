@@ -38,13 +38,13 @@ namespace ArtifactAdmin.BL.Services
 
         public PropertyDto GetByPosition(int position)
         {
-            return Mapper.Map<PropertyDto>(this.propertyRepository.GetAll()
+            return Mapper.Map<PropertyDto>(this.propertyRepository.GetAllNoTracking()
                                                       .FirstOrDefault(s => s.Position == position));
         }
 
         public PropertyDto GetMaxByPosition(int position)
         {
-            return Mapper.Map<PropertyDto>(this.propertyRepository.GetAll()
+            return Mapper.Map<PropertyDto>(this.propertyRepository.GetAllNoTracking()
                                                      .Where(s => s.Position < position)
                                                      .OrderByDescending(s => s.Position)
                                                      .FirstOrDefault());
@@ -52,7 +52,7 @@ namespace ArtifactAdmin.BL.Services
 
         public PropertyDto GetMinByPosition(int position)
         {
-            return Mapper.Map<PropertyDto>(this.propertyRepository.GetAll()
+            return Mapper.Map<PropertyDto>(this.propertyRepository.GetAllNoTracking()
                                                      .Where(s => s.Position > position)
                                                      .OrderBy(s => s.Position)
                                                      .FirstOrDefault());
