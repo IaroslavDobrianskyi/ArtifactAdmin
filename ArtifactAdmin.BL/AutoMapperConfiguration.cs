@@ -13,6 +13,7 @@ namespace ArtifactAdmin.BL
     using AutoMapper;
     using DAL.Models;
     using ModelsDTO;
+    using ModelsDTO.FlowItems;
 
     public static class AutoMapperConfiguration
     {
@@ -34,7 +35,10 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<StepObjectTypeDto, StepObjectType>();
 
             Mapper.CreateMap<StepTemplate, StepTemplateDto>();
-            Mapper.CreateMap<StepTemplateDto, StepTemplate>();
+            Mapper.CreateMap<StepTemplateDto, StepTemplate>(); 
+            
+            Mapper.CreateMap<Step, StepDto>();
+            Mapper.CreateMap<StepDto, Step>();
 
             Mapper.CreateMap<StepObjectStepTemplate, StepObjectStepTemplateDto>();
             Mapper.CreateMap<StepObjectStepTemplateDto, StepObjectStepTemplate>();

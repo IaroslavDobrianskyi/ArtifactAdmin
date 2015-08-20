@@ -126,6 +126,7 @@
     <Compile Include="Interfaces\IPropertyService.cs" />
     <Compile Include="Interfaces\IRaceService.cs" />
     <Compile Include="Interfaces\IStepActionTemplateService.cs" />
+    <Compile Include="Interfaces\IStepService.cs" />
     <Compile Include="Interfaces\IStepObjectService.cs" />
     <Compile Include="Interfaces\IStepObjectTypeService.cs" />
     <Compile Include="Interfaces\IStepTemplateService.cs" />
@@ -137,8 +138,11 @@
     <Compile Include="ModelsDTO\BonusDto.cs" />
     <Compile Include="ModelsDTO\CharacteristicDto.cs" />
     <Compile Include="ModelsDTO\ClassDto.cs" />
+    <Compile Include="ModelsDTO\FlowItems\FlowAction.cs" />
+    <Compile Include="ModelsDTO\FlowItems\FlowStep.cs" />
     <Compile Include="ModelsDTO\PredispositionDto.cs" />
     <Compile Include="ModelsDTO\PropertyDto.cs" />
+    <Compile Include="ModelsDTO\FlowItems\StepDto.cs" />
     <Compile Include="ModelsDTO\ViewCharacteristic.cs" />
     <Compile Include="ModelsDTO\ViewValueCharacteristic.cs" />
     <Compile Include="Services\CharacteristicService.cs" />
@@ -171,12 +175,14 @@
     <Compile Include="Services\BonusService.cs" />
     <Compile Include="Services\ConstellationService.cs" />
     <Compile Include="Services\DesireService.cs" />
+    <Compile Include="Services\FlowService.cs" />
     <Compile Include="Services\MapObjectService.cs" />
     <Compile Include="Services\MapZoneService.cs" />
     <Compile Include="Services\PredispositionService.cs" />
     <Compile Include="Services\PropertyService.cs" />
     <Compile Include="Services\RaceService.cs" />
     <Compile Include="Services\StepActionTemplateService.cs" />
+    <Compile Include="Services\StepService.cs" />
     <Compile Include="Services\StepObjectService.cs" />
     <Compile Include="Services\StepObjectTypeService.cs" />
     <Compile Include="Services\StepTemplateService.cs" />
