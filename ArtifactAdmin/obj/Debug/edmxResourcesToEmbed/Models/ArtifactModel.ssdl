@@ -329,6 +329,8 @@
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Carrier" Type="int" Nullable="false" />
+    <Property Name="CurrentStepIndex" Type="int" Nullable="false" />
+    <Property Name="QuestTemplate" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="QuestStep">
     <Key>
@@ -1042,6 +1044,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Quest_QuestTemplate">
+    <End Role="QuestTemplate" Type="Self.QuestTemplate" Multiplicity="1" />
+    <End Role="Quest" Type="Self.Quest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="QuestTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Quest">
+        <PropertyRef Name="QuestTemplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_QuestStep_Quest">
     <End Role="Quest" Type="Self.Quest" Multiplicity="1" />
     <End Role="QuestStep" Type="Self.QuestStep" Multiplicity="*" />
@@ -1527,6 +1541,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Quest_Carrier" Association="Self.FK_Quest_Carrier">
       <End Role="Carrier" EntitySet="Carrier" />
+      <End Role="Quest" EntitySet="Quest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quest_QuestTemplate" Association="Self.FK_Quest_QuestTemplate">
+      <End Role="QuestTemplate" EntitySet="QuestTemplate" />
       <End Role="Quest" EntitySet="Quest" />
     </AssociationSet>
     <AssociationSet Name="FK_QuestStep_Quest" Association="Self.FK_QuestStep_Quest">

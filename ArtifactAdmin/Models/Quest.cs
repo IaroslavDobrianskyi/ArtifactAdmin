@@ -24,9 +24,12 @@ namespace ArtifactAdmin.DAL.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int Carrier { get; set; }
+        public int CurrentStepIndex { get; set; }
+        public int QuestTemplate { get; set; }
     
         public virtual ICollection<ActionResult> ActionResults { get; set; }
         public virtual Carrier Carrier1 { get; set; }
         public virtual ICollection<QuestStep> QuestSteps { get; set; }
+        public virtual QuestTemplate QuestTemplate1 { get; set; }
     }
 }

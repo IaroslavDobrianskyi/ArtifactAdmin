@@ -557,6 +557,8 @@
     <EntitySetMapping Name="Quests">
       <EntityTypeMapping TypeName="artModel.Quest">
         <MappingFragment StoreEntitySet="Quest">
+          <ScalarProperty Name="QuestTemplate" ColumnName="QuestTemplate" />
+          <ScalarProperty Name="CurrentStepIndex" ColumnName="CurrentStepIndex" />
           <ScalarProperty Name="Carrier" ColumnName="Carrier" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />

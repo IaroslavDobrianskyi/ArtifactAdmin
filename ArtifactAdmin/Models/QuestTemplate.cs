@@ -18,6 +18,7 @@ namespace ArtifactAdmin.DAL.Models
         {
             this.ActionTemplateResults = new HashSet<ActionTemplateResult>();
             this.QuestTemplateStepTemplates = new HashSet<QuestTemplateStepTemplate>();
+            this.Quests = new HashSet<Quest>();
         }
     
         public int Id { get; set; }
@@ -26,5 +27,6 @@ namespace ArtifactAdmin.DAL.Models
     
         public virtual ICollection<ActionTemplateResult> ActionTemplateResults { get; set; }
         public virtual ICollection<QuestTemplateStepTemplate> QuestTemplateStepTemplates { get; set; }
+        public virtual ICollection<Quest> Quests { get; set; }
     }
 }

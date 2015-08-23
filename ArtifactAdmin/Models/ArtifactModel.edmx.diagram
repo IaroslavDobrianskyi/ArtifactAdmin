@@ -125,6 +125,7 @@
         <AssociationConnector Association="artModel.FK_QuestStep_Step" />
         <AssociationConnector Association="artModel.FK_QuestTemplateStepTemplate_QuestTemplate" />
         <AssociationConnector Association="artModel.FK_QuestTemplateStepTemplate_StepTemplate" />
+        <AssociationConnector Association="artModel.FK_Quest_QuestTemplate" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

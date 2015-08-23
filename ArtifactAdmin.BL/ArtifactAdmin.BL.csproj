@@ -139,6 +139,7 @@
     <Compile Include="ModelsDTO\ClassDto.cs" />
     <Compile Include="ModelsDTO\PredispositionDto.cs" />
     <Compile Include="ModelsDTO\PropertyDto.cs" />
+    <Compile Include="ModelsDTO\RaceDesireDto.cs" />
     <Compile Include="ModelsDTO\ViewCharacteristic.cs" />
     <Compile Include="ModelsDTO\ViewValueCharacteristic.cs" />
     <Compile Include="Services\CharacteristicService.cs" />
