@@ -13,6 +13,7 @@ namespace ArtifactAdmin.BL
     using AutoMapper;
     using DAL.Models;
     using ModelsDTO;
+    using ModelsDTO.FlowItems;
 
     public static class AutoMapperConfiguration
     {
@@ -34,7 +35,10 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<StepObjectTypeDto, StepObjectType>();
 
             Mapper.CreateMap<StepTemplate, StepTemplateDto>();
-            Mapper.CreateMap<StepTemplateDto, StepTemplate>();
+            Mapper.CreateMap<StepTemplateDto, StepTemplate>(); 
+            
+            Mapper.CreateMap<Step, StepDto>();
+            Mapper.CreateMap<StepDto, Step>();
 
             Mapper.CreateMap<StepObjectStepTemplate, StepObjectStepTemplateDto>();
             Mapper.CreateMap<StepObjectStepTemplateDto, StepObjectStepTemplate>();
@@ -72,6 +76,9 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<Race, RaceDto>();
             Mapper.CreateMap<RaceDto, Race>();
 
+            Mapper.CreateMap<Race, ViewRaceDesireDto>();
+            Mapper.CreateMap<ViewRaceDesireDto, Race>();
+
             Mapper.CreateMap<Class, ClassDto>();
             Mapper.CreateMap<ClassDto, Class>();
 
@@ -83,6 +90,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<Property, PropertyDto>();
             Mapper.CreateMap<PropertyDto, Property>();
+
+            Mapper.CreateMap<RaceDesire, RaceDesireDto>();
+            Mapper.CreateMap<RaceDesireDto, RaceDesire>();
         } 
     }
 }

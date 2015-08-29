@@ -56,7 +56,6 @@
             return GetFibonacciNumber(experienceLevel) * StartingExpPoints;
         }
 
-
         // TODO extract into utils method
         public static int GetFibonacciNumber(int n)
         {
@@ -71,6 +70,5 @@
             }
             return a;
         }
-
     }
 }

@@ -1,0 +1,79 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewRaceDesireDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Бажання раси</h4>
+    <hr/>
+    @{
+        string Desire = "Desire.Name";
+    }
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Description, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Icon)
+        </dt>
+
+        <dd>
+            <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath + "Races/" + @Model.Icon)" id="icon" width=" 160 " height=" 120">
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RaceDesires)
+        </dt>
+        <dd>
+            <table class="table">
+                <colgroup>
+                    <col style="width: 100px" />
+                    <col style="width: 100px" />
+                    <col style="width: 100px" />
+                    <col style="width: 100px" />
+                </colgroup>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SelectedDesires)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Probabilities)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DefaultValues)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Deviations)
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ListBoxFor(model => model.RaceDesires, new SelectList(Model.RaceDesires, "DesireId", Desire), new {size = 8, style = "width:100%"})
+                    </td>
+                    <td>
+                        @Html.ListBoxFor(model => model.RaceDesires, new SelectList(Model.RaceDesires, "DesireId", "Probability"), new { size = 8, style = "width:100%" })
+                    </td>
+                    <td>
+                        @Html.ListBoxFor(model => model.RaceDesires, new SelectList(Model.RaceDesires, "DesireId", "DefaultValue"), new { size = 8, style = "width:100%" })
+                    </td>
+                    <td>
+                        @Html.ListBoxFor(model => model.RaceDesires, new SelectList(Model.RaceDesires, "DesireId", "Deviation"), new { size = 8, style = "width:100%" })
+                    </td>
+                </tr>
+            </table>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿ // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="StepTemplateService.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
@@ -138,7 +138,7 @@ namespace ArtifactAdmin.BL.Services
             var stepTemplate = Mapper.Map<StepTemplate>(stepTewmplateDto);
             this.stepTemplateRepository.UpdateWithoutSave(stepTemplate);
             DeleteStepObjectTemplate(stepTemplate);
-            if (stepObj != null)
+            if (stepObj != null) 
             {
                 CreateStepObjectStepTemplate(stepTemplate, stepObj);
             }

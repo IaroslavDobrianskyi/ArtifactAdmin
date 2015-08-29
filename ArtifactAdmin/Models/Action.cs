@@ -26,9 +26,9 @@ namespace ArtifactAdmin.DAL.Models
         public int Id { get; set; }
         public int Step { get; set; }
         public string Text { get; set; }
-        public Nullable<double> PredispositionResult { get; set; }
+        public string PredispositionResult { get; set; }
         public Nullable<double> ExperienceModifier { get; set; }
-        public Nullable<System.DateTime> Duration { get; set; }
+        public Nullable<long> Duration { get; set; }
         public Nullable<int> ActionChangeCost { get; set; }
         public Nullable<int> ActionImprovementCost { get; set; }
         public string Icon { get; set; }

@@ -337,9 +337,9 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Step" Type="Int32" Nullable="false" />
     <Property Name="Text" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="PredispositionResult" Type="Double" />
+    <Property Name="PredispositionResult" Type="String" MaxLength="500" />
     <Property Name="ExperienceModifier" Type="Double" />
-    <Property Name="Duration" Type="DateTime" Precision="3" />
+    <Property Name="Duration" Type="Int64" />
     <Property Name="ActionChangeCost" Type="Int32" />
     <Property Name="ActionImprovementCost" Type="Int32" />
     <Property Name="Icon" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />

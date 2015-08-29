@@ -12,9 +12,9 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Step" Type="int" Nullable="false" />
           <Property Name="Text" Type="nchar" MaxLength="500" />
-          <Property Name="PredispositionResult" Type="float" />
+          <Property Name="PredispositionResult" Type="nvarchar" MaxLength="500" />
           <Property Name="ExperienceModifier" Type="float" />
-          <Property Name="Duration" Type="datetime" />
+          <Property Name="Duration" Type="bigint" />
           <Property Name="ActionChangeCost" Type="int" />
           <Property Name="ActionImprovementCost" Type="int" />
           <Property Name="Icon" Type="nchar" MaxLength="200" />
@@ -1982,9 +1982,9 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Step" Type="Int32" Nullable="false" />
           <Property Name="Text" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-          <Property Name="PredispositionResult" Type="Double" />
+          <Property Name="PredispositionResult" Type="String" MaxLength="500" />
           <Property Name="ExperienceModifier" Type="Double" />
-          <Property Name="Duration" Type="DateTime" Precision="3" />
+          <Property Name="Duration" Type="Int64" />
           <Property Name="ActionChangeCost" Type="Int32" />
           <Property Name="ActionImprovementCost" Type="Int32" />
           <Property Name="Icon" Type="String" MaxLength="200" FixedLength="true" Unicode="true" />

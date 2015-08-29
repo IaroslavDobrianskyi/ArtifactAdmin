@@ -1,0 +1,217 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewRaceDesireDto
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Змінити</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Бажання раси</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { rows = "5", cols = "50", @readonly = true })
+            </div>
+        </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Icon, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath + "Races/" + @Model.Icon)" id="icon" width=" 160 " height=" 120">
+        </div>
+    </div>
+            <table class="table">
+                <colgroup>
+                    <col style="width: 200px" />
+                    <col style="width: 200px" />
+                    <col style="width: 100px" />
+                    <col style="width: 400px" />
+                </colgroup>
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.AllDesires, new { @class = "control-label col-md-2" })<br />
+                        @Html.ListBoxFor(model => model.AllDesires, new SelectList(Model.AllDesires, "Id", "Name"), new { size = 8, style = "width:100%" })
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.OneProbability, new { @class = "control-label col-md-2" })<br />
+                        @Html.EditorFor(model => model.OneProbability, new { htmlAttributes = new { @class = "form-control", onchange = "ValidateZeroProbability()" } })<br />
+                        @Html.ValidationMessageFor(model => model.OneProbability, "", new { @class = "text-danger" })
+                        <input type="text" class="text-danger" id="MessageError1" value="" style="width: 100%" hidden>
+                        @Html.LabelFor(model => model.DefaultValue, new { @class = "control-label col-md-2" })<br />
+                        @Html.EditorFor(model => model.DefaultValue, new { htmlAttributes = new { @class = "form-control", onchange = "ValidatePositive(this.value,document.getElementById('MessageError2'))" } })<br />
+                        @Html.ValidationMessageFor(model => model.DefaultValue, "", new { @class = "text-danger" })
+                        <input type="text" class="text-danger" id="MessageError2" value="" style="width: 100%" hidden>
+                        @Html.LabelFor(model => model.Deviation, new { @class = "control-label col-md-2" })<br />
+                        @Html.EditorFor(model => model.Deviation, new { htmlAttributes = new { @class = "form-control", onchange = "ValidatePositive(this.value,document.getElementById('MessageError3'))" } })<br />
+                        @Html.ValidationMessageFor(model => model.Deviation, "", new { @class = "text-danger" })
+                        <input type="text" class="text-danger" id="MessageError3" value="" style="width: 100%" hidden>
+                    </td>
+                    <td style="text-align: center">
+                        <input type="button" id="add" value=">"
+                               onclick="javascript: MoveToSel();" />
+                        <br />
+                        <input type="button" id="rem" value="<"
+                               onclick="javascript: MoveToObj();" />
+                    </td>
+                    <td>
+                        <table class="table">
+                            <colgroup>
+                                <col style="width: 100px" />
+                                <col style="width: 100px" />
+                                <col style="width: 100px" />
+                                <col style="width: 100px" />
+                            </colgroup>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SelectedDesires)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Probabilities)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DefaultValues)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Deviations)
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.ListBoxFor(model => model.SelectedDesires, new MultiSelectList(Model.SelectedDesires, "Id", "Name"), new { size = 8, style = "width:100%" })
+                                </td>
+                                <td>
+                                    @Html.ListBoxFor(model => model.Probabilities, new MultiSelectList(Model.Probabilities), new { size = 8, style = "width:100%" })
+                                </td>
+                                <td>
+                                    @Html.ListBoxFor(model => model.DefaultValues, new MultiSelectList(Model.DefaultValues), new { size = 8, style = "width:100%" })
+                                </td>
+                                <td>
+                                    @Html.ListBoxFor(model => model.Deviations, new MultiSelectList(Model.Deviations), new { size = 8, style = "width:100%" })
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll()" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function MoveToSel(){
+            var from = document.getElementById("AllDesires");
+            var toSel = document.getElementById("SelectedDesires");
+            var toProbability = document.getElementById("Probabilities");
+            var toDefaultValues = document.getElementById("DefaultValues");
+            var toDeviations = document.getElementById("Deviations");
+            var selID = '';
+            var selText = '';
+            var selProbability = document.getElementById("OneProbability").value.toString();
+            var selDefaultValue = document.getElementById("DefaultValue").value;
+            var selDeviation = document.getElementById("Deviation").value;
+            var validateProbability = Number(selProbability);
+            if (validateProbability > 0 & validateProbability < 1 & selDefaultValue >= 0 & selDeviation >= 0){
+                for (i = from.options.length - 1; i >= 0; i--){
+                    if (from.options[i].selected == true){
+                        selID = from.options[i].value;
+                        selText = from.options[i].text;
+                        var newRow = new Option(selText, selID);
+                        toSel.options[toSel.length] = newRow;
+                        newRow = new Option(selProbability, selProbability);
+                        toProbability[toProbability.length] = newRow;
+                        newRow = new Option(selDefaultValue, selDefaultValue);
+                        toDefaultValues[toDefaultValues.length] = newRow;
+                        newRow = new Option(selDeviation, selDeviation);
+                        toDeviations[toDeviations.length] = newRow;
+                        from.options[i] = null;
+                    }
+                }
+            }
+        }
+
+        function MoveToObj(){
+            var from = document.getElementById("SelectedDesires");
+            var toObj = document.getElementById("AllDesires");
+            var fromProbability = document.getElementById("Probabilities");
+            var fromDefaultValues = document.getElementById("DefaultValues");
+            var fromDeviations = document.getElementById("Deviations");
+            var selId = '';
+            var selText = '';
+            for (i = from.options.length - 1; i >= 0; i--){
+                if (from.options[i].selected == true){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    toObj.options[toObj.length] = newRow;
+                    fromProbability.options[i] = null;
+                    fromDefaultValues.options[i] = null;
+                    fromDeviations.options[i] = null;
+                    from.options[i] = null;
+                }
+            }
+        }
+
+        function SelAll(){
+            var sP = document.getElementById("Probabilities");
+            var sD = document.getElementById("SelectedDesires");
+            var sDv = document.getElementById("DefaultValues");
+            var sDev = document.getElementById("Deviations");
+            var i = 0;
+            for (i = sD.options.length - 1; i >= 0; i--){
+                sD.options[i].selected = true;
+            }
+            for (i = sP.options.length - 1; i >= 0; i--){
+                sP.options[i].selected = true;
+            }
+            for (i = sDv.options.length - 1; i >= 0; i--){
+                sDv.options[i].selected = true;
+            }
+            for (i = sDev.options.length - 1; i >= 0; i--){
+                sDev.options[i].selected = true;
+            }
+        }
+
+        function ValidateZeroProbability(){
+            var val = document.getElementById("OneProbability").value.toString();
+            var message = document.getElementById("MessageError1");
+            if (val.substring(0, 3) == "0.0" & Number(val) == 0){
+                message.value = "Введіть число від 0 до 1 !";
+                message.hidden = false;
+            }
+            else{
+                message.value = "";
+                message.hidden = true;
+            }
+        }
+        function ValidatePositive(field, message) {
+            if (field >= 0) {
+                message.value = "";
+                message.hidden = true;
+            }
+            else {
+                message.value = "Введіть число не менше 0 !";
+                message.hidden = false;
+            }
+        }
+    </script>
+}

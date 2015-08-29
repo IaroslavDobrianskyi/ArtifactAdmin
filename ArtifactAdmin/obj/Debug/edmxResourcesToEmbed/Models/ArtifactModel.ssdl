@@ -7,9 +7,9 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Step" Type="int" Nullable="false" />
     <Property Name="Text" Type="nchar" MaxLength="500" />
-    <Property Name="PredispositionResult" Type="float" />
+    <Property Name="PredispositionResult" Type="nvarchar" MaxLength="500" />
     <Property Name="ExperienceModifier" Type="float" />
-    <Property Name="Duration" Type="datetime" />
+    <Property Name="Duration" Type="bigint" />
     <Property Name="ActionChangeCost" Type="int" />
     <Property Name="ActionImprovementCost" Type="int" />
     <Property Name="Icon" Type="nchar" MaxLength="200" />
