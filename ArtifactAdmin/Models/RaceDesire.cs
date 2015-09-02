@@ -19,7 +19,7 @@ namespace ArtifactAdmin.DAL.Models
         public int DesireId { get; set; }
         public double Probability { get; set; }
         public int DefaultValue { get; set; }
-        public Nullable<int> Deviation { get; set; }
+        public Nullable<double> Deviation { get; set; }
     
         public virtual Desire Desire { get; set; }
         public virtual Race Race { get; set; }

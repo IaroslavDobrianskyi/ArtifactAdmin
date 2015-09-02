@@ -379,7 +379,7 @@
     <Property Name="DesireId" Type="int" Nullable="false" />
     <Property Name="Probability" Type="float" Nullable="false" />
     <Property Name="DefaultValue" Type="int" Nullable="false" />
-    <Property Name="Deviation" Type="int" />
+    <Property Name="Deviation" Type="float" />
   </EntityType>
   <EntityType Name="Settings">
     <Key>

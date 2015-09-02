@@ -73,7 +73,7 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, int[] selectedDesires, string[] probabilities, int[] defaultValues, int[] deviations)
+        public ActionResult Edit(int id, int[] selectedDesires, string[] probabilities, int[] defaultValues, string[] deviations)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;

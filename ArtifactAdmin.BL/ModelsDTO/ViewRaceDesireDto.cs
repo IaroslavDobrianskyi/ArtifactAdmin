@@ -25,20 +25,20 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Display(Name = "Бажання раси")]
         public virtual ICollection<RaceDesireDto> RaceDesires { get; set; }
 
-        [Display(Name="Всі бажання")]
+        [Display(Name = "Всі бажання")]
         public List<DesireDto> AllDesires { get; set; }
 
-        [Display(Name="Бажання")]
+        [Display(Name = "Бажання")]
         public List<DesireDto> SelectedDesires { get; set; }
 
-        [Display(Name="Ймовірності")]
+        [Display(Name = "Ймовірності")]
         public List<double> Probabilities { get; set; }
 
-        [Display(Name="Базові значення")]
+        [Display(Name = "Базові значення")]
         public List<int> DefaultValues { get; set; }
 
-        [Display(Name="Відхилення")]
-        public List<int> Deviations { get; set; }
+        [Display(Name = "Відхилення")]
+        public List<double> Deviations { get; set; }
 
         [Display(Name = "Введіть ймовірність")]
         [RegularExpression(@"0.\d+", ErrorMessage = "Введіть число від 0 до 1 !")]
@@ -48,6 +48,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public int DefaultValue { get; set; }
 
         [Display(Name = "Введіть  відхилення")]
-        public int Deviation { get; set; }
+        [RegularExpression(@"0.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
+        public string Deviation { get; set; }
     }
 }

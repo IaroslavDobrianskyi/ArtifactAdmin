@@ -10,6 +10,16 @@
     @Html.ActionLink("Новий запис", "Create")
 </p>
 <table id="StepTemplate" class="tablesorter">
+    <colgroup>
+        <col style="width: 200px" />
+        <col style="width: 200px" />
+        <col style="width: 200px" />
+        <col style="width: 200px"/>
+        <col style="width: 70px"/>
+        <col style="width: 70px"/>
+        <col style="width: 70px"/>
+        <col style="width: 70px" />
+    </colgroup>
     <thead>
     <tr>
         <th>
@@ -22,7 +32,13 @@
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model=>model.Desire1)
+            @Html.DisplayNameFor(model => model.Desire1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsNotVisibleInFlow)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.IsQuestStarter)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.StepObjectStepTemplates)
@@ -35,16 +51,22 @@
         {
             <tr>
                 <td>
-                    @Html.TextAreaFor(modelItem => item.Description, new { @readonly = true, rows = "1", cols = "50" })
+                    @Html.TextAreaFor(modelItem => item.Description, new { @readonly = true, rows = "1", cols = "40" })
                 </td>
                 <td>
-                    @Html.TextAreaFor(modelItem => item.StepText, new { @readonly = true, rows = "1", cols = "50" })
+                    @Html.TextAreaFor(modelItem => item.StepText, new { @readonly = true, rows = "1", cols = "40" })
                 </td>
                 <td>
-                    @Html.TextAreaFor(modelItem => item.Name, new { @readonly = true, rows = "1", cols = "50" })
+                    @Html.TextAreaFor(modelItem => item.Name, new { @readonly = true, rows = "1", cols = "40" })
                 </td>
                 <td>
-                    @Html.TextAreaFor(modelItem => item.Desire1.Name, new { @readonly = true, rows = "5", cols = "50" })
+                    @Html.TextAreaFor(modelItem => item.Desire1.Name, new {@readonly = true, rows = "5", cols = "40"})
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsNotVisibleInFlow)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem=>item.IsQuestStarter)
                 </td>
                 <td>
                     @if (item.StepObjectStepTemplates.Count == 0)
@@ -83,7 +105,7 @@
 @section ScriptsSortStepTemplate{
     <script type="text/javascript">
     $(document).ready(function () {
-        $("#StepTemplate").tablesorter({ headers:{4:{sorter:false},5:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
+        $("#StepTemplate").tablesorter({ headers:{6:{sorter:false},7:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
         .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
     });
     </script>

@@ -40,35 +40,50 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.StepTemplate.Desire1.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.StepTemplate.Desire1, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.DesireDto, new SelectList(Model.DesireDto, "Id", "Name"), "Виберіть бажання", new {@class = "form-control", onchange = "javascript:SelId(this,document.getElementById('StepTemplate_Desire'));"})
+            @Html.ValidationMessageFor(model => model.StepTemplate.Desire, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.StepTemplate.IsNotVisibleInFlow, htmlAttributes: new {@class = "control-label col-md-2"})
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.StepTemplate.IsNotVisibleInFlow, new {htmlAttributes = new {@class = "form-control", rows = "10", cols = "50"}})
+            @Html.ValidationMessageFor(model => model.StepTemplate.IsNotVisibleInFlow, "", new {@class = "text-danger"})
+        </div>
+    </div>
+
+    <div class="form-group">
+            @Html.LabelFor(model => model.StepTemplate.IsQuestStarter, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(m=>m.DesireDto, new SelectList(Model.DesireDto,"Id","Name"),"Виберіть бажання",
-                new { @class = "form-control",
-                      onchange = "javascript:SelId(this,document.getElementById('StepTemplate_Desire'));"} )
-                @Html.ValidationMessageFor(model => model.StepTemplate.Desire, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.StepTemplate.IsQuestStarter, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.StepTemplate.IsQuestStarter, "", new { @class = "text-danger" })
             </div>
         </div>
-        <table class="table">
+
+    <table class="table">
             <tr>
+            <td>
+                @Html.LabelFor(model => model.StepObject)<br />
+                @Html.ListBoxFor(model => model.StepObject, new MultiSelectList(Model.StepObject, "idObjType", Obj), new {size = 8, style = "width:250px"})
+            </td>
+
+            <td style="text-align: center">
+                @Html.LabelFor(model => model.StepObjectType)<br />
+                @Html.ListBoxFor(model => model.StepObjectType, new SelectList(Model.StepObjectType, "Id", "Name"), new {size = 4, onclick = "javascript:AddTypObj();"})
+        <span id="TypeMes" class="alert-warning"></span>
+        <br/>
+        <input type="button" id="add" value=">"
+               onclick="javascript: MoveObj(document.getElementById('StepObject'), document.getElementById('SelectedStepObject'));"/>
+        <br/>
+        <input type="button" id="rem" value="<"
+               onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('StepObject'));"/>
+    </td>
                 <td>
-@Html.ListBoxFor(model => model.StepObject, new MultiSelectList(Model.StepObject, "idObjType", Obj),
-         new { size = 8, style = "width:250px" })
-                </td>
-               
-                <td style="text-align:center">
-                    @Html.ListBoxFor(model => model.StepObjectType,
-              new SelectList(Model.StepObjectType, "Id", "Name"),
-     new { size = 4, onclick = "javascript:AddTypObj();" })
-                    <span id="TypeMes" class="alert-warning"></span>
-                    <br />
-                    <input type="button" id="add" value=">"
-                           onclick="javascript: MoveObj(document.getElementById('StepObject'),document.getElementById('SelectedStepObject'));" />
-                    <br />
-                    <input type="button" id="rem" value="<"
-                           onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('StepObject'));" />
-                </td>
-                <td>
+                    @Html.LabelFor(model => model.SelectedStepObject)<br />
                     @Html.ListBoxFor(model => model.SelectedStepObject, new MultiSelectList(Model.SelectedStepObject, "idObjType", Obj),
 new { size = 8, style = "width:250px" })
                     @*@Html.ValidationMessageFor(model => model.selectedStepObject, "", new { @class = "text-danger" })*@

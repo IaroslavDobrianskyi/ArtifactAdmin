@@ -12,8 +12,6 @@ namespace ArtifactAdmin.BL.Services
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
-    using System.Security.Policy;
-    using System.Web;
     using AutoMapper;
     using DAL.Models;
     using Interfaces;
@@ -48,14 +46,14 @@ namespace ArtifactAdmin.BL.Services
             viewRaceDesireDto.SelectedDesires = new List<DesireDto>();
             viewRaceDesireDto.Probabilities = new List<double>();
             viewRaceDesireDto.DefaultValues = new List<int>();
-            viewRaceDesireDto.Deviations = new List<int>();
+            viewRaceDesireDto.Deviations = new List<double>();
         if (countRaceDesires != 0)
             {
                 foreach (var desire in viewRaceDesireDto.RaceDesires)
                 {
                     viewRaceDesireDto.Probabilities.Add(desire.Probability);
                     viewRaceDesireDto.DefaultValues.Add(desire.DefaultValue);
-                    viewRaceDesireDto.Deviations.Add(Convert.ToInt32(desire.Deviation));
+                    viewRaceDesireDto.Deviations.Add(Convert.ToDouble(desire.Deviation));
                     var oneDesire =
                         viewRaceDesireDto.AllDesires.FirstOrDefault(allDesire => allDesire.Id == desire.DesireId);
                     viewRaceDesireDto.AllDesires.Remove(oneDesire);
@@ -65,11 +63,11 @@ namespace ArtifactAdmin.BL.Services
             
             viewRaceDesireDto.OneProbability = "0.25";
             viewRaceDesireDto.DefaultValue = 0;
-            viewRaceDesireDto.Deviation = 0;
+            viewRaceDesireDto.Deviation = "0.0";
             return viewRaceDesireDto;
         }
 
-        public void Update(int id, int[] selectedDesires, string[] probabilities, int[] defaultValues, int[] deviations)
+        public void Update(int id, int[] selectedDesires, string[] probabilities, int[] defaultValues, string[] deviations)
         {
             var oldRaceDesire = this.raceDesireRepository.GetAll()
                                                                          .Where(s => s.RaceId == id);
@@ -85,19 +83,19 @@ namespace ArtifactAdmin.BL.Services
             int selectedDesiresLength = selectedDesires.Length;
             for (int i = 0; i < selectedDesiresLength; i++)
             {
-                var idDesire = selectedDesires[i];
-                var desireUpdate = oldRaceDesire.FirstOrDefault(item => item.DesireId == idDesire);
+                var desireId = selectedDesires[i];
+                var desireUpdate = oldRaceDesire.FirstOrDefault(item => item.DesireId == desireId);
                 if (desireUpdate != null)
                 {
                     desireUpdate.Probability = Convert.ToDouble(probabilities[i]);
                     desireUpdate.DefaultValue = defaultValues[i];
-                    if (deviations[i] == 0)
+                    if (deviations[i] == "0")
                     {
                         desireUpdate.Deviation = null;
                     }
                     else
                     {
-                        desireUpdate.Deviation = deviations[i];
+                        desireUpdate.Deviation = Convert.ToDouble(deviations[i]);
                     }
 
                     this.raceDesireRepository.UpdateWithoutSave(desireUpdate);
@@ -108,9 +106,9 @@ namespace ArtifactAdmin.BL.Services
                                                                 {
                                                                     RaceId = id,
                                                                     DesireId = selectedDesires[i],
-                                                                    Deviation = deviations[i] == 0
-                                                                                                ? (int?)null
-                                                                                                : deviations[i],
+                                                                    Deviation = deviations[i] == "0.0"
+                                                                                                ? (double?)null
+                                                                                                : Convert.ToDouble(deviations[i]),
                                                                                Probability =
                                                                                    Convert.ToDouble(probabilities[i]),
                                                                                DefaultValue = defaultValues[i],

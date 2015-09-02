@@ -35,10 +35,22 @@
             @Html.TextAreaFor(model => model.Name, new { rows = "5", cols = "50", @readonly = true })
         </dd>
         <dt>
-            @Html.DisplayNameFor(model=>model.Desire1.Name)
+            @Html.DisplayNameFor(model=>model.Desire1)
         </dt>
         <dd>
-            @Html.TextAreaFor(model => model.Desire1.Name, new { rows = "5", cols = "50", @readonly = true })
+            @Html.TextAreaFor(model => model.Desire1.Name, new {rows = "5", cols = "50", @readonly = true})
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsNotVisibleInFlow)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsNotVisibleInFlow)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsQuestStarter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IsQuestStarter)
         </dd>
     </dl>
 

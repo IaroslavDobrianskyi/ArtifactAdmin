@@ -15,18 +15,18 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Characreristics)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CharacteristicsLevelModifier)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Predisposition)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Properties)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Icon)
             </th>
@@ -40,18 +40,18 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Characreristics)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.CharacteristicsLevelModifier)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Predisposition)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Properties)
-                </td>
+                </td>*@
                 <td>
                     <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath+"Races/"+@item.Icon)" id="icon" width=" 160 " height=" 120">
                 </td>
@@ -83,7 +83,7 @@
 @section ScriptsSortRace{
     <script type="text/javascript">
     $(document).ready(function () {
-        $("#Race").tablesorter({ headers:{5:{sorter:false},6:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
+        $("#Race").tablesorter({ headers:{2:{sorter:false},3:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
         .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
     });
     </script>

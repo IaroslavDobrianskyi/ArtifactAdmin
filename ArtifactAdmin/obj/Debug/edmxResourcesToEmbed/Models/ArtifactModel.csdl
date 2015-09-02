@@ -337,7 +337,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Step" Type="Int32" Nullable="false" />
     <Property Name="Text" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
-    <Property Name="PredispositionResult" Type="String" MaxLength="500" />
+    <Property Name="PredispositionResult" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
     <Property Name="ExperienceModifier" Type="Double" />
     <Property Name="Duration" Type="Int64" />
     <Property Name="ActionChangeCost" Type="Int32" />
@@ -751,7 +751,7 @@
     <Property Name="DesireId" Type="Int32" Nullable="false" />
     <Property Name="Probability" Type="Double" Nullable="false" />
     <Property Name="DefaultValue" Type="Int32" Nullable="false" />
-    <Property Name="Deviation" Type="Int32" />
+    <Property Name="Deviation" Type="Double" />
     <NavigationProperty Name="Desire" Relationship="artModel.FK_RaceDesire_Desire" FromRole="RaceDesire" ToRole="Desire" />
     <NavigationProperty Name="Race" Relationship="artModel.FK_RaceDesire_Race" FromRole="RaceDesire" ToRole="Race" />
   </EntityType>

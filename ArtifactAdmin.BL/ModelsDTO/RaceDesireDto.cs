@@ -22,7 +22,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
         public int DefaultValue { get; set; }
 
-        public int? Deviation { get; set; }
+        public double? Deviation { get; set; }
 
         public virtual DesireDto Desire { get; set; }
 

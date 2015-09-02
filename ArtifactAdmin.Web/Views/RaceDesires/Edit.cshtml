@@ -52,7 +52,7 @@
                         @Html.ValidationMessageFor(model => model.DefaultValue, "", new { @class = "text-danger" })
                         <input type="text" class="text-danger" id="MessageError2" value="" style="width: 100%" hidden>
                         @Html.LabelFor(model => model.Deviation, new { @class = "control-label col-md-2" })<br />
-                        @Html.EditorFor(model => model.Deviation, new { htmlAttributes = new { @class = "form-control", onchange = "ValidatePositive(this.value,document.getElementById('MessageError3'))" } })<br />
+                        @Html.EditorFor(model => model.Deviation, new { htmlAttributes = new { @class = "form-control" } })<br />
                         @Html.ValidationMessageFor(model => model.Deviation, "", new { @class = "text-danger" })
                         <input type="text" class="text-danger" id="MessageError3" value="" style="width: 100%" hidden>
                     </td>
@@ -130,7 +130,8 @@
             var selDefaultValue = document.getElementById("DefaultValue").value;
             var selDeviation = document.getElementById("Deviation").value;
             var validateProbability = Number(selProbability);
-            if (validateProbability > 0 & validateProbability < 1 & selDefaultValue >= 0 & selDeviation >= 0){
+            var validateDeviation = Number(selDeviation); 
+            if (validateProbability > 0 & validateProbability < 1 & selDefaultValue >= 0 & validateDeviation >= 0 & validateDeviation<1) {
                 for (i = from.options.length - 1; i >= 0; i--){
                     if (from.options[i].selected == true){
                         selID = from.options[i].value;

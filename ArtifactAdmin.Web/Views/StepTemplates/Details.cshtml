@@ -35,10 +35,22 @@
             @Html.TextAreaFor(model => model.StepTemplate.Name, new { rows = "5", cols = "50", @readonly = true })
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.StepTemplate.Desire1.Name)
+            @Html.DisplayNameFor(model => model.StepTemplate.Desire1)
         </dt>
         <dd>
-            @Html.TextAreaFor(model => model.StepTemplate.Desire1.Name, new { rows = "5", cols = "50", @readonly = true })
+            @Html.TextAreaFor(model => model.StepTemplate.Desire1.Name, new {rows = "5", cols = "50", @readonly = true})
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StepTemplate.IsNotVisibleInFlow)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StepTemplate.IsNotVisibleInFlow)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StepTemplate.IsQuestStarter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StepTemplate.IsQuestStarter)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.StepTemplate.StepObjectStepTemplates)

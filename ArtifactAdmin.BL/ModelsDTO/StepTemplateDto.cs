@@ -40,7 +40,14 @@ namespace ArtifactAdmin.BL.ModelsDTO
     ErrorMessageResourceType = typeof(ValidationStrings))]
 
         public string Name { get; set; }
-        
+
+        [Display(Name = "Ключовий крок")]
+        public bool IsNotVisibleInFlow { get; set; }
+
+
+        [Display(Name = "Крок починає місію")]
+        public bool IsQuestStarter { get; set; }
+
         [Display(Name = "Об'єкти кроку")]
         public virtual ICollection<StepObjectStepTemplateDto> StepObjectStepTemplates { get; set; }
 

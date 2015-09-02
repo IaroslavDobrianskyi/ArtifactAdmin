@@ -29,7 +29,7 @@ namespace ArtifactAdmin.BL.Utils
                 int lengthSpecificValue = specificValue.Length;
                 if (lengthSpecificValue < 50)
                 {
-                    specificValue += new String(' ', 50 - lengthSpecificValue);
+                    specificValue += new string(' ', 50 - lengthSpecificValue);
                 }
 
                 int value;

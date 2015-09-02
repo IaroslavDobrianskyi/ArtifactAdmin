@@ -18,7 +18,7 @@ namespace ArtifactAdmin.BL.Interfaces
 
         ViewRaceDesireDto GetViewById(int? id);
 
-        void Update(int id, int[] selectedDesires, string[] probabilities, int[] defaultValues, int[] deviations);
+        void Update(int id, int[] selectedDesires, string[] probabilities, int[] defaultValues, string[] deviations);
 
         void Delete(int? id);
     }
