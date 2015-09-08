@@ -190,5 +190,55 @@ namespace ArtifactAdmin.Web.Controllers
             FileHelper.DeleteIcon(fileName, "Desires");
             return RedirectToAction("Index");
         }
+        // GET: Desires/Modifier/5
+        public ActionResult Modifier(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var desireDto = this.desireService.GetByIdMapZone(Convert.ToInt32(id));
+            if (desireDto == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Name = "Бажання";
+            ViewBag.ItemName = "MapZone1.ZoneName";
+            ViewBag.SelectedItem = "Зони карти";
+            return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Modifier([Bind(Include = "ItemId,ItemName")] ViewDesireMapZoneDto desire, int[] listDesireMapZone, double[] modifiers)
+        {
+            ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
+            ViewBag.Name = "Бажання";
+            ViewBag.ItemName = "MapZone1.ZoneName";
+            ViewBag.SelectedItem = "Зони карти";
+            var desireDto = new DesireDto();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.desireService.UpdateDesireMapZone(desire.ItemId, listDesireMapZone, modifiers);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
+                    desireDto = this.desireService.GetByIdMapZone(desire.ItemId);
+                    return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            desireDto = this.desireService.GetByIdMapZone(desire.ItemId);
+            return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+        }
     }
 }

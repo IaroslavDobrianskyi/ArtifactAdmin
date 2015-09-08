@@ -385,6 +385,7 @@
     <Content Include="Views\RaceDesires\Details.cshtml" />
     <Content Include="Views\RaceDesires\Edit.cshtml" />
     <Content Include="Views\RaceDesires\Index.cshtml" />
+    <Content Include="Views\Shared\ViewDesireMapZone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

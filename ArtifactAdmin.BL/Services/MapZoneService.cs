@@ -22,14 +22,20 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRepository<MapZone> mapZoneRepository;
         private readonly IRepository<MapObject> mapObjectRepository;
         private readonly IRepository<MapObjectProbability> mapObjectProbabilityRepository;
+        private readonly IRepository<Desire> desireRepository;
+        private readonly IRepository<DesireMapZone> desireMapZoneRepository;
 
         public MapZoneService(IRepository<MapZone> mapZoneRepository,
             IRepository<MapObject> mapObjectRepository,
-            IRepository<MapObjectProbability> mapObjectProbabilityRepository) 
+            IRepository<MapObjectProbability> mapObjectProbabilityRepository,
+            IRepository<Desire> desireRepository,
+            IRepository<DesireMapZone> desireMapZoneRepository) 
         {
             this.mapZoneRepository = mapZoneRepository;
             this.mapObjectRepository = mapObjectRepository;
             this.mapObjectProbabilityRepository = mapObjectProbabilityRepository;
+            this.desireMapZoneRepository = desireMapZoneRepository;
+            this.desireRepository = desireRepository;
         }
 
         public IEnumerable<MapZoneDto> GetAll()
@@ -41,6 +47,25 @@ namespace ArtifactAdmin.BL.Services
         {
             return Mapper.Map<MapZoneDto>(this.mapZoneRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
+
+        public MapZoneDto GetByIdDesire(int id)
+        {
+            var mapZoneDto = Mapper.Map<MapZoneDto>(this.mapZoneRepository.GetAll().FirstOrDefault(s => s.Id == id));
+            mapZoneDto.ViewDesireMapZoneDto = new ViewDesireMapZoneDto();
+            mapZoneDto.ViewDesireMapZoneDto.ItemId = id;
+            mapZoneDto.ViewDesireMapZoneDto.ItemName = mapZoneDto.ZoneName;
+            mapZoneDto.ViewDesireMapZoneDto.ListDesireMapZone = this.desireMapZoneRepository.GetAll()
+                                                                    .Where(s => s.MapZone == id)
+                                                                    .ToList();
+            mapZoneDto.ViewDesireMapZoneDto.Modifiers = new List<double>();
+            foreach (var desire in mapZoneDto.ViewDesireMapZoneDto.ListDesireMapZone)
+            {
+                mapZoneDto.ViewDesireMapZoneDto.Modifiers.Add(desire.Modifier);
+            }
+
+            mapZoneDto.ViewDesireMapZoneDto.OneModifier = "0.5";
+            return mapZoneDto;
+        } 
 
         public ViewMapZoneDto GetViewById(int? id)
         {
@@ -93,6 +118,7 @@ namespace ArtifactAdmin.BL.Services
         {
             var mapZone = Mapper.Map<MapZone>(mapZoneDto);
             this.mapZoneRepository.InsertWithoutSave(mapZone);
+            CreateDesireMapZoneForMap(mapZone);
             if (obj != null) 
             {
                 CreateMapObjectProbability(mapZone, obj, probability);
@@ -100,6 +126,20 @@ namespace ArtifactAdmin.BL.Services
 
             this.mapZoneRepository.SaveChanges();
             return Mapper.Map<MapZoneDto>(mapZone);
+        }
+
+        public void CreateDesireMapZoneForMap(MapZone mapZone)
+        {
+            var listDesires = this.desireRepository.GetAll().ToList();
+            foreach (var desire in listDesires)
+            {
+                this.desireMapZoneRepository.InsertWithoutSave(new DesireMapZone
+                                                               {
+                                                                   Desire = desire.Id,
+                                                                   MapZone = mapZone.Id,
+                                                                   Modifier = 0.5
+                                                               });
+            }
         }
 
         public void CreateMapObjectProbability(MapZone mapZone, string[] obj, string[] probability)
@@ -144,6 +184,27 @@ namespace ArtifactAdmin.BL.Services
             {
                 this.mapObjectProbabilityRepository.DeleteWithOutSave(obj);
             }
+        }
+
+        public void UpdateDesireMapZone(int id, int[] desireMapZoneId, double[] modifiers)
+        {
+            var desireMapZone = this.desireMapZoneRepository.GetAll()
+                                    .Where(s => s.MapZone == id)
+                                    .ToList();
+            var lengthModifiers = modifiers.Length;
+            for (var i = 0; i < lengthModifiers; i++)
+            {
+                foreach (var desire in desireMapZone)
+                {
+                    if (desire.Id == desireMapZoneId[i])
+                    {
+                        desire.Modifier = modifiers[i];
+                        this.desireMapZoneRepository.UpdateWithoutSave(desire);
+                    }
+                }
+            }
+
+            this.desireMapZoneRepository.SaveChanges();
         }
 
         public void Delete(int? id)

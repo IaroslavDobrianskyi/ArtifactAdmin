@@ -45,7 +45,8 @@
             <td>
                 @Html.ActionLink("Змінити", "Edit", new {id = item.Id}) |
                 @Html.ActionLink("Детально", "Details", new {id = item.Id}) |
-                @Html.ActionLink("Видалити", "Delete", new {id = item.Id})
+                @Html.ActionLink("Видалити", "Delete", new {id = item.Id})|
+                @Html.ActionLink("Модифікатор", "Modifier", new { id = item.Id })
             </td>
         </tr>
     }

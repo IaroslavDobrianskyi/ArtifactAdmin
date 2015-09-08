@@ -19,9 +19,13 @@ namespace ArtifactAdmin.BL.Interfaces
 
         DesireDto GetById(int? id);
 
+        DesireDto GetByIdMapZone(int id);
+
         DesireDto Create(DesireDto desireDto, string fileName);
 
         DesireDto Update(DesireDto desireDto, string fileName);
+
+        void UpdateDesireMapZone(int id, int[] desireMapZoneId, double[] modifiers);
 
         void Delete(int? id);
     }

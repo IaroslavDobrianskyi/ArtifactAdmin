@@ -170,5 +170,55 @@ namespace ArtifactAdmin.Web.Controllers
 
             return RedirectToAction("Index");
         }
+        // GET: Desires/Modifier/5
+        public ActionResult Modifier(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var desireDto = this.mapZoneService.GetByIdDesire(Convert.ToInt32(id));
+            if (desireDto == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Name = "Зона карти";
+            ViewBag.ItemName = "Desire1.Name";
+            ViewBag.SelectedItem = "Бажання";
+            return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Modifier([Bind(Include = "ItemId,ItemName")] ViewDesireMapZoneDto desire, int[] listDesireMapZone, double[] modifiers)
+        {
+            ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
+            ViewBag.Name = "Зона карти";
+            ViewBag.ItemName = "Desire1.Name";
+            ViewBag.SelectedItem = "Бажання";
+            var desireDto = new MapZoneDto();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.mapZoneService.UpdateDesireMapZone(desire.ItemId, listDesireMapZone, modifiers);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
+                    desireDto = this.mapZoneService.GetByIdDesire(desire.ItemId);
+                    return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            desireDto = this.mapZoneService.GetByIdDesire(desire.ItemId);
+            return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+        }
     }
 }

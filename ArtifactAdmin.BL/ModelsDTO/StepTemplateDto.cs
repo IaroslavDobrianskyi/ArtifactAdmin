@@ -44,7 +44,6 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Display(Name = "Ключовий крок")]
         public bool IsNotVisibleInFlow { get; set; }
 
-
         [Display(Name = "Крок починає місію")]
         public bool IsQuestStarter { get; set; }
 

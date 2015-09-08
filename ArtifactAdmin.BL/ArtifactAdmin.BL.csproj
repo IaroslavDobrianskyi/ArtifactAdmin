@@ -146,6 +146,7 @@
     <Compile Include="ModelsDTO\RaceDesireDto.cs" />
     <Compile Include="ModelsDTO\FlowItems\StepDto.cs" />
     <Compile Include="ModelsDTO\ViewCharacteristic.cs" />
+    <Compile Include="ModelsDTO\ViewDesireMapZoneDto.cs" />
     <Compile Include="ModelsDTO\ViewRaceDesireDto.cs" />
     <Compile Include="ModelsDTO\ViewValueCharacteristic.cs" />
     <Compile Include="Services\CharacteristicService.cs" />

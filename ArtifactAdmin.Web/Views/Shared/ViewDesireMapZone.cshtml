@@ -1,0 +1,105 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.ViewDesireMapZoneDto
+
+<h2>Змінити модифікатори</h2>
+
+@using (Html.BeginForm())
+{
+   @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ItemId)
+        <div class="form-group">
+            <label for="model.ItemName">@ViewBag.Name</label>
+            @Html.DisplayFor(model => model.ItemName)
+        </div>
+        <table class="table">
+            <colgroup>
+                <col style="width: 200px" />
+                <col style="width: 200px"/>
+                <col style="width: 100px"/>
+                <col style="width: 300px"/>
+            </colgroup>
+            <tr>
+            <td>
+                <label for="model.ListDesireMapZonee">@ViewBag.SelectedItem</label><br />
+                @Html.ListBoxFor(model => model.ListDesireMapZone, new MultiSelectList(Model.ListDesireMapZone, "Id", @ViewBag.ItemName), new { size = 8, style = "width:200px"} )
+            </td>
+                <td>
+                    @Html.LabelFor(model => model.OneModifier, new {@class = "control-label col-md-2"})<br/>
+                    @Html.EditorFor(model => model.OneModifier, new {htmlAttributes = new {@class = "form-control"}})<br/>
+                    @Html.ValidationMessageFor(model => model.OneModifier, "", new {@class = "text-danger"})
+                </td>
+    <td style="text-align: center">
+        <input type="button" id="add" value=">" onclick="javascript: MoveToSel();"/>
+    </td>
+    <td>
+        <label for="model.ListDesireMapZonee">@ViewBag.SelectedItem</label><br />
+        @Html.ListBoxFor(model => model.ListDesireMapZone, new MultiSelectList(Model.ListDesireMapZone, "Id", @ViewBag.ItemName), new { id="SelectDesireMapZone",size = 8, style = "width:200px" })
+        @Html.ListBoxFor(model => model.Modifiers, new MultiSelectList(Model.Modifiers), new { size = 8, style = "width:100px" })
+    </td>
+            </tr>
+        </table>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll()" />
+            </div>
+        </div>
+    </div>
+}
+        <div>
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function MoveToSel(){
+            var from = document.getElementById("ListDesireMapZone");
+            var to = document.getElementById("SelectDesireMapZone");
+            var toModifier = document.getElementById("Modifiers");
+            var newModifier = document.getElementById("OneModifier").value.toString();
+            var validateModifier = Number(newModifier);
+            var selId = '';
+            var selText = '';
+            var flagUpdate = false;
+            if (validateModifier >= 0 & validateModifier < 1){
+                for (i = from.options.length - 1; i >= 0; i--){
+                    if (from.options[i].selected == true){
+                        flagUpdate = true;
+                        selId = from.options[i].value;
+                        selText = from.options[i].text;
+                        var newRow = new Option(selText, selId);
+                        to.options[i] = null;
+                        to.options[to.length] = newRow;
+                        toModifier.options[i] = null;
+                        newRow = new Option(newModifier, newModifier);
+                        toModifier.options[toModifier.length] = newRow;
+                        from.options[i] = null;
+                    }
+                }
+                if (flagUpdate){
+                    for (i = from.options.length; i >=0 ; i--){
+                        from.options[i] = null;
+                    }
+                    for (i = 0; i < to.options.length; i++){
+                        selId = to.options[i].value;
+                        selText = to.options[i].text;
+                        newRow = new Option(selText, selId);
+                        from.options[from.length] = newRow;
+                    }
+                }
+            }
+        }
+
+        function SelAll(){
+            var SP = document.getElementById("Modifiers");
+            var SO = document.getElementById("SelectDesireMapZone");
+            for (i = SO.options.length - 1; i >= 0; i--){
+                SO.options[i].selected = true;
+            }
+            for (i = SP.options.length - 1; i >= 0; i--){
+                SP.options[i].selected = true;
+            }
+        }
+    </script>
+}
