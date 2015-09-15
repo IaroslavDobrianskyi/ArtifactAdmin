@@ -10,45 +10,66 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+    string selQuest = Model.QuestTemplate.ToString();
+    string sel = "";
+    if(selQuest == "")
+    {
+        sel = "Виберіть шаблон квесту";
+    }
     <div class="form-horizontal">
         <h4>Шаблон дії.Результат</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-
+        @Html.HiddenFor(model => model.PredispositionResultModifier)
+        @Html.HiddenFor(model => model.ExperienceModifier)
+        @Html.HiddenFor(model => model.ArtifactPosibility)
+        @Html.HiddenFor(model => model.GoldModifier)
+        @Html.HiddenFor(model => model.QuestTemplate)
         <div class="form-group">
-            @Html.LabelFor(model => model.PredispositionResultModifier, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Predisposition, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PredispositionResultModifier, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PredispositionResultModifier, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Predisposition, new { htmlAttributes = new { @class = "form-control", onchange = @"javascript:FillHidden(this,document.getElementById('PredispositionResultModifier'));" } })
+                @Html.ValidationMessageFor(model => model.Predisposition, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ExperienceModifier, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Experience, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExperienceModifier, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExperienceModifier, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Experience, new { htmlAttributes = new { @class = "form-control", onchange = @"javascript:FillHidden(this,document.getElementById('ExperienceModifier'));" } })
+                @Html.ValidationMessageFor(model => model.Experience, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ArtifactPosibility, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Posibility, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ArtifactPosibility, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ArtifactPosibility, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Posibility, new { htmlAttributes = new { @class = "form-control", onchange = @"javascript:FillHidden(this,document.getElementById('ArtifactPosibility'));" } })
+                @Html.ValidationMessageFor(model => model. Posibility, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.GoldModifier, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Gold, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.GoldModifier, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GoldModifier, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Gold, new { htmlAttributes = new { @class = "form-control", onchange = @"javascript:FillHidden(this,document.getElementById('GoldModifier'));" } })
+                @Html.ValidationMessageFor(model => model.Gold, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.QuestTemplate1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @if (Model.ListQuestTemplates==null)
+                {
+                    <span>---</span>
+                }
+                else
+                { 
+                @Html.DropDownListFor(m => m.ListQuestTemplates, new SelectList(Model.ListQuestTemplates, "Id", "Name", selQuest), sel, new {@class = "form-control", onchange = @"javascript:SelId(this,document.getElementById('QuestTemplate'));"})
+                }
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Записати" class="btn btn-default" />
@@ -63,4 +84,20 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+        function SelId(Sel, HiddenId){
+            var SelId = "";
+            for (i = 0; i < Sel.options.length; i++){
+                if (Sel.options[i].selected == true){
+                    SelId = Sel.options[i].value;
+                    HiddenId.value = Number(SelId);
+                    break;
+                }
+            }
+        }
+
+        function FillHidden(fill, hidden){
+            hidden.value = Number(fill.value);
+        }
+</script>
 }

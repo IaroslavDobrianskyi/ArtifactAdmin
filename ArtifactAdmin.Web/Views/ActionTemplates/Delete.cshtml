@@ -11,15 +11,15 @@
     <h4>Шаблон дії</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
+        <dt style="width: 200px; text-align: left">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
 
         <dd>
-            @Html.TextAreaFor(model => model.Name, new { rows = "10", cols = "50", @readonly = true })
+            @Html.TextAreaFor(model => model.Name, new {rows = "10", cols = "50", @readonly = true})
         </dd>
 
-        <dt>
+        <dt style="width: 200px; text-align: left">
             @Html.DisplayNameFor(model => model.BlockProbability)
         </dt>
 
@@ -27,13 +27,38 @@
             @Html.DisplayFor(model => model.BlockProbability)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ActionTemplateResult1.ArtifactPosibility)
+        <dt style="width: 200px; text-align: left">
+            @Html.DisplayNameFor(model => model.ActionTemplateResult1.PredispositionResultModifier)
         </dt>
 
         <dd>
+            @Html.DisplayFor(model => model.ActionTemplateResult1.PredispositionResultModifier)
+        </dd>
+        <dt style="width: 200px; text-align: left">
+            @Html.DisplayNameFor(model => model.ActionTemplateResult1.ExperienceModifier)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActionTemplateResult1.ExperienceModifier)
+        </dd>
+        <dt style="width: 200px; text-align: left">
+            @Html.DisplayNameFor(model => model.ActionTemplateResult1.ArtifactPosibility)
+        </dt>
+        <dd>
             @Html.DisplayFor(model => model.ActionTemplateResult1.ArtifactPosibility)
         </dd>
+        <dt style="width: 200px; text-align: left">
+            @Html.DisplayNameFor(model => model.ActionTemplateResult1.GoldModifier)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActionTemplateResult1.GoldModifier)
+        </dd>
+        <dt style="width: 200px; text-align: left">
+            @Html.DisplayNameFor(model => model.ActionTemplateResult1.QuestTemplate1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ActionTemplateResult1.QuestTemplate1.Name)
+        </dd>
+
     </dl>
 
     @using (Html.BeginForm()) {

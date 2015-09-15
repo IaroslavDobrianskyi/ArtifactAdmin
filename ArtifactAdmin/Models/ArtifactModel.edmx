@@ -118,7 +118,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PredispositionResultModifier" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PredispositionResultModifier" Type="float" Nullable="false" />
           <Property Name="ExperienceModifier" Type="float" Nullable="false" />
           <Property Name="ArtifactPosibility" Type="float" Nullable="false" />
           <Property Name="GoldModifier" Type="float" Nullable="false" />
@@ -284,7 +284,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="MapObjectProbability">
@@ -1974,7 +1974,7 @@
             <End Role="QuestTemplate" EntitySet="QuestTemplates" />
             <End Role="Quest" EntitySet="Quests" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Action">
           <Key>
             <PropertyRef Name="Id" />
@@ -2121,7 +2121,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PredispositionResultModifier" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="PredispositionResultModifier" Type="Double" Nullable="false" />
           <Property Name="ExperienceModifier" Type="Double" Nullable="false" />
           <Property Name="ArtifactPosibility" Type="Double" Nullable="false" />
           <Property Name="GoldModifier" Type="Double" Nullable="false" />
@@ -3429,7 +3429,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

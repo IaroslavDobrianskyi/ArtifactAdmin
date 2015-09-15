@@ -30,12 +30,22 @@ namespace ArtifactAdmin.BL.ModelsDTO
   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Name { get; set; }
 
+        [Required(ErrorMessageResourceName = "RequiredLevel",
+            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+        [Display(Name = "Максимальний рівень")]
+        [Range(0, int.MaxValue, ErrorMessage = "Введіть додатнє число!")]
         public int MaxLevel { get; set; }
 
+        [Display(Name = "Модифікатор")]
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
         public double Modifier { get; set; }
 
+        [Display(Name = "Базове значення")]
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
         public double BaseValue { get; set; }
 
+        [Display(Name = "Базовий модифікатор")]
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
         public double BaseModifier { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredIcon",

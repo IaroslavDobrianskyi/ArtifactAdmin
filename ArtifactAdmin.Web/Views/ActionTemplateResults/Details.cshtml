@@ -1,10 +1,10 @@
-﻿@model ArtifactAdmin.DAL.Models.ActionTemplateResult
+﻿@model ArtifactAdmin.BL.ModelsDTO.ActionTemplateResultDto
 
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>>Детально</h2>
+<h2>Детально</h2>
 
 <div>
     <h4>Шаблон дії.Результат</h4>
@@ -41,7 +41,12 @@
         <dd>
             @Html.DisplayFor(model => model.GoldModifier)
         </dd>
-
+        <dt>
+            @Html.DisplayNameFor(model => model.QuestTemplate1)
+        </dt>
+        <dd>
+            @Html.TextAreaFor(model => model.QuestTemplate1.Name, new { @readonly = true, rows = "5", cols = "40" })
+        </dd>
     </dl>
 </div>
 <p>

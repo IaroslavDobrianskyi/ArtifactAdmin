@@ -93,6 +93,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<RaceDesire, RaceDesireDto>();
             Mapper.CreateMap<RaceDesireDto, RaceDesire>();
+
+            Mapper.CreateMap<QuestTemplate, QuestTemplateDto>();
+            Mapper.CreateMap<QuestTemplateDto, QuestTemplate>();
         } 
     }
 }

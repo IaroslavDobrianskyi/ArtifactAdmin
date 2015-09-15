@@ -143,6 +143,7 @@
     <Compile Include="ModelsDTO\FlowItems\FlowStep.cs" />
     <Compile Include="ModelsDTO\PredispositionDto.cs" />
     <Compile Include="ModelsDTO\PropertyDto.cs" />
+    <Compile Include="ModelsDTO\QuestTemplateDto.cs" />
     <Compile Include="ModelsDTO\RaceDesireDto.cs" />
     <Compile Include="ModelsDTO\FlowItems\StepDto.cs" />
     <Compile Include="ModelsDTO\ViewCharacteristic.cs" />

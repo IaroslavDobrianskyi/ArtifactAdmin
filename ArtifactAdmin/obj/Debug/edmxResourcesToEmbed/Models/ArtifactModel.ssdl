@@ -113,7 +113,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="PredispositionResultModifier" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="PredispositionResultModifier" Type="float" Nullable="false" />
     <Property Name="ExperienceModifier" Type="float" Nullable="false" />
     <Property Name="ArtifactPosibility" Type="float" Nullable="false" />
     <Property Name="GoldModifier" Type="float" Nullable="false" />
@@ -279,7 +279,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="MapObjectProbability">

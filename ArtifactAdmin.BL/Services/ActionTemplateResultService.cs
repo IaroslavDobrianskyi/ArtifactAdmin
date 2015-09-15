@@ -21,12 +21,13 @@ namespace ArtifactAdmin.BL.Services
     {
         private readonly IRepository<ActionTemplateResult> actionTemplateResultRepository;
         private readonly IRepository<ActionTemplate> actionTemplateRepository;
+        private readonly IRepository<QuestTemplate> questTemplateRepository; 
 
-        public ActionTemplateResultService(IRepository<ActionTemplateResult> actionTemplateResultRepository,
-            IRepository<ActionTemplate> actionTemplateRepository) 
+        public ActionTemplateResultService(IRepository<ActionTemplateResult> actionTemplateResultRepository, IRepository<ActionTemplate> actionTemplateRepository, IRepository<QuestTemplate> questTemplateRepository) 
         {
             this.actionTemplateResultRepository = actionTemplateResultRepository;
             this.actionTemplateRepository = actionTemplateRepository;
+            this.questTemplateRepository = questTemplateRepository;
         }
 
         public IEnumerable<ActionTemplateResultDto> GetAll()
@@ -37,6 +38,31 @@ namespace ArtifactAdmin.BL.Services
         public ActionTemplateResultDto GetById(int? id)
         {
             return Mapper.Map<ActionTemplateResultDto>(this.actionTemplateResultRepository.GetAll().FirstOrDefault(s => s.Id == id));
+        }
+
+        public ActionTemplateResultDto GetViewById(int? id)
+        {
+            var actionTemplateResultDto = new ActionTemplateResultDto();
+            actionTemplateResultDto.ListQuestTemplates =
+                Mapper.Map<List<QuestTemplateDto>>(this.questTemplateRepository.GetAll()
+                                                 .AsNoTracking().ToList());
+            if (id != null)
+            { 
+            actionTemplateResultDto = Mapper.Map<ActionTemplateResultDto>(this.actionTemplateResultRepository.GetAll().FirstOrDefault(s => s.Id == id));
+            actionTemplateResultDto.Predisposition = actionTemplateResultDto.PredispositionResultModifier.ToString();
+            actionTemplateResultDto.Experience = actionTemplateResultDto.ExperienceModifier.ToString();
+            actionTemplateResultDto.Posibility = actionTemplateResultDto.ArtifactPosibility.ToString();
+            actionTemplateResultDto.Gold = actionTemplateResultDto.GoldModifier.ToString();
+            }
+            else
+            { 
+            actionTemplateResultDto.Predisposition = "0.5";
+            actionTemplateResultDto.Experience = "0.5";
+            actionTemplateResultDto.Posibility = "0.5";
+            actionTemplateResultDto.Gold = "0.5";
+            }
+            
+            return actionTemplateResultDto;
         }
 
         public ActionTemplateResultDto Create(ActionTemplateResultDto actionTemplateResultDto)

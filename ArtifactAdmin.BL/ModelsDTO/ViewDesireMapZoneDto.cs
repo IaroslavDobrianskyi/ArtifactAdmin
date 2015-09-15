@@ -24,7 +24,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public List<double> Modifiers { get; set; }
 
         [Display(Name = "Введіть швидкість зростання бажання")]
-        [RegularExpression(@"0.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
         public string OneModifier { get; set; }
     }
 }

@@ -18,6 +18,8 @@ namespace ArtifactAdmin.BL.Interfaces
 
         ActionTemplateResultDto GetById(int? id);
 
+        ActionTemplateResultDto GetViewById(int? id);
+
         ActionTemplateResultDto Create(ActionTemplateResultDto actionTemplateResultDto);
 
         ActionTemplateResultDto Update(ActionTemplateResultDto actionTemplateResultDto);

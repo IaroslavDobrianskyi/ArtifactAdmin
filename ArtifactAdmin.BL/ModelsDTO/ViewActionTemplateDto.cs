@@ -17,9 +17,11 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public ActionTemplateDto ActionTemplateDto { get; set; }
 
         public List<ActionTemplateResultDto> ActionTemplateResults { get; set; }
-       
+
         [Display(Name = "Введіть ймовірність")]
-        [RegularExpression(@"0.\d+", ErrorMessage = "Введіть число від 0 до 1 !")]
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
         public string OneProbability { get; set; }
+
+        public string NameResult { get; set; }
     }
 }

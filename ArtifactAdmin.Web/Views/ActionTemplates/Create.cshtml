@@ -33,16 +33,46 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ActionTemplateDto.ActionTemplateResult1.ArtifactPosibility, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="ActionTemplateDto_ActionTemplateResult1">Виберіть результат дії:</label>
             <div class="col-md-10">
-                @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ArtifactPosibility"), "Виберіть результат",
-                new
-                {
-                    @class = "form-control",
-                    onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"
-                })
-                @*@Html.ValidationMessageFor(model => model.ActionTemplateDto, "", new { @class = "text-danger" })*@
-                @Html.ValidationMessageFor(model => model.ActionTemplateDto.ActionTemplateResult, "", new { @class = "text-danger" })
+                <table>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.PredispositionResultModifier)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.ExperienceModifier)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.ArtifactPosibility)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.GoldModifier)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.QuestTemplate1)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "PredispositionResultModifier"), new {@class = "form-control", id="item1",size = 8, onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ExperienceModifier"), new { @class = "form-control", size = 8, id = "item2", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ArtifactPosibility"), new { @class = "form-control", size = 8, id = "item3", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "GoldModifier"), new { @class = "form-control", size = 8, id = "item4", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "QuestTemplate1"), new { @class = "form-control", size = 8, id = "item5", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                    </tr>
+                </table>
+
+                @Html.ValidationMessageFor(model => model.ActionTemplateDto.ActionTemplateResult, "", new {@class = "text-danger"})
             </div>
         </div>
         <div class="form-group">
@@ -62,10 +92,20 @@
     <script type="text/javascript">
         function SelId(Sel, HiddenId){
             var SelId = "";
+            var item1 = document.getElementById("item1");
+            var item2 = document.getElementById("item2");
+            var item3 = document.getElementById("item3");
+            var item4 = document.getElementById("item4");
+            var item5 = document.getElementById("item5");
             for (i = 0; i < Sel.options.length; i++){
                 if (Sel.options[i].selected == true){
                     SelId = Sel.options[i].value;
                     HiddenId.value = Number(SelId);
+                    item1.options[i].selected = true;
+                    item2.options[i].selected = true;
+                    item3.options[i].selected = true;
+                    item4.options[i].selected = true;
+                    item5.options[i].selected = true;
                     break;
                 }
             }

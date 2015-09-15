@@ -476,7 +476,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PredispositionResultModifier" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="PredispositionResultModifier" Type="Double" Nullable="false" />
     <Property Name="ExperienceModifier" Type="Double" Nullable="false" />
     <Property Name="ArtifactPosibility" Type="Double" Nullable="false" />
     <Property Name="GoldModifier" Type="Double" Nullable="false" />
