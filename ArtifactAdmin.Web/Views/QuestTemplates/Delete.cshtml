@@ -1,0 +1,45 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.QuestTemplateDto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Видалення запису</h2>
+
+<h3>Ви дійсно хочете видалити цей запис?</h3>
+<div>
+    <h4>Шаблон квесту-шаблон кроку</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Name, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.Description, new { rows = "5", cols = "50", @readonly = true })
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model=>model.QuestTemplateStepTemplates)
+        </dt>
+        <dd>
+            @Html.ListBoxFor(model => model.SelectedSteps, new SelectList(Model.SelectedSteps, "Id", "Name"), new { size = 8, style = "width:280px" })
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Видалити" class="btn btn-default" /> |
+            @Html.ActionLink("Повернутись до списку", "Index")
+        </div>
+    }
+</div>

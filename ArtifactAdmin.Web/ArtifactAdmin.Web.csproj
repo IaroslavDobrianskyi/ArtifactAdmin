@@ -190,6 +190,7 @@
     <Compile Include="Controllers\MapZonesController.cs" />
     <Compile Include="Controllers\PredispositionsController.cs" />
     <Compile Include="Controllers\PropertisController.cs" />
+    <Compile Include="Controllers\QuestTemplatesController.cs" />
     <Compile Include="Controllers\RaceDesiresController.cs" />
     <Compile Include="Controllers\RacesController.cs" />
     <Compile Include="Controllers\StepActionTemplatesController.cs" />
@@ -386,6 +387,11 @@
     <Content Include="Views\RaceDesires\Edit.cshtml" />
     <Content Include="Views\RaceDesires\Index.cshtml" />
     <Content Include="Views\Shared\ViewDesireMapZone.cshtml" />
+    <Content Include="Views\QuestTemplates\Create.cshtml" />
+    <Content Include="Views\QuestTemplates\Delete.cshtml" />
+    <Content Include="Views\QuestTemplates\Details.cshtml" />
+    <Content Include="Views\QuestTemplates\Edit.cshtml" />
+    <Content Include="Views\QuestTemplates\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

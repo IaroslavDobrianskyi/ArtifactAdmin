@@ -77,10 +77,10 @@
         <span id="TypeMes" class="alert-warning"></span>
         <br/>
         <input type="button" id="add" value=">"
-               onclick="javascript: MoveObj(document.getElementById('StepObject'), document.getElementById('SelectedStepObject'));"/>
+               onclick="javascript: MoveObj(document.getElementById('StepObject'), document.getElementById('SelectedStepObject'));">
         <br/>
         <input type="button" id="rem" value="<"
-               onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('StepObject'));"/>
+               onclick="javascript: MoveObj(document.getElementById('SelectedStepObject'), document.getElementById('StepObject'));">
     </td>
                 <td>
                     @Html.LabelFor(model => model.SelectedStepObject)<br />
@@ -93,7 +93,7 @@ new { size = 8, style = "width:250px" })
         </table>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll()" />
+                    <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll();" />
                 </div>
             </div>
 </div>
@@ -179,6 +179,7 @@ new { size = 8, style = "width:250px" })
         var OT = document.getElementById("StepObjectType");
         var SO = document.getElementById("StepObject");
         var To = document.getElementById('SelectedStepObject');
+        var i = 0 ;
         for (i = To.options.length - 1; i >= 0; i--)
         {
             To.options[i].selected = true;

@@ -96,6 +96,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<QuestTemplate, QuestTemplateDto>();
             Mapper.CreateMap<QuestTemplateDto, QuestTemplate>();
+
+            Mapper.CreateMap<QuestTemplateStepTemplate, QuestTemplateStepTemplateDto>();
+            Mapper.CreateMap<QuestTemplateStepTemplateDto, QuestTemplateStepTemplate>();
         } 
     }
 }
