@@ -116,7 +116,7 @@
         var Val = document.getElementById("OneProbability").value.toString();
         var ValidateProbability = Number(Val);
         var Message = document.getElementById("MessageError");
-        if (Val.substring(0, 3) == "0.0" & Number(Val) == 0) {
+        if (Number(Val) == 0) {
             Message.value = "Введіть число від 0 до 1 !";
             Message.hidden = false;
         }

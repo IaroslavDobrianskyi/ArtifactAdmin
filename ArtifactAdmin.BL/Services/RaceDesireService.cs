@@ -16,6 +16,7 @@ namespace ArtifactAdmin.BL.Services
     using DAL.Models;
     using Interfaces;
     using ModelsDTO;
+    using Utils;
 
     public class RaceDesireService : IRaceDesireService
     {
@@ -60,8 +61,8 @@ namespace ArtifactAdmin.BL.Services
                     viewRaceDesireDto.SelectedDesires.Add(oneDesire);
                 }
             }
-            
-            viewRaceDesireDto.OneProbability = "0.25";
+
+        viewRaceDesireDto.OneProbability = "0.25";
             viewRaceDesireDto.DefaultValue = 0;
             viewRaceDesireDto.Deviation = "0.0";
             return viewRaceDesireDto;
@@ -106,7 +107,7 @@ namespace ArtifactAdmin.BL.Services
                                                                 {
                                                                     RaceId = id,
                                                                     DesireId = selectedDesires[i],
-                                                                    Deviation = deviations[i] == "0.0"
+                                                                    Deviation = Convert.ToDouble(deviations[i]) == 0
                                                                                                 ? (double?)null
                                                                                                 : Convert.ToDouble(deviations[i]),
                                                                                Probability =

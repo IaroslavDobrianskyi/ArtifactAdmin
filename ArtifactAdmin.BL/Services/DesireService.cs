@@ -17,6 +17,7 @@ namespace ArtifactAdmin.BL.Services
     using DAL.Models;
     using Interfaces;
     using ModelsDTO;
+    using Utils;
 
     public class DesireService : IDesireService
     {
@@ -58,7 +59,7 @@ namespace ArtifactAdmin.BL.Services
                 desireDto.ViewDesireMapZoneDto.Modifiers.Add(mapZone.Modifier);
             }
 
-            desireDto.ViewDesireMapZoneDto.OneModifier = "0.5";
+            desireDto.ViewDesireMapZoneDto.OneModifier = ViewHelper.ConvertToCurrentSeparator("0.5");
             return desireDto;
         }
 

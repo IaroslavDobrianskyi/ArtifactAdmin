@@ -18,7 +18,7 @@ namespace ArtifactAdmin.BL.Services
     using Interfaces;
     using ModelsDTO;
 
-    public class QuestTemplateService: IQuestTemplateService
+    public class QuestTemplateService : IQuestTemplateService
     {
         private readonly IRepository<QuestTemplate> questTemplateRepository;
         private readonly IRepository<StepTemplate> stepTemplateRepository;
@@ -45,15 +45,16 @@ namespace ArtifactAdmin.BL.Services
         public QuestTemplateDto GetViewById(int? id)
         {
             var questTemplateDto = new QuestTemplateDto();
-            if(id != null)
+            if (id != null)
             {
                 questTemplateDto = Mapper.Map<QuestTemplateDto>(this.questTemplateRepository.GetAll().Include(s => s.QuestTemplateStepTemplates)
                                                                     .FirstOrDefault(s => s.Id == id));
             }
+
             var listSteps = Mapper.Map<List<StepTemplateDto>>(this.stepTemplateRepository.GetAll());
             questTemplateDto.AllSteps = listSteps;
             questTemplateDto.SelectedSteps = new List<StepTemplateDto>();
-            if(id != null)
+            if (id != null)
             {
                 if (questTemplateDto.QuestTemplateStepTemplates.Any())
                 {
@@ -107,10 +108,11 @@ namespace ArtifactAdmin.BL.Services
         {
             var questTemplate = Mapper.Map<QuestTemplate>(questTemplateDto);
             this.questTemplateRepository.InsertWithoutSave(questTemplate);
-            if(steps != null)
+            if (steps != null)
             {
                 CreateQuestTemplateStepTemplate(questTemplate, steps);
             }
+
             this.questTemplateRepository.SaveChanges();
             return Mapper.Map<QuestTemplateDto>(questTemplate);
         }
@@ -180,6 +182,7 @@ namespace ArtifactAdmin.BL.Services
                 result.QuestTemplate = null;
                 this.actionTemplateResultRepository.UpdateWithoutSave(result);
             }
+
             this.actionTemplateResultRepository.SaveChanges();
         }
     }

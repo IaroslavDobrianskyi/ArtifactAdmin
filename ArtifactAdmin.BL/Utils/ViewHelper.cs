@@ -60,5 +60,12 @@ namespace ArtifactAdmin.BL.Utils
 
             return viewValueCharacteristic;
         }
+
+        public static string ConvertToCurrentSeparator(string inString)
+        {
+            var separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+            string outString = inString.Replace('.', separator);
+            return outString;
+        }
     }
 }

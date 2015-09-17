@@ -16,6 +16,7 @@ namespace ArtifactAdmin.BL.Services
     using DAL.Models;
     using Interfaces;
     using ModelsDTO;
+    using Utils;
 
     public class ActionTemplateResultService : IActionTemplateResultService
     {
@@ -55,11 +56,17 @@ namespace ArtifactAdmin.BL.Services
             actionTemplateResultDto.Gold = actionTemplateResultDto.GoldModifier.ToString();
             }
             else
-            { 
-            actionTemplateResultDto.Predisposition = "0.5";
-            actionTemplateResultDto.Experience = "0.5";
-            actionTemplateResultDto.Posibility = "0.5";
-            actionTemplateResultDto.Gold = "0.5";
+            {
+                var initialString = ViewHelper.ConvertToCurrentSeparator("0.5");
+                var initialValue = Convert.ToDouble(initialString);
+                actionTemplateResultDto.Predisposition = "0.5";
+                actionTemplateResultDto.Experience = "0.5";
+                actionTemplateResultDto.Posibility = "0.5";
+                actionTemplateResultDto.Gold = "0.5";
+                actionTemplateResultDto.PredispositionResultModifier = initialValue;
+                actionTemplateResultDto.ExperienceModifier = initialValue;
+                actionTemplateResultDto.ArtifactPosibility = initialValue;
+                actionTemplateResultDto.GoldModifier = initialValue;
             }
             
             return actionTemplateResultDto;

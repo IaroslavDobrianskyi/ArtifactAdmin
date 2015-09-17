@@ -1,9 +1,9 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StepTemplatesController.cs" company="Artifact">
+// <copyright file="QuestTemplatesController.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the StepTemplatesController type.
+//   Defines the QuestTemplatesController type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web.Controllers
@@ -14,6 +14,7 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
+
     public class QuestTemplatesController : Controller
     {
         private IQuestTemplateService questTemplateService;
@@ -36,11 +37,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var questTemplate = this.questTemplateService.GetViewById(id);
             if (questTemplate == null)
             {
                 return HttpNotFound();
             }
+
             return View(questTemplate);
         }
 
@@ -65,13 +68,14 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     this.questTemplateService.Create(questTemplateDto, selectedSteps);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    questTemplateDto = this.questTemplateService.GetByList(questTemplateDto,selectedSteps);
+                    questTemplateDto = this.questTemplateService.GetByList(questTemplateDto, selectedSteps);
                     return View(questTemplateDto);
                 }
+
                 return RedirectToAction("Index");
             }
 
@@ -86,11 +90,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var questTemplateDto = this.questTemplateService.GetViewById(id);
             if (questTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(questTemplateDto);
         }
 
@@ -109,7 +115,7 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     this.questTemplateService.Update(questTemplateDto, selectedSteps);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
@@ -131,11 +137,13 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var questTemplateDto = this.questTemplateService.GetViewById(id);
             if (questTemplateDto == null)
             {
                 return HttpNotFound();
             }
+
             return View(questTemplateDto);
         }
 
