@@ -8,6 +8,7 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ItemId)
+        @Html.HiddenFor(model => model.ItemName)
         <div class="form-group">
             <label for="model.ItemName">@ViewBag.Name</label>
             @Html.DisplayFor(model => model.ItemName)
@@ -59,6 +60,7 @@
             var toModifier = document.getElementById("Modifiers");
             var newModifier = document.getElementById("OneModifier").value.toString();
             var validateModifier = Number(newModifier);
+            newModifier = validateModifier.toString();
             var selId = '';
             var selText = '';
             var flagUpdate = false;

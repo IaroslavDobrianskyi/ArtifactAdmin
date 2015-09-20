@@ -13,6 +13,7 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
+    using BL.Utils;
 
     public class StepActionTemplatesController : Controller
     {
@@ -79,6 +80,8 @@ namespace ArtifactAdmin.Web.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Error = "Помилка при створенні нового запису";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
             viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.Id);
             return View(viewStepActionTemplateDto);
         }
@@ -127,6 +130,8 @@ namespace ArtifactAdmin.Web.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
             viewStepActionTemplateDto = this.stepActionTemplateService.GetViewById(stepTemplateDto.Id);
             return View(viewStepActionTemplateDto);
         }

@@ -50,10 +50,10 @@ namespace ArtifactAdmin.BL.Services
             if (id != null)
             { 
             actionTemplateResultDto = Mapper.Map<ActionTemplateResultDto>(this.actionTemplateResultRepository.GetAll().FirstOrDefault(s => s.Id == id));
-            actionTemplateResultDto.Predisposition = actionTemplateResultDto.PredispositionResultModifier.ToString();
-            actionTemplateResultDto.Experience = actionTemplateResultDto.ExperienceModifier.ToString();
-            actionTemplateResultDto.Posibility = actionTemplateResultDto.ArtifactPosibility.ToString();
-            actionTemplateResultDto.Gold = actionTemplateResultDto.GoldModifier.ToString();
+            actionTemplateResultDto.Predisposition =ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.PredispositionResultModifier.ToString());
+            actionTemplateResultDto.Experience = ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.ExperienceModifier.ToString());
+            actionTemplateResultDto.Posibility = ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.ArtifactPosibility.ToString());
+            actionTemplateResultDto.Gold = ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.GoldModifier.ToString());
             }
             else
             {

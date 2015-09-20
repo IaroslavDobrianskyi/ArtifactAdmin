@@ -64,7 +64,7 @@ namespace ArtifactAdmin.BL.Services
                 mapZoneDto.ViewDesireMapZoneDto.Modifiers.Add(desire.Modifier);
             }
 
-            mapZoneDto.ViewDesireMapZoneDto.OneModifier = ViewHelper.ConvertToCurrentSeparator("0.5");
+            mapZoneDto.ViewDesireMapZoneDto.OneModifier = "0.5";
             return mapZoneDto;
         } 
 
@@ -115,6 +115,41 @@ namespace ArtifactAdmin.BL.Services
             return viewMapZoneDto;
         }
 
+        public ViewMapZoneDto GetByList(MapZoneDto mapZoneDto, string[] obj, string[] probability)
+        {
+            var viewMapZoneDto = new ViewMapZoneDto();
+            viewMapZoneDto.OneProbability = "0.25";
+            viewMapZoneDto.MapZone = mapZoneDto;
+            viewMapZoneDto.MapObject = Mapper.Map<List<MapObjectDto>>(this.mapObjectRepository.GetAll());
+            viewMapZoneDto.SelectedMapObject = new List<MapObjectProbabilityDto>();
+            for(int i = 0; i < obj.Length; i++)
+            {
+                probability[i] = ViewHelper.ConvertToCurrentSeparator(probability[i]);
+                var objProbability = Convert.ToDouble(probability[i]);
+                {
+                    foreach(var mapObject in viewMapZoneDto.MapObject)
+                    {
+                        if(mapObject.Id == Convert.ToInt32(obj[i]))
+                        {
+                            viewMapZoneDto.MapObject.Remove(mapObject);
+                            viewMapZoneDto.SelectedMapObject.Add(new MapObjectProbabilityDto
+                                                                 {
+                                                                     MapObject = mapObject.Id,
+                                                                     MapZone = mapZoneDto.Id,
+                                                                     MapObject1 = mapObject,
+                                                                     MapZone1 = mapZoneDto,
+                                                                     Probability =
+                                                                         objProbability
+                                                                 });
+                        }
+                    }
+                }
+            }
+
+            viewMapZoneDto.Probability = viewMapZoneDto.SelectedMapObject;
+            return viewMapZoneDto;
+        }
+
         public MapZoneDto Create(MapZoneDto mapZoneDto, string[] obj, string[] probability)
         {
             var mapZone = Mapper.Map<MapZone>(mapZoneDto);
@@ -148,8 +183,9 @@ namespace ArtifactAdmin.BL.Services
             int objLength = obj.Length;
             int objId = 0;
             double objProbability = 0;
-            for (int i = 0; i < objLength; i++) 
+            for (int i = 0; i < objLength; i++)
             {
+                probability[i] = ViewHelper.ConvertToCurrentSeparator(probability[i]);
                 objProbability = Convert.ToDouble(probability[i]);
                 if (objProbability > 0 & objProbability < 1) 
                 {
@@ -187,7 +223,7 @@ namespace ArtifactAdmin.BL.Services
             }
         }
 
-        public void UpdateDesireMapZone(int id, int[] desireMapZoneId, double[] modifiers)
+        public void UpdateDesireMapZone(int id, int[] desireMapZoneId, string[] modifiers)
         {
             var desireMapZone = this.desireMapZoneRepository.GetAll()
                                     .Where(s => s.MapZone == id)
@@ -199,7 +235,8 @@ namespace ArtifactAdmin.BL.Services
                 {
                     if (desire.Id == desireMapZoneId[i])
                     {
-                        desire.Modifier = modifiers[i];
+                        modifiers[i] = ViewHelper.ConvertToCurrentSeparator(modifiers[i]);
+                        desire.Modifier =Convert.ToDouble( modifiers[i]);
                         this.desireMapZoneRepository.UpdateWithoutSave(desire);
                     }
                 }

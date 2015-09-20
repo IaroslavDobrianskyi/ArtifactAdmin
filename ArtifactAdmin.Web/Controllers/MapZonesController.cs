@@ -13,6 +13,7 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
+    using BL.Utils;
 
     public class MapZonesController : Controller
     {
@@ -73,14 +74,16 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+                    viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
                     return View(viewMapZoneDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
+            viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
             return View(viewMapZoneDto);
         }
 
@@ -121,14 +124,16 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+                    viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
                     return View(viewMapZoneDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
+            viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
             return View(viewMapZoneDto);
         }
 
@@ -192,7 +197,7 @@ namespace ArtifactAdmin.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Modifier([Bind(Include = "ItemId,ItemName")] ViewDesireMapZoneDto desire, int[] listDesireMapZone, double[] modifiers)
+        public ActionResult Modifier([Bind(Include = "ItemId,ItemName")] ViewDesireMapZoneDto desire, int[] listDesireMapZone, string[] modifiers)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -217,6 +222,8 @@ namespace ArtifactAdmin.Web.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
             desireDto = this.mapZoneService.GetByIdDesire(desire.ItemId);
             return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
         }

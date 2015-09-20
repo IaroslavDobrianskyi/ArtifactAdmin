@@ -59,7 +59,7 @@ namespace ArtifactAdmin.BL.Services
                 desireDto.ViewDesireMapZoneDto.Modifiers.Add(mapZone.Modifier);
             }
 
-            desireDto.ViewDesireMapZoneDto.OneModifier = ViewHelper.ConvertToCurrentSeparator("0.5");
+            desireDto.ViewDesireMapZoneDto.OneModifier = "0.5";
             return desireDto;
         }
 
@@ -102,7 +102,7 @@ namespace ArtifactAdmin.BL.Services
             this.desireRepository.Delete(desire);
         }
 
-        public void UpdateDesireMapZone(int id, int[] desireMapZoneId, double[] modifiers)
+        public void UpdateDesireMapZone(int id, int[] desireMapZoneId, string[] modifiers)
         {
             var desireMapZone = this.desireMapZoneRepository.GetAll()
                                     .Where(s => s.Desire == id)
@@ -114,7 +114,8 @@ namespace ArtifactAdmin.BL.Services
                 {
                     if (mapZone.Id == desireMapZoneId[i])
                     {
-                        mapZone.Modifier = modifiers[i];
+                        modifiers[i] = ViewHelper.ConvertToCurrentSeparator(modifiers[i]);
+                        mapZone.Modifier = Convert.ToDouble(modifiers[i]);
                         this.desireMapZoneRepository.UpdateWithoutSave(mapZone);
                     }
                 }

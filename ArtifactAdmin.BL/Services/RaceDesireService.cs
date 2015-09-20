@@ -85,12 +85,14 @@ namespace ArtifactAdmin.BL.Services
             for (int i = 0; i < selectedDesiresLength; i++)
             {
                 var desireId = selectedDesires[i];
+                probabilities[i] = ViewHelper.ConvertToCurrentSeparator(probabilities[i]);
+                deviations[i] = ViewHelper.ConvertToCurrentSeparator(deviations[i]);
                 var desireUpdate = oldRaceDesire.FirstOrDefault(item => item.DesireId == desireId);
                 if (desireUpdate != null)
                 {
                     desireUpdate.Probability = Convert.ToDouble(probabilities[i]);
                     desireUpdate.DefaultValue = defaultValues[i];
-                    if (deviations[i] == "0")
+                    if (Convert.ToDouble(deviations[i]) == 0)
                     {
                         desireUpdate.Deviation = null;
                     }

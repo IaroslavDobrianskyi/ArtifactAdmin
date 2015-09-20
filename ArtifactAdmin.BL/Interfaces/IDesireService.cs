@@ -25,7 +25,7 @@ namespace ArtifactAdmin.BL.Interfaces
 
         DesireDto Update(DesireDto desireDto, string fileName);
 
-        void UpdateDesireMapZone(int id, int[] desireMapZoneId, double[] modifiers);
+        void UpdateDesireMapZone(int id, int[] desireMapZoneId, string[] modifiers);
 
         void Delete(int? id);
     }

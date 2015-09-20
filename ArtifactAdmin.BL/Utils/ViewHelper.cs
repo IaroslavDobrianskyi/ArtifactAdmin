@@ -10,6 +10,8 @@ namespace ArtifactAdmin.BL.Utils
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
     using ModelsDTO;
 
     public class ViewHelper
@@ -66,6 +68,27 @@ namespace ArtifactAdmin.BL.Utils
             var separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
             string outString = inString.Replace('.', separator);
             return outString;
+        }
+
+        public static string ConvertSeparatorToDot(string inString)
+        {
+            var separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+            string outString = inString.Replace(separator,'.');
+            return outString;
+        }
+
+        public static string ModelStateExeption(ModelStateDictionary modelState)
+        {
+            var messageException = "";
+            var errors = modelState.Where(ms => ms.Value.Errors.Any())
+                                       .Select(x => new { x.Key, x.Value.Errors });
+            foreach (var oneError in errors)
+            {
+                var fieldKey = oneError.Key;
+                var fieldErrors = oneError.Errors;
+                messageException += fieldKey + ": " + fieldErrors[0].Exception.Message.ToString()+". ";
+            }
+            return messageException;
         }
     }
 }
