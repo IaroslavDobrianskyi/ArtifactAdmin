@@ -44,16 +44,15 @@ namespace ArtifactAdmin.BL.Services
         public ActionTemplateResultDto GetViewById(int? id)
         {
             var actionTemplateResultDto = new ActionTemplateResultDto();
-            actionTemplateResultDto.ListQuestTemplates =
-                Mapper.Map<List<QuestTemplateDto>>(this.questTemplateRepository.GetAll()
-                                                 .AsNoTracking().ToList());
             if (id != null)
             { 
             actionTemplateResultDto = Mapper.Map<ActionTemplateResultDto>(this.actionTemplateResultRepository.GetAll().FirstOrDefault(s => s.Id == id));
-            actionTemplateResultDto.Predisposition =ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.PredispositionResultModifier.ToString());
+                actionTemplateResultDto.Predisposition =
+                    ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.PredispositionResultModifier.ToString());
             actionTemplateResultDto.Experience = ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.ExperienceModifier.ToString());
             actionTemplateResultDto.Posibility = ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.ArtifactPosibility.ToString());
             actionTemplateResultDto.Gold = ViewHelper.ConvertSeparatorToDot(actionTemplateResultDto.GoldModifier.ToString());
+            actionTemplateResultDto.IsQuestStarter = this.actionTemplateResultRepository.QuestStarter(Convert.ToInt32(id));
             }
             else
             {
@@ -66,9 +65,13 @@ namespace ArtifactAdmin.BL.Services
                 actionTemplateResultDto.PredispositionResultModifier = initialValue;
                 actionTemplateResultDto.ExperienceModifier = initialValue;
                 actionTemplateResultDto.ArtifactPosibility = initialValue;
-                actionTemplateResultDto.GoldModifier = initialValue;
+                actionTemplateResultDto.GoldModifier = initialValue; 
+                actionTemplateResultDto.IsQuestStarter = 0;
             }
-            
+
+            actionTemplateResultDto.ListQuestTemplates =
+               Mapper.Map<List<QuestTemplateDto>>(this.questTemplateRepository.GetAll()
+                                                .AsNoTracking().ToList());
             return actionTemplateResultDto;
         }
 

@@ -595,5 +595,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="QuestStarter" FunctionName="artModel.Store.QuestStarter" />
   </EntityContainerMapping>
 </Mapping>

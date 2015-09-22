@@ -63,31 +63,32 @@ namespace ArtifactAdmin.BL.Utils
             return viewValueCharacteristic;
         }
 
-        public static string ConvertToCurrentSeparator(string inString)
+        public static string ConvertToCurrentSeparator(string stringIn)
         {
             var separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
-            string outString = inString.Replace('.', separator);
+            string outString = stringIn.Replace('.', separator);
             return outString;
         }
 
-        public static string ConvertSeparatorToDot(string inString)
+        public static string ConvertSeparatorToDot(string stringIn)
         {
             var separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
-            string outString = inString.Replace(separator,'.');
+            string outString = stringIn.Replace(separator, '.');
             return outString;
         }
 
         public static string ModelStateExeption(ModelStateDictionary modelState)
         {
-            var messageException = "";
+            var messageException = string.Empty;
             var errors = modelState.Where(ms => ms.Value.Errors.Any())
                                        .Select(x => new { x.Key, x.Value.Errors });
             foreach (var oneError in errors)
             {
                 var fieldKey = oneError.Key;
                 var fieldErrors = oneError.Errors;
-                messageException += fieldKey + ": " + fieldErrors[0].Exception.Message.ToString()+". ";
+                messageException += fieldKey + ": " + fieldErrors[0].Exception.Message.ToString() + ". ";
             }
+
             return messageException;
         }
     }

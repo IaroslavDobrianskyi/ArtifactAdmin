@@ -329,6 +329,9 @@
       <End Role="QuestTemplate" EntitySet="QuestTemplates" />
       <End Role="Quest" EntitySet="Quests" />
     </AssociationSet>
+    <FunctionImport Name="QuestStarter" ReturnType="Collection(Int32)">
+      <Parameter Name="idActionResult" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Action">
     <Key>

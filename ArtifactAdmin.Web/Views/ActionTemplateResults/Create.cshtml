@@ -52,12 +52,12 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.ListQuestTemplates, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(m => m.ListQuestTemplates, new SelectList(Model.ListQuestTemplates, "Id", "Name"), "Виберіть шаблон квесту", new {@class = "form-control", onchange = @"javascript:SelId(this,document.getElementById('QuestTemplate'));"})
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

@@ -26,17 +26,13 @@ namespace ArtifactAdmin.Web.App_Start
                 {
                     double temp;
                     var attempted = result.AttemptedValue.Replace(",", ".");
-                    if (double.TryParse(
-                        attempted,
-                        NumberStyles.Number,
-                        CultureInfo.InvariantCulture,
-                        out temp)
-                    )
+                    if (double.TryParse(attempted, NumberStyles.Number, CultureInfo.InvariantCulture, out temp))
                     {
                         return temp;
                     }
                 }
             }
+
             return base.BindModel(controllerContext, bindingContext);
         }
     }

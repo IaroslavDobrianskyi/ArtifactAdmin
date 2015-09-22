@@ -60,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.QuestTemplate1, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @if (Model.ListQuestTemplates==null)
+                @if (Model.IsQuestStarter==0)
                 {
                     <span>---</span>
                 }

@@ -122,14 +122,14 @@ namespace ArtifactAdmin.BL.Services
             viewMapZoneDto.MapZone = mapZoneDto;
             viewMapZoneDto.MapObject = Mapper.Map<List<MapObjectDto>>(this.mapObjectRepository.GetAll());
             viewMapZoneDto.SelectedMapObject = new List<MapObjectProbabilityDto>();
-            for(int i = 0; i < obj.Length; i++)
+            for (int i = 0; i < obj.Length; i++)
             {
                 probability[i] = ViewHelper.ConvertToCurrentSeparator(probability[i]);
                 var objProbability = Convert.ToDouble(probability[i]);
                 {
-                    foreach(var mapObject in viewMapZoneDto.MapObject)
+                    foreach (var mapObject in viewMapZoneDto.MapObject)
                     {
-                        if(mapObject.Id == Convert.ToInt32(obj[i]))
+                        if (mapObject.Id == Convert.ToInt32(obj[i]))
                         {
                             viewMapZoneDto.MapObject.Remove(mapObject);
                             viewMapZoneDto.SelectedMapObject.Add(new MapObjectProbabilityDto
@@ -236,7 +236,7 @@ namespace ArtifactAdmin.BL.Services
                     if (desire.Id == desireMapZoneId[i])
                     {
                         modifiers[i] = ViewHelper.ConvertToCurrentSeparator(modifiers[i]);
-                        desire.Modifier =Convert.ToDouble( modifiers[i]);
+                        desire.Modifier = Convert.ToDouble(modifiers[i]);
                         this.desireMapZoneRepository.UpdateWithoutSave(desire);
                     }
                 }

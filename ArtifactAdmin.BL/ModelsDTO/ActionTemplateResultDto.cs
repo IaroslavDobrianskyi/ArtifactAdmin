@@ -53,5 +53,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
         [Display(Name = "Назва шаблону квеста")]
         public virtual QuestTemplateDto QuestTemplate1 { get; set; }
+
+        public int IsQuestStarter { get; set; }
     }
 }

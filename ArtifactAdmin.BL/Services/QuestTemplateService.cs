@@ -117,28 +117,6 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<QuestTemplateDto>(questTemplate);
         }
 
-        private void CreateQuestTemplateStepTemplate(QuestTemplate questTemplate, string[] steps)
-        {
-            int stepsLength = steps.Length;
-            for (int i = 0; i < stepsLength; i++)
-            {
-                this.questTemplateStepTemplateRepository.InsertWithoutSave(new QuestTemplateStepTemplate
-                                                                           {
-                                                                               StepTemplate
-                                                                                   =
-                                                                                   Convert
-                                                                                   .ToInt32
-                                                                                   (steps[
-                                                                                       i]),
-                                                                               QuestTemaplate
-                                                                                   =
-                                                                                   questTemplate.Id,
-                                                                               StepOrder =
-                                                                                   i + 1
-                                                                           });
-            }
-        }
-
         public QuestTemplateDto Update(QuestTemplateDto questTemplateDto, string[] steps)
         {
             var questTemplate = Mapper.Map<QuestTemplate>(questTemplateDto);
@@ -153,20 +131,10 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<QuestTemplateDto>(questTemplate);
         }
 
-        private void DeleteQuestTemplateStepTemplate(QuestTemplate questTemplate)
-        {
-            var forDelete = this.questTemplateStepTemplateRepository.GetAll()
-                                .Where(p => p.QuestTemaplate == questTemplate.Id);
-            foreach (var quest in forDelete)
-            {
-                this.questTemplateStepTemplateRepository.DeleteWithOutSave(quest);
-            }
-        }
-
         public void Delete(int? id)
         {
             var questTemplate = this.questTemplateRepository.GetAll()
-                                    .FirstOrDefault(s => s.Id ==id);
+                                    .FirstOrDefault(s => s.Id == id);
             this.questTemplateRepository.DeleteWithOutSave(questTemplate);
             DeleteQuestTemplateStepTemplate(questTemplate);
             UpdateActionTemplateResult(questTemplate);
@@ -177,13 +145,37 @@ namespace ArtifactAdmin.BL.Services
         {
             var forUpdate = this.actionTemplateResultRepository.GetAll()
                                 .Where(p => p.QuestTemplate == questTemplate.Id);
-            foreach(var result in forUpdate)
+            foreach (var result in forUpdate)
             {
                 result.QuestTemplate = null;
                 this.actionTemplateResultRepository.UpdateWithoutSave(result);
             }
 
             this.actionTemplateResultRepository.SaveChanges();
+        }
+
+        private void CreateQuestTemplateStepTemplate(QuestTemplate questTemplate, string[] steps)
+        {
+            int stepsLength = steps.Length;
+            for (int i = 0; i < stepsLength; i++)
+            {
+                this.questTemplateStepTemplateRepository.InsertWithoutSave(new QuestTemplateStepTemplate
+                {
+                    StepTemplate = Convert.ToInt32(steps[i]),
+                    QuestTemaplate = questTemplate.Id,
+                    StepOrder = i + 1
+                });
+            }
+        }
+
+        private void DeleteQuestTemplateStepTemplate(QuestTemplate questTemplate)
+        {
+            var forDelete = this.questTemplateStepTemplateRepository.GetAll()
+                                .Where(p => p.QuestTemaplate == questTemplate.Id);
+            foreach (var quest in forDelete)
+            {
+                this.questTemplateStepTemplateRepository.DeleteWithOutSave(quest);
+            }
         }
     }
 }
