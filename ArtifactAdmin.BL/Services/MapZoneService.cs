@@ -6,6 +6,9 @@
 //   Defines the MapZoneService type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using ArtifactAdmin.BL.Utils;
+
 namespace ArtifactAdmin.BL.Services
 {
     using System;
@@ -22,14 +25,20 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRepository<MapZone> mapZoneRepository;
         private readonly IRepository<MapObject> mapObjectRepository;
         private readonly IRepository<MapObjectProbability> mapObjectProbabilityRepository;
+        private readonly IRepository<ZoneCoordinat> zoneCoordinatRepository;
+        private readonly IRepository<MapInfo> mapInfoRepository;
 
         public MapZoneService(IRepository<MapZone> mapZoneRepository,
             IRepository<MapObject> mapObjectRepository,
-            IRepository<MapObjectProbability> mapObjectProbabilityRepository) 
+            IRepository<MapObjectProbability> mapObjectProbabilityRepository,
+            IRepository<ZoneCoordinat> zoneCoordinatRepository,
+            IRepository<MapInfo> mapInfoRepository) 
         {
             this.mapZoneRepository = mapZoneRepository;
             this.mapObjectRepository = mapObjectRepository;
             this.mapObjectProbabilityRepository = mapObjectProbabilityRepository;
+            this.zoneCoordinatRepository = zoneCoordinatRepository;
+            this.mapInfoRepository = mapInfoRepository;
         }
 
         public IEnumerable<MapZoneDto> GetAll()
@@ -152,6 +161,30 @@ namespace ArtifactAdmin.BL.Services
             this.mapZoneRepository.DeleteWithOutSave(mapZone);
             DeleteMapObjectProbability(mapZone);
             this.mapZoneRepository.SaveChanges();
+        }
+
+        public void EnshureAllZonesPresentInMapInfo(int? mapInfoId)
+        {
+            var availableColors = GetAll().Select(x => x.Color.ToLower().Trim()).Distinct();
+
+            var mapInfo = this.mapInfoRepository.GetAll().FirstOrDefault(s => s.Id == mapInfoId);
+            if (mapInfo == null)
+            {
+                throw new Exception(string.Format("Mapinfo with id({0}) no exist", mapInfoId));
+            }
+            var requiredColors = ImageHelper.GetAllColorsFromImage(mapInfo.ImagePath);
+
+            foreach (var color in requiredColors)
+            {
+                if (!availableColors.Contains(color))
+                {
+                    mapZoneRepository.Insert(new MapZone()
+                        {
+                            ZoneName = color,
+                            Color = color
+                        });
+                }
+            }
         }
     }
 }

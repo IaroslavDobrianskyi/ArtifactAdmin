@@ -1,0 +1,72 @@
+﻿@using ArtifactAdmin.Web.Helpers
+@model ArtifactAdmin.BL.ModelsDTO.MapInfoDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Об'єкти карти</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MapName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapName)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+            
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+            
+        </dd>
+
+    </dl>
+<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+            
+        </dd>
+
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Файл на сервері
+        </dt>
+
+        <dd >
+            @Html.Raw(@Html.Image(@Url.Action("ImageFromFileOnServer",new {id = Model.Id}),"",new object()))
+        </dd>
+    </dl>
+    
+</div>
+    
+<p>
+    @Html.ActionLink("Змінити", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

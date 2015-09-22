@@ -1,13 +1,18 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtifactAdmin.DAL", "ArtifactAdmin\ArtifactAdmin.DAL.csproj", "{5A608750-C6A8-4A8D-819C-FBCD33B45AAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtifactAdmin.BL", "ArtifactAdmin.BL\ArtifactAdmin.BL.csproj", "{960A35A0-5D68-447D-A928-12D99C3F43FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtifactAdmin.Web", "ArtifactAdmin.Web\ArtifactAdmin.Web.csproj", "{BF2B893D-218E-48B1-A091-EF836DD37251}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DD3CB878-E327-42FD-BFBF-FEF3132936A3}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

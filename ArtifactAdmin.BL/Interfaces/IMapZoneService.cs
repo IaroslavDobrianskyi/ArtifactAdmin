@@ -25,5 +25,6 @@ namespace ArtifactAdmin.BL.Interfaces
             MapZoneDto Update(MapZoneDto mapZOneDto, string[] obj, string[] probability);
 
             void Delete(int? id);
+            void EnshureAllZonesPresentInMapInfo(int? mapInfoId);
     }
 }

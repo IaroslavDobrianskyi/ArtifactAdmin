@@ -109,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Interfaces\IMapInfoDimensionService.cs" />
+    <Compile Include="MapHelpers\LinesContainer.cs" />
+    <Compile Include="MapHelpers\LineOfPoints.cs" />
     <Compile Include="InjectionConfig.cs" />
     <Compile Include="Interfaces\IActionDescriptionService.cs" />
     <Compile Include="Interfaces\IActionTemplateResultService.cs" />
@@ -132,6 +135,8 @@
     <Compile Include="Interfaces\IStepObjectTypeService.cs" />
     <Compile Include="Interfaces\IStepTemplateService.cs" />
     <Compile Include="Interfaces\ITalentService.cs" />
+    <Compile Include="Interfaces\IMapManagerService.cs" />
+    <Compile Include="Interfaces\IZoneCoordinatesService.cs" />
     <Compile Include="ModelsDTO\ActionDescriptionDto.cs" />
     <Compile Include="ModelsDTO\ActionTemplateDto.cs" />
     <Compile Include="ModelsDTO\ActionTemplateResultDto.cs" />
@@ -139,8 +144,12 @@
     <Compile Include="ModelsDTO\BonusDto.cs" />
     <Compile Include="ModelsDTO\CharacteristicDto.cs" />
     <Compile Include="ModelsDTO\ClassDto.cs" />
+    <Compile Include="ModelsDTO\DimentionRadiuDto.cs" />
     <Compile Include="ModelsDTO\FlowItems\FlowAction.cs" />
     <Compile Include="ModelsDTO\FlowItems\FlowStep.cs" />
+    <Compile Include="ModelsDTO\MapInfoDimensionDto.cs" />
+    <Compile Include="ModelsDTO\MiddlePointDto.cs" />
+    <Compile Include="ModelsDTO\MiddlePointNeighborDto.cs" />
     <Compile Include="ModelsDTO\PredispositionDto.cs" />
     <Compile Include="ModelsDTO\PropertyDto.cs" />
     <Compile Include="ModelsDTO\RaceDesireDto.cs" />
@@ -148,6 +157,8 @@
     <Compile Include="ModelsDTO\ViewCharacteristic.cs" />
     <Compile Include="ModelsDTO\ViewRaceDesireDto.cs" />
     <Compile Include="ModelsDTO\ViewValueCharacteristic.cs" />
+    <Compile Include="ModelsDTO\MapInfoDto.cs" />
+    <Compile Include="ModelsDTO\ZoneCoordinatDto.cs" />
     <Compile Include="Services\CharacteristicService.cs" />
     <Compile Include="Services\CarrierService.cs" />
     <Compile Include="Services\ClassService.cs" />
@@ -179,6 +190,8 @@
     <Compile Include="Services\ConstellationService.cs" />
     <Compile Include="Services\DesireService.cs" />
     <Compile Include="Services\FlowService.cs" />
+    <Compile Include="Services\MapInfoDimensionService.cs" />
+    <Compile Include="Services\MapInfoService.cs" />
     <Compile Include="Services\MapObjectService.cs" />
     <Compile Include="Services\MapZoneService.cs" />
     <Compile Include="Services\PredispositionService.cs" />
@@ -191,6 +204,13 @@
     <Compile Include="Services\StepObjectTypeService.cs" />
     <Compile Include="Services\StepTemplateService.cs" />
     <Compile Include="Services\TalentService.cs" />
+    <Compile Include="Services\ZoneCoordinatesService.cs" />
+    <Compile Include="Utils\ColorHelper.cs" />
+    <Compile Include="Utils\GeneratingMiddlePoints\ZonePointsLocator.cs" />
+    <Compile Include="Utils\GeneratingMiddlePoints\ImagePoint.cs" />
+    <Compile Include="Utils\GeneratingMiddlePoints\MapMiddlePointsGenerator.cs" />
+    <Compile Include="Utils\GeneratingMiddlePoints\SimplePoint.cs" />
+    <Compile Include="Utils\ImageHelper.cs" />
     <Compile Include="Utils\ViewHelper.cs" />
     <Compile Include="Validate\AcceptableLengthAttribute.cs" />
     <Compile Include="Validate\AcceptablePositionAttribute.cs" />

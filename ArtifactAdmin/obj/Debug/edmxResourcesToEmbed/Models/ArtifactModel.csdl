@@ -329,6 +329,44 @@
       <End Role="QuestTemplate" EntitySet="QuestTemplates" />
       <End Role="Quest" EntitySet="Quests" />
     </AssociationSet>
+    <EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
+    <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="artModel.FK_ActionTemplateActionDescription_ActionDescription">
+      <End Role="ActionDescription" EntitySet="ActionDescriptions" />
+      <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescriptions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionTemplateActionDescription_ActionTemplate" Association="artModel.FK_ActionTemplateActionDescription_ActionTemplate">
+      <End Role="ActionTemplate" EntitySet="ActionTemplates" />
+      <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescriptions" />
+    </AssociationSet>
+    <EntitySet Name="MapInfoes" EntityType="artModel.MapInfo" />
+    <AssociationSet Name="FK_ZoneCoordinats_MapInfo" Association="artModel.FK_ZoneCoordinats_MapInfo">
+      <End Role="MapInfo" EntitySet="MapInfoes" />
+      <End Role="ZoneCoordinat" EntitySet="ZoneCoordinats" />
+    </AssociationSet>
+    <EntitySet Name="MapInfoDimensions" EntityType="artModel.MapInfoDimension" />
+    <AssociationSet Name="FK_MapInfoDimension_MapInfo" Association="artModel.FK_MapInfoDimension_MapInfo">
+      <End Role="MapInfo" EntitySet="MapInfoes" />
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimensions" />
+    </AssociationSet>
+    <EntitySet Name="MiddlePoints" EntityType="artModel.MiddlePoint" />
+    <AssociationSet Name="FK_MiddlePoint_MapInfoDimension" Association="artModel.FK_MiddlePoint_MapInfoDimension">
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimensions" />
+      <End Role="MiddlePoint" EntitySet="MiddlePoints" />
+    </AssociationSet>
+    <EntitySet Name="MiddlePointNeighbors" EntityType="artModel.MiddlePointNeighbor" />
+    <AssociationSet Name="FK_MiddlePointNeighbors_MiddlePoint" Association="artModel.FK_MiddlePointNeighbors_MiddlePoint">
+      <End Role="MiddlePoint" EntitySet="MiddlePoints" />
+      <End Role="MiddlePointNeighbor" EntitySet="MiddlePointNeighbors" />
+    </AssociationSet>
+    <EntitySet Name="DimentionRadius" EntityType="artModel.DimentionRadiu" />
+    <AssociationSet Name="FK_DimentionRadius_MapInfoDimension" Association="artModel.FK_DimentionRadius_MapInfoDimension">
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimensions" />
+      <End Role="DimentionRadiu" EntitySet="DimentionRadius" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MiddlePointNeighbors_DimentionRadius" Association="artModel.FK_MiddlePointNeighbors_DimentionRadius">
+      <End Role="DimentionRadiu" EntitySet="DimentionRadius" />
+      <End Role="MiddlePointNeighbor" EntitySet="MiddlePointNeighbors" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Action">
     <Key>
@@ -374,6 +412,7 @@
     <NavigationProperty Name="MapZone1" Relationship="artModel.FK_ActionDescription_MapZone" FromRole="ActionDescription" ToRole="MapZone" />
     <NavigationProperty Name="Race1" Relationship="artModel.FK_ActionDescription_Race1" FromRole="ActionDescription" ToRole="Race" />
     <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionDescription_ActionTemplate" FromRole="ActionDescription" ToRole="ActionTemplate" />
+    <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionDescription" FromRole="ActionDescription" ToRole="ActionTemplateActionDescription" />
   </EntityType>
   <EntityType Name="ActionPredisposition">
     <Key>
@@ -437,6 +476,7 @@
     <NavigationProperty Name="ActionTemplateProperties" Relationship="artModel.FK_ActionTemplateProperties_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateProperty" />
     <NavigationProperty Name="StepTemplateActionTemplates" Relationship="artModel.FK_StepTemplateActionTemplate_ActionTemplate" FromRole="ActionTemplate" ToRole="StepTemplateActionTemplate" />
     <NavigationProperty Name="ActionDescriptions" Relationship="artModel.FK_ActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionDescription" />
+    <NavigationProperty Name="ActionTemplateActionDescriptions" Relationship="artModel.FK_ActionTemplateActionDescription_ActionTemplate" FromRole="ActionTemplate" ToRole="ActionTemplateActionDescription" />
   </EntityType>
   <EntityType Name="ActionTemplateCharacteristic">
     <Key>
@@ -930,9 +970,10 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="MapZone" Type="Int32" Nullable="false" />
-    <Property Name="x" Type="Int32" Nullable="false" />
-    <Property Name="y" Type="Int32" Nullable="false" />
     <NavigationProperty Name="MapZone1" Relationship="artModel.FK_ZoneCoordinats_MapZone" FromRole="ZoneCoordinat" ToRole="MapZone" />
+    <Property Name="MapInfo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MapInfo1" Relationship="artModel.FK_ZoneCoordinats_MapInfo" FromRole="ZoneCoordinat" ToRole="MapInfo" />
+    <Property Name="Coordinates" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Action_Step">
     <End Type="artModel.Step" Role="Step" Multiplicity="1" />
@@ -1781,6 +1822,168 @@
       </Principal>
       <Dependent Role="Quest">
         <PropertyRef Name="QuestTemplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ActionTemplateActionDescription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ActionTemplate" Nullable="false" />
+    <Property Type="Int32" Name="ActionDescription" Nullable="false" />
+    <NavigationProperty Name="ActionDescription1" Relationship="artModel.FK_ActionTemplateActionDescription_ActionDescription" FromRole="ActionTemplateActionDescription" ToRole="ActionDescription" />
+    <NavigationProperty Name="ActionTemplate1" Relationship="artModel.FK_ActionTemplateActionDescription_ActionTemplate" FromRole="ActionTemplateActionDescription" ToRole="ActionTemplate" />
+  </EntityType>
+  <Association Name="FK_ActionTemplateActionDescription_ActionDescription">
+    <End Type="artModel.ActionDescription" Role="ActionDescription" Multiplicity="1" />
+    <End Type="artModel.ActionTemplateActionDescription" Role="ActionTemplateActionDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionDescription">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionTemplateActionDescription">
+        <PropertyRef Name="ActionDescription" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionTemplateActionDescription_ActionTemplate">
+    <End Type="artModel.ActionTemplate" Role="ActionTemplate" Multiplicity="1" />
+    <End Type="artModel.ActionTemplateActionDescription" Role="ActionTemplateActionDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionTemplateActionDescription">
+        <PropertyRef Name="ActionTemplate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MapInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ZoneCoordinats" Relationship="artModel.FK_ZoneCoordinats_MapInfo" FromRole="MapInfo" ToRole="ZoneCoordinat" />
+    <Property Name="Width" Type="Int32" Nullable="false" />
+    <Property Name="Height" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MapInfoDimensions" Relationship="artModel.FK_MapInfoDimension_MapInfo" FromRole="MapInfo" ToRole="MapInfoDimension" />
+  </EntityType>
+  <Association Name="FK_ZoneCoordinats_MapInfo">
+    <End Type="artModel.MapInfo" Role="MapInfo" Multiplicity="1" />
+    <End Type="artModel.ZoneCoordinat" Role="ZoneCoordinat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ZoneCoordinat">
+        <PropertyRef Name="MapInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MapInfoDimension">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Dimension" Type="Int32" Nullable="false" />
+    <Property Name="MapInfo" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MapInfo1" Relationship="artModel.FK_MapInfoDimension_MapInfo" FromRole="MapInfoDimension" ToRole="MapInfo" />
+    <NavigationProperty Name="MiddlePoints" Relationship="artModel.FK_MiddlePoint_MapInfoDimension" FromRole="MapInfoDimension" ToRole="MiddlePoint" />
+    <NavigationProperty Name="DimentionRadius" Relationship="artModel.FK_DimentionRadius_MapInfoDimension" FromRole="MapInfoDimension" ToRole="DimentionRadiu" />
+  </EntityType>
+  <Association Name="FK_MapInfoDimension_MapInfo">
+    <End Type="artModel.MapInfo" Role="MapInfo" Multiplicity="1" />
+    <End Type="artModel.MapInfoDimension" Role="MapInfoDimension" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MapInfoDimension">
+        <PropertyRef Name="MapInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MiddlePoint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="X" Type="Int32" Nullable="false" />
+    <Property Name="Y" Type="Int32" Nullable="false" />
+    <Property Name="RelatedCoordinates" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MapInfoDimension" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MapInfoDimension1" Relationship="artModel.FK_MiddlePoint_MapInfoDimension" FromRole="MiddlePoint" ToRole="MapInfoDimension" />
+    <NavigationProperty Name="MiddlePointNeighbors" Relationship="artModel.FK_MiddlePointNeighbors_MiddlePoint" FromRole="MiddlePoint" ToRole="MiddlePointNeighbor" />
+  </EntityType>
+  <Association Name="FK_MiddlePoint_MapInfoDimension">
+    <End Type="artModel.MapInfoDimension" Role="MapInfoDimension" Multiplicity="1" />
+    <End Type="artModel.MiddlePoint" Role="MiddlePoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfoDimension">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MiddlePoint">
+        <PropertyRef Name="MapInfoDimension" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="MiddlePointNeighbor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DimensionRadius" Type="Int32" Nullable="false" />
+    <Property Name="NeighborCoordinates" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="MiddlePoint" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MiddlePoint1" Relationship="artModel.FK_MiddlePointNeighbors_MiddlePoint" FromRole="MiddlePointNeighbor" ToRole="MiddlePoint" />
+    <NavigationProperty Name="DimentionRadiu" Relationship="artModel.FK_MiddlePointNeighbors_DimentionRadius" FromRole="MiddlePointNeighbor" ToRole="DimentionRadiu" />
+  </EntityType>
+  <Association Name="FK_MiddlePointNeighbors_MiddlePoint">
+    <End Type="artModel.MiddlePoint" Role="MiddlePoint" Multiplicity="1" />
+    <End Type="artModel.MiddlePointNeighbor" Role="MiddlePointNeighbor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MiddlePoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MiddlePointNeighbor">
+        <PropertyRef Name="MiddlePoint" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DimentionRadiu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapInfoDimension" Type="Int32" Nullable="false" />
+    <Property Name="Radius" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="MapInfoDimension1" Relationship="artModel.FK_DimentionRadius_MapInfoDimension" FromRole="DimentionRadiu" ToRole="MapInfoDimension" />
+    <NavigationProperty Name="MiddlePointNeighbors" Relationship="artModel.FK_MiddlePointNeighbors_DimentionRadius" FromRole="DimentionRadiu" ToRole="MiddlePointNeighbor" />
+  </EntityType>
+  <Association Name="FK_DimentionRadius_MapInfoDimension">
+    <End Type="artModel.MapInfoDimension" Role="MapInfoDimension" Multiplicity="1" />
+    <End Type="artModel.DimentionRadiu" Role="DimentionRadiu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfoDimension">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DimentionRadiu">
+        <PropertyRef Name="MapInfoDimension" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MiddlePointNeighbors_DimentionRadius">
+    <End Type="artModel.DimentionRadiu" Role="DimentionRadiu" Multiplicity="1" />
+    <End Type="artModel.MiddlePointNeighbor" Role="MiddlePointNeighbor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimentionRadiu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MiddlePointNeighbor">
+        <PropertyRef Name="DimensionRadius" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

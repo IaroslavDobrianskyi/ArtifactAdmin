@@ -14,6 +14,11 @@ namespace ArtifactAdmin.DAL.Models
     
     public partial class ActionDescription
     {
+        public ActionDescription()
+        {
+            this.ActionTemplateActionDescriptions = new HashSet<ActionTemplateActionDescription>();
+        }
+    
         public int Id { get; set; }
         public int ActionTemplate { get; set; }
         public Nullable<int> MapZone { get; set; }
@@ -25,5 +30,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual MapZone MapZone1 { get; set; }
         public virtual Race Race1 { get; set; }
         public virtual ActionTemplate ActionTemplate1 { get; set; }
+        public virtual ICollection<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
     }
 }

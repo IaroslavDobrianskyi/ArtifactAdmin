@@ -16,9 +16,10 @@ namespace ArtifactAdmin.DAL.Models
     {
         public int Id { get; set; }
         public int MapZone { get; set; }
-        public int x { get; set; }
-        public int y { get; set; }
+        public int MapInfo { get; set; }
+        public string Coordinates { get; set; }
     
         public virtual MapZone MapZone1 { get; set; }
+        public virtual MapInfo MapInfo1 { get; set; }
     }
 }

@@ -1,0 +1,59 @@
+﻿@using ArtifactAdmin.Web.Helpers
+@model ArtifactAdmin.BL.ModelsDTO.MapInfoDimensionDto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Середні точки карти</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MapInfo1.MapName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapInfo1.MapName)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Dimension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dimension)
+        </dd>
+
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Середні точки
+        </dt>
+
+        <dd >
+            @Html.Raw(@Html.Image(@Url.Action("ImageFromZoneCoordinatesWithMiddplePoints",new {id = Model.Id}),"",new object()))
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Зв'язки з координатами
+        </dt>
+
+        <dd >
+            @Html.Raw(@Html.Image(@Url.Action("MiddlePointsImage",new {id = Model.Id}),"",new object()))
+        </dd>
+    </dl>
+
+    
+</div>
+    
+<p>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

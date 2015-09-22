@@ -188,6 +188,9 @@
     <Compile Include="Models\ActionTemplate.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActionTemplateActionDescription.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActionTemplateCharacteristic.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
@@ -260,10 +263,19 @@
     <Compile Include="Models\DesireMapZone.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DimentionRadiu.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetDbSet.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IRepository.cs" />
     <Compile Include="Models\Log.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MapInfo.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MapInfoDimension.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MapObject.cs">
@@ -273,6 +285,12 @@
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MapZone.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MiddlePoint.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MiddlePointNeighbor.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Predisposition.cs">
@@ -386,6 +404,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
+    <Content Include="ClassDiagram1.cd" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

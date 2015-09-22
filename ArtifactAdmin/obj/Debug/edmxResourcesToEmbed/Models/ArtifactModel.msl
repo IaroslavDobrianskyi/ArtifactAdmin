@@ -537,8 +537,8 @@
     <EntitySetMapping Name="ZoneCoordinats">
       <EntityTypeMapping TypeName="artModel.ZoneCoordinat">
         <MappingFragment StoreEntitySet="ZoneCoordinats">
-          <ScalarProperty Name="y" ColumnName="y" />
-          <ScalarProperty Name="x" ColumnName="x" />
+          <ScalarProperty Name="Coordinates" ColumnName="Coordinates" />
+          <ScalarProperty Name="MapInfo" ColumnName="MapInfo" />
           <ScalarProperty Name="MapZone" ColumnName="MapZone" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -591,6 +591,65 @@
           <ScalarProperty Name="StepOrder" ColumnName="StepOrder" />
           <ScalarProperty Name="QuestTemaplate" ColumnName="QuestTemaplate" />
           <ScalarProperty Name="StepTemplate" ColumnName="StepTemplate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ActionTemplateActionDescriptions">
+      <EntityTypeMapping TypeName="artModel.ActionTemplateActionDescription">
+        <MappingFragment StoreEntitySet="ActionTemplateActionDescription">
+          <ScalarProperty Name="ActionDescription" ColumnName="ActionDescription" />
+          <ScalarProperty Name="ActionTemplate" ColumnName="ActionTemplate" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapInfoes">
+      <EntityTypeMapping TypeName="artModel.MapInfo">
+        <MappingFragment StoreEntitySet="MapInfo">
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Width" ColumnName="Width" />
+          <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+          <ScalarProperty Name="MapName" ColumnName="MapName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapInfoDimensions">
+      <EntityTypeMapping TypeName="artModel.MapInfoDimension">
+        <MappingFragment StoreEntitySet="MapInfoDimension">
+          <ScalarProperty Name="MapInfo" ColumnName="MapInfo" />
+          <ScalarProperty Name="Dimension" ColumnName="Dimension" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MiddlePoints">
+      <EntityTypeMapping TypeName="artModel.MiddlePoint">
+        <MappingFragment StoreEntitySet="MiddlePoint">
+          <ScalarProperty Name="MapInfoDimension" ColumnName="MapInfoDimension" />
+          <ScalarProperty Name="RelatedCoordinates" ColumnName="RelatedCoordinates" />
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MiddlePointNeighbors">
+      <EntityTypeMapping TypeName="artModel.MiddlePointNeighbor">
+        <MappingFragment StoreEntitySet="MiddlePointNeighbors">
+          <ScalarProperty Name="MiddlePoint" ColumnName="MiddlePoint" />
+          <ScalarProperty Name="NeighborCoordinates" ColumnName="NeighborCoordinates" />
+          <ScalarProperty Name="DimensionRadius" ColumnName="DimensionRadius" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DimentionRadius">
+      <EntityTypeMapping TypeName="artModel.DimentionRadiu">
+        <MappingFragment StoreEntitySet="DimentionRadius">
+          <ScalarProperty Name="Radius" ColumnName="Radius" />
+          <ScalarProperty Name="MapInfoDimension" ColumnName="MapInfoDimension" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

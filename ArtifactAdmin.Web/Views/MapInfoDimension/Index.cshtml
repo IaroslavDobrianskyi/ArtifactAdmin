@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ArtifactAdmin.BL.ModelsDTO.MapInfoDimensionDto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Виміри карти</h2>
+
+<p>
+    @Html.ActionLink("Новий запис", "Create")
+</p>
+<table id="MapObject" class="tablesorter" width="700px">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MapInfo1.MapName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dimension)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MapInfo1.MapName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dimension)
+                </td>
+                <td>
+                    @Html.ActionLink("Детально", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Видалити", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div id="pager" style="position: none;">
+    <form>
+        <img src="@Url.Content("~/Content/images/first.png")" class="first" />
+        <img src="@Url.Content("~/Content/images/prev.png")" class="prev" />
+        <input type="text" class="pagedisplay" />
+        <img src="@Url.Content("~/Content/images/next.png")" class="next" />
+        <img src="@Url.Content("~/Content/images/last.png")" class="last" />
+        <select class="pagesize">
+            <option selected="selected" value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+        </select>
+    </form>
+</div>
+@section ScriptsSortMapObject{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#MapObject").tablesorter({ headers: { 1: { sorter: false } }, widthFixed: true, sortList: [[0, 0]] })
+                .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
+        });
+    </script>}

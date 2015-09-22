@@ -1,0 +1,40 @@
+﻿@using ArtifactAdmin.Web.Helpers
+@model ArtifactAdmin.Web.Models.ZoneCoordinatesInfoModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Координати зон для карти: <h3><b>@Html.DisplayFor(model => model.MapName)</b></h3></h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LinesCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinesCount)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            Малюнок зформований з 
+            Координат зон
+        </dt>
+
+        <dd >
+            @Html.Raw(@Html.Image(@Url.Action("ImageFromZoneCoordinates",new {id = Model.MapInfoId}),"",new object()));
+            
+        </dd>
+    </dl>
+</div>
+    
+<p>
+    @Html.ActionLink("Стерти ZoneCoordinates", "Delete", new { id = @Model.MapInfoId } ) |
+    @Html.ActionLink("Створити ZoneCoordinates", "Create", new { id = @Model.MapInfoId }) |
+    @Html.ActionLink("Повернутись до списку", "Index","MapInfo")
+</p>

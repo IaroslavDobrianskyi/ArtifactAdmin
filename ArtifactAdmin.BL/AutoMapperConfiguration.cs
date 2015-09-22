@@ -46,6 +46,20 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<Talent, TalentDto>();
             Mapper.CreateMap<TalentDto, Talent>();
 
+
+            Mapper.CreateMap<MapInfo, MapInfoDto>();
+            Mapper.CreateMap<MapInfoDto, MapInfo>();
+
+            Mapper.CreateMap<MapInfoDimension, MapInfoDimensionDto>();
+            Mapper.CreateMap<MapInfoDimensionDto, MapInfoDimension>();
+
+            Mapper.CreateMap<MiddlePoint, MiddlePointDto>();
+            Mapper.CreateMap<MiddlePointDto, MiddlePoint>();
+
+            Mapper.CreateMap<ZoneCoordinat, ZoneCoordinatDto>();
+            Mapper.CreateMap<ZoneCoordinatDto, ZoneCoordinat>();
+            
+
             Mapper.CreateMap<MapObject, MapObjectDto>();
             Mapper.CreateMap<MapObjectDto, MapObject>();
 

@@ -40,6 +40,7 @@ namespace ArtifactAdmin.BL.Services
         {
             var mapObjects = Mapper.Map<MapObject>(mapObjectDto);
             this.mapObjectRepository.Insert(mapObjects);
+
             return Mapper.Map<MapObjectDto>(mapObjects);
         }
 

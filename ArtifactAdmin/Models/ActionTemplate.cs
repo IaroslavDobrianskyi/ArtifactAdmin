@@ -21,6 +21,7 @@ namespace ArtifactAdmin.DAL.Models
             this.ActionTemplateProperties = new HashSet<ActionTemplateProperty>();
             this.StepTemplateActionTemplates = new HashSet<StepTemplateActionTemplate>();
             this.ActionDescriptions = new HashSet<ActionDescription>();
+            this.ActionTemplateActionDescriptions = new HashSet<ActionTemplateActionDescription>();
         }
     
         public int Id { get; set; }
@@ -34,5 +35,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual ICollection<ActionTemplateProperty> ActionTemplateProperties { get; set; }
         public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
         public virtual ICollection<ActionDescription> ActionDescriptions { get; set; }
+        public virtual ICollection<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
     }
 }

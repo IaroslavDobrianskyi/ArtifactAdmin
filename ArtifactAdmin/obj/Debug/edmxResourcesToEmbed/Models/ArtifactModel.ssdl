@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="artModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="artModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Action">
     <Key>
       <PropertyRef Name="Id" />
@@ -80,6 +80,14 @@
     <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="BlockProbability" Type="float" Nullable="false" />
     <Property Name="ActionTemplateResult" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ActionTemplateActionDescription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ActionTemplate" Type="int" Nullable="false" />
+    <Property Name="ActionDescription" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ActionTemplateCharacteristics">
     <Key>
@@ -265,6 +273,14 @@
     <Property Name="MapZone" Type="int" Nullable="false" />
     <Property Name="Modifier" Type="float" Nullable="false" />
   </EntityType>
+  <EntityType Name="DimentionRadius">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MapInfoDimension" Type="int" Nullable="false" />
+    <Property Name="Radius" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Log">
     <Key>
       <PropertyRef Name="Id" />
@@ -274,6 +290,24 @@
     <Property Name="ExtendedLog" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Date" Type="datetime" Nullable="false" />
     <Property Name="UserArtifact" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MapInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MapName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ImagePath" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Width" Type="int" Nullable="false" />
+    <Property Name="Height" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MapInfoDimension">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Dimension" Type="int" Nullable="false" />
+    <Property Name="MapInfo" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="MapObject">
     <Key>
@@ -298,6 +332,25 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ZoneName" Type="nchar" MaxLength="50" Nullable="false" />
     <Property Name="Color" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MiddlePoint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="X" Type="int" Nullable="false" />
+    <Property Name="Y" Type="int" Nullable="false" />
+    <Property Name="RelatedCoordinates" Type="varchar(max)" Nullable="false" />
+    <Property Name="MapInfoDimension" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MiddlePointNeighbors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DimensionRadius" Type="int" Nullable="false" />
+    <Property Name="NeighborCoordinates" Type="varchar(max)" Nullable="false" />
+    <Property Name="MiddlePoint" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Predisposition">
     <Key>
@@ -535,10 +588,10 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MapZone" Type="int" Nullable="false" />
-    <Property Name="x" Type="int" Nullable="false" />
-    <Property Name="y" Type="int" Nullable="false" />
+    <Property Name="MapInfo" Type="int" Nullable="false" />
+    <Property Name="Coordinates" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="FK_Action_Step">
     <End Role="Step" Type="Self.Step" Multiplicity="1" />
@@ -717,6 +770,30 @@
       </Principal>
       <Dependent Role="ActionTemplate">
         <PropertyRef Name="ActionTemplateResult" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionTemplateActionDescription_ActionDescription">
+    <End Role="ActionDescription" Type="Self.ActionDescription" Multiplicity="1" />
+    <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionDescription">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionTemplateActionDescription">
+        <PropertyRef Name="ActionDescription" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ActionTemplateActionDescription_ActionTemplate">
+    <End Role="ActionTemplate" Type="Self.ActionTemplate" Multiplicity="1" />
+    <End Role="ActionTemplateActionDescription" Type="Self.ActionTemplateActionDescription" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ActionTemplate">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ActionTemplateActionDescription">
+        <PropertyRef Name="ActionTemplate" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -996,6 +1073,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_DimentionRadius_MapInfoDimension">
+    <End Role="MapInfoDimension" Type="Self.MapInfoDimension" Multiplicity="1" />
+    <End Role="DimentionRadius" Type="Self.DimentionRadius" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfoDimension">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DimentionRadius">
+        <PropertyRef Name="MapInfoDimension" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Log_UserArtifact">
     <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
     <End Role="Log" Type="Self.Log" Multiplicity="*" />
@@ -1005,6 +1094,18 @@
       </Principal>
       <Dependent Role="Log">
         <PropertyRef Name="UserArtifact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MapInfoDimension_MapInfo">
+    <End Role="MapInfo" Type="Self.MapInfo" Multiplicity="1" />
+    <End Role="MapInfoDimension" Type="Self.MapInfoDimension" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MapInfoDimension">
+        <PropertyRef Name="MapInfo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1029,6 +1130,42 @@
       </Principal>
       <Dependent Role="MapObjectProbability">
         <PropertyRef Name="MapZone" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MiddlePoint_MapInfoDimension">
+    <End Role="MapInfoDimension" Type="Self.MapInfoDimension" Multiplicity="1" />
+    <End Role="MiddlePoint" Type="Self.MiddlePoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfoDimension">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MiddlePoint">
+        <PropertyRef Name="MapInfoDimension" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MiddlePointNeighbors_DimentionRadius">
+    <End Role="DimentionRadius" Type="Self.DimentionRadius" Multiplicity="1" />
+    <End Role="MiddlePointNeighbors" Type="Self.MiddlePointNeighbors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimentionRadius">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MiddlePointNeighbors">
+        <PropertyRef Name="DimensionRadius" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MiddlePointNeighbors_MiddlePoint">
+    <End Role="MiddlePoint" Type="Self.MiddlePoint" Multiplicity="1" />
+    <End Role="MiddlePointNeighbors" Type="Self.MiddlePointNeighbors" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MiddlePoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MiddlePointNeighbors">
+        <PropertyRef Name="MiddlePoint" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1308,6 +1445,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ZoneCoordinats_MapInfo">
+    <End Role="MapInfo" Type="Self.MapInfo" Multiplicity="1" />
+    <End Role="ZoneCoordinats" Type="Self.ZoneCoordinats" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ZoneCoordinats">
+        <PropertyRef Name="MapInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ZoneCoordinats_MapZone">
     <End Role="MapZone" Type="Self.MapZone" Multiplicity="1" />
     <End Role="ZoneCoordinats" Type="Self.ZoneCoordinats" Multiplicity="*" />
@@ -1329,6 +1478,7 @@
     <EntitySet Name="ActionResult" EntityType="Self.ActionResult" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionResultDesire" EntityType="Self.ActionResultDesire" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionTemplate" EntityType="Self.ActionTemplate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ActionTemplateActionDescription" EntityType="Self.ActionTemplateActionDescription" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionTemplateCharacteristics" EntityType="Self.ActionTemplateCharacteristics" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionTemplatePredisposition" EntityType="Self.ActionTemplatePredisposition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ActionTemplateProperties" EntityType="Self.ActionTemplateProperties" Schema="dbo" store:Type="Tables" />
@@ -1348,10 +1498,15 @@
     <EntitySet Name="Desire" EntityType="Self.Desire" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DesireActionTemplateResult" EntityType="Self.DesireActionTemplateResult" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DesireMapZone" EntityType="Self.DesireMapZone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DimentionRadius" EntityType="Self.DimentionRadius" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MapInfo" EntityType="Self.MapInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MapInfoDimension" EntityType="Self.MapInfoDimension" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MapObject" EntityType="Self.MapObject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MapObjectProbability" EntityType="Self.MapObjectProbability" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MapZone" EntityType="Self.MapZone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MiddlePoint" EntityType="Self.MiddlePoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MiddlePointNeighbors" EntityType="Self.MiddlePointNeighbors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Predisposition" EntityType="Self.Predisposition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quest" EntityType="Self.Quest" Schema="dbo" store:Type="Tables" />
@@ -1434,6 +1589,14 @@
     <AssociationSet Name="FK_ActionTemplate_ActionTemplateResult1" Association="Self.FK_ActionTemplate_ActionTemplateResult1">
       <End Role="ActionTemplateResult" EntitySet="ActionTemplateResult" />
       <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="Self.FK_ActionTemplateActionDescription_ActionDescription">
+      <End Role="ActionDescription" EntitySet="ActionDescription" />
+      <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ActionTemplateActionDescription_ActionTemplate" Association="Self.FK_ActionTemplateActionDescription_ActionTemplate">
+      <End Role="ActionTemplate" EntitySet="ActionTemplate" />
+      <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescription" />
     </AssociationSet>
     <AssociationSet Name="FK_ActionTemplateCharacteristics_ActionTemplate" Association="Self.FK_ActionTemplateCharacteristics_ActionTemplate">
       <End Role="ActionTemplate" EntitySet="ActionTemplate" />
@@ -1527,9 +1690,17 @@
       <End Role="MapZone" EntitySet="MapZone" />
       <End Role="DesireMapZone" EntitySet="DesireMapZone" />
     </AssociationSet>
+    <AssociationSet Name="FK_DimentionRadius_MapInfoDimension" Association="Self.FK_DimentionRadius_MapInfoDimension">
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimension" />
+      <End Role="DimentionRadius" EntitySet="DimentionRadius" />
+    </AssociationSet>
     <AssociationSet Name="FK_Log_UserArtifact" Association="Self.FK_Log_UserArtifact">
       <End Role="UserArtifact" EntitySet="UserArtifact" />
       <End Role="Log" EntitySet="Log" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MapInfoDimension_MapInfo" Association="Self.FK_MapInfoDimension_MapInfo">
+      <End Role="MapInfo" EntitySet="MapInfo" />
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimension" />
     </AssociationSet>
     <AssociationSet Name="FK_MapObjectProbability_MapObject" Association="Self.FK_MapObjectProbability_MapObject">
       <End Role="MapObject" EntitySet="MapObject" />
@@ -1538,6 +1709,18 @@
     <AssociationSet Name="FK_MapObjectProbability_MapZone" Association="Self.FK_MapObjectProbability_MapZone">
       <End Role="MapZone" EntitySet="MapZone" />
       <End Role="MapObjectProbability" EntitySet="MapObjectProbability" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MiddlePoint_MapInfoDimension" Association="Self.FK_MiddlePoint_MapInfoDimension">
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimension" />
+      <End Role="MiddlePoint" EntitySet="MiddlePoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MiddlePointNeighbors_DimentionRadius" Association="Self.FK_MiddlePointNeighbors_DimentionRadius">
+      <End Role="DimentionRadius" EntitySet="DimentionRadius" />
+      <End Role="MiddlePointNeighbors" EntitySet="MiddlePointNeighbors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MiddlePointNeighbors_MiddlePoint" Association="Self.FK_MiddlePointNeighbors_MiddlePoint">
+      <End Role="MiddlePoint" EntitySet="MiddlePoint" />
+      <End Role="MiddlePointNeighbors" EntitySet="MiddlePointNeighbors" />
     </AssociationSet>
     <AssociationSet Name="FK_Quest_Carrier" Association="Self.FK_Quest_Carrier">
       <End Role="Carrier" EntitySet="Carrier" />
@@ -1630,6 +1813,10 @@
     <AssociationSet Name="FK_UserTalent_UserArtifact" Association="Self.FK_UserTalent_UserArtifact">
       <End Role="UserArtifact" EntitySet="UserArtifact" />
       <End Role="UserArtifactTalent" EntitySet="UserArtifactTalent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ZoneCoordinats_MapInfo" Association="Self.FK_ZoneCoordinats_MapInfo">
+      <End Role="MapInfo" EntitySet="MapInfo" />
+      <End Role="ZoneCoordinats" EntitySet="ZoneCoordinats" />
     </AssociationSet>
     <AssociationSet Name="FK_ZoneCoordinats_MapZone" Association="Self.FK_ZoneCoordinats_MapZone">
       <End Role="MapZone" EntitySet="MapZone" />
