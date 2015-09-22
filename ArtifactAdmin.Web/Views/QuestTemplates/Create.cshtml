@@ -1,0 +1,141 @@
+﻿@model ArtifactAdmin.BL.ModelsDTO.QuestTemplateDto
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Створити новий запис</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Шаблон квесту-шаблон кроку</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div>
+            <table class="table">
+                <tr>
+                    <td>
+                        @Html.LabelFor(model => model.AllSteps)<br/>
+                        @Html.ListBoxFor(model => model.AllSteps, new MultiSelectList(Model.AllSteps, "Id", "Name"), new { size = 8, style = "width:250px" })
+                    </td>
+                    <td style="text-align: center">
+                        <input type="button" id="add" value=">" onclick="javascript: MoveObj(document.getElementById('AllSteps'), document.getElementById('SelectedSteps'));">
+                        <br/>
+                        <input type="button" id="rem" value="<" onclick="javascript: MoveObj(document.getElementById('SelectedSteps'), document.getElementById('AllSteps'));">
+                    </td>
+                    <td>
+                        @Html.LabelFor(model => model.SelectedSteps)<br/>
+                        @Html.ListBoxFor(model => model.SelectedSteps, new MultiSelectList(Model.SelectedSteps, "Id", "Name"), new { size = 8, style = "width:250px" })
+                    </td>
+                    <td style="text-align: center">
+                        <label for="up">Змінити порядок кроків:</label>
+                        <br />
+                        <input type="button" id="up" value="" style="background: url(/Content/images/desc.png) no-repeat" onclick="javascript: MoveUp(document.getElementById('SelectedSteps'));" />
+                        <br/>
+                        <input type="button" id="down" value="" style="background: url(/Content/images/asc.png) no-repeat" onclick="javascript: MoveDown(document.getElementById('SelectedSteps'));" />
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll();" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function MoveObj(from, to){
+            var selId = '';
+            var selText = '';
+            // Move rows from SS1 to SS2 from bottom to top
+            for (var i = from.options.length - 1; i >= 0; i--){
+                if (from.options[i].selected == true){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    to.options[to.length] = newRow;
+                    from.options[i] = null;
+                }
+            }
+        }
+
+        function SelAll(){
+            var to = document.getElementById('SelectedSteps');
+            for (var i = to.options.length - 1; i >= 0; i--){
+                to.options[i].selected = true;
+            }
+        }
+
+        function MoveUp(list){
+            var selId = "";
+            var selText = "";
+            var prevId = "";
+            var prevText = "";
+            for (var i = 0; i < list.options.length; i++){
+                if (list.options[i].selected == true){
+                    if (i > 0){
+                        selId = list.options[i].value;
+                        selText = list.options[i].text;
+                        prevId = list.options[i - 1].value;
+                        prevText = list.options[i - 1].text;
+                        list.options[i - 1].value = selId;
+                        list.options[i - 1].text = selText;
+                        list.options[i].value = prevId;
+                        list.options[i].text = prevText;
+                    }
+                    break;
+                }
+            }
+        }
+
+        function MoveDown(list){
+            var selId = "";
+            var selText = "";
+            var nextId = "";
+            var nextText = "";
+            for (var i = 0; i < list.options.length; i++){
+                if (list.options[i].selected == true){
+                    if (i < list.options.length - 1){
+                        selId = list.options[i].value;
+                        selText = list.options[i].text;
+                        nextId = list.options[i + 1].value;
+                        nextText = list.options[i + 1].text;
+                        list.options[i + 1].value = selId;
+                        list.options[i + 1].text = selText;
+                        list.options[i].value = nextId;
+                        list.options[i].text = nextText;
+                    }
+                    break;
+                }
+            }
+        }
+    </script>
+}

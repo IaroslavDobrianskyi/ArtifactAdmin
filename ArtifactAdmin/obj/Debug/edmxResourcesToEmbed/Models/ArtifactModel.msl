@@ -595,7 +595,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ActionTemplateActionDescriptions">
+    <FunctionImportMapping FunctionImportName="QuestStarter" FunctionName="artModel.Store.QuestStarter" />
+<EntitySetMapping Name="ActionTemplateActionDescriptions">
       <EntityTypeMapping TypeName="artModel.ActionTemplateActionDescription">
         <MappingFragment StoreEntitySet="ActionTemplateActionDescription">
           <ScalarProperty Name="ActionDescription" ColumnName="ActionDescription" />

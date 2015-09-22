@@ -329,7 +329,10 @@
       <End Role="QuestTemplate" EntitySet="QuestTemplates" />
       <End Role="Quest" EntitySet="Quests" />
     </AssociationSet>
-    <EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
+    <FunctionImport Name="QuestStarter" ReturnType="Collection(Int32)">
+      <Parameter Name="idActionResult" Mode="In" Type="Int32" />
+    </FunctionImport>
+<EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
     <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="artModel.FK_ActionTemplateActionDescription_ActionDescription">
       <End Role="ActionDescription" EntitySet="ActionDescriptions" />
       <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescriptions" />
@@ -516,7 +519,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="PredispositionResultModifier" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="PredispositionResultModifier" Type="Double" Nullable="false" />
     <Property Name="ExperienceModifier" Type="Double" Nullable="false" />
     <Property Name="ArtifactPosibility" Type="Double" Nullable="false" />
     <Property Name="GoldModifier" Type="Double" Nullable="false" />

@@ -22,10 +22,14 @@ namespace ArtifactAdmin.BL.ModelsDTO
   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public string Name { get; set; }
 
+        [Display(Name = "Ймовірність блокування дії")]
         public double BlockProbability { get; set; }
 
+        [Required(ErrorMessageResourceName = "RequiredActionResult",
+    ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
         public int ActionTemplateResult { get; set; }
 
+        [Display(Name = "Результат дії")]
         public virtual ActionTemplateResultDto ActionTemplateResult1 { get; set; }
     }
 }

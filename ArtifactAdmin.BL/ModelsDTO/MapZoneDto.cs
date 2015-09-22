@@ -32,5 +32,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
 
         [Display(Name = "Об'єкти та імовірності")]
         public virtual ICollection<MapObjectProbabilityDto> MapObjectProbabilities { get; set; }
+
+        public ViewDesireMapZoneDto ViewDesireMapZoneDto { get; set; }
     }
 }

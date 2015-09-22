@@ -41,14 +41,14 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public List<double> Deviations { get; set; }
 
         [Display(Name = "Введіть ймовірність")]
-        [RegularExpression(@"0.\d+", ErrorMessage = "Введіть число від 0 до 1 !")]
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Введіть число від 0 до 1 !")]
         public string OneProbability { get; set; }
 
          [Display(Name = "Введіть базове значення")]
         public int DefaultValue { get; set; }
 
         [Display(Name = "Введіть  відхилення")]
-        [RegularExpression(@"0.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Введіть число від 0.0 до 1 !")]
         public string Deviation { get; set; }
     }
 }

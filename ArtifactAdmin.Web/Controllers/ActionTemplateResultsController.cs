@@ -49,7 +49,7 @@ namespace ArtifactAdmin.Web.Controllers
         // GET: ActionTemplateResults/Create
         public ActionResult Create()
         {
-            return View();
+            return View(this.actionTemplateResultService.GetViewById(null));
         }
 
         // POST: ActionTemplateResults/Create
@@ -57,10 +57,16 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier")] ActionTemplateResultDto actionTemplateResultDto)
+        public ActionResult Create([Bind(Include = "Id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier,QuestTemplate")] ActionTemplateResultDto actionTemplateResultDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
+            var viewActionTemplateResult = this.actionTemplateResultService.GetViewById(null);
+            viewActionTemplateResult.PredispositionResultModifier = actionTemplateResultDto.PredispositionResultModifier;
+            viewActionTemplateResult.ExperienceModifier = actionTemplateResultDto.ExperienceModifier;
+            viewActionTemplateResult.ArtifactPosibility = actionTemplateResultDto.ArtifactPosibility;
+            viewActionTemplateResult.GoldModifier = actionTemplateResultDto.GoldModifier;
+            viewActionTemplateResult.QuestTemplate = actionTemplateResultDto.QuestTemplate;
             if (ModelState.IsValid)
             {
                 try
@@ -71,13 +77,13 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    return View(actionTemplateResultDto);
+                    return View(viewActionTemplateResult);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            return View(actionTemplateResultDto);
+            return View(viewActionTemplateResult);
         }
 
         // GET: ActionTemplateResults/Edit/5
@@ -88,7 +94,7 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var actionTemplateResult = this.actionTemplateResultService.GetById(id);
+            var actionTemplateResult = this.actionTemplateResultService.GetViewById(id);
             if (actionTemplateResult == null)
             {
                 return HttpNotFound();
@@ -102,10 +108,16 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier")] ActionTemplateResultDto actionTemplateResultDto)
+        public ActionResult Edit([Bind(Include = "Id,PredispositionResultModifier,ExperienceModifier,ArtifactPosibility,GoldModifier,QuestTemplate")] ActionTemplateResultDto actionTemplateResultDto)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
+            var viewActionTemplateResult = this.actionTemplateResultService.GetViewById(null);
+            viewActionTemplateResult.PredispositionResultModifier = actionTemplateResultDto.PredispositionResultModifier;
+            viewActionTemplateResult.ExperienceModifier = actionTemplateResultDto.ExperienceModifier;
+            viewActionTemplateResult.ArtifactPosibility = actionTemplateResultDto.ArtifactPosibility;
+            viewActionTemplateResult.GoldModifier = actionTemplateResultDto.GoldModifier;
+            viewActionTemplateResult.QuestTemplate = actionTemplateResultDto.QuestTemplate;
             if (ModelState.IsValid)
             {
                 try
@@ -116,13 +128,13 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    return View(actionTemplateResultDto);
+                    return View(viewActionTemplateResult);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            return View(actionTemplateResultDto);
+            return View(viewActionTemplateResult);
         }
 
         // GET: ActionTemplateResults/Delete/5

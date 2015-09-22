@@ -19,11 +19,17 @@ namespace ArtifactAdmin.BL.Interfaces
             ViewMapZoneDto GetViewById(int? id);
 
             MapZoneDto GetById(int? id);
+        
+            MapZoneDto GetByIdDesire(int id);
 
+            ViewMapZoneDto GetByList(MapZoneDto mapZoneDto, string[] obj, string[] probability);
+        
             MapZoneDto Create(MapZoneDto mapZoneDto, string[] obj, string[] probability);
 
             MapZoneDto Update(MapZoneDto mapZOneDto, string[] obj, string[] probability);
 
+            void UpdateDesireMapZone(int id, int[] desireMapZoneId, string[] modifiers);
+     
             void Delete(int? id);
             void EnshureAllZonesPresentInMapInfo(int? mapInfoId);
     }

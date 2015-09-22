@@ -34,15 +34,48 @@
             </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ActionTemplateDto.ActionTemplateResult1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <label class="control-label col-md-2" for="ActionTemplateDto_ActionTemplateResult1">Виберіть результат дії:</label>
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "Id", "ArtifactPosibility", SelResult), htmlAttributes: new
-           {
-               @class = "form-control",
-               onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateresult'));"
-           })
-                @Html.ValidationMessageFor(model => model.ActionTemplateResults, "", new { @class = "text-danger" })
+                <table>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.PredispositionResultModifier)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.ExperienceModifier)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.ArtifactPosibility)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.GoldModifier)
+                        </td>
+                        <td>
+                            @Html.DisplayNameFor(model => model.ActionTemplateDto.ActionTemplateResult1.QuestTemplate1)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(m => m.NameResult, new SelectList(Model.ActionTemplateResults, "Id", "PredispositionResultModifier", SelResult), new { @class = "form-control", id = "item1", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.NameResult, new SelectList(Model.ActionTemplateResults, "Id", "ExperienceModifier", SelResult), htmlAttributes: new { @class = "form-control", id = "item2", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.NameResult, new SelectList(Model.ActionTemplateResults, "Id", "ArtifactPosibility", SelResult), htmlAttributes: new { @class = "form-control", id = "item3", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.NameResult, new SelectList(Model.ActionTemplateResults, "Id", "GoldModifier", SelResult), htmlAttributes: new { @class = "form-control", id = "item4", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(m => m.NameResult, new SelectList(Model.ActionTemplateResults, "Id", "QuestTemplate1", SelResult), htmlAttributes: new { @class = "form-control", id = "item5", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                        </td>
+                    </tr>
+                </table>
+
+                @Html.ValidationMessageFor(model => model.ActionTemplateDto.ActionTemplateResult, "", new { @class = "text-danger" })
             </div>
+
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
@@ -59,15 +92,22 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
-    function SelId(Sel,HiddenId)
-    {
+    function SelId(Sel, HiddenId) {
         var SelId = "";
-        for (i = 0; i < Sel.options.length; i++)
-        {
-            if (Sel.options[i].selected == true)
-            {
+        var item1 = document.getElementById("item1");
+        var item2 = document.getElementById("item2");
+        var item3 = document.getElementById("item3");
+        var item4 = document.getElementById("item4");
+        var item5 = document.getElementById("item5");
+        for (i = 0; i < Sel.options.length; i++) {
+            if (Sel.options[i].selected == true) {
                 SelId = Sel.options[i].value;
                 HiddenId.value = Number(SelId);
+                item1.options[i].selected = true;
+                item2.options[i].selected = true;
+                item3.options[i].selected = true;
+                item4.options[i].selected = true;
+                item5.options[i].selected = true;
                 break;
             }
         }
@@ -76,7 +116,7 @@
         var Val = document.getElementById("OneProbability").value.toString();
         var ValidateProbability = Number(Val);
         var Message = document.getElementById("MessageError");
-        if (Val.substring(0, 3) == "0.0" & Number(Val) == 0) {
+        if (Number(Val) == 0) {
             Message.value = "Введіть число від 0 до 1 !";
             Message.hidden = false;
         }

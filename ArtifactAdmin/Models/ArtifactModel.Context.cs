@@ -12,6 +12,8 @@ namespace ArtifactAdmin.DAL.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class artEntities : DbContext
     {
@@ -79,7 +81,17 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<QuestStep> QuestSteps { get; set; }
         public virtual DbSet<QuestTemplate> QuestTemplates { get; set; }
         public virtual DbSet<QuestTemplateStepTemplate> QuestTemplateStepTemplates { get; set; }
-        public virtual DbSet<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
+    
+        public virtual ObjectResult<Nullable<int>> QuestStarter(Nullable<int> idActionResult)
+        {
+            var idActionResultParameter = idActionResult.HasValue ?
+                new ObjectParameter("idActionResult", idActionResult) :
+                new ObjectParameter("idActionResult", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("QuestStarter", idActionResultParameter);
+        }
+
+public virtual DbSet<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
         public virtual DbSet<MapInfo> MapInfoes { get; set; }
         public virtual DbSet<MapInfoDimension> MapInfoDimensions { get; set; }
         public virtual DbSet<MiddlePoint> MiddlePoints { get; set; }

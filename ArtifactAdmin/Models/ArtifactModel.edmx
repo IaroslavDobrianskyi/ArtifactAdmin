@@ -126,7 +126,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PredispositionResultModifier" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PredispositionResultModifier" Type="float" Nullable="false" />
           <Property Name="ExperienceModifier" Type="float" Nullable="false" />
           <Property Name="ArtifactPosibility" Type="float" Nullable="false" />
           <Property Name="GoldModifier" Type="float" Nullable="false" />
@@ -318,7 +318,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="MapObjectProbability">
@@ -1474,6 +1474,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="QuestStarter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idActionResult" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="artModelStoreContainer">
           <EntitySet Name="Action" EntityType="Self.Action" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ActionCharacteristics" EntityType="Self.ActionCharacteristics" Schema="dbo" store:Type="Tables" />
@@ -2161,7 +2164,10 @@
             <End Role="QuestTemplate" EntitySet="QuestTemplates" />
             <End Role="Quest" EntitySet="Quests" />
           </AssociationSet>
-          <EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
+          <FunctionImport Name="QuestStarter" ReturnType="Collection(Int32)">
+          <Parameter Name="idActionResult" Mode="In" Type="Int32" />
+          </FunctionImport>
+ <EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
           <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="artModel.FK_ActionTemplateActionDescription_ActionDescription">
             <End Role="ActionDescription" EntitySet="ActionDescriptions" />
             <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescriptions" />
@@ -2199,7 +2205,7 @@
             <End Role="DimentionRadiu" EntitySet="DimentionRadius" />
             <End Role="MiddlePointNeighbor" EntitySet="MiddlePointNeighbors" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Action">
           <Key>
             <PropertyRef Name="Id" />
@@ -2348,7 +2354,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="PredispositionResultModifier" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="PredispositionResultModifier" Type="Double" Nullable="false" />
           <Property Name="ExperienceModifier" Type="Double" Nullable="false" />
           <Property Name="ArtifactPosibility" Type="Double" Nullable="false" />
           <Property Name="GoldModifier" Type="Double" Nullable="false" />
@@ -4419,7 +4425,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ActionTemplateActionDescriptions">
+          <FunctionImportMapping FunctionImportName="QuestStarter" FunctionName="artModel.Store.QuestStarter" />
+ <EntitySetMapping Name="ActionTemplateActionDescriptions">
             <EntityTypeMapping TypeName="artModel.ActionTemplateActionDescription">
               <MappingFragment StoreEntitySet="ActionTemplateActionDescription">
                 <ScalarProperty Name="ActionDescription" ColumnName="ActionDescription" />

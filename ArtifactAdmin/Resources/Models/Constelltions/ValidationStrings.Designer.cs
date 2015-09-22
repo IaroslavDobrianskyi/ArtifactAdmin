@@ -61,6 +61,15 @@ namespace ValidationConstellation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Виберіть результат дії!.
+        /// </summary>
+        public static string RequiredActionResult {
+            get {
+                return ResourceManager.GetString("RequiredActionResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Виберіть дію!.
         /// </summary>
         public static string RequiredActionTemplate {
@@ -111,6 +120,15 @@ namespace ValidationConstellation {
         public static string RequiredLength {
             get {
                 return ResourceManager.GetString("RequiredLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Введіть додатнє число!.
+        /// </summary>
+        public static string RequiredLevel {
+            get {
+                return ResourceManager.GetString("RequiredLevel", resourceCulture);
             }
         }
         

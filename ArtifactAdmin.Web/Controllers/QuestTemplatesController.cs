@@ -1,36 +1,37 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="StepTemplatesController.cs" company="Artifact">
+// <copyright file="QuestTemplatesController.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
 // <summary>
-//   Defines the StepTemplatesController type.
+//   Defines the QuestTemplatesController type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
+    using System.Linq.Expressions;
     using System.Net;
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
     using BL.Utils;
 
-    public class StepTemplatesController : Controller
+    public class QuestTemplatesController : Controller
     {
-        private IStepTemplateService stepTemplateService;
+        private IQuestTemplateService questTemplateService;
 
-        public StepTemplatesController(IStepTemplateService stepTemplateService)
+        public QuestTemplatesController(IQuestTemplateService questTemplateService)
         {
-            this.stepTemplateService = stepTemplateService;
+            this.questTemplateService = questTemplateService;
         }
-    
-        // GET: StepTemplates
+
+        // GET: QuestTemplates
         public ActionResult Index()
         {
-            return View(this.stepTemplateService.GetAll());
+            return View(this.questTemplateService.GetAll());
         }
 
-        // GET: StepTemplates/Details/5
+        // GET: QuestTemplates/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,45 +39,42 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var viewStepTemplateDto = this.stepTemplateService.GetViewById(id);
-            if (viewStepTemplateDto == null)
+            var questTemplate = this.questTemplateService.GetViewById(id);
+            if (questTemplate == null)
             {
                 return HttpNotFound();
             }
 
-            return View(viewStepTemplateDto);
+            return View(questTemplate);
         }
 
-        // GET: StepTemplates/Create
-       
+        // GET: QuestTemplates/Create
         public ActionResult Create()
         {
-            var viewStepTemplateDto = this.stepTemplateService.GetViewById(null);
-            return View(viewStepTemplateDto);
+            return View(this.questTemplateService.GetViewById(null));
         }
-        
-        // POST: StepTemplates/Create
+
+        // POST: QuestTemplates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Description,StepText,Name,Desire,IsNotVisibleInFlow,IsQuestStarter")] StepTemplateDto stepTemplate, string[] selectedStepObject)
+        public ActionResult Create([Bind(Include = "Id,Name,Description")] QuestTemplateDto questTemplateDto, string[] selectedSteps)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var viewStepTemplateDto = new ViewStepTemplateDto();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    this.stepTemplateService.Create(stepTemplate, selectedStepObject);
+                    this.questTemplateService.Create(questTemplateDto, selectedSteps);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
-                    return View(viewStepTemplateDto);
+                    questTemplateDto = this.questTemplateService.GetByList(questTemplateDto, selectedSteps);
+                    return View(questTemplateDto);
                 }
 
                 return RedirectToAction("Index");
@@ -84,11 +82,11 @@ namespace ArtifactAdmin.Web.Controllers
 
             ViewBag.Error = "Помилка при створенні нового запису";
             ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
-            viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
-            return View(viewStepTemplateDto);
+            questTemplateDto = this.questTemplateService.GetByList(questTemplateDto, selectedSteps); 
+            return View(questTemplateDto);
         }
 
-        // GET: StepTemplates/Edit/5
+        // GET: QuestTemplates/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -96,37 +94,36 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var viewStepTemplateDto = this.stepTemplateService.GetViewById(id);
-            if (viewStepTemplateDto == null)
+            var questTemplateDto = this.questTemplateService.GetViewById(id);
+            if (questTemplateDto == null)
             {
                 return HttpNotFound();
             }
 
-            return View(viewStepTemplateDto);
+            return View(questTemplateDto);
         }
 
-        // POST: StepTemplates/Edit/5
+        // POST: QuestTemplates/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Description,StepText,Name,Desire,IsNotVisibleInFlow,IsQuestStarter")] StepTemplateDto stepTemplate, string[] selectedStepObject)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description")] QuestTemplateDto questTemplateDto, string[] selectedSteps)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var viewStepTemplateDto = new ViewStepTemplateDto();
             if (ModelState.IsValid)
             {
                 try
                 {
-                    this.stepTemplateService.Update(stepTemplate, selectedStepObject);
+                    this.questTemplateService.Update(questTemplateDto, selectedSteps);
                 }
                 catch (Exception e)
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
-                    return View(viewStepTemplateDto);
+                    questTemplateDto = this.questTemplateService.GetByList(questTemplateDto, selectedSteps);
+                    return View(questTemplateDto);
                 }
 
                 return RedirectToAction("Index");
@@ -134,11 +131,11 @@ namespace ArtifactAdmin.Web.Controllers
 
             ViewBag.Error = "Помилка при спробі змінити запис";
             ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
-            viewStepTemplateDto = this.stepTemplateService.GetViewById(stepTemplate.Id);
-            return View(viewStepTemplateDto);
+            questTemplateDto = this.questTemplateService.GetByList(questTemplateDto, selectedSteps);
+            return View(questTemplateDto);
         }
 
-        // GET: StepTemplates/Delete/5
+        // GET: QuestTemplates/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -146,32 +143,32 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var stepTemplateDto = this.stepTemplateService.GetById(id);
-            if (stepTemplateDto == null)
+            var questTemplateDto = this.questTemplateService.GetViewById(id);
+            if (questTemplateDto == null)
             {
                 return HttpNotFound();
             }
 
-            return View(stepTemplateDto);
+            return View(questTemplateDto);
         }
 
-        // POST: StepTemplates/Delete/5
+        // POST: QuestTemplates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
-            var stepTemplateDto = this.stepTemplateService.GetById(id);
+            var questTemplateDto = this.questTemplateService.GetViewById(id);
             try
             {
-                this.stepTemplateService.Delete(id);
+                this.questTemplateService.Delete(id);
             }
             catch (Exception e)
             {
                 ViewBag.Error = "Помилка при видаленні запису !";
                 ViewBag.ErrMes = e.Message;
-                return View(stepTemplateDto);
+                return View(questTemplateDto);
             }
 
             return RedirectToAction("Index");

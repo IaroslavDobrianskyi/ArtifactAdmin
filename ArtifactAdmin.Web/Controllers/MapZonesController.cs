@@ -13,6 +13,7 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
+    using BL.Utils;
 
     public class MapZonesController : Controller
     {
@@ -73,14 +74,16 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при створенні нового запису";
                     ViewBag.ErrMes = e.Message;
-                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+                    viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
                     return View(viewMapZoneDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
+            viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
             return View(viewMapZoneDto);
         }
 
@@ -121,14 +124,16 @@ namespace ArtifactAdmin.Web.Controllers
                 {
                     ViewBag.Error = "Помилка при спробі змінити запис";
                     ViewBag.ErrMes = e.Message;
-                    viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+                    viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
                     return View(viewMapZoneDto);
                 }
 
                 return RedirectToAction("Index");
             }
 
-            viewMapZoneDto = this.mapZoneService.GetViewById(mapZone.Id);
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
+            viewMapZoneDto = this.mapZoneService.GetByList(mapZone, selectedMapObject, probability);
             return View(viewMapZoneDto);
         }
 
@@ -169,6 +174,58 @@ namespace ArtifactAdmin.Web.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+        // GET: Desires/Modifier/5
+        public ActionResult Modifier(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var desireDto = this.mapZoneService.GetByIdDesire(Convert.ToInt32(id));
+            if (desireDto == null)
+            {
+                return HttpNotFound();
+            }
+
+            ViewBag.Name = "Зона карти";
+            ViewBag.ItemName = "Desire1.Name";
+            ViewBag.SelectedItem = "Бажання";
+            return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Modifier([Bind(Include = "ItemId,ItemName")] ViewDesireMapZoneDto desire, int[] listDesireMapZone, string[] modifiers)
+        {
+            ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
+            ViewBag.Name = "Зона карти";
+            ViewBag.ItemName = "Desire1.Name";
+            ViewBag.SelectedItem = "Бажання";
+            var desireDto = new MapZoneDto();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.mapZoneService.UpdateDesireMapZone(desire.ItemId, listDesireMapZone, modifiers);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
+                    desireDto = this.mapZoneService.GetByIdDesire(desire.ItemId);
+                    return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
+            desireDto = this.mapZoneService.GetByIdDesire(desire.ItemId);
+            return View("../Shared/ViewDesireMapZone", desireDto.ViewDesireMapZoneDto);
         }
     }
 }

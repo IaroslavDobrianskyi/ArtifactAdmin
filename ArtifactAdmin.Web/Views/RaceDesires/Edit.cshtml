@@ -195,7 +195,7 @@
         function ValidateZeroProbability(){
             var val = document.getElementById("OneProbability").value.toString();
             var message = document.getElementById("MessageError1");
-            if (val.substring(0, 3) == "0.0" & Number(val) == 0){
+            if (Number(val) == 0){
                 message.value = "Введіть число від 0 до 1 !";
                 message.hidden = false;
             }

@@ -72,5 +72,11 @@ namespace ArtifactAdmin.DAL.Models
         {
             artEntities.SaveChanges();
         }
+
+        public int QuestStarter(int id)
+        {
+            var starter = Convert.ToInt32(this.artEntities.QuestStarter(id).FirstOrDefault());
+            return starter;
+        }
     }
 }

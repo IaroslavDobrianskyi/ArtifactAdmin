@@ -30,5 +30,7 @@ namespace ArtifactAdmin.DAL.Models
         void DeleteWithOutSave(T entity);
         
         void SaveChanges();
+
+        int QuestStarter(int id);
     }
 }

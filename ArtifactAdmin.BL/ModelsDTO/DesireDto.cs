@@ -35,5 +35,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public string Icon { get; set; }
 
         public string NewIcon { get; set; }
+
+        public ViewDesireMapZoneDto ViewDesireMapZoneDto { get; set; }
     }
 }

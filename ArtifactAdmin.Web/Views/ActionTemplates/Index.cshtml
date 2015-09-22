@@ -18,9 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.BlockProbability)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ActionTemplateResult1.ArtifactPosibility)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -33,9 +30,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.BlockProbability)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ActionTemplateResult1.ArtifactPosibility)
                 </td>
                 <td>
                     @Html.ActionLink("Змінити", "Edit", new { id = item.Id }) |

@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿ // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="RaceDesireService.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
@@ -16,6 +16,7 @@ namespace ArtifactAdmin.BL.Services
     using DAL.Models;
     using Interfaces;
     using ModelsDTO;
+    using Utils;
 
     public class RaceDesireService : IRaceDesireService
     {
@@ -60,8 +61,8 @@ namespace ArtifactAdmin.BL.Services
                     viewRaceDesireDto.SelectedDesires.Add(oneDesire);
                 }
             }
-            
-            viewRaceDesireDto.OneProbability = "0.25";
+
+        viewRaceDesireDto.OneProbability = "0.25";
             viewRaceDesireDto.DefaultValue = 0;
             viewRaceDesireDto.Deviation = "0.0";
             return viewRaceDesireDto;
@@ -84,12 +85,14 @@ namespace ArtifactAdmin.BL.Services
             for (int i = 0; i < selectedDesiresLength; i++)
             {
                 var desireId = selectedDesires[i];
+                probabilities[i] = ViewHelper.ConvertToCurrentSeparator(probabilities[i]);
+                deviations[i] = ViewHelper.ConvertToCurrentSeparator(deviations[i]);
                 var desireUpdate = oldRaceDesire.FirstOrDefault(item => item.DesireId == desireId);
                 if (desireUpdate != null)
                 {
                     desireUpdate.Probability = Convert.ToDouble(probabilities[i]);
                     desireUpdate.DefaultValue = defaultValues[i];
-                    if (deviations[i] == "0")
+                    if (Convert.ToDouble(deviations[i]) == 0)
                     {
                         desireUpdate.Deviation = null;
                     }
@@ -106,7 +109,7 @@ namespace ArtifactAdmin.BL.Services
                                                                 {
                                                                     RaceId = id,
                                                                     DesireId = selectedDesires[i],
-                                                                    Deviation = deviations[i] == "0.0"
+                                                                    Deviation = Convert.ToDouble(deviations[i]) == 0
                                                                                                 ? (double?)null
                                                                                                 : Convert.ToDouble(deviations[i]),
                                                                                Probability =

@@ -9,15 +9,10 @@
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data;
-    using System.Data.Entity;
-    using System.Linq;
     using System.Net;
-    using System.Web;
     using System.Web.Mvc;
     using BL.Interfaces;
-    using BL.ModelsDTO;
+    using BL.Utils;
 
     public class RaceDesiresController : Controller
     {
@@ -95,6 +90,8 @@ namespace ArtifactAdmin.Web.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
             viewRaceDesireDto = this.raceDesireService.GetViewById(id);
             return View(viewRaceDesireDto);
         }
