@@ -46,7 +46,6 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<Talent, TalentDto>();
             Mapper.CreateMap<TalentDto, Talent>();
 
-
             Mapper.CreateMap<MapInfo, MapInfoDto>();
             Mapper.CreateMap<MapInfoDto, MapInfo>();
 
@@ -58,7 +57,6 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<ZoneCoordinat, ZoneCoordinatDto>();
             Mapper.CreateMap<ZoneCoordinatDto, ZoneCoordinat>();
-            
 
             Mapper.CreateMap<MapObject, MapObjectDto>();
             Mapper.CreateMap<MapObjectDto, MapObject>();

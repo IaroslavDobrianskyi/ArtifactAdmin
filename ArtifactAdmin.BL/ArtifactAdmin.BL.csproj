@@ -158,6 +158,7 @@
     <Compile Include="ModelsDTO\RaceDesireDto.cs" />
     <Compile Include="ModelsDTO\FlowItems\StepDto.cs" />
     <Compile Include="ModelsDTO\ViewCharacteristic.cs" />
+    <Compile Include="ModelsDTO\ViewDesireActionResultDto.cs" />
     <Compile Include="ModelsDTO\ViewDesireMapZoneDto.cs" />
     <Compile Include="ModelsDTO\ViewRaceDesireDto.cs" />
     <Compile Include="ModelsDTO\ViewValueCharacteristic.cs" />
@@ -226,6 +227,17 @@
       <Project>{5a608750-c6a8-4a8d-819c-fbcd33b45aad}</Project>
       <Name>ArtifactAdmin.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

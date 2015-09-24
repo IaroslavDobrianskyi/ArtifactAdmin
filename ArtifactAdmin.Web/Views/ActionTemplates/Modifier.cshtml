@@ -1,0 +1,122 @@
+﻿@using ArtifactAdmin.DAL.Models
+@model ArtifactAdmin.BL.ModelsDTO.ViewDesireActionResultDto
+
+@{
+    ViewBag.Title = "Modifier";
+}
+
+<h2>Змінити</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+     string Id = "Desire1.Id";
+    string Name = "Desire1.Name";
+    <div class="form-horizontal">
+        <h4>Зміна сила бажання</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActionResultId)
+        @Html.HiddenFor(model=>model.ActionName)
+        <div class="form-group">
+            @Html.DisplayNameFor(model => model.ActionName)
+            @Html.DisplayFor(model=>model.ActionName)
+        </div>
+        <table class="table">
+            <colgroup>
+                <col style="width: 200px"/>
+                <col style="width: 200px"/>
+                <col style="width: 100px"/>
+                <col style="width: 300px"/>
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.DisplayNameFor(model => model.DesiresDto)
+                    @Html.ListBoxFor(model => model.DesiresDto, new SelectList(Model.DesiresDto, "Id", "Name"), new {size = 8, style = "width:200px"})
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.OneModifier, new {@class = "control-label col-md-2"})<br/>
+                    @Html.EditorFor(model => model.OneModifier, new {htmlAttributes = new {@class = "form-control"}})<br/>
+                    @Html.ValidationMessageFor(model => model.OneModifier, "", new {@class = "text-danger"})
+                </td>
+                <td style="text-align: center">
+                    <input type="button" id="add" value=">"
+                           onclick="javascript: MoveToSel(document.getElementById('DesiresDto'),document.getElementById('DesireResultsDto'));">
+                    <br/>
+                    <input type="button" id="rem" value="<"
+                           onclick="javascript: MoveObj(document.getElementById('DesireResultsDto'), document.getElementById('DesiresDto'));"/>
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.DesireResultsDto)<br/>
+                    @Html.ListBoxFor(model => model.DesireResultsDto, new MultiSelectList(Model.DesireResultsDto, "Desire", Name), new { size = 8, style = "width:200px" })
+                    @Html.ListBoxFor(model => model.Modifiers, new MultiSelectList(Model.Modifiers), new { size = 8, style = "width:100px" })
+                </td>
+            </tr>    
+        </table>    
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll();" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        function MoveToSel(from, to){
+            var toModifier = document.getElementById("Modifiers");
+            var newModifier = document.getElementById("OneModifier").value.toString();
+            var validateModifier = Number(newModifier);
+            newModifier = validateModifier.toString();
+            var selId = '';
+            var selText = '';
+            if (validateModifier >= 0 & validateModifier < 1){
+                for (i = from.options.length - 1; i >= 0; i--){
+                    if (from.options[i].selected == true){
+                        selId = from.options[i].value;
+                        selText = from.options[i].text;
+                        var newRow = new Option(selText, selId);
+                        to.options[to.length] = newRow;
+                        newRow = new Option(newModifier, newModifier);
+                        toModifier.options[toModifier.length] = newRow;
+                        from.options[i] = null;
+                    }
+                }
+            }
+        }
+
+        function MoveObj(from, to){
+            var selId = '';
+            var selText = '';
+            var fromModifier = document.getElementById("Modifiers");
+            for (var i = from.options.length - 1; i >= 0; i--){
+                if (from.options[i].selected == true){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    to.options[to.length] = newRow;
+                    from.options[i] = null;
+                    fromModifier.options[i] = null;
+                }
+            }
+        }
+
+        function SelAll(){
+            var to = document.getElementById('DesireResultsDto');
+            var toModifier = document.getElementById("Modifiers");
+            for (var i = to.options.length - 1; i >= 0; i--){
+                to.options[i].selected = true;
+            }
+            for (var i = toModifier.length - 1; i >= 0; i--){
+                toModifier.options[i].selected = true;
+            }
+        }
+    </script>
+}

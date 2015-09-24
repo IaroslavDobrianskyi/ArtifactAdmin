@@ -31,7 +31,7 @@
                     @Html.ValidationMessageFor(model => model.OneModifier, "", new {@class = "text-danger"})
                 </td>
     <td style="text-align: center">
-        <input type="button" id="add" value=">" onclick="javascript: MoveToSel();"/>
+        <input type="button" id="add" value=">" onclick="javascript: MoveToSel();">
     </td>
     <td>
         <label for="model.ListDesireMapZonee">@ViewBag.SelectedItem</label><br />
@@ -42,7 +42,7 @@
         </table>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll()" />
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SelAll();" />
             </div>
         </div>
     </div>
