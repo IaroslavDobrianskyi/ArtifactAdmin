@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Interfaces\IDimentionRadiusService.cs" />
     <Compile Include="Interfaces\IMapInfoDimensionService.cs" />
     <Compile Include="MapHelpers\LinesContainer.cs" />
     <Compile Include="MapHelpers\LineOfPoints.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Services\BonusService.cs" />
     <Compile Include="Services\ConstellationService.cs" />
     <Compile Include="Services\DesireService.cs" />
+    <Compile Include="Services\DimentionRadiusService.cs" />
     <Compile Include="Services\FlowService.cs" />
     <Compile Include="Services\MapInfoDimensionService.cs" />
     <Compile Include="Services\MapInfoService.cs" />

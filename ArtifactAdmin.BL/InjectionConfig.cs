@@ -28,6 +28,7 @@ namespace ArtifactAdmin.BL
             container.Register<IStepTemplateService, StepTemplateService>(new PerScopeLifetime());
             container.Register<IMapObjectService, MapObjectService>(new PerScopeLifetime());
             container.Register<IMapInfoService, MapInfoService>(new PerScopeLifetime());
+            container.Register<IDimentionRadiusService, DimentionRadiusService>(new PerScopeLifetime());
             container.Register<IMapInfoDimensionService, MapInfoDimensionService>(new PerScopeLifetime());
             container.Register<IZoneCoordinatesService, ZoneCoordinatesService>(new PerScopeLifetime());
             container.Register<IMapZoneService, MapZoneService>(new PerScopeLifetime());

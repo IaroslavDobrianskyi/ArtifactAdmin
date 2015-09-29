@@ -66,6 +66,9 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<MapZone, MapZoneDto>();
             Mapper.CreateMap<MapZoneDto, MapZone>();
 
+            Mapper.CreateMap<DimentionRadiu, DimentionRadiuDto>();
+            Mapper.CreateMap<DimentionRadiuDto, DimentionRadiu>();
+
             Mapper.CreateMap<MapObjectProbability, MapObjectProbabilityDto>();
             Mapper.CreateMap<MapObjectProbabilityDto, MapObjectProbability>();
 

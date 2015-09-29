@@ -188,6 +188,7 @@
     <Compile Include="Controllers\ClassesController.cs" />
     <Compile Include="Controllers\ConstellationsController.cs" />
     <Compile Include="Controllers\DesiresController.cs" />
+    <Compile Include="Controllers\DimensionRadiusController.cs" />
     <Compile Include="Controllers\MapInfoDimensionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MapInfoController.cs" />
@@ -210,7 +211,9 @@
     </Compile>
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DimentionRadiusModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MapInfoAndDimensionModel.cs" />
     <Compile Include="Models\MapInfoDimensionModels.cs" />
     <Compile Include="Models\ZoneCoordinatesModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -410,6 +413,8 @@
     <Content Include="Views\QuestTemplates\Details.cshtml" />
     <Content Include="Views\QuestTemplates\Edit.cshtml" />
     <Content Include="Views\QuestTemplates\Index.cshtml" />
+    <Content Include="Views\DimensionRadius\Index.cshtml" />
+    <Content Include="Views\DimensionRadius\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
