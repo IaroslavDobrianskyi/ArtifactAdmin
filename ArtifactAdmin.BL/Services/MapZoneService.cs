@@ -6,9 +6,6 @@
 //   Defines the MapZoneService type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-
-using ArtifactAdmin.BL.Utils;
-
 namespace ArtifactAdmin.BL.Services
 {
     using System;
@@ -28,15 +25,15 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRepository<MapObjectProbability> mapObjectProbabilityRepository;
         private readonly IRepository<Desire> desireRepository;
         private readonly IRepository<DesireMapZone> desireMapZoneRepository;
-		private readonly IRepository<ZoneCoordinat> zoneCoordinatRepository;
+        private readonly IRepository<ZoneCoordinat> zoneCoordinatRepository;
         private readonly IRepository<MapInfo> mapInfoRepository;
 
         public MapZoneService(IRepository<MapZone> mapZoneRepository,
-            IRepository<MapObject> mapObjectRepository, 
+            IRepository<MapObject> mapObjectRepository,
             IRepository<MapObjectProbability> mapObjectProbabilityRepository,
             IRepository<Desire> desireRepository,
             IRepository<DesireMapZone> desireMapZoneRepository,
-			IRepository<ZoneCoordinat> zoneCoordinatRepository,
+            IRepository<ZoneCoordinat> zoneCoordinatRepository,
             IRepository<MapInfo> mapInfoRepository) 
         {
             this.mapZoneRepository = mapZoneRepository;
@@ -44,7 +41,7 @@ namespace ArtifactAdmin.BL.Services
             this.mapObjectProbabilityRepository = mapObjectProbabilityRepository;
             this.desireMapZoneRepository = desireMapZoneRepository;
             this.desireRepository = desireRepository;
-			this.zoneCoordinatRepository = zoneCoordinatRepository;
+            this.zoneCoordinatRepository = zoneCoordinatRepository;
             this.mapInfoRepository = mapInfoRepository;
         }
 
@@ -135,9 +132,8 @@ namespace ArtifactAdmin.BL.Services
             {
                 probability[i] = ViewHelper.ConvertToCurrentSeparator(probability[i]);
                 var objProbability = Convert.ToDouble(probability[i]);
-                {
-                    foreach (var mapObject in viewMapZoneDto.MapObject)
-                    {
+                foreach (var mapObject in viewMapZoneDto.MapObject)
+                { 
                         if (mapObject.Id == Convert.ToInt32(obj[i]))
                         {
                             viewMapZoneDto.MapObject.Remove(mapObject);
@@ -151,7 +147,6 @@ namespace ArtifactAdmin.BL.Services
                                                                          objProbability
                                                                  });
                         }
-                    }
                 }
             }
 
@@ -247,6 +242,7 @@ namespace ArtifactAdmin.BL.Services
                         modifiers[i] = ViewHelper.ConvertToCurrentSeparator(modifiers[i]);
                         desire.Modifier = Convert.ToDouble(modifiers[i]);
                         this.desireMapZoneRepository.UpdateWithoutSave(desire);
+                        break;
                     }
                 }
             }
@@ -271,6 +267,7 @@ namespace ArtifactAdmin.BL.Services
             {
                 throw new Exception(string.Format("Mapinfo with id({0}) no exist", mapInfoId));
             }
+
             var requiredColors = ImageHelper.GetAllColorsFromImage(mapInfo.ImagePath);
 
             foreach (var color in requiredColors)

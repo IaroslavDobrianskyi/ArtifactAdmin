@@ -13,6 +13,7 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
+    using BL.Utils;
 
     public class ActionTemplatesController : Controller
     {
@@ -162,6 +163,61 @@ namespace ArtifactAdmin.Web.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Modifier(int? id, string name)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var viewDesireActionResultDto = this.actionTemplateService.GetViewDesireResult(id, name);
+            if (viewDesireActionResultDto == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(viewDesireActionResultDto);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Modifier(
+            [Bind(Include = "ActionResultId,ActionName")] ViewDesireActionResultDto desireActionResultDto, int[] desireResultsDto, string[] modifiers)
+        {
+            ViewBag.Error = string.Empty;
+            ViewBag.ErrMes = string.Empty;
+            var viewDesireActionResultDto = new ViewDesireActionResultDto();
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    this.actionTemplateService.UpdateDesireActionResult(desireActionResultDto.ActionResultId, desireResultsDto, modifiers);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Error = "Помилка при спробі змінити запис";
+                    ViewBag.ErrMes = e.Message;
+                    viewDesireActionResultDto =
+                        this.actionTemplateService.GetViewDesireResultByList(desireActionResultDto.ActionResultId,
+                            desireActionResultDto.ActionName,
+                            desireResultsDto,
+                            modifiers);
+                    return View(viewDesireActionResultDto);
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Error = "Помилка при спробі змінити запис";
+            ViewBag.ErrMes = ViewHelper.ModelStateExeption(ModelState);
+            viewDesireActionResultDto =
+                        this.actionTemplateService.GetViewDesireResultByList(desireActionResultDto.ActionResultId,
+                            desireActionResultDto.ActionName,
+                            desireResultsDto,
+                            modifiers);
+            return View(viewDesireActionResultDto);
         }
     }
 }

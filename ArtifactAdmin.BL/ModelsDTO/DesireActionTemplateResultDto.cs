@@ -21,6 +21,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public double Modifier { get; set; }
 
         public virtual ActionTemplateResultDto ActionTemplateResult1 { get; set; }
-        //////public virtual Desire Desire1 { get; set; }
+       
+        public virtual DesireDto Desire1 { get; set; }
     }
 }
