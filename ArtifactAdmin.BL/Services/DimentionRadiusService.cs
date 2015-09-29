@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ArtifactAdmin.BL.Interfaces;
 using ArtifactAdmin.BL.ModelsDTO;
+using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
 using ArtifactAdmin.DAL.Models;
 using AutoMapper;
 
@@ -12,10 +13,14 @@ namespace ArtifactAdmin.BL.Services
     public class DimentionRadiusService : IDimentionRadiusService
     {
         private readonly IRepository<DimentionRadiu> dimentionRadiusRepository;
+        private readonly IRepository<MiddlePoint> middlePointRepository;
+        private readonly IRepository<MiddlePointNeighbor> middlePointNeighborRepository;
 
-        public DimentionRadiusService(IRepository<DimentionRadiu> dimentionRadiusRepository)
+        public DimentionRadiusService(IRepository<DimentionRadiu> dimentionRadiusRepository, IRepository<MiddlePoint> middlePointRepository, IRepository<MiddlePointNeighbor> middlePointNeighborRepository)
         {
             this.dimentionRadiusRepository = dimentionRadiusRepository;
+            this.middlePointRepository = middlePointRepository;
+            this.middlePointNeighborRepository = middlePointNeighborRepository;
         }
 
         public IEnumerable<DimentionRadiuDto> GetAll()
@@ -27,23 +32,29 @@ namespace ArtifactAdmin.BL.Services
         {
             var dimentionRadius = Mapper.Map<DimentionRadiu>(dimentionRadiusDto);
             this.dimentionRadiusRepository.Insert(dimentionRadius);
+            var allMiddlePoints =
+                middlePointRepository.GetAll()
+                                     .Where(m => m.MapInfoDimension == dimentionRadiusDto.MapInfoDimension)
+                                     .ToList();
 
-            //var mapInfo = this.mapInfoRepository.GetAll().Where(d => d.Id == mapInfoDimension.MapInfo).FirstOrDefault();
 
-            //var middlePoints = MapMiddlePointsGenerator.GetMiddlePoints(mapInfo.ImagePath, mapInfoDimension.Dimension);
+            var allMiddlePointsDto = Mapper.Map<List<MiddlePointDto>>(allMiddlePoints);
+            foreach (var middlePointDto in allMiddlePointsDto)
+            {
 
+                middlePointNeighborRepository.Insert(new MiddlePointNeighbor()
+                    {
+                        DimensionRadius = dimentionRadius.Id,
+                        MiddlePoint = middlePointDto.Id,
+                        NeighborCoordinates =
+                            NeighborMiddlePointsGenerator.GetNeighbors(middlePointDto, allMiddlePointsDto, dimentionRadius.Radius)
+                    });
+            }
+        }
 
-
-            //foreach (var key in middlePoints.Keys)
-            //{
-            //    middlePointRepository.Insert(new MiddlePoint()
-            //        {
-            //            MapInfoDimension = mapInfoDimension.Id,
-            //            X = key.X,
-            //            Y = key.Y,
-            //            RelatedCoordinates = middlePoints[key].Serialize()
-            //        });
-            //}
+        public DimentionRadiuDto GetById(int? id)
+        {
+            return Mapper.Map<DimentionRadiuDto>(this.dimentionRadiusRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
     }
 }

@@ -67,6 +67,9 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<DimentionRadiu, DimentionRadiuDto>();
             Mapper.CreateMap<DimentionRadiuDto, DimentionRadiu>();
 
+            Mapper.CreateMap<MiddlePointNeighbor, MiddlePointNeighborDto>();
+            Mapper.CreateMap<MiddlePointNeighborDto, MiddlePointNeighbor>();
+
             Mapper.CreateMap<MapObjectProbability, MapObjectProbabilityDto>();
             Mapper.CreateMap<MapObjectProbabilityDto, MapObjectProbability>();
 

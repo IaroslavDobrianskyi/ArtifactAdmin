@@ -19,5 +19,20 @@ namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
         {
             return X + Y * 10000;
         }
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1}", X, Y);
+        }
+
+        public static SimplePoint CreateFrom(string neighor)
+        {
+            var strArray = neighor.Split(',');
+            return new SimplePoint()
+                {
+                    X = int.Parse(strArray[0]),
+                    Y = int.Parse(strArray[1])
+                };
+        }
     }
 }

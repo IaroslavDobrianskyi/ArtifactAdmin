@@ -111,6 +111,7 @@
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="Interfaces\IDimentionRadiusService.cs" />
     <Compile Include="Interfaces\IMapInfoDimensionService.cs" />
+    <Compile Include="Interfaces\IMiddlePointNeighborsService.cs" />
     <Compile Include="MapHelpers\LinesContainer.cs" />
     <Compile Include="MapHelpers\LineOfPoints.cs" />
     <Compile Include="InjectionConfig.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Services\MapInfoService.cs" />
     <Compile Include="Services\MapObjectService.cs" />
     <Compile Include="Services\MapZoneService.cs" />
+    <Compile Include="Services\MiddlePointNeighborsService.cs" />
     <Compile Include="Services\PredispositionService.cs" />
     <Compile Include="Services\PropertyService.cs" />
     <Compile Include="Services\QuestTemplateService.cs" />
@@ -214,6 +216,7 @@
     <Compile Include="Services\TalentService.cs" />
     <Compile Include="Services\ZoneCoordinatesService.cs" />
     <Compile Include="Utils\ColorHelper.cs" />
+    <Compile Include="Utils\GeneratingMiddlePoints\NeighborMiddlePointsGenerator.cs" />
     <Compile Include="Utils\GeneratingMiddlePoints\ZonePointsLocator.cs" />
     <Compile Include="Utils\GeneratingMiddlePoints\ImagePoint.cs" />
     <Compile Include="Utils\GeneratingMiddlePoints\MapMiddlePointsGenerator.cs" />

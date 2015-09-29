@@ -12,5 +12,7 @@ namespace ArtifactAdmin.BL.Interfaces
         void Create(ModelsDTO.DimentionRadiuDto dimentionRadius);
 
         IEnumerable<DimentionRadiuDto> GetAll();
+
+        DimentionRadiuDto GetById(int? id);
     }
 }

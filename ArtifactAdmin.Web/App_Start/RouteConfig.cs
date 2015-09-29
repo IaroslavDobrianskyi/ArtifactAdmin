@@ -25,6 +25,13 @@ namespace ArtifactAdmin.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
+            // will allow for Products/Item/2/1
+            routes.MapRoute(
+                    "withParams",
+                    "{controller}/{action}/{id}/{p1}",
+                    new { }
+            );
         }
     }
 }

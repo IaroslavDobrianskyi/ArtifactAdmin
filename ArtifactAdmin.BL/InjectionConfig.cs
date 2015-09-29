@@ -31,6 +31,7 @@ namespace ArtifactAdmin.BL
             container.Register<IDimentionRadiusService, DimentionRadiusService>(new PerScopeLifetime());
             container.Register<IMapInfoDimensionService, MapInfoDimensionService>(new PerScopeLifetime());
             container.Register<IZoneCoordinatesService, ZoneCoordinatesService>(new PerScopeLifetime());
+            container.Register<IMiddlePointNeighborsService, MiddlePointNeighborsService>(new PerScopeLifetime());
             container.Register<IMapZoneService, MapZoneService>(new PerScopeLifetime());
             container.Register<IActionTemplateService, ActionTemplateService>(new PerScopeLifetime());
             container.Register<IActionDescriptionService, ActionDescriptionService>(new PerScopeLifetime());

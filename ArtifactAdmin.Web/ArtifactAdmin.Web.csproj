@@ -8,7 +8,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{BF2B893D-218E-48B1-A091-EF836DD37251}</ProjectGuid>
-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ArtifactAdmin.Web</RootNamespace>
@@ -417,8 +417,11 @@
     <Content Include="Views\QuestTemplates\Details.cshtml" />
     <Content Include="Views\QuestTemplates\Edit.cshtml" />
     <Content Include="Views\QuestTemplates\Index.cshtml" />
-<Content Include="Views\ActionTemplates\Modifier.cshtml" /><Content Include="Views\DimensionRadius\Index.cshtml" />
-    <Content Include="Views\DimensionRadius\Create.cshtml" />  </ItemGroup>
+    <Content Include="Views\ActionTemplates\Modifier.cshtml" />
+    <Content Include="Views\DimensionRadius\Index.cshtml" />
+    <Content Include="Views\DimensionRadius\Create.cshtml" />
+    <Content Include="Views\DimensionRadius\Details.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>

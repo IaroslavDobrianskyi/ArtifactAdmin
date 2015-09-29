@@ -97,17 +97,6 @@ namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
 
             var proceedMatrix = new bool[width, height];
 
-            //for (int x = 0; x < width; x++)
-            //{
-            //    for (int y = 0; y < height; y++)
-            //    {
-            //        if (bitmap.GetPixel(x, y) == Color.White)
-            //        {
-            //            proceedMatrix[x, y] = true;
-            //        }
-            //    }
-            //}
-
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
