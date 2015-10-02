@@ -7,6 +7,7 @@ using ArtifactAdmin.BL.Interfaces;
 using ArtifactAdmin.BL.MapHelpers;
 using ArtifactAdmin.BL.ModelsDTO;
 using ArtifactAdmin.BL.Utils;
+using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
 using ArtifactAdmin.DAL.Models;
 using AutoMapper;
 
@@ -25,14 +26,50 @@ namespace ArtifactAdmin.BL.Services
             this.mapZoneRepository = mapZoneRepository;
         }
 
-        public IEnumerable<ZoneCoordinatDto> GetZoneCoordinatByMapInfoId(int? id)
+
+
+        public Dictionary<string, List<SimplePoint>> GetZoneValuesCoordinatByMapInfoId(int? id)
+        {
+            var dic = GetZoneIdCoordinatByMapInfoId(id);
+            var retVal = new Dictionary<string, List<SimplePoint>>();
+
+            var zonesInCoordinates = this.zoneCoordinatRepository.GetAll().Where(z => z.MapInfo1.Id == id)
+                                  .Select(x => new
+                                      {
+                                          x.MapZone,
+                                          x.MapZone1.Color
+                                      });
+            foreach (var zonesInCoordinate in zonesInCoordinates)
+            {
+                retVal.Add(zonesInCoordinate.Color,dic[zonesInCoordinate.MapZone]);
+            }
+
+            return retVal;
+        }
+
+        public Dictionary<int, List<SimplePoint>> GetZoneIdCoordinatByMapInfoId(int? id)
         {
             if (this.mapInfoRepository.GetAll().FirstOrDefault(s => s.Id == id) == null)
             {
                 throw new Exception(string.Format("Mapinfo with id({0}) no exist", id));
             }
-            var zoneCoordinates = this.zoneCoordinatRepository.GetAll().Where(z => z.MapInfo1.Id == id).ToList();
-            return Mapper.Map<List<ZoneCoordinatDto>>(zoneCoordinates);
+            var coordinates = this.zoneCoordinatRepository.GetAll().Where(z => z.MapInfo1.Id == id).ToList();
+            //return Mapper.Map<List<ZoneCoordinatDto>>(zoneCoordinates);
+
+            var dic = new Dictionary<int, List<SimplePoint>>();
+            var count = 0;
+            if (coordinates.Count() > 0)
+            {
+                foreach (var c in coordinates)
+                {
+                    dic.Add(c.MapZone, LinesContainer.DeserializeAndGetPointsList(c.Coordinates));
+                }
+                foreach (var key in dic.Keys)
+                {
+                    count += dic[key].Count;
+                }
+            }
+            return dic;
         }
 
 

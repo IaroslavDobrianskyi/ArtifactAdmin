@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using ArtifactAdmin.BL.Interfaces;
 using ArtifactAdmin.BL.ModelsDTO;
+using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
 using ArtifactAdmin.DAL.Models;
 using AutoMapper;
 
@@ -18,11 +19,22 @@ namespace ArtifactAdmin.BL.Services
             this.middlePointNeighborRepository = middlePointNeighborRepository;
         }
 
-        public List<MiddlePointNeighborDto> GetMiddlePointNeighborsByDimentionRadius(int dimentionRadiusId)
+        public Dictionary<SimplePoint, List<SimplePoint>> GetMiddlePointNeighborsByDimentionRadius(int dimentionRadiusId)
         {
-            return Mapper.Map<List<MiddlePointNeighborDto>>(
-                this.middlePointNeighborRepository.GetAll().Where(n => n.DimensionRadius == dimentionRadiusId));
+            var retVal = new Dictionary<SimplePoint, List<SimplePoint>>();
 
+            var middlePointNeighbors = this.middlePointNeighborRepository.GetAll().Where(n => n.DimensionRadius == dimentionRadiusId);
+            foreach (var middlePointNeighbor in middlePointNeighbors)
+            {
+                retVal.Add(new SimplePoint()
+                    {
+                        X = middlePointNeighbor.MiddlePoint1.X,
+                        Y = middlePointNeighbor.MiddlePoint1.Y
+                    }, NeighborMiddlePointsGenerator.GetNeighbors(middlePointNeighbor.NeighborCoordinates));
+
+            }
+
+            return retVal;
         }
     }
 }

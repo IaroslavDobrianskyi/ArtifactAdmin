@@ -108,7 +108,7 @@ namespace ArtifactAdmin.Web.Controllers
             }
             var dimentionRadiusDto = dimentionRadiusService.GetById(id);
 
-            var coordinates = zoneCoordinatesService.GetZoneCoordinatByMapInfoId(dimentionRadiusDto.MapInfoDimension1.MapInfo);
+            var coordinates = zoneCoordinatesService.GetZoneValuesCoordinatByMapInfoId(dimentionRadiusDto.MapInfoDimension1.MapInfo);
 
             var middlePointNeighbors =
                 middlePointNeighborsService.GetMiddlePointNeighborsByDimentionRadius(dimentionRadiusDto.Id);
@@ -116,40 +116,30 @@ namespace ArtifactAdmin.Web.Controllers
 
             if (coordinates.Count() > 0)
             {
-                var dic = new Dictionary<string, LinesContainer>();
-
-                foreach (var c in coordinates)
-                {
-                    dic.Add(c.MapZone1.Color, LinesContainer.Deserialize(c.Coordinates));
-                }
-
                 var img = new Bitmap(dimentionRadiusDto.MapInfoDimension1.MapInfo1.Width, dimentionRadiusDto.MapInfoDimension1.MapInfo1.Height);
 
                 var cc = new ColorConverter();
-                foreach (var key in dic.Keys)
+                foreach (var key in coordinates.Keys)
                 {
                     var color = (Color)cc.ConvertFromString(key);
-                    foreach (var line in dic[key].Lines)
+                    foreach (var item in coordinates[key])
                     {
-                        for (int x = line.StartX; x <= line.EndX; x++)
-                        {
-                            img.SetPixel(x, line.Y, color);
-                        }
+                        img.SetPixel(item.X, item.Y, color);
                     }
 
                 }
                 using (var graphics = Graphics.FromImage(img))
                 {
-                    var mp = middlePointNeighbors[index.Value];
+                    var mp = middlePointNeighbors.Keys.ElementAt(index.Value);
                     var randomColor = ColorHelper.GetRandomColor();
                     
-                    img.SetPixel(mp.MiddlePoint1.X, mp.MiddlePoint1.Y, randomColor);
+                    img.SetPixel(mp.X, mp.Y, randomColor);
 
-                    var neighbors = NeighborMiddlePointsGenerator.GetNeighbors(mp.NeighborCoordinates);
+                    var neighbors = middlePointNeighbors[mp];
                     foreach (var simplePoint in neighbors)
                     {
                         var pen = new Pen(ColorHelper.GetRandomColor());
-                        graphics.DrawLine(pen, mp.MiddlePoint1.X, mp.MiddlePoint1.Y, simplePoint.X, simplePoint.Y);
+                        graphics.DrawLine(pen, mp.X, mp.Y, simplePoint.X, simplePoint.Y);
                         graphics.DrawEllipse(new Pen(Color.Red, 5), simplePoint.X, simplePoint.Y, 1, 1);
                     }
                     

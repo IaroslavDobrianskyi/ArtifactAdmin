@@ -105,21 +105,22 @@ namespace ArtifactAdmin.Web.Controllers
 
             if (middlePoints.Count() > 0)
             {
-                var dic = new Dictionary<SimplePoint, LinesContainer>();
+                var dic = new Dictionary<SimplePoint, List<SimplePoint>>();
                 var dicColors = new Dictionary<SimplePoint, Color>();
 
-                foreach (var c in middlePoints)
+                foreach (var key in middlePoints.Keys)
                 {
                     var color = ColorHelper.GetRandomColor();
                     dic.Add(new SimplePoint()
                         {
-                            X = c.X,
-                            Y = c.Y,
-                        }, LinesContainer.Deserialize(c.RelatedCoordinates));
+                            X = key.X,
+                            Y = key.Y,
+                        }, middlePoints[key]);
+                    
                     dicColors.Add(new SimplePoint()
                         {
-                            X = c.X,
-                            Y = c.Y,
+                            X = key.X,
+                            Y = key.Y,
                         }, color);
                 }
 
@@ -128,12 +129,9 @@ namespace ArtifactAdmin.Web.Controllers
                 foreach (var key in dic.Keys)
                 {
                     var color = dicColors[key];
-                    foreach (var line in dic[key].Lines)
+                    foreach (var item in dic[key])
                     {
-                        for (int x = line.StartX; x <= line.EndX; x++)
-                        {
-                            img.SetPixel(x, line.Y, color);
-                        }
+                        img.SetPixel(item.X, item.Y, color);
                     }
                     img.SetPixel(key.X, key.Y, Color.FromKnownColor(KnownColor.Black));
                 }
@@ -156,33 +154,24 @@ namespace ArtifactAdmin.Web.Controllers
 
             var middlePoints = mapInfoDimensionService.GetMiddlePointsForDimension(id);
 
-            var coordinates = zoneCoordinatesService.GetZoneCoordinatByMapInfoId(mapInfoDimention.MapInfo);
+            var coordinates = zoneCoordinatesService.GetZoneValuesCoordinatByMapInfoId(mapInfoDimention.MapInfo);
 
             if (coordinates.Count() > 0)
             {
-                var dic = new Dictionary<string, LinesContainer>();
-
-                foreach (var c in coordinates)
-                {
-                    dic.Add(c.MapZone1.Color, LinesContainer.Deserialize(c.Coordinates));
-                }
 
                 var img = new Bitmap(mapInfoDimention.MapInfo1.Width, mapInfoDimention.MapInfo1.Height);
                 var cc = new ColorConverter();
-                foreach (var key in dic.Keys)
+                foreach (var key in coordinates.Keys)
                 {
                     var color = (Color)cc.ConvertFromString(key);
-                    foreach (var line in dic[key].Lines)
+                    foreach (var item in coordinates[key])
                     {
-                        for (int x = line.StartX; x <= line.EndX; x++)
-                        {
-                            img.SetPixel(x, line.Y, color);
-                        }
+                        img.SetPixel(item.X, item.Y, color);
                     }
 
                 }
 
-                foreach (var mp in middlePoints)
+                foreach (var mp in middlePoints.Keys)
                 {
                     img.SetPixel(mp.X, mp.Y, Color.FromKnownColor(KnownColor.Black));
                 }

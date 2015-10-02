@@ -204,6 +204,7 @@
     <Compile Include="Controllers\StepObjectTypesController.cs" />
     <Compile Include="Controllers\StepTemplatesController.cs" />
     <Compile Include="Controllers\TalentsController.cs" />
+    <Compile Include="Controllers\TestMapController.cs" />
     <Compile Include="Controllers\ZoneCoordinatesController.cs" />
     <Compile Include="FileHelper.cs" />
     <Compile Include="Global.asax.cs">
@@ -215,6 +216,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MapInfoAndDimensionModel.cs" />
     <Compile Include="Models\MapInfoDimensionModels.cs" />
+    <Compile Include="Models\TestMapModel.cs" />
     <Compile Include="Models\ZoneCoordinatesModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -421,6 +423,7 @@
     <Content Include="Views\DimensionRadius\Index.cshtml" />
     <Content Include="Views\DimensionRadius\Create.cshtml" />
     <Content Include="Views\DimensionRadius\Details.cshtml" />
+    <Content Include="Views\TestMap\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

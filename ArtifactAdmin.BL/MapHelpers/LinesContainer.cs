@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
 
 namespace ArtifactAdmin.BL.MapHelpers
 {
@@ -15,7 +16,7 @@ namespace ArtifactAdmin.BL.MapHelpers
             Lines = new List<LineOfPoints>();
         }
 
-        public static LinesContainer Deserialize(string serializedString)
+        private static LinesContainer Deserialize(string serializedString)
         {
             var retVal = new LinesContainer();
             var stringLines = serializedString.Split(';');
@@ -28,6 +29,24 @@ namespace ArtifactAdmin.BL.MapHelpers
                         StartX = int.Parse(vals[1]),
                         EndX = int.Parse(vals[2])
                     });
+            }
+            return retVal;
+        }
+
+        public static List<SimplePoint> DeserializeAndGetPointsList(string serializedString)
+        {
+            var linesConteiner = Deserialize(serializedString);
+            var retVal = new List<SimplePoint>();
+            foreach (var line in linesConteiner.Lines)
+            {
+                for (int i = line.StartX; i <= line.EndX; i++)
+                {
+                    retVal.Add(new SimplePoint()
+                        {
+                            Y = line.Y,
+                            X = i
+                        });
+                }
             }
             return retVal;
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.BL.MapHelpers;
 using ArtifactAdmin.BL.ModelsDTO;
 using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
 using ArtifactAdmin.DAL.Models;
@@ -59,9 +60,21 @@ namespace ArtifactAdmin.BL.Services
 
         }
 
-        public IEnumerable<MiddlePointDto> GetMiddlePointsForDimension(int? id)
+        public Dictionary<SimplePoint, List<SimplePoint>> GetMiddlePointsForDimension(int? id)
         {
-            return Mapper.Map<List< MiddlePointDto>>(this.middlePointRepository.GetAll().Where(x => x.MapInfoDimension == id.Value));
+            var middlePoints = this.middlePointRepository.GetAll().Where(x => x.MapInfoDimension == id.Value);
+            var retVal = new Dictionary<SimplePoint, List<SimplePoint>>();
+
+            foreach (var c in middlePoints)
+            {
+                
+                retVal.Add(new SimplePoint()
+                {
+                    X = c.X,
+                    Y = c.Y,
+                }, LinesContainer.DeserializeAndGetPointsList(c.RelatedCoordinates));
+            }
+            return retVal;
         }
     }
 }
