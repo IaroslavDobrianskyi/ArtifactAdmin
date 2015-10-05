@@ -10,17 +10,20 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+    string NameChar = "Characteristic.Name";
+    string NamePred = "Predisposition1.Name";
+    string NameProp = "Property.Name";
     <div class="form-horizontal">
-        <h4>Шаблон дії</h4>
+        @*<h4>Шаблон дії</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ActionTemplateDto.ActionTemplateResult)
         @Html.HiddenFor(model => model.ActionTemplateDto.BlockProbability)
         <div class="form-group">
-            @Html.LabelFor(model => model.ActionTemplateDto.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*@Html.LabelFor(model => model.ActionTemplateDto.Name, htmlAttributes: new { @class = "control-label col-md-2" })*@
+            <label class="control-label col-md-2" for="ActionTemplateDto_Name">Шаблон дії</label>
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.ActionTemplateDto.Name, new { htmlAttributes = new { @class = "form-control", rows = "10", cols = "50" } })
+                @Html.TextAreaFor(model => model.ActionTemplateDto.Name, new { rows="1", cols="100", @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.ActionTemplateDto.Name, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,19 +58,19 @@
                     </tr>
                     <tr>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "PredispositionResultModifier"), new {@class = "form-control", id="item1",size = 8, onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "PredispositionResultModifier"), new {@class = "form-control", id = "item1", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ExperienceModifier"), new { @class = "form-control", size = 8, id = "item2", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ExperienceModifier"), new {@class = "form-control", id = "item2", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ArtifactPosibility"), new { @class = "form-control", size = 8, id = "item3", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ArtifactPosibility"), new {@class = "form-control",  id = "item3", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "GoldModifier"), new { @class = "form-control", size = 8, id = "item4", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "GoldModifier"), new {@class = "form-control",  id = "item4", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "QuestTemplate1"), new { @class = "form-control", size = 8, id = "item5", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "QuestTemplate1"), new {@class = "form-control",  id = "item5", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                     </tr>
                 </table>
@@ -75,9 +78,96 @@
                 @Html.ValidationMessageFor(model => model.ActionTemplateDto.ActionTemplateResult, "", new {@class = "text-danger"})
             </div>
         </div>
+        <table class="table">
+            <colgroup>
+                <col style="width: 250px" />
+                <col style="width: 100px" />
+                <col style="width: 250px" />
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Characteristics)<br/>
+                    @Html.ListBoxFor(model => model.Characteristics, new SelectList(Model.Characteristics, "Id", "Name"), new {size = 6, style = "width:100%"})
+                </td>
+                <td style="text-align: center">
+                    <input type="button" id="addChar" value=">"
+                           onclick="javascript: MoveObj(document.getElementById('Characteristics'), document.getElementById('SelectedCharacteristics'));">
+                    <br/>
+                    <input type="button" id="remChar" value="<"
+                           onclick="javascript: MoveObj(document.getElementById('SelectedCharacteristics'), document.getElementById('Characteristics'));">
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.SelectedCharacteristics)<br/>
+                    @Html.ListBoxFor(model => model.SelectedCharacteristics, new MultiSelectList(Model.SelectedCharacteristics, "Characteristics", NameChar), new {size = 6, style = "width:100%"})
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <colgroup>
+                <col style="width: 200px" />
+                <col style="width: 200px" />
+                <col style="width: 100px" />
+                <col style="width: 300px" />
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Predispositions)<br />
+                    @Html.ListBoxFor(model => model.Predispositions, new SelectList(Model.Predispositions, "Id", "Name"), new { size = 6, style = "width:200px" })
+                </td>
+                <td style="text-align: center">
+                    @Html.LabelFor(model => model.OneLow)<br />
+                    @Html.EditorFor(model => model.OneLow)<br />
+                    @Html.LabelFor(model => model.OneHigh)<br />
+                    @Html.EditorFor(model => model.OneHigh)
+                </td>
+                <td style="text-align: center">
+                    <input type="button" id="addPred" value=">"
+                           onclick="javascript: MoveToPred(document.getElementById('Predispositions'), document.getElementById('SelectedPredispositions'));">
+                    <br />
+                    <input type="button" id="remPred" value="<"
+                           onclick="javascript: MoveFromPred(document.getElementById('SelectedPredispositions'), document.getElementById('Predispositions'));">
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.SelectedPredispositions)<br />
+                    @Html.ListBoxFor(model => model.Predispositions, new MultiSelectList(Model.SelectedPredispositions, "Predisposition", NamePred), new { size = 6, style = "width:200px" })
+                    @Html.ListBoxFor(model => model.Lows, new MultiSelectList(Model.Lows), new { size = 6, style = "width:50px" })
+                    @Html.ListBoxFor(model => model.Highs, new MultiSelectList(Model.Highs), new { size = 6, style = "width:50px" })
+                </td>
+            </tr>
+        </table>
+        <table class="table">
+            <colgroup>
+                <col style="width: 200px" />
+                <col style="width: 200px" />
+                <col style="width: 100px" />
+                <col style="width: 300px" />
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Properties)<br />
+                    @Html.ListBoxFor(model => model.Properties, new SelectList(Model.Properties, "Id", "Name"), new { size = 6, style = "width:200px" })
+                </td>
+                <td style="text-align: center">
+                    @Html.LabelFor(model => model.OneAppearance)<br />
+                    @Html.EditorFor(model => model.OneAppearance)
+                </td>
+                <td style="text-align: center">
+                    <input type="button" id="addProp" value=">"
+                           onclick="javascript: MoveToProp(document.getElementById('Properties'), document.getElementById('SelectedProperties'));">
+                    <br />
+                    <input type="button" id="remProp" value="<"
+                           onclick="javascript: MoveFromProp(document.getElementById('SelectedProperties'), document.getElementById('Properties'));">
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.SelectedProperties)<br />
+                    @Html.ListBoxFor(model => model.SelectedProperties, new MultiSelectList(Model.SelectedProperties, "Properties", NameProp), new { size = 6, style = "width:200px" })
+                    @Html.ListBoxFor(model => model.Appearances, new MultiSelectList(Model.Appearances), new { size = 6, style = "width:100px" })
+                </td>
+            </tr>
+        </table>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SetProbability()" />
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: SetProbability();" />
             </div>
         </div>
     </div>
@@ -90,24 +180,22 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        function SelId(Sel, HiddenId){
-            var SelId = "";
+        function SelId(sel, hiddenId){
+            var selId = "";
             var item1 = document.getElementById("item1");
             var item2 = document.getElementById("item2");
             var item3 = document.getElementById("item3");
             var item4 = document.getElementById("item4");
             var item5 = document.getElementById("item5");
-            for (i = 0; i < Sel.options.length; i++){
-                if (Sel.options[i].selected == true){
-                    SelId = Sel.options[i].value;
-                    HiddenId.value = Number(SelId);
-                    item1.options[i].selected = true;
-                    item2.options[i].selected = true;
-                    item3.options[i].selected = true;
-                    item4.options[i].selected = true;
-                    item5.options[i].selected = true;
-                    break;
-                }
+            var i = sel.selectedIndex;
+            if (i != -1) {
+                selId = sel.options[i].value;
+                hiddenId.value = Number(selId);
+                item1.options[i].selected = true;
+                item2.options[i].selected = true;
+                item3.options[i].selected = true;
+                item4.options[i].selected = true;
+                item5.options[i].selected = true;
             }
         }
 
@@ -128,8 +216,7 @@
             }
         }
 
-        function SetProbability()
-        {
+        function SetProbability(){
             if (document.getElementById("ActionTemplateDto_BlockProbability").value == 0){
                 document.getElementById("ActionTemplateDto_BlockProbability").value = 0.25;
             }

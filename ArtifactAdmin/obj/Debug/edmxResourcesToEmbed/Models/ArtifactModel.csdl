@@ -332,7 +332,7 @@
     <FunctionImport Name="QuestStarter" ReturnType="Collection(Int32)">
       <Parameter Name="idActionResult" Mode="In" Type="Int32" />
     </FunctionImport>
-<EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
+    <EntitySet Name="ActionTemplateActionDescriptions" EntityType="artModel.ActionTemplateActionDescription" />
     <AssociationSet Name="FK_ActionTemplateActionDescription_ActionDescription" Association="artModel.FK_ActionTemplateActionDescription_ActionDescription">
       <End Role="ActionDescription" EntitySet="ActionDescriptions" />
       <End Role="ActionTemplateActionDescription" EntitySet="ActionTemplateActionDescriptions" />

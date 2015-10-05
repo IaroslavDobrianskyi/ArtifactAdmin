@@ -139,7 +139,10 @@
     <Compile Include="Interfaces\IMapManagerService.cs" />
     <Compile Include="Interfaces\IZoneCoordinatesService.cs" />
     <Compile Include="ModelsDTO\ActionDescriptionDto.cs" />
+    <Compile Include="ModelsDTO\ActionTemplateCharacteristicDto.cs" />
     <Compile Include="ModelsDTO\ActionTemplateDto.cs" />
+    <Compile Include="ModelsDTO\ActionTemplatePredispositionDto.cs" />
+    <Compile Include="ModelsDTO\ActionTemplatePropertyDto.cs" />
     <Compile Include="ModelsDTO\ActionTemplateResultDto.cs" />
     <Compile Include="ModelsDTO\ArtifactTypeDto.cs" />
     <Compile Include="ModelsDTO\BonusDto.cs" />

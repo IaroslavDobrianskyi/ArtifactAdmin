@@ -24,16 +24,34 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRepository<ActionTemplateResult> actionTemplateResultRepository;
         private readonly IRepository<DesireActionTemplateResult> desireActionTemplateResultRepository;
         private readonly IRepository<Desire> desireRepository;
+        private readonly IRepository<Characteristic> characteristicRepository;
+        private readonly IRepository<Predisposition> predispositionRepository;
+        private readonly IRepository<Property> propertyRepository;
+        private readonly IRepository<ActionTemplateCharacteristic> actionCharacteristicRepository;
+        private readonly IRepository<ActionTemplatePredisposition> actionPredispositionRepository;
+        private readonly IRepository<ActionTemplateProperty> actionPropertyRepository; 
 
         public ActionTemplateService(IRepository<ActionTemplate> actionTemplateRepository,
             IRepository<ActionTemplateResult> actionTemplateResultRepository,
             IRepository<DesireActionTemplateResult> desireActionTemplateResultRepository,
-            IRepository<Desire> desireRepository) 
+            IRepository<Desire> desireRepository,
+            IRepository<Characteristic> characteristicRepository,
+            IRepository<Predisposition> predispositionRepository,
+            IRepository<Property> propertyRepository,
+            IRepository<ActionTemplateCharacteristic> actionCharacteristicRepository,
+            IRepository<ActionTemplatePredisposition> actionPredispositionRepository,
+            IRepository<ActionTemplateProperty> actionPropertyRepository) 
         {
             this.actionTemplateRepository = actionTemplateRepository;
             this.actionTemplateResultRepository = actionTemplateResultRepository;
             this.desireActionTemplateResultRepository = desireActionTemplateResultRepository;
             this.desireRepository = desireRepository;
+            this.characteristicRepository = characteristicRepository;
+            this.predispositionRepository = predispositionRepository;
+            this.propertyRepository = propertyRepository;
+            this.actionCharacteristicRepository = actionCharacteristicRepository;
+            this.actionPredispositionRepository = actionPredispositionRepository;
+            this.actionPropertyRepository = actionPropertyRepository;
         }
 
         public IEnumerable<ActionTemplateDto> GetAll()
@@ -46,12 +64,82 @@ namespace ArtifactAdmin.BL.Services
             var viewActionTemplateDto = new ViewActionTemplateDto();
             viewActionTemplateDto.OneProbability = "0.25";
             viewActionTemplateDto.ActionTemplateResults = Mapper.Map<List<ActionTemplateResultDto>>(this.actionTemplateResultRepository.GetAll());
+            viewActionTemplateDto.ActionTemplateResults.Add(new ActionTemplateResultDto());
+            viewActionTemplateDto.Characteristics = Mapper.Map<List<CharacteristicDto>>(this.characteristicRepository.GetAll());
+            viewActionTemplateDto.Predispositions = Mapper.Map<List<PredispositionDto>>(this.predispositionRepository.GetAll());
+            viewActionTemplateDto.Properties = Mapper.Map<List<PropertyDto>>(this.propertyRepository.GetAll());
+            viewActionTemplateDto.SelectedCharacteristics = new List<ActionTemplateCharacteristicDto>();
+            viewActionTemplateDto.SelectedPredispositions = new List<ActionTemplatePredispositionDto>();
+            viewActionTemplateDto.SelectedProperties = new List<ActionTemplatePropertyDto>();
+            viewActionTemplateDto.Lows = new List<int>();
+            viewActionTemplateDto.Highs = new List<int>();
+            viewActionTemplateDto.Appearances = new List<bool>();
+            viewActionTemplateDto.OneLow = 0;
+            viewActionTemplateDto.OneHigh = 1;
+            viewActionTemplateDto.OneAppearance = true;
             if (id != null) 
             {
                 viewActionTemplateDto.ActionTemplateDto = Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.Id == id));
                 if (viewActionTemplateDto.ActionTemplateDto != null)
                 {
                     viewActionTemplateDto.OneProbability = ViewHelper.ConvertSeparatorToDot(viewActionTemplateDto.ActionTemplateDto.BlockProbability.ToString());
+                }
+
+                viewActionTemplateDto.SelectedCharacteristics =
+                    Mapper.Map<List<ActionTemplateCharacteristicDto>>(this.actionCharacteristicRepository.GetAll()
+                                                                          .Where(s => s.ActionTemplate == id));
+                if (viewActionTemplateDto.SelectedCharacteristics.Count > 0)
+                {
+                    foreach (var selectedCharacteristic in viewActionTemplateDto.SelectedCharacteristics)
+                    {
+                        foreach (var characteristic in viewActionTemplateDto.Characteristics)
+                        {
+                            if (characteristic.Id == selectedCharacteristic.Characteristics)
+                            {
+                                viewActionTemplateDto.Characteristics.Remove(characteristic);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                viewActionTemplateDto.SelectedProperties =
+                    Mapper.Map<List<ActionTemplatePropertyDto>>(this.actionPropertyRepository.GetAll()
+                                                                    .Where(s => s.ActionTemplate == id));
+                if (viewActionTemplateDto.SelectedProperties.Count > 0)
+                {
+                    foreach (var selectedProperties in viewActionTemplateDto.SelectedProperties)
+                    {
+                        viewActionTemplateDto.Appearances.Add(selectedProperties.Appearance);
+                        foreach (var property in viewActionTemplateDto.Properties)
+                        {
+                            if (property.Id == selectedProperties.Properties)
+                            {
+                                viewActionTemplateDto.Properties.Remove(property);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                viewActionTemplateDto.SelectedPredispositions =
+                    Mapper.Map<List<ActionTemplatePredispositionDto>>(this.actionPredispositionRepository.GetAll()
+                                                                          .Where(s => s.ActionTemplate == id));
+                if (viewActionTemplateDto.SelectedPredispositions.Count > 0)
+                {
+                    foreach (var selectedPredisposition in viewActionTemplateDto.SelectedPredispositions)
+                    {
+                        viewActionTemplateDto.Lows.Add(selectedPredisposition.RequirementLow);
+                        viewActionTemplateDto.Highs.Add(selectedPredisposition.RequirementHigh);
+                        foreach (var predisposition in viewActionTemplateDto.Predispositions)
+                        {
+                            if (predisposition.Id == selectedPredisposition.Predisposition)
+                            {
+                                viewActionTemplateDto.Predispositions.Remove(predisposition);
+                                break;
+                            }
+                        }
+                    }
                 }
             }
 
