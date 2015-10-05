@@ -6,6 +6,7 @@
 //   Defines the ExternalLoginConfirmationViewModel type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Models
 {
     using System.ComponentModel.DataAnnotations;

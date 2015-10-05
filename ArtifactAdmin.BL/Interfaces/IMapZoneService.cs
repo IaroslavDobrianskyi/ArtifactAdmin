@@ -6,13 +6,13 @@
 //   Defines the IMapZoneService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
     using System.Collections.Generic;
     using ModelsDTO;
 
-        public interface IMapZoneService
+    public interface IMapZoneService
     {
             IEnumerable<MapZoneDto> GetAll();
 

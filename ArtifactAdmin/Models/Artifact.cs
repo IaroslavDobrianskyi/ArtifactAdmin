@@ -9,9 +9,8 @@
 
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
     using System.Collections.Generic;
-    
+
     public partial class Artifact
     {
         public Artifact()

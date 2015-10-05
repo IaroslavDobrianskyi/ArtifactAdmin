@@ -8,8 +8,6 @@
 // -------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-   
     public class QuestTemplateStepTemplateDto
     {
         public int Id { get; set; }

@@ -6,9 +6,9 @@
 //   Defines the InjectionConfig type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL
 {
-    using System;
     using DAL.Models;
     using Interfaces;
     using LightInject;

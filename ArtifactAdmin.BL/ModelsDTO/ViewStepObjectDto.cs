@@ -8,8 +8,6 @@
 // -------------------------------------------------------------------------------------------------------------------
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-
     public class ViewStepObjectDto
     {
         public StepObjectDto StepObjectDto { get; set; }

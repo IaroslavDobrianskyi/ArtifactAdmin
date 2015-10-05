@@ -6,6 +6,7 @@
 //   Defines the DbSet type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.DAL.Models
 {
     using System;

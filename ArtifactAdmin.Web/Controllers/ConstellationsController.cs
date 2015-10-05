@@ -6,6 +6,7 @@
 //   Defines the ConstellationsController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

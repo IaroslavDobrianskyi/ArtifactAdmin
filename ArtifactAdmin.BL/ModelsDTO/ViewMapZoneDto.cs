@@ -6,12 +6,12 @@
 //   Defines the ViewMapZoneDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public class ViewMapZoneDto
     {
         public MapZoneDto MapZone { get; set; }

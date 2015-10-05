@@ -6,6 +6,7 @@
 //   Defines the ActionTemplateResultsController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

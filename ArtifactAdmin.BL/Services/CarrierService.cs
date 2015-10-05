@@ -1,7 +1,6 @@
 ﻿namespace ArtifactAdmin.BL.Services
 {
     using System;
-    using System.Security.AccessControl;
     using DAL.Models;
     using Interfaces;
 

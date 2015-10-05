@@ -6,6 +6,7 @@
 //   Defines the MapZoneService type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
     using System;

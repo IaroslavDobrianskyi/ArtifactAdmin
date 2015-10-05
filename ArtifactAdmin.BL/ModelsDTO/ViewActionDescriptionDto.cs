@@ -6,9 +6,9 @@
 //   Defines the ViewActionDescriptionDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
     using System.Collections.Generic;
 
     public class ViewActionDescriptionDto

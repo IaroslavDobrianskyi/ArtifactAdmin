@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ArtifactAdmin.BL.ModelsDTO.RaceDto>
+﻿@using ArtifactAdmin.Web.App_Start
+@model IEnumerable<ArtifactAdmin.BL.ModelsDTO.RaceDto>
 
 @{
     ViewBag.Title = "Index";
@@ -53,7 +54,7 @@
                     @Html.DisplayFor(modelItem => item.Properties)
                 </td>*@
                 <td>
-                    <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath+"Races/"+@item.Icon)" id="icon" width=" 160 " height=" 120">
+                    <img src="@(ImagePath.ImPath+"Races/"+@item.Icon)" id="icon" width=" 160 " height=" 120">
                 </td>
                 <td>
                     @Html.ActionLink("Змінити", "Edit", new { id = item.Id }) |

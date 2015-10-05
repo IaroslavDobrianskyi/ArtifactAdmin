@@ -6,6 +6,7 @@
 //   Defines the StepObjectTypesController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

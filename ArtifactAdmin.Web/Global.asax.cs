@@ -9,7 +9,6 @@
 
 namespace ArtifactAdmin.Web
 {
-    using System;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Optimization;

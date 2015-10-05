@@ -6,24 +6,25 @@
 //   Defines the ActionDescriptionDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
+    using ValidationConstellation;
 
     public class ActionDescriptionDto
     {
         public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredActionTemplate",
-    ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+    ErrorMessageResourceType = typeof(ValidationStrings))]
        public int ActionTemplate { get; set; }
 
         public int? MapZone { get; set; }
 
         [Display(Name = "Опис дії")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",
-  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+  ErrorMessageResourceType = typeof(ValidationStrings))]
         public string ActionText { get; set; }
 
         public int? Race { get; set; }

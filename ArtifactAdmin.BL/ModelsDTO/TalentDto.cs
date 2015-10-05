@@ -9,29 +9,29 @@
 
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
-    
+    using ValidationConstellation;
+
     public class TalentDto
     {
         public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredDescription",
-        ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+        ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Опис")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",
-  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+  ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Description { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredName",
-    ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+    ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Назва")]
         [StringLength(50, ErrorMessageResourceName = "StringLength",
-  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+  ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Name { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredLevel",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Максимальний рівень")]
         [Range(0, int.MaxValue, ErrorMessage = "Введіть додатнє число!")]
         public int MaxLevel { get; set; }
@@ -49,7 +49,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public double BaseModifier { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredIcon",
-         ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+         ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Іконка")]
         public string Icon { get; set; }
 

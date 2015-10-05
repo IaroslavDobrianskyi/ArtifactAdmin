@@ -1,4 +1,5 @@
-﻿@model IEnumerable<ArtifactAdmin.BL.ModelsDTO.ClassDto>
+﻿@using ArtifactAdmin.Web.App_Start
+@model IEnumerable<ArtifactAdmin.BL.ModelsDTO.ClassDto>
 
 @{
     ViewBag.Title = "Index";
@@ -32,7 +33,7 @@
                 @Html.TextAreaFor(modelItem => item.Description, new {@readonly = true, width = "255px", height = "118px"})
             </td>
             <td>
-                <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath + "Classes/" + @item.Icon)" id="icon" width=" 160 " height=" 120">
+                <img src="@(ImagePath.ImPath + "Classes/" + @item.Icon)" id="icon" width=" 160 " height=" 120">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.FibonacciSeed)

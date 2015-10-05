@@ -6,6 +6,7 @@
 //   Defines the ArtifactTypesController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

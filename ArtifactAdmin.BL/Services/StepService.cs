@@ -6,18 +6,13 @@
 //   Defines the StepServicetype.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.IO;
     using System.Linq;
-    using System.Web;
     using AutoMapper;
     using DAL.Models;
     using Interfaces;
-    using ModelsDTO;
     using ModelsDTO.FlowItems;
 
     public class StepService : IStepService

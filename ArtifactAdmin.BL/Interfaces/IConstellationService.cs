@@ -6,11 +6,10 @@
 //   Defines the IConstellationService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
     using System.Collections.Generic;
-    using System.Web;
     using ModelsDTO;
 
     public interface IConstellationService

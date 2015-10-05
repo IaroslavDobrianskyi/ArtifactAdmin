@@ -9,7 +9,6 @@
 
 namespace ArtifactAdmin.BL
 {
-    using System;
     using AutoMapper;
     using DAL.Models;
     using ModelsDTO;

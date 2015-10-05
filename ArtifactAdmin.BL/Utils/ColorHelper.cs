@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-
-namespace ArtifactAdmin.BL.Utils
+﻿namespace ArtifactAdmin.BL.Utils
 {
+    using System;
+    using System.Drawing;
+
     public static class ColorHelper
     {
         private static Random randomGen;

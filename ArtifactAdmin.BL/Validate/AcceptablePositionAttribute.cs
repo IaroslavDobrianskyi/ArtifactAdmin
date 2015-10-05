@@ -6,6 +6,7 @@
 //   Defines the AcceptablePositionAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Validate
 {
     using System;

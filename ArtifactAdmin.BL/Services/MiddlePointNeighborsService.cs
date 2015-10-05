@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-using ArtifactAdmin.DAL.Models;
-using AutoMapper;
-
-namespace ArtifactAdmin.BL.Services
+﻿namespace ArtifactAdmin.BL.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using DAL.Models;
+    using Interfaces;
+    using Utils.GeneratingMiddlePoints;
+
     public class MiddlePointNeighborsService : IMiddlePointNeighborsService
     {
         private readonly IRepository<MiddlePointNeighbor> middlePointNeighborRepository;

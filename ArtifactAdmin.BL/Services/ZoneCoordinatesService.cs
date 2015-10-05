@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.MapHelpers;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-using ArtifactAdmin.DAL.Models;
-using AutoMapper;
-
-namespace ArtifactAdmin.BL.Services
+﻿namespace ArtifactAdmin.BL.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using DAL.Models;
+    using Interfaces;
+    using MapHelpers;
+    using ModelsDTO;
+    using Utils;
+    using Utils.GeneratingMiddlePoints;
+
     public class ZoneCoordinatesService : IZoneCoordinatesService
     {
         private readonly IRepository<MapInfo> mapInfoRepository;

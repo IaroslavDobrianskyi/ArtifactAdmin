@@ -6,12 +6,12 @@
 //   Defines the IQuestTemplateService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
     using System.Collections.Generic;
     using ModelsDTO;
-    
+
     public interface IQuestTemplateService
     {
         IEnumerable<QuestTemplateDto> GetAll();

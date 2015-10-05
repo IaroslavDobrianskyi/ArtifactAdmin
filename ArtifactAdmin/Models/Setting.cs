@@ -9,9 +9,6 @@
 
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Setting
     {
         public int Id { get; set; }

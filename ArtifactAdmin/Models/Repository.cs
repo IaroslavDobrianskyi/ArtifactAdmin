@@ -6,6 +6,7 @@
 //   Defines the Repository type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.DAL.Models
 {
     using System;

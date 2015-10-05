@@ -6,6 +6,7 @@
 //   Defines the StepTemplateService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
     using System;

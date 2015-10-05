@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using System.Web;
-using ArtifactAdmin.BL.MapHelpers;
-
-namespace ArtifactAdmin.BL.Utils
+﻿namespace ArtifactAdmin.BL.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.IO;
+    using System.Linq;
+    using MapHelpers;
+
     public static class ImageHelper
     {
         public static List<string> GetAllColorsFromImage(string imagePath)
@@ -32,13 +31,13 @@ namespace ArtifactAdmin.BL.Utils
 
         public static Stream ToStream(this Image image, ImageFormat formaw)
         {
-            var stream = new System.IO.MemoryStream();
+            var stream = new MemoryStream();
             image.Save(stream, formaw);
             stream.Position = 0;
             return stream;
         }
 
-        public static String HexConverter(System.Drawing.Color c)
+        public static String HexConverter(Color c)
         {
             String rtn = String.Empty;
             try
@@ -69,7 +68,7 @@ namespace ArtifactAdmin.BL.Utils
                 for (int x = 0; x < width; x++)
                 {
                     line.Y = y;
-                    var colorName = ImageHelper.HexConverter(bitmap.GetPixel(x, y));
+                    var colorName = HexConverter(bitmap.GetPixel(x, y));
 
                     if (previousColor == null)
                     {

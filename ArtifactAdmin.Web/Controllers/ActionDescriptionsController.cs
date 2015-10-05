@@ -6,6 +6,7 @@
 //   Defines the ActionDescriptionsController type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

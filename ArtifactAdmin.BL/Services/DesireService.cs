@@ -6,13 +6,12 @@
 //   Defines the DesireService type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
-    using System.Web;
     using AutoMapper;
     using DAL.Models;
     using Interfaces;

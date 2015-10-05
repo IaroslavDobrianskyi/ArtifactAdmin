@@ -6,6 +6,7 @@
 //   Defines the AcceptableLengthAttribute type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Validate
 {
     using System;

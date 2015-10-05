@@ -6,6 +6,7 @@
 //   Defines the Startup type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web
 {
     using System;

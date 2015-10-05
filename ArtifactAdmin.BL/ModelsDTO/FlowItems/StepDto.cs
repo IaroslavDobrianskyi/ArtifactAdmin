@@ -9,8 +9,6 @@
 
 namespace ArtifactAdmin.BL.ModelsDTO.FlowItems
 {
-    using System;
-
     public class StepDto
     {   
         public int Id { get; set; }

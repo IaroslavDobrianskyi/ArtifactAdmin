@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-
-namespace ArtifactAdmin.BL.Interfaces
+﻿namespace ArtifactAdmin.BL.Interfaces
 {
+    using System.Collections.Generic;
+    using Utils.GeneratingMiddlePoints;
+
     public interface IZoneCoordinatesService
     {
         Dictionary<string, List<SimplePoint>> GetZoneValuesCoordinatByMapInfoId(int? id);

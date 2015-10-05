@@ -6,9 +6,9 @@
 //   Defines the IPredispositionService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
     using System.Collections.Generic;
     using ModelsDTO;
 

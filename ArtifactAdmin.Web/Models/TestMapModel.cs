@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace ArtifactAdmin.Web.Models
+﻿namespace ArtifactAdmin.Web.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class TestMapModel
     {
         [Display(Name = "Назва карти")]

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-using ArtifactAdmin.DAL.Models;
-using AutoMapper;
-
-namespace ArtifactAdmin.BL.Services
+﻿namespace ArtifactAdmin.BL.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using DAL.Models;
+    using Interfaces;
+    using ModelsDTO;
+    using Utils.GeneratingMiddlePoints;
+
     public class DimentionRadiusService : IDimentionRadiusService
     {
         private readonly IRepository<DimentionRadiu> dimentionRadiusRepository;
@@ -28,7 +26,7 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<List<DimentionRadiuDto>>(this.dimentionRadiusRepository.GetAll());
         }
 
-        public void Create(ModelsDTO.DimentionRadiuDto dimentionRadiusDto)
+        public void Create(DimentionRadiuDto dimentionRadiusDto)
         {
             var dimentionRadius = Mapper.Map<DimentionRadiu>(dimentionRadiusDto);
             this.dimentionRadiusRepository.Insert(dimentionRadius);

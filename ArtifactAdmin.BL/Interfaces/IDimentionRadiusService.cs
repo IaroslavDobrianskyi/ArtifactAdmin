@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArtifactAdmin.BL.ModelsDTO;
-
-namespace ArtifactAdmin.BL.Interfaces
+﻿namespace ArtifactAdmin.BL.Interfaces
 {
+    using System.Collections.Generic;
+    using ModelsDTO;
+
     public interface IDimentionRadiusService
     {
-        void Create(ModelsDTO.DimentionRadiuDto dimentionRadius);
+        void Create(DimentionRadiuDto dimentionRadius);
 
         IEnumerable<DimentionRadiuDto> GetAll();
 

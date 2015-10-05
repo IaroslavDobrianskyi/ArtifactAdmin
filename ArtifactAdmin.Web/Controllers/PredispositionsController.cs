@@ -6,6 +6,7 @@
 //   Defines the PredispositionsController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

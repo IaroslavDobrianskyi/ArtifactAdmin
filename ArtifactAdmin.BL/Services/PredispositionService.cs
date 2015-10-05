@@ -6,9 +6,9 @@
 //   Defines the PredispositionService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using AutoMapper;

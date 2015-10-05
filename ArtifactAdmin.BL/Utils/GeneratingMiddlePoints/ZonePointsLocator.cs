@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Web;
-
-namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
+﻿namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+
     public class ZonePointsLocator
     {
         private Color activeColor;

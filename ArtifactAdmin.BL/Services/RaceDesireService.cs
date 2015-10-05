@@ -6,6 +6,7 @@
 //   Defines the RaceDesireService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
     using System;

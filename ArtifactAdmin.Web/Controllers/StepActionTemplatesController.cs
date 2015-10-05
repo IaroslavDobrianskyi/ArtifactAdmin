@@ -6,6 +6,7 @@
 //   Defines the StepActionTemplatesController type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

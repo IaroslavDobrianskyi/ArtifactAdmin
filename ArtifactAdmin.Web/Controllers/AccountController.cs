@@ -6,9 +6,9 @@
 //   Defines the AccountController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web
 {
-    using System;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
@@ -16,7 +16,7 @@ namespace ArtifactAdmin.Web
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
     using Models;
- 
+
     [Authorize]
     public class AccountController : Controller
     {

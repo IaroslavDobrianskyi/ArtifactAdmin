@@ -6,9 +6,9 @@
 //   Defines the IRepository interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
     using System.Linq;
 
     public interface IRepository<T>

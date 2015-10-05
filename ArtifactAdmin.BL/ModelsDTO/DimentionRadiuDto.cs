@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace ArtifactAdmin.BL.ModelsDTO
+﻿namespace ArtifactAdmin.BL.ModelsDTO
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class DimentionRadiuDto
     {
     

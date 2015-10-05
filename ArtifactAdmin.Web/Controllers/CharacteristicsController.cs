@@ -6,10 +6,11 @@
 //   Defines the CharacteristicsController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
-    using System.Net; 
+    using System.Net;
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;

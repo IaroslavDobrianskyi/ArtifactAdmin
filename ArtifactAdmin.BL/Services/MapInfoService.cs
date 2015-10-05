@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.DAL.Models;
-using AutoMapper;
-
-namespace ArtifactAdmin.BL.Services
+﻿namespace ArtifactAdmin.BL.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using DAL.Models;
+    using Interfaces;
+    using ModelsDTO;
+
     public class MapInfoService : IMapInfoService
     {
         private readonly IRepository<MapInfo> mapInfoRepository;

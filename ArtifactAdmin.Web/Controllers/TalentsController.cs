@@ -6,6 +6,7 @@
 //   Defines the TalentsController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;
@@ -14,7 +15,7 @@ namespace ArtifactAdmin.Web.Controllers
     using System.Web.Mvc;
     using BL.Interfaces;
     using BL.ModelsDTO;
-    
+
     public class TalentsController : Controller
     {
         private ITalentService talentService;

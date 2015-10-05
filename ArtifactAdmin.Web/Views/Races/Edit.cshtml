@@ -1,4 +1,5 @@
-﻿@model ArtifactAdmin.BL.ModelsDTO.RaceDto
+﻿@using ArtifactAdmin.Web.App_Start
+@model ArtifactAdmin.BL.ModelsDTO.RaceDto
 
 @{
     ViewBag.Title = "Edit";
@@ -29,7 +30,7 @@
             <td>
                 @Html.LabelFor(model => model.Icon, htmlAttributes: new {@class = "control-label col-md-2"})
                     @Html.HiddenFor(model => model.Icon, new {htmlAttributes = new {@class = "form-control"}})
-                    <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath + "Races/" + @Model.Icon)" id="ic" width=" 160 " height=" 120">
+                    <img src="@(ImagePath.ImPath + "Races/" + @Model.Icon)" id="ic" width=" 160 " height=" 120">
                     @Html.EditorFor(model => model.NewIcon, new {htmlAttributes = new {@class = "file", @type = "file", @name = "file", @accept = "image/*", @onchange = "javascript:ShowIcon(this);"}})
                     @Html.ValidationMessageFor(model => model.Icon, "", new {@class = "text-danger"})
             </td>

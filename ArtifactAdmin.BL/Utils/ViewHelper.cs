@@ -6,10 +6,11 @@
 //   Defines the ViewHelper type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Utils
 {
-    using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
     using ModelsDTO;
@@ -65,14 +66,14 @@ namespace ArtifactAdmin.BL.Utils
 
         public static string ConvertToCurrentSeparator(string stringIn)
         {
-            var separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+            var separator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
             string outString = stringIn.Replace('.', separator);
             return outString;
         }
 
         public static string ConvertSeparatorToDot(string stringIn)
         {
-            var separator = System.Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
+            var separator = CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator[0];
             string outString = stringIn.Replace(separator, '.');
             return outString;
         }

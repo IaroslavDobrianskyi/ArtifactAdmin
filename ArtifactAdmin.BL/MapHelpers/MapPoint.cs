@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-
-namespace ArtifactAdmin.BL.MapHelpers
+﻿namespace ArtifactAdmin.BL.MapHelpers
 {
+    using System;
+    using System.Collections.Generic;
+
     public class MapPointBase
     {
         public int X { get; set; }

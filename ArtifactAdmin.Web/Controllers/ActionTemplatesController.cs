@@ -6,6 +6,7 @@
 //   Defines the ActionTemplatesController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

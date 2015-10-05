@@ -6,11 +6,10 @@
 //   Defines the CharacteristicService type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
-    using System;
     using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Linq;
     using AutoMapper;
     using DAL.Models;

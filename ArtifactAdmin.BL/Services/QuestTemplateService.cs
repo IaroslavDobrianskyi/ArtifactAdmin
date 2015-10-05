@@ -6,13 +6,13 @@
 //   Defines the QuestTemplateService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
-    using System.Web;
     using AutoMapper;
     using DAL.Models;
     using Interfaces;

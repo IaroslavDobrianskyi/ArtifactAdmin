@@ -6,6 +6,7 @@
 //   Defines the ActionTemplateResultService type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.Services
 {
     using System;

@@ -6,6 +6,7 @@
 //   Defines the RaceDesiresController type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.Web.Controllers
 {
     using System;

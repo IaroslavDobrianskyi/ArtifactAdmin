@@ -6,25 +6,26 @@
 //   Defines the RaceDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using ValidationConstellation;
 
     public class RaceDto
     {
         [Required(ErrorMessageResourceName = "RequiredDescription",
-           ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+           ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Опис")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Description { get; set; }
 
         public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredList",
-           ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+           ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Характеристики")]
         public string Characreristics { get; set; }
 
@@ -41,7 +42,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public string CharacteristicsLevelModifier { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredList",
-           ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+           ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Схильності")]
         public string Predisposition { get; set; }
 
@@ -55,7 +56,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public int ValuePredisposition { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredList",
-           ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+           ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Властивості")]
         public string Properties { get; set; }
 
