@@ -6,11 +6,11 @@
 //   Defines the IRepository interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Linq;
+
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
-    using System.Linq;
-
     public interface IRepository<T>
     {
         IQueryable<T> GetAll();

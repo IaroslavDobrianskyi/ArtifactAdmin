@@ -7,11 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Carrier
     {
         public Carrier()

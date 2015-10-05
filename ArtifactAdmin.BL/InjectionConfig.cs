@@ -6,14 +6,14 @@
 //   Defines the InjectionConfig type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.BL.Services;
+using ArtifactAdmin.DAL.Models;
+using LightInject;
+
 namespace ArtifactAdmin.BL
 {
-    using System;
-    using DAL.Models;
-    using Interfaces;
-    using LightInject;
-    using Services;
-
     public static class InjectionConfig
     {
         public static ServiceContainer RegisterAllDependencies()
@@ -28,8 +28,12 @@ namespace ArtifactAdmin.BL
             container.Register<IStepTemplateService, StepTemplateService>(new PerScopeLifetime());
             container.Register<IMapObjectService, MapObjectService>(new PerScopeLifetime());
             container.Register<IMapInfoService, MapInfoService>(new PerScopeLifetime());
+            container.Register<IMapManagerService, MapManagerService>(new PerScopeLifetime());
+            container.Register<ICacheService, CacheService>(new PerScopeLifetime());
+            container.Register<IDimentionRadiusService, DimentionRadiusService>(new PerScopeLifetime());
             container.Register<IMapInfoDimensionService, MapInfoDimensionService>(new PerScopeLifetime());
             container.Register<IZoneCoordinatesService, ZoneCoordinatesService>(new PerScopeLifetime());
+            container.Register<IMiddlePointNeighborsService, MiddlePointNeighborsService>(new PerScopeLifetime());
             container.Register<IMapZoneService, MapZoneService>(new PerScopeLifetime());
             container.Register<IActionTemplateService, ActionTemplateService>(new PerScopeLifetime());
             container.Register<IActionDescriptionService, ActionDescriptionService>(new PerScopeLifetime());

@@ -195,3 +195,6 @@ FakesAssemblies/
 # Visual Studio 6 workspace options file
 *.opt
 /ArtifactAdmin/App_Data
+/ArtifactAdmin.BL/web.config
+/ArtifactAdmin.BL/web.Debug.config
+/ArtifactAdmin.BL/web.Release.config

@@ -7,11 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System;
+
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
-    using System.Collections.Generic;
-    
     public partial class Statistic
     {
         public int idUser { get; set; }

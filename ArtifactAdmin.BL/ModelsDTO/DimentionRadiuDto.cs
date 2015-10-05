@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ArtifactAdmin.BL.ModelsDTO
 {
@@ -10,6 +8,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
     
         public int Id { get; set; }
         public int MapInfoDimension { get; set; }
+        [Display(Name = "Радіус виміру")]
         public int Radius { get; set; }
     
         public virtual MapInfoDimensionDto MapInfoDimension1 { get; set; }

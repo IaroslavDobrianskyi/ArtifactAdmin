@@ -6,13 +6,12 @@
 //   Defines the IRaceService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using ArtifactAdmin.BL.ModelsDTO;
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Web;
-    using ModelsDTO;
-
     public interface IRaceService
     {
         IEnumerable<RaceDto> GetAll();

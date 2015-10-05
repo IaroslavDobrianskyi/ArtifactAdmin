@@ -6,11 +6,11 @@
 //   Defines the ViewValueCharacteristic type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-
     public class ViewValueCharacteristic
     {
         public List<ViewCharacteristic> Characteristics { get; set; }

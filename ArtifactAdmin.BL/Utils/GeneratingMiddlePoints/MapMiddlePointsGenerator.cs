@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Web;
 using ArtifactAdmin.BL.MapHelpers;
 
 namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
@@ -96,17 +94,6 @@ namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
             var height = bitmap.Height;
 
             var proceedMatrix = new bool[width, height];
-
-            //for (int x = 0; x < width; x++)
-            //{
-            //    for (int y = 0; y < height; y++)
-            //    {
-            //        if (bitmap.GetPixel(x, y) == Color.White)
-            //        {
-            //            proceedMatrix[x, y] = true;
-            //        }
-            //    }
-            //}
 
             for (int x = 0; x < width; x++)
             {

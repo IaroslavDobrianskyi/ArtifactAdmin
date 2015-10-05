@@ -7,16 +7,15 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.BL.ModelsDTO;
+using ArtifactAdmin.DAL.Models;
+using AutoMapper;
+
 namespace ArtifactAdmin.BL.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using AutoMapper;
-    using DAL.Models;
-    using Interfaces;
-    using ModelsDTO;
-
     public class BonusService : IBonusService
     {
         private readonly IRepository<Bonu> bonuRepository;

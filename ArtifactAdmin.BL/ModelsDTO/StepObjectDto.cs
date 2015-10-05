@@ -6,11 +6,12 @@
 //   Defines the StepObjectDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.ComponentModel.DataAnnotations;
+using ValidationConstellation;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-
     public class StepObjectDto
     {
         public int Id { get; set; }
@@ -18,21 +19,21 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public int StepObjectType { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredName",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Назва")]
         [StringLength(50, ErrorMessageResourceName = "StringLength",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Name { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredDescription",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Опис")]
         [StringLength(100, ErrorMessageResourceName = "StringLength",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Description { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredIcon",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Іконка")]
         public string Icon { get; set; }
 

@@ -6,12 +6,12 @@
 //   Defines the IActionDescriptionService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using ArtifactAdmin.BL.ModelsDTO;
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using ModelsDTO;
-
     public interface IActionDescriptionService
     {
         IEnumerable<ActionDescriptionDto> GetAll();

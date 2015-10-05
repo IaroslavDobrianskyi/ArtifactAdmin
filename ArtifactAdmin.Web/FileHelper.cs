@@ -6,14 +6,14 @@
 //   Defines the FileHelper type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.IO;
+using System.Web;
+using ArtifactAdmin.Web.App_Start;
+
 namespace ArtifactAdmin.Web
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Web;
-
     public class FileHelper
     {
         /// <summary>
@@ -28,7 +28,7 @@ namespace ArtifactAdmin.Web
         {
             var fileName = Path.GetFileName(icon.FileName);
             fileName = Guid.NewGuid().ToString() + '_' + fileName;
-            var pathToIcon = HttpContext.Current.Server.MapPath(App_Start.ImagePath.ImPath + folder);
+            var pathToIcon = HttpContext.Current.Server.MapPath(ImagePath.ImPath + folder);
             try
             {
                 if (!Directory.Exists(pathToIcon.ToString()))
@@ -61,7 +61,7 @@ namespace ArtifactAdmin.Web
         /// <param name="folder">folder with file for delete</param>
         public static void DeleteIcon(string fileName, string folder)
         {
-            var pathToIcon = App_Start.ImagePath.ImPath;
+            var pathToIcon = ImagePath.ImPath;
             var path = Path.Combine(HttpContext.Current.Server.MapPath(pathToIcon + folder), fileName);
             FileInfo file = new FileInfo(path);
             if (file.Exists)

@@ -6,15 +6,12 @@
 //   Defines the RouteConfig type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Web.Mvc;
+using System.Web.Routing;
+
 namespace ArtifactAdmin.Web
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Routing;
-
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)
@@ -25,6 +22,13 @@ namespace ArtifactAdmin.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional });
+
+            // will allow for Products/Item/2/1
+            routes.MapRoute(
+                    "withParams",
+                    "{controller}/{action}/{id}/{p1}",
+                    new { }
+            );
         }
     }
 }

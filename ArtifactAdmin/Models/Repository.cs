@@ -6,12 +6,13 @@
 //   Defines the Repository type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Data.Entity;
+using System.Linq;
+
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
-
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly artEntities artEntities;

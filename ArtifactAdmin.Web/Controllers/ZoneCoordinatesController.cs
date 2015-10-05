@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.MapHelpers;
 using ArtifactAdmin.BL.Utils;
 using ArtifactAdmin.Web.Models;
 
@@ -37,19 +34,13 @@ namespace ArtifactAdmin.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-             var coordinates = zoneCoordinatesService.GetZoneCoordinatByMapInfoId(id);
+             var coordinates = zoneCoordinatesService.GetZoneValuesCoordinatByMapInfoId(id);
             var count = 0;
             if (coordinates.Count() > 0)
             {
-                var dic = new Dictionary<string, LinesContainer>();
-
-                foreach (var c in coordinates)
+                foreach (var key in coordinates.Keys)
                 {
-                    dic.Add(c.MapZone1.Color, LinesContainer.Deserialize(c.Coordinates));
-                }
-                foreach (var key in dic.Keys)
-                {
-                    count += dic[key].Lines.Count;
+                    count += coordinates[key].Count;
                 }
             }
 
@@ -117,30 +108,20 @@ namespace ArtifactAdmin.Web.Controllers
                 return HttpNotFound();
             }
 
-            var coordinates = zoneCoordinatesService.GetZoneCoordinatByMapInfoId(id);
+            var coordinates = zoneCoordinatesService.GetZoneValuesCoordinatByMapInfoId(id);
 
             if (coordinates.Count() > 0)
             {
-                var dic = new Dictionary<string, LinesContainer>();
-
-                foreach (var c in coordinates)
-                {
-                    dic.Add(c.MapZone1.Color, LinesContainer.Deserialize(c.Coordinates));
-                }
 
                 var img = new Bitmap(mapInfo.Width, mapInfo.Height);
                 var cc = new ColorConverter();
-                foreach (var key in dic.Keys)
+                foreach (var key in coordinates.Keys)
                 {
                     var color = (Color)cc.ConvertFromString(key);
-                    foreach (var line in dic[key].Lines)
+                    foreach (var item in coordinates[key])
                     {
-                        for (int x = line.StartX; x <= line.EndX; x++)
-                        {
-                            img.SetPixel(x, line.Y, color);
-                        }
+                        img.SetPixel(item.X, item.Y, color);
                     }
-
                 }
 
                 return base.File(img.ToStream(ImageFormat.Bmp), "image/jpeg");

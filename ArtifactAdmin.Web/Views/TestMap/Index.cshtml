@@ -1,0 +1,80 @@
+﻿@model ArtifactAdmin.Web.Models.TestMapModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Тест продуктивності карти</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MapName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapName)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Width)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Width)
+            
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+            
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MilisecondsToLoadMap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MilisecondsToLoadMap)
+            
+        </dd>
+    </dl>
+    <h3>@Html.DisplayNameFor(model => model.AlaivableDimentionsAndRadiuses)</h3>
+
+    @foreach (var dimention in Model.AlaivableDimentionsAndRadiuses.Keys)
+    {
+        <dl class="dl-horizontal">
+                <dt>
+                    Вимір:
+                </dt>
+
+                <dd>
+                     @dimention
+                </dd>
+            </dl>
+
+        foreach (var radius in Model.AlaivableDimentionsAndRadiuses[dimention])
+        {
+            <dl class="dl-horizontal ">
+                <dt>
+                    Радіус:
+                </dt>
+
+                <dd>
+                    @radius
+                </dd>
+            </dl>
+        }
+    }
+</div>
+
+

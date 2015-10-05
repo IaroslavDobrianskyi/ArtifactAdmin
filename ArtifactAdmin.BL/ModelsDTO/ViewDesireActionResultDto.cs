@@ -6,14 +6,12 @@
 //   Defines the ViewDesireActionResultDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Web;
-
     public class ViewDesireActionResultDto
     {
         public int ActionResultId { get; set; }

@@ -1,0 +1,75 @@
+﻿@using ArtifactAdmin.Web.Helpers
+@model ArtifactAdmin.Web.Models.DimentionRadiusModelDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Детально</h2>
+
+<div>
+    <h4>Середні точки карти</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DimentionRadiuDto.MapInfoDimension1.MapInfo1.MapName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DimentionRadiuDto.MapInfoDimension1.MapInfo1.MapName)
+        </dd>
+
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DimentionRadiuDto.MapInfoDimension1.Dimension)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DimentionRadiuDto.MapInfoDimension1.Dimension)
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DimentionRadiuDto.Radius)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DimentionRadiuDto.Radius)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Index)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Index)
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>
+            Точки сусіди
+        </dt>
+
+        <dd >
+            @Html.Raw(@Html.Image(@Url.Action("ImageForDimentionRadius",new {id = Model.DimentionRadiuDto.Id, index= Model.Index}),"",new object()))
+        </dd>
+    </dl>    
+</div>
+    
+<p>
+    @Html.ActionLink("Повернутись до списку", "Index")
+</p>

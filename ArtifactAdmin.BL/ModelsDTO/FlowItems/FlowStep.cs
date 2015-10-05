@@ -1,8 +1,7 @@
-﻿namespace ArtifactAdmin.BL.ModelsDTO.FlowItems
-{
-    using System;
-    using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
+namespace ArtifactAdmin.BL.ModelsDTO.FlowItems
+{
     public class FlowStep
     {
         public int Id { get; set; }

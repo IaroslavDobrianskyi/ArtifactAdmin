@@ -6,15 +6,16 @@
 //   Defines the ConstellationsController type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.BL.ModelsDTO;
+
 namespace ArtifactAdmin.Web.Controllers
 {
-    using System;
-    using System.Net;
-    using System.Web;
-    using System.Web.Mvc;
-    using BL.Interfaces;
-    using BL.ModelsDTO;
-
     public class ConstellationsController : Controller
     {
         private IConstellationService constellationService;

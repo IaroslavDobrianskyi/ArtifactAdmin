@@ -6,14 +6,11 @@
 //   Defines the IStepService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using ArtifactAdmin.BL.ModelsDTO.FlowItems;
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Web;
-    using ModelsDTO;
-    using ModelsDTO.FlowItems;
-
     public interface IStepService
     {
         StepDto GetById(int? id);
