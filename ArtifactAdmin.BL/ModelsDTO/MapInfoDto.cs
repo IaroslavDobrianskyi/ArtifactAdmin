@@ -23,7 +23,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public string ImagePath { get; set; }
         [Display(Name = "Ширина")]
         public int Width { get; set; }
-        [Display(Name = "Висона")]
+        [Display(Name = "Висота")]
         public int Height { get; set; }
     }
 }

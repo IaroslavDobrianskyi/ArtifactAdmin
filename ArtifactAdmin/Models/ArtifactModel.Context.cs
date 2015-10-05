@@ -81,6 +81,13 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<QuestStep> QuestSteps { get; set; }
         public virtual DbSet<QuestTemplate> QuestTemplates { get; set; }
         public virtual DbSet<QuestTemplateStepTemplate> QuestTemplateStepTemplates { get; set; }
+        public virtual DbSet<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
+        public virtual DbSet<MapInfo> MapInfoes { get; set; }
+        public virtual DbSet<MapInfoDimension> MapInfoDimensions { get; set; }
+        public virtual DbSet<MiddlePoint> MiddlePoints { get; set; }
+        public virtual DbSet<MiddlePointNeighbor> MiddlePointNeighbors { get; set; }
+        public virtual DbSet<DimentionRadiu> DimentionRadius { get; set; }
+        public virtual DbSet<PathFinderConfig> PathFinderConfigs { get; set; }
     
         public virtual ObjectResult<Nullable<int>> QuestStarter(Nullable<int> idActionResult)
         {
@@ -90,12 +97,5 @@ namespace ArtifactAdmin.DAL.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("QuestStarter", idActionResultParameter);
         }
-
-public virtual DbSet<ActionTemplateActionDescription> ActionTemplateActionDescriptions { get; set; }
-        public virtual DbSet<MapInfo> MapInfoes { get; set; }
-        public virtual DbSet<MapInfoDimension> MapInfoDimensions { get; set; }
-        public virtual DbSet<MiddlePoint> MiddlePoints { get; set; }
-        public virtual DbSet<MiddlePointNeighbor> MiddlePointNeighbors { get; set; }
-        public virtual DbSet<DimentionRadiu> DimentionRadius { get; set; }
     }
 }

@@ -140,6 +140,10 @@
         <EntityTypeShape EntityType="artModel.DimentionRadiu" Width="1.5" PointX="5.25" PointY="13.125" />
         <AssociationConnector Association="artModel.FK_DimentionRadius_MapInfoDimension" />
         <AssociationConnector Association="artModel.FK_MiddlePointNeighbors_DimentionRadius" />
+        <EntityTypeShape EntityType="artModel.PathFinderConfig" Width="1.5" PointX="13.5" PointY="0.875" />
+        <AssociationConnector Association="artModel.FK_PathFinderConfig_DimentionRadius" />
+        <AssociationConnector Association="artModel.FK_PathFinderConfig_MapInfo" />
+        <AssociationConnector Association="artModel.FK_PathFinderConfig_MapInfoDimension" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

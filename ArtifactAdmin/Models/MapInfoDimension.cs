@@ -18,6 +18,7 @@ namespace ArtifactAdmin.DAL.Models
         {
             this.MiddlePoints = new HashSet<MiddlePoint>();
             this.DimentionRadius = new HashSet<DimentionRadiu>();
+            this.PathFinderConfigs = new HashSet<PathFinderConfig>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual MapInfo MapInfo1 { get; set; }
         public virtual ICollection<MiddlePoint> MiddlePoints { get; set; }
         public virtual ICollection<DimentionRadiu> DimentionRadius { get; set; }
+        public virtual ICollection<PathFinderConfig> PathFinderConfigs { get; set; }
     }
 }

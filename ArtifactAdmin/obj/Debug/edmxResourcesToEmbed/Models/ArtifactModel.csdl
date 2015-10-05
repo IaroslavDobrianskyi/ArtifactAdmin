@@ -370,6 +370,19 @@
       <End Role="DimentionRadiu" EntitySet="DimentionRadius" />
       <End Role="MiddlePointNeighbor" EntitySet="MiddlePointNeighbors" />
     </AssociationSet>
+    <EntitySet Name="PathFinderConfigs" EntityType="artModel.PathFinderConfig" />
+    <AssociationSet Name="FK_PathFinderConfig_DimentionRadius" Association="artModel.FK_PathFinderConfig_DimentionRadius">
+      <End Role="DimentionRadiu" EntitySet="DimentionRadius" />
+      <End Role="PathFinderConfig" EntitySet="PathFinderConfigs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PathFinderConfig_MapInfo" Association="artModel.FK_PathFinderConfig_MapInfo">
+      <End Role="MapInfo" EntitySet="MapInfoes" />
+      <End Role="PathFinderConfig" EntitySet="PathFinderConfigs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PathFinderConfig_MapInfoDimension" Association="artModel.FK_PathFinderConfig_MapInfoDimension">
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimensions" />
+      <End Role="PathFinderConfig" EntitySet="PathFinderConfigs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Action">
     <Key>
@@ -1873,6 +1886,7 @@
     <Property Name="Width" Type="Int32" Nullable="false" />
     <Property Name="Height" Type="Int32" Nullable="false" />
     <NavigationProperty Name="MapInfoDimensions" Relationship="artModel.FK_MapInfoDimension_MapInfo" FromRole="MapInfo" ToRole="MapInfoDimension" />
+    <NavigationProperty Name="PathFinderConfigs" Relationship="artModel.FK_PathFinderConfig_MapInfo" FromRole="MapInfo" ToRole="PathFinderConfig" />
   </EntityType>
   <Association Name="FK_ZoneCoordinats_MapInfo">
     <End Type="artModel.MapInfo" Role="MapInfo" Multiplicity="1" />
@@ -1896,6 +1910,7 @@
     <NavigationProperty Name="MapInfo1" Relationship="artModel.FK_MapInfoDimension_MapInfo" FromRole="MapInfoDimension" ToRole="MapInfo" />
     <NavigationProperty Name="MiddlePoints" Relationship="artModel.FK_MiddlePoint_MapInfoDimension" FromRole="MapInfoDimension" ToRole="MiddlePoint" />
     <NavigationProperty Name="DimentionRadius" Relationship="artModel.FK_DimentionRadius_MapInfoDimension" FromRole="MapInfoDimension" ToRole="DimentionRadiu" />
+    <NavigationProperty Name="PathFinderConfigs" Relationship="artModel.FK_PathFinderConfig_MapInfoDimension" FromRole="MapInfoDimension" ToRole="PathFinderConfig" />
   </EntityType>
   <Association Name="FK_MapInfoDimension_MapInfo">
     <End Type="artModel.MapInfo" Role="MapInfo" Multiplicity="1" />
@@ -1965,6 +1980,7 @@
     <Property Name="Radius" Type="Int32" Nullable="false" />
     <NavigationProperty Name="MapInfoDimension1" Relationship="artModel.FK_DimentionRadius_MapInfoDimension" FromRole="DimentionRadiu" ToRole="MapInfoDimension" />
     <NavigationProperty Name="MiddlePointNeighbors" Relationship="artModel.FK_MiddlePointNeighbors_DimentionRadius" FromRole="DimentionRadiu" ToRole="MiddlePointNeighbor" />
+    <NavigationProperty Name="PathFinderConfigs" Relationship="artModel.FK_PathFinderConfig_DimentionRadius" FromRole="DimentionRadiu" ToRole="PathFinderConfig" />
   </EntityType>
   <Association Name="FK_DimentionRadius_MapInfoDimension">
     <End Type="artModel.MapInfoDimension" Role="MapInfoDimension" Multiplicity="1" />
@@ -1987,6 +2003,55 @@
       </Principal>
       <Dependent Role="MiddlePointNeighbor">
         <PropertyRef Name="DimensionRadius" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PathFinderConfig">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MapInfo" Type="Int32" Nullable="false" />
+    <Property Name="MapInfoDimention" Type="Int32" Nullable="false" />
+    <Property Name="DimentionRadius" Type="Int32" Nullable="false" />
+    <Property Name="OrderIndex" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="DimentionRadiu" Relationship="artModel.FK_PathFinderConfig_DimentionRadius" FromRole="PathFinderConfig" ToRole="DimentionRadiu" />
+    <NavigationProperty Name="MapInfo1" Relationship="artModel.FK_PathFinderConfig_MapInfo" FromRole="PathFinderConfig" ToRole="MapInfo" />
+    <NavigationProperty Name="MapInfoDimension" Relationship="artModel.FK_PathFinderConfig_MapInfoDimension" FromRole="PathFinderConfig" ToRole="MapInfoDimension" />
+  </EntityType>
+  <Association Name="FK_PathFinderConfig_DimentionRadius">
+    <End Type="artModel.DimentionRadiu" Role="DimentionRadiu" Multiplicity="1" />
+    <End Type="artModel.PathFinderConfig" Role="PathFinderConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimentionRadiu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PathFinderConfig">
+        <PropertyRef Name="DimentionRadius" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PathFinderConfig_MapInfo">
+    <End Type="artModel.MapInfo" Role="MapInfo" Multiplicity="1" />
+    <End Type="artModel.PathFinderConfig" Role="PathFinderConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PathFinderConfig">
+        <PropertyRef Name="MapInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PathFinderConfig_MapInfoDimension">
+    <End Type="artModel.MapInfoDimension" Role="MapInfoDimension" Multiplicity="1" />
+    <End Type="artModel.PathFinderConfig" Role="PathFinderConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfoDimension">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PathFinderConfig">
+        <PropertyRef Name="MapInfoDimention" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

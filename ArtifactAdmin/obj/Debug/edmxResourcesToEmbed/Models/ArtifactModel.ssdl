@@ -352,6 +352,16 @@
     <Property Name="NeighborCoordinates" Type="varchar(max)" Nullable="false" />
     <Property Name="MiddlePoint" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="PathFinderConfig">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MapInfo" Type="int" Nullable="false" />
+    <Property Name="MapInfoDimention" Type="int" Nullable="false" />
+    <Property Name="DimentionRadius" Type="int" Nullable="false" />
+    <Property Name="OrderIndex" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Predisposition">
     <Key>
       <PropertyRef Name="Id" />
@@ -1169,6 +1179,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_PathFinderConfig_DimentionRadius">
+    <End Role="DimentionRadius" Type="Self.DimentionRadius" Multiplicity="1" />
+    <End Role="PathFinderConfig" Type="Self.PathFinderConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DimentionRadius">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PathFinderConfig">
+        <PropertyRef Name="DimentionRadius" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PathFinderConfig_MapInfo">
+    <End Role="MapInfo" Type="Self.MapInfo" Multiplicity="1" />
+    <End Role="PathFinderConfig" Type="Self.PathFinderConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PathFinderConfig">
+        <PropertyRef Name="MapInfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PathFinderConfig_MapInfoDimension">
+    <End Role="MapInfoDimension" Type="Self.MapInfoDimension" Multiplicity="1" />
+    <End Role="PathFinderConfig" Type="Self.PathFinderConfig" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MapInfoDimension">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PathFinderConfig">
+        <PropertyRef Name="MapInfoDimention" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Quest_Carrier">
     <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
     <End Role="Quest" Type="Self.Quest" Multiplicity="*" />
@@ -1510,6 +1556,7 @@
     <EntitySet Name="MapZone" EntityType="Self.MapZone" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MiddlePoint" EntityType="Self.MiddlePoint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MiddlePointNeighbors" EntityType="Self.MiddlePointNeighbors" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PathFinderConfig" EntityType="Self.PathFinderConfig" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Predisposition" EntityType="Self.Predisposition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Properties" EntityType="Self.Properties" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Quest" EntityType="Self.Quest" Schema="dbo" store:Type="Tables" />
@@ -1724,6 +1771,18 @@
     <AssociationSet Name="FK_MiddlePointNeighbors_MiddlePoint" Association="Self.FK_MiddlePointNeighbors_MiddlePoint">
       <End Role="MiddlePoint" EntitySet="MiddlePoint" />
       <End Role="MiddlePointNeighbors" EntitySet="MiddlePointNeighbors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PathFinderConfig_DimentionRadius" Association="Self.FK_PathFinderConfig_DimentionRadius">
+      <End Role="DimentionRadius" EntitySet="DimentionRadius" />
+      <End Role="PathFinderConfig" EntitySet="PathFinderConfig" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PathFinderConfig_MapInfo" Association="Self.FK_PathFinderConfig_MapInfo">
+      <End Role="MapInfo" EntitySet="MapInfo" />
+      <End Role="PathFinderConfig" EntitySet="PathFinderConfig" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PathFinderConfig_MapInfoDimension" Association="Self.FK_PathFinderConfig_MapInfoDimension">
+      <End Role="MapInfoDimension" EntitySet="MapInfoDimension" />
+      <End Role="PathFinderConfig" EntitySet="PathFinderConfig" />
     </AssociationSet>
     <AssociationSet Name="FK_Quest_Carrier" Association="Self.FK_Quest_Carrier">
       <End Role="Carrier" EntitySet="Carrier" />
