@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.IO;
-using System.Linq;
-using ArtifactAdmin.BL.MapHelpers;
-
-namespace ArtifactAdmin.BL.Utils
+﻿namespace ArtifactAdmin.BL.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.IO;
+    using System.Linq;
+    using MapHelpers;
+
     public static class ImageHelper
     {
         public static List<string> GetAllColorsFromImage(string imagePath)

@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ArtifactAdmin.BL.ModelsDTO
+﻿namespace ArtifactAdmin.BL.ModelsDTO
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class MapInfoDimensionDto
     {
         public int Id { get; set; }

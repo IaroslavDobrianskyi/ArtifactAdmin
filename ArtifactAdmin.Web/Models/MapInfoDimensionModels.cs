@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using ArtifactAdmin.BL.ModelsDTO;
-
-namespace ArtifactAdmin.Web.Models
+﻿namespace ArtifactAdmin.Web.Models
 {
+    using System.Collections.Generic;
+    using BL.ModelsDTO;
+
     public class MapInfoDimensionCreateModel
     {
         public MapInfoDimensionDto MapInfoDimensionDto { get; set; }

@@ -7,14 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Net;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-
 namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Net;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using BL.ModelsDTO;
+
     public class PredispositionsController : Controller
     {
         private IPredispositionService predispositionService;

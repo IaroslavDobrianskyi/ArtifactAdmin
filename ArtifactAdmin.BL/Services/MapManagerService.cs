@@ -1,10 +1,10 @@
-﻿using System.Linq;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.MapHelpers;
-using ArtifactAdmin.DAL.Models;
-
-namespace ArtifactAdmin.BL.Services
+﻿namespace ArtifactAdmin.BL.Services
 {
+    using System.Linq;
+    using DAL.Models;
+    using Interfaces;
+    using MapHelpers;
+
     public class MapManagerService : IMapManagerService
     {
         private readonly IRepository<MapInfo> mapInfoRepository;

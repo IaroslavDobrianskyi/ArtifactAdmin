@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace ArtifactAdmin.BL.ModelsDTO
+﻿namespace ArtifactAdmin.BL.ModelsDTO
 {
+    using System.Collections.Generic;
+
     public class MiddlePointDto
     {    
         public int Id { get; set; }

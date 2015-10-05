@@ -1,9 +1,9 @@
-﻿using System;
-using System.Runtime.Caching;
-using ArtifactAdmin.BL.Interfaces;
-
-namespace ArtifactAdmin.BL.Services
+﻿namespace ArtifactAdmin.BL.Services
 {
+    using System;
+    using System.Runtime.Caching;
+    using Interfaces;
+
     public class CacheService : ICacheService
     {
         public T GetOrSet<T>(string cacheKey, Func<T> getItemCallback) where T : class

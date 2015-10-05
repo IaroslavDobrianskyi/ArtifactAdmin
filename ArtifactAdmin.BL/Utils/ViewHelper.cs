@@ -7,14 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.ModelsDTO;
-
 namespace ArtifactAdmin.BL.Utils
 {
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Web.Mvc;
+    using ModelsDTO;
+
     public class ViewHelper
     {
         public static ViewValueCharacteristic GetValueByString(string specificValue, List<ViewCharacteristic> allCharacteristic)

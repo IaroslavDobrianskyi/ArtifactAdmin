@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
 namespace ArtifactAdmin.DAL.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     public partial class ActionTemplateResult
     {
         public ActionTemplateResult()

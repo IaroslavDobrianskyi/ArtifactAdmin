@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System;
-
 namespace ArtifactAdmin.DAL.Models
 {
+    using System;
+
     public partial class sysdiagram
     {
         public string name { get; set; }

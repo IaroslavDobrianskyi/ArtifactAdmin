@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-
-namespace ArtifactAdmin.BL.MapHelpers
+﻿namespace ArtifactAdmin.BL.MapHelpers
 {
+    using System;
+    using System.Collections.Generic;
+    using Utils.GeneratingMiddlePoints;
+
     public class MapManager
     {
         public string MapName { get; set; }

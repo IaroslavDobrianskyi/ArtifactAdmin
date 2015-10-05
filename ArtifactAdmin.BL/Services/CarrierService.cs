@@ -1,9 +1,9 @@
-﻿using System;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.DAL.Models;
-
-namespace ArtifactAdmin.BL.Services
+﻿namespace ArtifactAdmin.BL.Services
 {
+    using System;
+    using DAL.Models;
+    using Interfaces;
+
     public class CarrierService : ICarrierService
     {
         // TODO extract into separate class 

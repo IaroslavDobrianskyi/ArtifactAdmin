@@ -7,10 +7,10 @@
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-
 namespace ArtifactAdmin.Web.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

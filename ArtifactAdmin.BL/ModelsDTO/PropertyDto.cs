@@ -7,12 +7,12 @@
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 
-using System.ComponentModel.DataAnnotations;
-using ArtifactAdmin.BL.Validate;
-using ValidationConstellation;
-
 namespace ArtifactAdmin.BL.ModelsDTO
 {
+    using System.ComponentModel.DataAnnotations;
+    using Validate;
+    using ValidationConstellation;
+
     public class PropertyDto
     {
         public int Id { get; set; }

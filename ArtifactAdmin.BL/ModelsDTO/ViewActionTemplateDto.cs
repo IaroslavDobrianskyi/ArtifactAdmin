@@ -7,12 +7,8 @@
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-      public class ViewActionTemplateDto
     {
         public ActionTemplateDto ActionTemplateDto { get; set; }
 

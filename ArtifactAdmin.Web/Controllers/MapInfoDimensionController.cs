@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-using ArtifactAdmin.Web.Models;
-
-namespace ArtifactAdmin.Web.Controllers
+﻿namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using BL.ModelsDTO;
+    using BL.Utils;
+    using BL.Utils.GeneratingMiddlePoints;
+    using Models;
+
     public class MapInfoDimensionController : Controller
     {
 

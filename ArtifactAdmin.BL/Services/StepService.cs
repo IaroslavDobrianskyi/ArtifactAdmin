@@ -7,14 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Linq;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO.FlowItems;
-using ArtifactAdmin.DAL.Models;
-using AutoMapper;
-
 namespace ArtifactAdmin.BL.Services
 {
+    using System.Linq;
+    using AutoMapper;
+    using DAL.Models;
+    using Interfaces;
+    using ModelsDTO.FlowItems;
+
     public class StepService : IStepService
     {
         private readonly IRepository<Step> stepRepository;

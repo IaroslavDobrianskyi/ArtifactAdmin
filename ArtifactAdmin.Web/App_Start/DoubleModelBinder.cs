@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Globalization;
-using System.Web.Mvc;
-
 namespace ArtifactAdmin.Web.App_Start
 {
+    using System.Globalization;
+    using System.Web.Mvc;
+
     public class DoubleModelBinder : DefaultModelBinder
     {
         public override object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)

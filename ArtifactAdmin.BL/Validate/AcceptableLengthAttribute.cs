@@ -7,14 +7,14 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-
 namespace ArtifactAdmin.BL.Validate
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
+    using Interfaces;
+    using ModelsDTO;
+
     public class AcceptableLengthAttribute : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)

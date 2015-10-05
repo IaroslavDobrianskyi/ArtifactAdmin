@@ -7,16 +7,16 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils;
-
 namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Net;
+    using System.Web;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using BL.ModelsDTO;
+    using BL.Utils;
+
     public class DesiresController : Controller
     {
         private IDesireService desireService;

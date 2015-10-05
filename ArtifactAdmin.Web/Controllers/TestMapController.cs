@@ -1,10 +1,10 @@
-﻿using System;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.Web.Models;
-
-namespace ArtifactAdmin.Web.Controllers
+﻿namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using Models;
+
     public class TestMapController : Controller
     {
         private IMapManagerService mapManagerService;

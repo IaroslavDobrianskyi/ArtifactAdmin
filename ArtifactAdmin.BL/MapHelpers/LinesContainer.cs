@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-
-namespace ArtifactAdmin.BL.MapHelpers
+﻿namespace ArtifactAdmin.BL.MapHelpers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using Utils.GeneratingMiddlePoints;
+
     public class LinesContainer
     {
         public List<LineOfPoints> Lines { get; set; }

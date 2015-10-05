@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
-
-namespace ArtifactAdmin.BL.Interfaces
+﻿namespace ArtifactAdmin.BL.Interfaces
 {
+    using System.Collections.Generic;
+    using ModelsDTO;
+    using Utils.GeneratingMiddlePoints;
+
     public interface IMapInfoDimensionService
     {
         IEnumerable<MapInfoDimensionDto> GetAll();

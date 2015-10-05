@@ -7,11 +7,11 @@
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
 namespace ArtifactAdmin.BL.ModelsDTO
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class ActionTemplateResultDto
     {
         public int Id { get; set; }

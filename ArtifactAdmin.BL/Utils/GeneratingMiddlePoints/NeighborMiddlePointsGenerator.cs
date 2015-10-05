@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ArtifactAdmin.BL.ModelsDTO;
-
-namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
+﻿namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using ModelsDTO;
+
     public static class NeighborMiddlePointsGenerator
     {
         public static string GetNeighbors(MiddlePointDto middlePoint, List<MiddlePointDto> allMiddlePoints, int radius)

@@ -7,11 +7,11 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using ArtifactAdmin.BL.ModelsDTO;
-
 namespace ArtifactAdmin.BL.Interfaces
 {
+    using System.Collections.Generic;
+    using ModelsDTO;
+
     public interface IQuestTemplateService
     {
         IEnumerable<QuestTemplateDto> GetAll();
