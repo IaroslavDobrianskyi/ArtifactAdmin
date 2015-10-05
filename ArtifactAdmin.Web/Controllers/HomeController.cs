@@ -7,10 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Web.Mvc;
-
 namespace ArtifactAdmin.Web
 {
+    using System.Web.Mvc;
+
     public class HomeController : Controller
     {
         public ActionResult Index()

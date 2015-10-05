@@ -1,7 +1,7 @@
-﻿using ArtifactAdmin.BL.MapHelpers;
-
-namespace ArtifactAdmin.BL.Interfaces
+﻿namespace ArtifactAdmin.BL.Interfaces
 {
+    using MapHelpers;
+
     public interface IMapManagerService
     {
         MapManager GetFirstMapManager();

@@ -7,16 +7,16 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.DAL.Models;
-using AutoMapper;
-
 namespace ArtifactAdmin.BL.Services
 {
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using AutoMapper;
+    using DAL.Models;
+    using Interfaces;
+    using ModelsDTO;
+
     public class ActionDescriptionService : IActionDescriptionService
     {
         private readonly IRepository<ActionDescription> actionDescriptionRepository;

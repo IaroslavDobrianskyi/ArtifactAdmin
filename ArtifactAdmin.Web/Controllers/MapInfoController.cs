@@ -1,14 +1,14 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Net;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils;
-
-namespace ArtifactAdmin.Web.Controllers
+﻿namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Net;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using BL.ModelsDTO;
+    using BL.Utils;
+
     public class MapInfoController : Controller
     {
         private IMapInfoService mapInfoService;

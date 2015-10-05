@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using ArtifactAdmin.BL.MapHelpers;
-
-namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
+﻿namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using MapHelpers;
+
     public static class MapMiddlePointsGenerator
     {
         public static Dictionary<SimplePoint,LinesContainer> GetMiddlePoints(string imagePath, int mapDimension)

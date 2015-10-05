@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ArtifactAdmin.BL.MapHelpers
+﻿namespace ArtifactAdmin.BL.MapHelpers
 {
+    using System;
+    using System.Collections.Generic;
+
     public class MapPointBase
     {
         public int X { get; set; }

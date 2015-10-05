@@ -7,13 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.IO;
-using System.Web;
-using ArtifactAdmin.Web.App_Start;
-
 namespace ArtifactAdmin.Web
 {
+    using System;
+    using System.IO;
+    using System.Web;
+    using App_Start;
+
     public class FileHelper
     {
         /// <summary>

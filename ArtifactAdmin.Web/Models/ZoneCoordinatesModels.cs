@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ArtifactAdmin.Web.Models
+﻿namespace ArtifactAdmin.Web.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ZoneCoordinatesInfoModel
     {
         public int MapInfoId { get; set; }

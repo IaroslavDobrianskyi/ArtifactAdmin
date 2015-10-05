@@ -7,10 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-using ArtifactAdmin.BL.ModelsDTO.FlowItems;
-
 namespace ArtifactAdmin.BL.Interfaces
 {
+    using ModelsDTO.FlowItems;
+
     public interface IStepService
     {
         StepDto GetById(int? id);

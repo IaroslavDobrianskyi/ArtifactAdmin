@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using ArtifactAdmin.BL.ModelsDTO;
-
-namespace ArtifactAdmin.Web.Models
+﻿namespace ArtifactAdmin.Web.Models
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using BL.ModelsDTO;
+
     public class DimentionRadiusModel
     {
         public DimentionRadiuDto DimentionRadiuDto { get; set; }

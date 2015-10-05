@@ -1,16 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.BL.Utils;
-using ArtifactAdmin.Web.Models;
-
-namespace ArtifactAdmin.Web.Controllers
+﻿namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using BL.ModelsDTO;
+    using BL.Utils;
+    using Models;
+
     public class DimensionRadiusController : Controller
     {
         private IDimentionRadiusService dimentionRadiusService;

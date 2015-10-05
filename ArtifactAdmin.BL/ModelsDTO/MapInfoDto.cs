@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using ValidationConstellation;
-
-namespace ArtifactAdmin.BL.ModelsDTO
+﻿namespace ArtifactAdmin.BL.ModelsDTO
 {
+    using System.ComponentModel.DataAnnotations;
+    using ValidationConstellation;
+
     public class MapInfoDto
     {
         public int Id { get; set; }

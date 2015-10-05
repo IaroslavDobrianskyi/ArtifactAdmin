@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace ArtifactAdmin.Web.Helpers
+﻿namespace ArtifactAdmin.Web.Helpers
 {
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
     public static class HtmlHelperExtensions
     {
         public static string Image(this HtmlHelper helper,

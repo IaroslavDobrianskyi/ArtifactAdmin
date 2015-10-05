@@ -1,15 +1,15 @@
-﻿using System;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Net;
-using System.Web.Mvc;
-using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.Utils;
-using ArtifactAdmin.Web.Models;
-
-namespace ArtifactAdmin.Web.Controllers
+﻿namespace ArtifactAdmin.Web.Controllers
 {
+    using System;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.Linq;
+    using System.Net;
+    using System.Web.Mvc;
+    using BL.Interfaces;
+    using BL.Utils;
+    using Models;
+
     public class ZoneCoordinatesController : Controller
     {
         private IMapZoneService mapZoneService;
