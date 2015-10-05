@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using ArtifactAdmin.BL.Interfaces;
 using ArtifactAdmin.BL.MapHelpers;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
 using ArtifactAdmin.DAL.Models;
 
 namespace ArtifactAdmin.BL.Services

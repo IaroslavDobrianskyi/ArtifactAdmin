@@ -1,4 +1,5 @@
-﻿@model ArtifactAdmin.BL.ModelsDTO.ViewRaceDesireDto
+﻿@using ArtifactAdmin.Web.App_Start
+@model ArtifactAdmin.BL.ModelsDTO.ViewRaceDesireDto
 
 @{
     ViewBag.Title = "Edit";
@@ -27,7 +28,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Icon, htmlAttributes: new {@class = "control-label col-md-2"})
         <div class="col-md-10">
-            <img src="@(@ArtifactAdmin.Web.App_Start.ImagePath.ImPath + "Races/" + @Model.Icon)" id="icon" width=" 160 " height=" 120">
+            <img src="@(ImagePath.ImPath + "Races/" + @Model.Icon)" id="icon" width=" 160 " height=" 120">
         </div>
     </div>
             <table class="table">

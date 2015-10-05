@@ -6,39 +6,40 @@
 //   Defines the PropertyDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.ComponentModel.DataAnnotations;
+using ArtifactAdmin.BL.Validate;
+using ValidationConstellation;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-    using Validate;
-
     public class PropertyDto
     {
         public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredName",
-    ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+    ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Назва")]
         [StringLength(50, ErrorMessageResourceName = "StringLength",
-  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+  ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Name { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredDescription",
-        ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+        ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Опис")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",
-  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+  ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Description { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredLength",
-     ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+     ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Довжина рядка")]
         [Range(1, 50)]
         [AcceptableLength]
         public int Length { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredPosition",
-     ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+     ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Початкова позиція")]
         [Range(0, 49)]
         [UniquePosition]
@@ -46,10 +47,10 @@ namespace ArtifactAdmin.BL.ModelsDTO
         public int Position { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredDeviation",
-   ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+   ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Відхилення")]
         [StringLength(50, ErrorMessageResourceName = "StringLength",
-  ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+  ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Deviation { get; set; }
     }
 }

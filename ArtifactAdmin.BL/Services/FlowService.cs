@@ -1,12 +1,12 @@
-﻿namespace ArtifactAdmin.BL.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using DAL.Models;
-    using ModelsDTO.FlowItems;
-    using Action = DAL.Models.Action;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using ArtifactAdmin.BL.ModelsDTO.FlowItems;
+using ArtifactAdmin.DAL.Models;
+using Action = ArtifactAdmin.DAL.Models.Action;
 
+namespace ArtifactAdmin.BL.Services
+{
     public class FlowService
     {
         public FlowService()

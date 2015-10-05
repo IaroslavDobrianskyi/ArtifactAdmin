@@ -6,11 +6,11 @@
 //   Defines the ViewActionDescriptionDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-
     public class ViewActionDescriptionDto
     {
         public ActionDescriptionDto ActionDescriptionDto { get; set; }

@@ -6,14 +6,14 @@
 //   Defines the InjectionConfig type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.BL.Services;
+using ArtifactAdmin.DAL.Models;
+using LightInject;
+
 namespace ArtifactAdmin.BL
 {
-    using System;
-    using DAL.Models;
-    using Interfaces;
-    using LightInject;
-    using Services;
-
     public static class InjectionConfig
     {
         public static ServiceContainer RegisterAllDependencies()

@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ArtifactAdmin.BL.Interfaces;
-using ArtifactAdmin.BL.MapHelpers;
 using ArtifactAdmin.BL.ModelsDTO;
 using ArtifactAdmin.BL.Utils;
-using ArtifactAdmin.BL.Utils.GeneratingMiddlePoints;
 using ArtifactAdmin.Web.Models;
 
 namespace ArtifactAdmin.Web.Controllers

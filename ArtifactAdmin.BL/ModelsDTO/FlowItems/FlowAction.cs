@@ -1,8 +1,5 @@
 ﻿namespace ArtifactAdmin.BL.ModelsDTO.FlowItems
 {
-    using System;
-    using System.Collections;
-
     public class FlowAction
     {
         public int Id { get; set; }

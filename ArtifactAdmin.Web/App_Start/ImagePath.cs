@@ -7,11 +7,10 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Web.Configuration;
+
 namespace ArtifactAdmin.Web.App_Start
 {
-    using System;
-    using System.Web.Configuration;
-
     public static class ImagePath
     {
         static ImagePath() 

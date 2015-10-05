@@ -6,11 +6,11 @@
 //   Defines the ViewStepActionTemplateDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-    
     public class ViewStepActionTemplateDto
     {
         public StepTemplateDto StepTemplateDto { get; set; }

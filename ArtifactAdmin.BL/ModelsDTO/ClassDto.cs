@@ -6,24 +6,25 @@
 //   Defines the ClassDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.ComponentModel.DataAnnotations;
+using ValidationConstellation;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-
     public class ClassDto
     {
         public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredDescription",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Опис")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Description { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredIcon",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Іконка")]
         public string Icon { get; set; }
 

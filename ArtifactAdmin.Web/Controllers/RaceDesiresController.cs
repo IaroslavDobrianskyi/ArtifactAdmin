@@ -6,14 +6,15 @@
 //   Defines the RaceDesiresController type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Net;
+using System.Web.Mvc;
+using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.BL.Utils;
+
 namespace ArtifactAdmin.Web.Controllers
 {
-    using System;
-    using System.Net;
-    using System.Web.Mvc;
-    using BL.Interfaces;
-    using BL.Utils;
-
     public class RaceDesiresController : Controller
     {
         private IRaceDesireService raceDesireService;

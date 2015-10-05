@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ArtifactAdmin.BL.Interfaces;
 using ArtifactAdmin.Web.Models;

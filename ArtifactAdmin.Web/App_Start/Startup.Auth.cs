@@ -6,16 +6,17 @@
 //   Defines the Startup type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using ArtifactAdmin.Web.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Owin;
+
 namespace ArtifactAdmin.Web
 {
-    using System;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.Owin;
-    using Microsoft.Owin;
-    using Microsoft.Owin.Security.Cookies;
-    using Models;
-    using Owin;
-
     public partial class Startup
     {
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864

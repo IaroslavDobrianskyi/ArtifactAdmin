@@ -1,10 +1,9 @@
-﻿namespace ArtifactAdmin.BL.Services
-{
-    using System;
-    using System.Security.AccessControl;
-    using DAL.Models;
-    using Interfaces;
+﻿using System;
+using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.DAL.Models;
 
+namespace ArtifactAdmin.BL.Services
+{
     public class CarrierService : ICarrierService
     {
         // TODO extract into separate class 

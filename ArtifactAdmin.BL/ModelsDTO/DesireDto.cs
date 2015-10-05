@@ -6,31 +6,32 @@
 //   Defines the DesireDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.ComponentModel.DataAnnotations;
+using ValidationConstellation;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.ComponentModel.DataAnnotations;
-
     public class DesireDto
     {
         public int Id { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredName",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Назва")]
         [StringLength(250, ErrorMessageResourceName = "StringLength",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Name { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredDescription",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Опис")]
         [StringLength(500, ErrorMessageResourceName = "StringLength",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         public string Description { get; set; }
 
         [Required(ErrorMessageResourceName = "RequiredIcon",
-            ErrorMessageResourceType = typeof(ValidationConstellation.ValidationStrings))]
+            ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Іконка")]
         public string Icon { get; set; }
 

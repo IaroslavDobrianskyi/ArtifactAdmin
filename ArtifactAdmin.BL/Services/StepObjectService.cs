@@ -6,19 +6,17 @@
 //   Defines the StepObjectServicetype.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using ArtifactAdmin.BL.Interfaces;
+using ArtifactAdmin.BL.ModelsDTO;
+using ArtifactAdmin.DAL.Models;
+using AutoMapper;
+
 namespace ArtifactAdmin.BL.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.IO;
-    using System.Linq;
-    using System.Web;
-    using AutoMapper;
-    using DAL.Models;
-    using Interfaces;
-    using ModelsDTO;
-
     public class StepObjectService : IStepObjectService
     {
         private readonly IRepository<StepObject> stepObjectRepository;

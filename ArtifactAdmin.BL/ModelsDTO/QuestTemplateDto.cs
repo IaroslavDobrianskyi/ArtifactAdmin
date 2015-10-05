@@ -6,13 +6,13 @@
 //   Defines the QuestTemplateDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using ValidationConstellation;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using ValidationConstellation;
-
     public class QuestTemplateDto
     {
         public int Id { get; set; }

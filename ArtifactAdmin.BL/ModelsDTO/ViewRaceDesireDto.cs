@@ -6,12 +6,12 @@
 //   Defines the ViewRaceDesireDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
     public class ViewRaceDesireDto
     {
         public int Id { get; set; }

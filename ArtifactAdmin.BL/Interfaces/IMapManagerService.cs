@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using ArtifactAdmin.BL.MapHelpers;
+﻿using ArtifactAdmin.BL.MapHelpers;
 
 namespace ArtifactAdmin.BL.Interfaces
 {

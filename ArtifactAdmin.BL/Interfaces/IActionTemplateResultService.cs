@@ -6,12 +6,12 @@
 //   Defines the IActionTemplateResultService interface.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using ArtifactAdmin.BL.ModelsDTO;
+
 namespace ArtifactAdmin.BL.Interfaces
 {
-    using System;
-    using System.Collections.Generic;
-    using ModelsDTO;
-
     public interface IActionTemplateResultService
     {
         IEnumerable<ActionTemplateResultDto> GetAll();

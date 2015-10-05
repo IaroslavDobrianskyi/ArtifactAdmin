@@ -6,13 +6,13 @@
 //   Defines the StepTemplateDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using ValidationConstellation;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using ValidationConstellation;
-
     public class StepTemplateDto
     {
         public int Id { get; set; }

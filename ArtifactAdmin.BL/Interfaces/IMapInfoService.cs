@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using ArtifactAdmin.BL.ModelsDTO;
 
 namespace ArtifactAdmin.BL.Interfaces
 {
     public interface IMapInfoService
     {
-        MapInfoDto Create(ModelsDTO.MapInfoDto mapInfo);
+        MapInfoDto Create(MapInfoDto mapInfo);
 
         IEnumerable<MapInfoDto> GetAll();
 

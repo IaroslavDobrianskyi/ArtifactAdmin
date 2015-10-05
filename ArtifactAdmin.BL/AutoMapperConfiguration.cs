@@ -7,14 +7,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+using ArtifactAdmin.BL.ModelsDTO;
+using ArtifactAdmin.BL.ModelsDTO.FlowItems;
+using ArtifactAdmin.DAL.Models;
+using AutoMapper;
+
 namespace ArtifactAdmin.BL
 {
-    using System;
-    using AutoMapper;
-    using DAL.Models;
-    using ModelsDTO;
-    using ModelsDTO.FlowItems;
-
     public static class AutoMapperConfiguration
     {
         public static void Configure()

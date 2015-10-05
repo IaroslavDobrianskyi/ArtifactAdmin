@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
 using ArtifactAdmin.BL.ModelsDTO;
-using ArtifactAdmin.DAL.Models;
 
 namespace ArtifactAdmin.BL.Utils.GeneratingMiddlePoints
 {

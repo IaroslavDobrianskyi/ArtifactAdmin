@@ -6,13 +6,13 @@
 //   Defines the ViewDesireMapZoneDto type.
 // </summary>
 // -------------------------------------------------------------------------------------------------------------------
+
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using ArtifactAdmin.DAL.Models;
+
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using DAL.Models;
-
     public class ViewDesireMapZoneDto
     {
         public int ItemId { get; set; }

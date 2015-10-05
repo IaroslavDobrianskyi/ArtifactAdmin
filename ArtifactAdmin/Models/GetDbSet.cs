@@ -6,14 +6,15 @@
 //   Defines the DbSet type.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Reflection;
+
 namespace ArtifactAdmin.DAL.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Reflection;
-
     public partial class artEntities 
     {
         private static readonly Dictionary<Type, PropertyInfo> DictionaryProperties = new Dictionary<Type, PropertyInfo>();
