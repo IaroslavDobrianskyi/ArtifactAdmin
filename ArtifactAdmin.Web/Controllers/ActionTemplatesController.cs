@@ -19,10 +19,12 @@ namespace ArtifactAdmin.Web.Controllers
     public class ActionTemplatesController : Controller
     {
         private IActionTemplateService actionTemplateService;
+        private IActionTemplateResultService actionTemplateResultService;
 
-        public ActionTemplatesController(IActionTemplateService actionTemplateService) 
+        public ActionTemplatesController(IActionTemplateService actionTemplateService, IActionTemplateResultService actionTemplateResultService) 
         {
             this.actionTemplateService = actionTemplateService;
+            this.actionTemplateResultService = actionTemplateResultService;
         }
 
         // GET: ActionTemplates
@@ -59,7 +61,18 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,BlockProbability,ActionTemplateResult")] ActionTemplateDto actionTemplateDto)
+        public ActionResult Create(
+            [Bind(Include = "Id,Name,BlockProbability,ActionTemplateResult")] ActionTemplateDto actionTemplateDto,
+            string predisposition,
+            string experience,
+            string posibility,
+            string gold,
+            int[] selectedCharacteristics,
+            int[] selectedPredispositions,
+            int[] lows,
+            int[] highs,
+            int[] selectedProperties,
+            bool[] appearances)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -67,7 +80,19 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.actionTemplateService.Create(actionTemplateDto);
+                    if (actionTemplateDto.ActionTemplateResult == 0)
+                    {
+                       var actionTemplateResultDto = new ActionTemplateResultDto();
+                        actionTemplateResultDto.PredispositionResultModifier =
+                            Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(predisposition));
+                        actionTemplateResultDto.ExperienceModifier = Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(experience));
+                        actionTemplateResultDto.ArtifactPosibility = Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(posibility));
+                        actionTemplateResultDto.GoldModifier = Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(gold));
+                        actionTemplateResultDto = this.actionTemplateResultService.Create(actionTemplateResultDto);
+                        actionTemplateDto.ActionTemplateResult = actionTemplateResultDto.Id;
+                    }
+
+                    this.actionTemplateService.Create(actionTemplateDto, selectedCharacteristics, selectedPredispositions, lows, highs, selectedProperties, appearances); 
                 }
                 catch (Exception e) 
                 {
@@ -104,7 +129,17 @@ namespace ArtifactAdmin.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,BlockProbability,ActionTemplateResult")] ActionTemplateDto actionTemplateDto)
+        public ActionResult Edit([Bind(Include = "Id,Name,BlockProbability,ActionTemplateResult")] ActionTemplateDto actionTemplateDto,
+            string predisposition,
+            string experience,
+            string posibility,
+            string gold,
+            int[] selectedCharacteristics,
+            int[] selectedPredispositions,
+            int[] lows,
+            int[] highs,
+            int[] selectedProperties,
+            bool[] appearances)
         {
             ViewBag.Error = string.Empty;
             ViewBag.ErrMes = string.Empty;
@@ -112,7 +147,19 @@ namespace ArtifactAdmin.Web.Controllers
             {
                 try
                 {
-                    this.actionTemplateService.Update(actionTemplateDto);
+                    if (actionTemplateDto.ActionTemplateResult == 0)
+                    {
+                        var actionTemplateResultDto = new ActionTemplateResultDto();
+                        actionTemplateResultDto.PredispositionResultModifier =
+                            Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(predisposition));
+                        actionTemplateResultDto.ExperienceModifier = Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(experience));
+                        actionTemplateResultDto.ArtifactPosibility = Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(posibility));
+                        actionTemplateResultDto.GoldModifier = Convert.ToDouble(ViewHelper.ConvertToCurrentSeparator(gold));
+                        actionTemplateResultDto = this.actionTemplateResultService.Create(actionTemplateResultDto);
+                        actionTemplateDto.ActionTemplateResult = actionTemplateResultDto.Id;
+                    }
+
+                    this.actionTemplateService.Update(actionTemplateDto, selectedCharacteristics, selectedPredispositions, lows, highs, selectedProperties, appearances);
                 }
                 catch (Exception e)
                 {

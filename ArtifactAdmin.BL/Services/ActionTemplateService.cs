@@ -30,7 +30,9 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRepository<Property> propertyRepository;
         private readonly IRepository<ActionTemplateCharacteristic> actionCharacteristicRepository;
         private readonly IRepository<ActionTemplatePredisposition> actionPredispositionRepository;
-        private readonly IRepository<ActionTemplateProperty> actionPropertyRepository; 
+        private readonly IRepository<ActionTemplateProperty> actionPropertyRepository;
+        private readonly IRepository<StepTemplateActionTemplate> stepTemplateActionTemplateRepository;
+        private readonly IRepository<ActionDescription> actionDescriptionRepository; 
 
         public ActionTemplateService(IRepository<ActionTemplate> actionTemplateRepository,
             IRepository<ActionTemplateResult> actionTemplateResultRepository,
@@ -41,7 +43,9 @@ namespace ArtifactAdmin.BL.Services
             IRepository<Property> propertyRepository,
             IRepository<ActionTemplateCharacteristic> actionCharacteristicRepository,
             IRepository<ActionTemplatePredisposition> actionPredispositionRepository,
-            IRepository<ActionTemplateProperty> actionPropertyRepository) 
+            IRepository<ActionTemplateProperty> actionPropertyRepository,
+            IRepository<StepTemplateActionTemplate> stepTemplateActionTemplateRepository,
+            IRepository<ActionDescription> actionDescriptionRepository) 
         {
             this.actionTemplateRepository = actionTemplateRepository;
             this.actionTemplateResultRepository = actionTemplateResultRepository;
@@ -53,6 +57,8 @@ namespace ArtifactAdmin.BL.Services
             this.actionCharacteristicRepository = actionCharacteristicRepository;
             this.actionPredispositionRepository = actionPredispositionRepository;
             this.actionPropertyRepository = actionPropertyRepository;
+            this.stepTemplateActionTemplateRepository = stepTemplateActionTemplateRepository;
+            this.actionDescriptionRepository = actionDescriptionRepository;
         }
 
         public IEnumerable<ActionTemplateDto> GetAll()
@@ -64,8 +70,11 @@ namespace ArtifactAdmin.BL.Services
         {
             var viewActionTemplateDto = new ViewActionTemplateDto();
             viewActionTemplateDto.OneProbability = "0.25";
+            viewActionTemplateDto.Predisposition = "0.0";
+            viewActionTemplateDto.Experience = "0.0";
+            viewActionTemplateDto.Posibility = "0.0";
+            viewActionTemplateDto.Gold = "0.0";
             viewActionTemplateDto.ActionTemplateResults = Mapper.Map<List<ActionTemplateResultDto>>(this.actionTemplateResultRepository.GetAll());
-            viewActionTemplateDto.ActionTemplateResults.Add(new ActionTemplateResultDto());
             viewActionTemplateDto.Characteristics = Mapper.Map<List<CharacteristicDto>>(this.characteristicRepository.GetAll());
             viewActionTemplateDto.Predispositions = Mapper.Map<List<PredispositionDto>>(this.predispositionRepository.GetAll());
             viewActionTemplateDto.Properties = Mapper.Map<List<PropertyDto>>(this.propertyRepository.GetAll());
@@ -152,24 +161,232 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<ActionTemplateDto>(this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.Id == id));
         }
 
-        public ActionTemplateDto Create(ActionTemplateDto actionTemplateDto)
+        public ActionTemplateDto Create(ActionTemplateDto actionTemplateDto, int[] characteristics, int[] predispositions, int[] lows, int[] highs, int[] properties, bool[] appearences)
         {
             var actionTemplate = Mapper.Map<ActionTemplate>(actionTemplateDto);
-            this.actionTemplateRepository.Insert(actionTemplate);
+            this.actionTemplateRepository.InsertWithoutSave(actionTemplate);
+            if (characteristics != null)
+            {
+                var objLength = characteristics.Length;
+                for (var i = 0; i < objLength; i++)
+                {
+                    var characteristicId = characteristics[i];
+                    this.actionCharacteristicRepository.InsertWithoutSave(new ActionTemplateCharacteristic { Characteristics = characteristicId, ActionTemplate1 = actionTemplate }); 
+                }
+            }
+
+            if (predispositions != null)
+            {
+                var objLength = predispositions.Length;
+                for (var i = 0; i < objLength; i++)
+                {
+                    var predispositionId = predispositions[i];
+                    var requirementLow = lows[i];
+                    var requirementHigh = highs[i];
+                    this.actionPredispositionRepository.InsertWithoutSave(new ActionTemplatePredisposition { Predisposition = predispositionId, RequirementLow = requirementLow, RequirementHigh = requirementHigh, ActionTemplate1 = actionTemplate });
+                }
+            }
+
+            if (properties != null)
+            {
+                var objLength = properties.Length;
+                for (var i = 0; i < objLength; i++)
+                {
+                    var propertyId = properties[i];
+                    var appearenceValue = appearences[i];
+                    this.actionPropertyRepository.InsertWithoutSave(new ActionTemplateProperty { Properties = propertyId, Appearance = appearenceValue, ActionTemplate1 = actionTemplate });
+                }
+            }
+
+            this.actionTemplateRepository.SaveChanges();
             return Mapper.Map<ActionTemplateDto>(actionTemplate);
         }
 
-        public ActionTemplateDto Update(ActionTemplateDto actionTemplateDto)
+        public ActionTemplateDto Update(ActionTemplateDto actionTemplateDto, int[] characteristics, int[] predispositions, int[] lows, int[] highs, int[] properties, bool[] appearences)
         {
             var actionTemplate = Mapper.Map<ActionTemplate>(actionTemplateDto);
-            this.actionTemplateRepository.Update(actionTemplate);
+            this.actionTemplateRepository.UpdateWithoutSave(actionTemplate);
+            if (characteristics != null)
+            {
+                var allCharacteristic = this.actionCharacteristicRepository.GetAll()
+                                            .Where(s => s.ActionTemplate == actionTemplate.Id)
+                                            .ToList();
+                foreach (var characterictic in allCharacteristic)
+                {
+                    var forDelete = true;
+                    foreach (var newCharacteristic in characteristics)
+                    {
+                        if (characterictic.Characteristics == newCharacteristic)
+                        {
+                            forDelete = false;
+                            break;
+                        }
+                    }
+
+                    if (forDelete)
+                    {
+                       this.actionCharacteristicRepository.DeleteWithOutSave(characterictic); 
+                    }
+                }
+
+                foreach (var newCharacteristic in characteristics)
+                {
+                    var forInsert = true;
+                    foreach (var characterictic in allCharacteristic)
+                    {
+                        if (characterictic.Characteristics == newCharacteristic)
+                        {
+                            forInsert = false;
+                            break;
+                        }
+                    }
+
+                    if (forInsert)
+                    {
+                        this.actionCharacteristicRepository.InsertWithoutSave(new ActionTemplateCharacteristic { ActionTemplate = actionTemplate.Id, Characteristics = newCharacteristic });
+                    }
+                }
+            }
+
+            if (predispositions != null)
+            {
+                var allPredispositions = this.actionPredispositionRepository.GetAll()
+                                             .Where(s => s.ActionTemplate == actionTemplate.Id)
+                                             .ToList();
+                foreach (var predisposition in allPredispositions)
+                {
+                    var forDelete = true;
+                    for (var i = 0; i < predispositions.Length; i++)
+                    {
+                        if (predisposition.Predisposition == predispositions[i])
+                        {
+                            forDelete = false;
+                            predisposition.RequirementLow = lows[i];
+                            predisposition.RequirementHigh = highs[i];
+                            this.actionPredispositionRepository.UpdateWithoutSave(predisposition);
+                            break;
+                        }
+                    }
+
+                    if (forDelete)
+                    {
+                        this.actionPredispositionRepository.DeleteWithOutSave(predisposition);
+                    }
+                }
+
+                for (var i = 0; i < predispositions.Length; i++)
+                {
+                    var forInsert = true;
+                    foreach (var predisposition in allPredispositions)
+                    {
+                        if (predisposition.Predisposition == predispositions[i])
+                        {
+                            forInsert = false;
+                            break;
+                        }
+                    }
+
+                    if (forInsert)
+                    {
+                        var newPredisposition = predispositions[i];
+                        var newLow = lows[i];
+                        var newHigh = highs[i];
+                        this.actionPredispositionRepository.InsertWithoutSave(new ActionTemplatePredisposition { ActionTemplate = actionTemplate.Id, Predisposition = newPredisposition, RequirementLow = newLow, RequirementHigh = newHigh });
+                    }
+                }
+            }
+
+            if (properties != null)
+            {
+                var allProperties = this.actionPropertyRepository.GetAll()
+                                        .Where(s => s.ActionTemplate == actionTemplate.Id)
+                                        .ToList();
+                foreach (var property in allProperties)
+                {
+                    var forDelete = true;
+                    for (var i = 0; i < properties.Length; i++)
+                    {
+                        if (property.Properties == properties[i])
+                        {
+                            forDelete = false;
+                            property.Appearance = appearences[i];
+                            this.actionPropertyRepository.UpdateWithoutSave(property);
+                            break;
+                        }
+                    }
+
+                    if (forDelete)
+                    {
+                        this.actionPropertyRepository.DeleteWithOutSave(property);
+                    }
+                }
+
+                for (var i = 0; i < properties.Length; i++)
+                {
+                    var forInsert = true;
+                    foreach (var property in allProperties)
+                    {
+                        if (property.Properties == properties[i])
+                        {
+                            forInsert = false;
+                            break;
+                        }
+                    }
+
+                    if (forInsert)
+                    {
+                        var newProperty = properties[i];
+                        var newAppearance = appearences[i];
+                        this.actionPropertyRepository.InsertWithoutSave(new ActionTemplateProperty { ActionTemplate = actionTemplate.Id, Properties = newProperty, Appearance = newAppearance });
+                    }
+                }
+            }
+
+            this.actionTemplateRepository.SaveChanges();
             return Mapper.Map<ActionTemplateDto>(actionTemplate);
         }
 
         public void Delete(int? id)
         {
             var actionTemplate = this.actionTemplateRepository.GetAll().FirstOrDefault(s => s.Id == id);
-            this.actionTemplateRepository.Delete(actionTemplate);
+            
+            var stepTemplates = this.stepTemplateActionTemplateRepository.GetAll()
+                                   .Where(s => s.ActionTemplate == actionTemplate.Id);
+            foreach (var stepTemplate in stepTemplates)
+            {
+                this.stepTemplateActionTemplateRepository.DeleteWithOutSave(stepTemplate);
+            }
+
+            var characteristics = this.actionCharacteristicRepository.GetAll()
+                                      .Where(s => s.ActionTemplate == actionTemplate.Id);
+            foreach (var characteristic in characteristics)
+            {
+                this.actionCharacteristicRepository.DeleteWithOutSave(characteristic);
+            }
+
+            var predispositions = this.actionPredispositionRepository.GetAll()
+                                      .Where(s => s.ActionTemplate == actionTemplate.Id);
+            foreach (var predisposition in predispositions)
+            {
+                this.actionPredispositionRepository.DeleteWithOutSave(predisposition);
+            }
+
+            var propperties = this.actionPropertyRepository.GetAll()
+                                  .Where(s => s.ActionTemplate == actionTemplate.Id);
+            foreach (var property in propperties)
+            {
+                this.actionPropertyRepository.DeleteWithOutSave(property);
+            }
+
+            var descriptions = this.actionDescriptionRepository.GetAll()
+                                   .Where(s => s.ActionTemplate == actionTemplate.Id);
+            foreach (var description in descriptions)
+            {
+                this.actionDescriptionRepository.DeleteWithOutSave(description);
+            }
+
+            this.actionTemplateRepository.DeleteWithOutSave(actionTemplate);
+            this.actionTemplateRepository.SaveChanges();
         }
 
         public ViewDesireActionResultDto GetViewDesireResult(int? id, string name)

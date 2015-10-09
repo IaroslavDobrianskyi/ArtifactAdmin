@@ -20,15 +20,16 @@ namespace ArtifactAdmin.BL.Interfaces
         
         ActionTemplateDto GetById(int? id);
 
-        ActionTemplateDto Create(ActionTemplateDto actionTemplateDto);
+        ActionTemplateDto Create(ActionTemplateDto actionTemplateDto, int[] characteristics, int[] predispositions, int[] lows, int[] highs, int[] properties, bool[] appearences);
 
-        ActionTemplateDto Update(ActionTemplateDto actionTEmplateDto);
+        ActionTemplateDto Update(ActionTemplateDto actionTEmplateDto, int[] characteristics, int[] predispositions, int[] lows, int[] highs, int[] properties, bool[] appearences);
 
         void Delete(int? id);
 
         ViewDesireActionResultDto GetViewDesireResult(int? id, string name);
 
         void UpdateDesireActionResult(int id, int[] desires, string[] modifiers);
-        ViewDesireActionResultDto GetViewDesireResultByList(int id, string name,int[] desires, string[] modifiers);
+        
+        ViewDesireActionResultDto GetViewDesireResultByList(int id, string name, int[] desires, string[] modifiers);
     }
 }

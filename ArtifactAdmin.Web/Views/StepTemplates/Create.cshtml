@@ -106,18 +106,18 @@ new { size = 8, style = "width:250px" })
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 <script type="text/javascript">
-    function MoveObj(From, To)
+    function MoveObj(from, to)
     {
-        var SelID = '';
-        var SelText = '';
+        var selId = '';
+        var selText = '';
         // Move rows from SS1 to SS2 from bottom to top
-        for (i = From.options.length - 1; i >= 0; i--) {
-            if (From.options[i].selected == true) {
-                SelID = From.options[i].value;
-                SelText = From.options[i].text;
-                var newRow = new Option(SelText, SelID);
-                To.options[To.length] = newRow;
-                From.options[i] = null;
+        for (i = from.options.length - 1; i >= 0; i--) {
+            if (from.options[i].selected == true) {
+                selId = from.options[i].value;
+                selText = from.options[i].text;
+                var newRow = new Option(selText, selId);
+                to.options[t.length] = newRow;
+                from.options[i] = null;
             }
         }
     }

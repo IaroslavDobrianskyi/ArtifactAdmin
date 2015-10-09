@@ -9,7 +9,11 @@
 
 namespace ArtifactAdmin.BL.ModelsDTO
 {
-    {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    public class ViewActionTemplateDto
+{
         public ActionTemplateDto ActionTemplateDto { get; set; }
 
         public List<ActionTemplateResultDto> ActionTemplateResults { get; set; }
@@ -48,8 +52,22 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Display(Name = "Вибрані властивості")]
         public List<ActionTemplatePropertyDto> SelectedProperties { get; set; }
 
+        [Display(Name = "Видимість")]
         public List<bool> Appearances { get; set; }
 
+        [Display(Name = "Видимість")]
         public bool OneAppearance { get; set; }
+
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Модифікатор схильності: Введіть число від 0.0 до 1 !")]
+        public string Predisposition { get; set; }
+
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Модифікатор досвіду: Введіть число від 0.0 до 1 !")]
+        public string Experience { get; set; }
+
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Модифікатор можливості: Введіть число від 0.0 до 1 !")]
+        public string Posibility { get; set; }
+
+        [RegularExpression(@"0\.\d+", ErrorMessage = "Модифікатор золота: Введіть число від 0.0 до 1 !")]
+        public string Gold { get; set; }
     }
 }

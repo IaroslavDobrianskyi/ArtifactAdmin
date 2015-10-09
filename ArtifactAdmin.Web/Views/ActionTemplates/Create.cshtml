@@ -58,24 +58,36 @@
                     </tr>
                     <tr>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "PredispositionResultModifier"), new {@class = "form-control", id = "item1", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "PredispositionResultModifier"), new { @class = "form-control", id = "item1", onclick = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));" })
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ExperienceModifier"), new {@class = "form-control", id = "item2", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ExperienceModifier"), new {@class = "form-control", id = "item2", onclick = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ArtifactPosibility"), new {@class = "form-control",  id = "item3", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "ArtifactPosibility"), new {@class = "form-control", id = "item3", onclick = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "GoldModifier"), new {@class = "form-control",  id = "item4", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "GoldModifier"), new {@class = "form-control", id = "item4", onlick = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                         <td>
-                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "QuestTemplate1"), new {@class = "form-control",  id = "item5", onchange = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
+                            @Html.DropDownListFor(m => m.ActionTemplateResults, new SelectList(Model.ActionTemplateResults, "id", "QuestTemplate1"), new {@class = "form-control", id = "item5", onclick = "javascript:SelId(this,document.getElementById('ActionTemplateDto_ActionTemplateResult'));"})
                         </td>
                     </tr>
                 </table>
-
                 @Html.ValidationMessageFor(model => model.ActionTemplateDto.ActionTemplateResult, "", new {@class = "text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="button" id="newRezult" value="Новий результат дії:" class="control-label col-md-2" onclick="javascript: NewResult();">
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Predisposition, new {disabled = "disabled"})
+                @Html.TextBoxFor(model => model.Experience, new {disabled = "disabled"})
+                @Html.TextBoxFor(model => model.Posibility, new {disabled = "disabled"})
+                @Html.TextBoxFor(model => model.Gold, new {disabled = "disabled"})<br/>
+                @Html.ValidationMessageFor(model => model.Predisposition, "", new {@class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.Experience, "", new {@class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.Posibility, "", new {@class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.Gold, "", new {@class = "text-danger"})
             </div>
         </div>
         <table class="table">
@@ -87,7 +99,7 @@
             <tr>
                 <td>
                     @Html.LabelFor(model => model.Characteristics)<br/>
-                    @Html.ListBoxFor(model => model.Characteristics, new SelectList(Model.Characteristics, "Id", "Name"), new {size = 6, style = "width:100%"})
+                    @Html.ListBoxFor(model => model.Characteristics, new MultiSelectList(Model.Characteristics, "Id", "Name"), new {size = 6, style = "width:100%"})
                 </td>
                 <td style="text-align: center">
                     <input type="button" id="addChar" value=">"
@@ -119,6 +131,7 @@
                     @Html.EditorFor(model => model.OneLow)<br />
                     @Html.LabelFor(model => model.OneHigh)<br />
                     @Html.EditorFor(model => model.OneHigh)
+                    <input type="text" class="text-danger" id="MessageErrorPredisposition" value="" style="width:100%" hidden>
                 </td>
                 <td style="text-align: center">
                     <input type="button" id="addPred" value=">"
@@ -129,7 +142,7 @@
                 </td>
                 <td>
                     @Html.LabelFor(model => model.SelectedPredispositions)<br />
-                    @Html.ListBoxFor(model => model.Predispositions, new MultiSelectList(Model.SelectedPredispositions, "Predisposition", NamePred), new { size = 6, style = "width:200px" })
+                    @Html.ListBoxFor(model => model.SelectedPredispositions, new MultiSelectList(Model.SelectedPredispositions, "Predisposition", NamePred), new { size = 6, style = "width:200px" })
                     @Html.ListBoxFor(model => model.Lows, new MultiSelectList(Model.Lows), new { size = 6, style = "width:50px" })
                     @Html.ListBoxFor(model => model.Highs, new MultiSelectList(Model.Highs), new { size = 6, style = "width:50px" })
                 </td>
@@ -188,7 +201,7 @@
             var item4 = document.getElementById("item4");
             var item5 = document.getElementById("item5");
             var i = sel.selectedIndex;
-            if (i != -1) {
+            if (i != -1){
                 selId = sel.options[i].value;
                 hiddenId.value = Number(selId);
                 item1.options[i].selected = true;
@@ -197,21 +210,25 @@
                 item4.options[i].selected = true;
                 item5.options[i].selected = true;
             }
+            document.getElementById("Predisposition").disabled = true;
+            document.getElementById("Experience").disabled = true;
+            document.getElementById("Posibility").disabled = true;
+            document.getElementById("Gold").disabled = true;
         }
 
         function ValidateProbability(){
-            var Val = document.getElementById("OneProbability").value.toString();
-            var ValidateProbability = Number(Val);
-            var Message = document.getElementById("MessageError");
-            if (Number(Val) == 0){
-                Message.value = "Введіть число від 0 до 1 !";
-                Message.hidden = false;
+            var val = document.getElementById("OneProbability").value.toString();
+            var validateProbability = Number(val);
+            var message = document.getElementById("MessageError");
+            if (Number(val) == 0) {
+                message.value = "Введіть число від 0 до 1 !";
+                message.hidden = false;
             }
-            else{
-                if (ValidateProbability > 0 & ValidateProbability < 1){
-                    document.getElementById("ActionTemplateDto_BlockProbability").value = ValidateProbability;
-                    Message.value = "";
-                    Message.hidden = true;
+            else {
+                if (validateProbability > 0 & validateProbability < 1) {
+                    document.getElementById("ActionTemplateDto_BlockProbability").value = validateProbability;
+                    message.value = "";
+                    message.hidden = true;
                 }
             }
         }
@@ -219,6 +236,140 @@
         function SetProbability(){
             if (document.getElementById("ActionTemplateDto_BlockProbability").value == 0){
                 document.getElementById("ActionTemplateDto_BlockProbability").value = 0.25;
+            }
+            var charact = document.getElementById("SelectedCharacteristics");
+            var pred = document.getElementById("SelectedPredispositions");
+            var lows = document.getElementById("Lows");
+            var highs = document.getElementById("Highs");
+            var prop = document.getElementById("SelectedProperties");
+            var apper = document.getElementById("Appearances");
+            var i = 0;
+            for (i = charact.options.length - 1; i >= 0; i--){
+                charact.options[i].selected = true;
+            }
+            for (i = pred.options.length - 1; i >= 0; i--){
+                pred.options[i].selected = true;
+                lows.options[i].selected = true;
+                highs.options[i].selected = true;
+            }
+            for (i = prop.options.length - 1; i >= 0; i--){
+                prop.options[i].selected = true;
+                apper.options[i].selected = true;
+            }
+        }
+
+        function NewResult(){
+            var hiddenId = document.getElementById("ActionTemplateDto_ActionTemplateResult");
+            hiddenId.value = 0;
+            document.getElementById("Predisposition").disabled = false;
+            document.getElementById("Experience").disabled = false;
+            document.getElementById("Posibility").disabled = false;
+            document.getElementById("Gold").disabled = false;
+        }
+
+        function MoveObj(from, to){
+            var selId = '';
+            var selText = '';
+            for (var i = from.options.length - 1; i >= 0; i--){
+                if (from.options[i].selected == true){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    to.options[to.length] = newRow;
+                    from.options[i] = null;
+                }
+            }
+        }
+
+        function MoveToPred(from, to){
+            var selId = '';
+            var selText = '';
+            var i = from.selectedIndex;
+            var low = Number(document.getElementById("OneLow").value);
+            var high = Number(document.getElementById("OneHigh").value);
+            var lows = document.getElementById("Lows");
+            var highs = document.getElementById("Highs");
+            var message = document.getElementById("MessageErrorPredisposition");
+            if (i != -1){
+                if (low >= 0 & high >= 0 & low <= high){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    to.options[to.length] = newRow;
+                    var newRow = new Option(low, low);
+                    lows.options[lows.length] = newRow;
+                    var newRow = new Option(high, high);
+                    highs.options[highs.length] = newRow;
+                    from.options[i] = null;
+                    message.value = "";
+                    message.hidden = true;
+                }
+                else{
+                    if (low < 0){
+                        message.value = "Введіть значення від > 0!";
+                    }
+                    else{
+                        message.value = "";
+                    }
+                    if (high < 0){
+                        message.value = message.value + " Введіть значення до > 0!";
+                    }
+                    if (low > high){
+                        message.value = message.value + " Введіть значення від < значення до!";
+                    }
+                    message.hidden = false;
+                }
+            }
+        }
+
+        function MoveFromPred(from, to){
+            var selId = '';
+            var selText = '';
+            var lows = document.getElementById("Lows");
+            var highs = document.getElementById("Highs");
+            for (var i = from.options.length - 1; i >= 0; i--){
+                if (from.options[i].selected == true){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    to.options[to.length] = newRow;
+                    from.options[i] = null;
+                    lows.options[i] = null;
+                    highs.options[i] = null;
+                }
+            }
+        }
+
+        function MoveToProp(from, to){
+            var selId = '';
+            var selText = '';
+            var i = from.selectedIndex;
+            var oneAppearance = document.getElementById("OneAppearance").checked;
+            var appearances = document.getElementById("Appearances");
+            if (i != -1){
+                selId = from.options[i].value;
+                selText = from.options[i].text;
+                var newRow = new Option(selText, selId);
+                to.options[to.length] = newRow;
+                newRow = new Option(oneAppearance, oneAppearance);
+                appearances.options[appearances.length] = newRow;
+                from.options[i] = null;
+            }
+        }
+
+        function MoveFromProp(from, to){
+            var selId = '';
+            var selText = '';
+            var appearances = document.getElementById("Appearances");
+            for (var i = from.options.length - 1; i >= 0; i--){
+                if (from.options[i].selected == true){
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    to.options[to.length] = newRow;
+                    from.options[i] = null;
+                    appearances.options[i] = null;
+                }
             }
         }
     </script>

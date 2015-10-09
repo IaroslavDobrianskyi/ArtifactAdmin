@@ -116,6 +116,15 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<QuestTemplateStepTemplate, QuestTemplateStepTemplateDto>();
             Mapper.CreateMap<QuestTemplateStepTemplateDto, QuestTemplateStepTemplate>();
+
+            Mapper.CreateMap<ActionTemplateCharacteristic, ActionTemplateCharacteristicDto>();
+            Mapper.CreateMap<ActionTemplateCharacteristicDto, ActionTemplateCharacteristic>();
+
+            Mapper.CreateMap<ActionTemplatePredisposition, ActionTemplatePredispositionDto>();
+            Mapper.CreateMap<ActionTemplatePredispositionDto, ActionTemplatePredisposition>();
+
+            Mapper.CreateMap<ActionTemplateProperty, ActionTemplatePropertyDto>();
+            Mapper.CreateMap<ActionTemplatePropertyDto, ActionTemplateProperty>();
         } 
     }
 }
