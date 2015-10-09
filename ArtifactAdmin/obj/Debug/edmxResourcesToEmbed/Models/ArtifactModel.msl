@@ -655,5 +655,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PathFinderConfigs">
+      <EntityTypeMapping TypeName="artModel.PathFinderConfig">
+        <MappingFragment StoreEntitySet="PathFinderConfig">
+          <ScalarProperty Name="OrderIndex" ColumnName="OrderIndex" />
+          <ScalarProperty Name="DimentionRadius" ColumnName="DimentionRadius" />
+          <ScalarProperty Name="MapInfoDimention" ColumnName="MapInfoDimention" />
+          <ScalarProperty Name="MapInfo" ColumnName="MapInfo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

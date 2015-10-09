@@ -9,24 +9,19 @@
 
 namespace ArtifactAdmin.DAL.Models
 {
+    using System;
     using System.Collections.Generic;
-
-    public partial class MapInfoDimension
+    
+    public partial class PathFinderConfig
     {
-        public MapInfoDimension()
-        {
-            this.MiddlePoints = new HashSet<MiddlePoint>();
-            this.DimentionRadius = new HashSet<DimentionRadiu>();
-            this.PathFinderConfigs = new HashSet<PathFinderConfig>();
-        }
-    
         public int Id { get; set; }
-        public int Dimension { get; set; }
         public int MapInfo { get; set; }
+        public int MapInfoDimention { get; set; }
+        public int DimentionRadius { get; set; }
+        public int OrderIndex { get; set; }
     
+        public virtual DimentionRadiu DimentionRadiu { get; set; }
         public virtual MapInfo MapInfo1 { get; set; }
-        public virtual ICollection<MiddlePoint> MiddlePoints { get; set; }
-        public virtual ICollection<DimentionRadiu> DimentionRadius { get; set; }
-        public virtual ICollection<PathFinderConfig> PathFinderConfigs { get; set; }
+        public virtual MapInfoDimension MapInfoDimension { get; set; }
     }
 }

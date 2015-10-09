@@ -176,6 +176,9 @@
     <Compile Include="Models\MiddlePointNeighbor.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PathFinderConfig.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Predisposition.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>

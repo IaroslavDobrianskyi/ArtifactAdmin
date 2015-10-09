@@ -16,6 +16,7 @@ namespace ArtifactAdmin.DAL.Models
         public DimentionRadiu()
         {
             this.MiddlePointNeighbors = new HashSet<MiddlePointNeighbor>();
+            this.PathFinderConfigs = new HashSet<PathFinderConfig>();
         }
     
         public int Id { get; set; }
@@ -24,5 +25,6 @@ namespace ArtifactAdmin.DAL.Models
     
         public virtual MapInfoDimension MapInfoDimension1 { get; set; }
         public virtual ICollection<MiddlePointNeighbor> MiddlePointNeighbors { get; set; }
+        public virtual ICollection<PathFinderConfig> PathFinderConfigs { get; set; }
     }
 }

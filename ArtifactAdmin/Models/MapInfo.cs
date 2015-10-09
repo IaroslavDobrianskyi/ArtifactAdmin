@@ -17,6 +17,7 @@ namespace ArtifactAdmin.DAL.Models
         {
             this.ZoneCoordinats = new HashSet<ZoneCoordinat>();
             this.MapInfoDimensions = new HashSet<MapInfoDimension>();
+            this.PathFinderConfigs = new HashSet<PathFinderConfig>();
         }
     
         public int Id { get; set; }
@@ -27,5 +28,6 @@ namespace ArtifactAdmin.DAL.Models
     
         public virtual ICollection<ZoneCoordinat> ZoneCoordinats { get; set; }
         public virtual ICollection<MapInfoDimension> MapInfoDimensions { get; set; }
+        public virtual ICollection<PathFinderConfig> PathFinderConfigs { get; set; }
     }
 }
