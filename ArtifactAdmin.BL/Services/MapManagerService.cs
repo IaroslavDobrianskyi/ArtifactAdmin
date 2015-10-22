@@ -3,7 +3,7 @@
     using System.Linq;
     using DAL.Models;
     using Interfaces;
-    using MapHelpers;
+    using Utils.MapHelpers;
 
     public class MapManagerService : IMapManagerService
     {

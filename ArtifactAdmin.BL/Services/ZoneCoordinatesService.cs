@@ -6,10 +6,10 @@
     using AutoMapper;
     using DAL.Models;
     using Interfaces;
-    using MapHelpers;
     using ModelsDTO;
     using Utils;
     using Utils.GeneratingMiddlePoints;
+    using Utils.MapHelpers;
 
     public class ZoneCoordinatesService : IZoneCoordinatesService
     {

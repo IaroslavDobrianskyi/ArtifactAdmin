@@ -15,7 +15,7 @@
         public bool? IsKey { get; set; }
         public int Duration { get; set; }
 
-        public int ActiveAction { get; set; }
+        public FlowAction ActiveAction { get; set; }
         public IEnumerable<FlowAction> ActionsList { get; set; }
     }
 }

@@ -5,9 +5,9 @@
     using AutoMapper;
     using DAL.Models;
     using Interfaces;
-    using MapHelpers;
     using ModelsDTO;
     using Utils.GeneratingMiddlePoints;
+    using Utils.MapHelpers;
 
     public class MapInfoDimensionService : IMapInfoDimensionService 
     {

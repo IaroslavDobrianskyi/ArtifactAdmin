@@ -82,8 +82,8 @@
     <Compile Include="Interfaces\IMapInfoDimensionService.cs" />
     <Compile Include="Interfaces\IMapManagerService.cs" />
     <Compile Include="Interfaces\IMiddlePointNeighborsService.cs" />
-    <Compile Include="MapHelpers\LinesContainer.cs" />
-    <Compile Include="MapHelpers\LineOfPoints.cs" />
+    <Compile Include="Utils\MapHelpers\LinesContainer.cs" />
+    <Compile Include="Utils\MapHelpers\LineOfPoints.cs" />
     <Compile Include="InjectionConfig.cs" />
     <Compile Include="Interfaces\IActionDescriptionService.cs" />
     <Compile Include="Interfaces\IActionTemplateResultService.cs" />
@@ -110,8 +110,8 @@
     <Compile Include="Interfaces\ITalentService.cs" />
     <Compile Include="Interfaces\IMapInfoService.cs" />
     <Compile Include="Interfaces\IZoneCoordinatesService.cs" />
-    <Compile Include="MapHelpers\MapManager.cs" />
-    <Compile Include="MapHelpers\MapPoint.cs" />
+    <Compile Include="Utils\MapHelpers\MapManager.cs" />
+    <Compile Include="Utils\MapHelpers\MapPoint.cs" />
     <Compile Include="ModelsDTO\ActionDescriptionDto.cs" />
     <Compile Include="ModelsDTO\ActionTemplateCharacteristicDto.cs" />
     <Compile Include="ModelsDTO\ActionTemplateDto.cs" />

@@ -1,4 +1,4 @@
-﻿namespace ArtifactAdmin.BL.MapHelpers
+﻿namespace ArtifactAdmin.BL.Utils.MapHelpers
 {
     using System.Collections.Generic;
     using System.Linq;
