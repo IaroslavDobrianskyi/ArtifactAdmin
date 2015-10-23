@@ -9,6 +9,9 @@
 
 namespace ArtifactAdmin.DAL.Models
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class ActionCharacteristic
     {
         public int Id { get; set; }

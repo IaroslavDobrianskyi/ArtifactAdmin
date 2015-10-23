@@ -19,9 +19,9 @@
             @*<th>
                 @Html.DisplayNameFor(model => model.Characreristics)
             </th>*@
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.CharacteristicsLevelModifier)
-            </th>
+            </th>*@
             @*<th>
                 @Html.DisplayNameFor(model => model.Predisposition)
             </th>
@@ -44,9 +44,9 @@
                 @*<td>
                     @Html.DisplayFor(modelItem => item.Characreristics)
                 </td>*@
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.CharacteristicsLevelModifier)
-                </td>
+                </td>*@
                 @*<td>
                     @Html.DisplayFor(modelItem => item.Predisposition)
                 </td>
@@ -83,9 +83,9 @@
 </div>
 @section ScriptsSortRace{
     <script type="text/javascript">
-    $(document).ready(function () {
-        $("#Race").tablesorter({ headers:{2:{sorter:false},3:{sorter:false}},widthFixed: true, sortList: [[0, 0]]  })
-        .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
-    });
+        $(document).ready(function(){
+            $("#Race").tablesorter({ headers: { 1: { sorter: false }, 2: { sorter: false }, widthFixed: true, sortList: [[0, 0]] } })
+                .tablesorterPager({ container: $("#pager"), size: $(".pagesize option:selected").val() });
+        });
     </script>
 }

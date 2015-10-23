@@ -257,6 +257,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="web.config" />
     <EntityDeploy Include="Models\ArtifactModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ArtifactModel.Designer.cs</LastGenOutput>
@@ -292,7 +293,6 @@
     <Content Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="web.config" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

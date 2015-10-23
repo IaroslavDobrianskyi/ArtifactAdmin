@@ -10,7 +10,8 @@
 namespace ArtifactAdmin.DAL.Models
 {
     using System;
-
+    using System.Collections.Generic;
+    
     public partial class sysdiagram
     {
         public string name { get; set; }

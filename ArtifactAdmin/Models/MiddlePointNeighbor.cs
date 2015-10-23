@@ -9,6 +9,9 @@
 
 namespace ArtifactAdmin.DAL.Models
 {
+    using System;
+    using System.Collections.Generic;
+    
     public partial class MiddlePointNeighbor
     {
         public int Id { get; set; }

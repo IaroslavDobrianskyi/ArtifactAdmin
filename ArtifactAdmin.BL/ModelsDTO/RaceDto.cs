@@ -41,8 +41,12 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Required]
         public string CharacteristicsLevelModifier { get; set; }
 
-        [Required(ErrorMessageResourceName = "RequiredList",
-           ErrorMessageResourceType = typeof(ValidationStrings))]
+        public List<ViewCharacteristic> SelectedModifiers { get; set; }
+
+         [Display(Name = "Введіть модифікатор характеристики!")]
+        public int ValueModifier { get; set; }
+
+        [Required(ErrorMessageResourceName = "RequiredList", ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Схильності")]
         public string Predisposition { get; set; }
 

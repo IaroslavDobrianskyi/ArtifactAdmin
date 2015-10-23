@@ -51,6 +51,7 @@ namespace ArtifactAdmin.BL.Services
             var viewValueCharacteristic = new ViewValueCharacteristic();
             var viewValuePredisposition = new ViewValueCharacteristic();
             var viewValueProperties = new ViewValueCharacteristic();
+            var viewValueModifiers = new ViewValueCharacteristic();
             var allCharacteristic = this.characteristicRepository.GetAll().Select(
                         type =>
                         new ViewCharacteristic
@@ -72,6 +73,7 @@ namespace ArtifactAdmin.BL.Services
                             Name = type.Name,
                             PositionLength = type.Position.ToString() + "." + type.Length.ToString()
                         }).ToList();
+
             if (id != null)
             {
                 raceDto = Mapper.Map<RaceDto>(this.raceRepository.GetAll()
@@ -79,18 +81,22 @@ namespace ArtifactAdmin.BL.Services
                 viewValueCharacteristic = ViewHelper.GetValueByString(raceDto.Characreristics, allCharacteristic);
                 viewValuePredisposition = ViewHelper.GetValueByString(raceDto.Predisposition, allPredisposition);
                 viewValueProperties = ViewHelper.GetValueByString(raceDto.Properties, allProperty);
+                viewValueModifiers = ViewHelper.GetValueByString(raceDto.CharacteristicsLevelModifier, allCharacteristic);
             }
             else
             {
                 viewValueCharacteristic = ViewHelper.GetValueByString(null, allCharacteristic);
                 viewValuePredisposition = ViewHelper.GetValueByString(null, allPredisposition);
                 viewValueProperties = ViewHelper.GetValueByString(null, allProperty);
+                viewValueModifiers = ViewHelper.GetValueByString(null, allCharacteristic);
             }
 
             raceDto.AllCharacteristics = viewValueCharacteristic.Characteristics;
             raceDto.SelectedCharacteristics = viewValueCharacteristic.SelectedCharacteristics;
             raceDto.SelectedValues = viewValueCharacteristic.SelectedValues;
             raceDto.ValueCharacteristic = 0;
+            raceDto.SelectedModifiers = viewValueModifiers.SelectedValues;
+            raceDto.ValueModifier = 0;
             raceDto.AllPredispositions = viewValuePredisposition.Characteristics;
             raceDto.SelectedPredispositions = viewValuePredisposition.SelectedCharacteristics;
             raceDto.SelectedValuesPredisposition = viewValuePredisposition.SelectedValues;

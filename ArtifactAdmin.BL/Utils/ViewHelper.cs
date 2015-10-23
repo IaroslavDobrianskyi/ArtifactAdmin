@@ -1,4 +1,4 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿ // --------------------------------------------------------------------------------------------------------------------
 // <copyright file="ViewHelper.cs" company="Artifact">
 //   All rights reserved
 // </copyright>
@@ -47,9 +47,8 @@ namespace ArtifactAdmin.BL.Utils
                     {
                         if (value > 0)
                         {
-                            characteristic.Value = value;
-                            viewValueCharacteristic.SelectedCharacteristics.Add(characteristic);
-                            viewValueCharacteristic.SelectedValues.Add(characteristic);
+                            viewValueCharacteristic.SelectedCharacteristics.Add(new ViewCharacteristic { Name = characteristic.Name, PositionLength = characteristic.PositionLength, Value = value });
+                            viewValueCharacteristic.SelectedValues.Add(new ViewCharacteristic { Name = characteristic.Name, PositionLength = characteristic.PositionLength, Value = value });
                             selValue = true;
                         }
                     }

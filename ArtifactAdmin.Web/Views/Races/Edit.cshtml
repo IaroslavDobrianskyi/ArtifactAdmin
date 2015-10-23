@@ -36,57 +36,56 @@
             </td>
         </tr>
     </table>
-    
 
         <table class="table">
-        <colgroup>
-            <col style="width: 300px"/>
-            <col style="width: 150px"/>
-            <col style="width: 100px"/>
-            <col style="width: 300px"/>
-        </colgroup>
-                <tr>
-                    <td>
-                        @Html.ListBoxFor(model => model.AllCharacteristics, new SelectList(Model.AllCharacteristics, "PositionLength", "Name"),
-                new { size = 6, style = "width:250px" })
-                    </td>
-                    <td>
-                        @Html.LabelFor(model => model.ValueCharacteristic, new { @class = "control-label col-md-2" })
-                        <br />
-                        @Html.EditorFor(model => model.ValueCharacteristic, new { htmlAttributes = new { @class = "form-control" } })
-                        <br />
-                        <span class="text-danger" id="MessageErrorChar" ></span>
-                    </td>
-                    <td style="text-align: center">
-                        <input type="button" id="addChar" value=">"
-                               onclick="javascript: MoveToSel(document.getElementById('AllCharacteristics'),
+            <colgroup>
+                <col style="width: 300px" />
+                <col style="width: 100px" />
+                <col style="width: 50px" />
+                <col style="width: 450px" />
+            </colgroup>
+            <tr>
+                <td>
+                    @Html.ListBoxFor(model => model.AllCharacteristics, new SelectList(Model.AllCharacteristics, "PositionLength", "Name"),
+                new { size = 8, style = "width:250px" })
+                </td>
+                <td>
+                    @Html.LabelFor(model => model.ValueCharacteristic, new { @class = "control-label col-md-2" })
+                    <br />
+                    @Html.EditorFor(model => model.ValueCharacteristic, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="text-danger" id="MessageErrorChar"></span>
+                    <br />
+                    @Html.LabelFor(model => model.ValueModifier, new { @class = "control-label col-md-2" })
+                    <br />
+                    @Html.EditorFor(model => model.ValueModifier, new { htmlAttributes = new { @class = "form-control" } })
+                    <span class="text-danger" id="MessageErrorModi"></span>
+                </td>
+                <td style="text-align: center">
+                    <input type="button" id="add" value=">"
+                           onclick="javascript: MoveToSelChar(document.getElementById('AllCharacteristics'),
     document.getElementById('SelectedCharacteristics'), document.getElementById('SelectedValues'),
-    document.getElementById('ValueCharacteristic').value.toString(), document.getElementById('MessageErrorChar'));" />
-                        <br />
-                        <input type="button" id="remChar" value="<"
-                               onclick="javascript: MoveToObj(document.getElementById('SelectedCharacteristics'),
-    document.getElementById('AllCharacteristics'), document.getElementById('SelectedValues'));" />
-                        <br />
-                    </td>
-                    <td>
-                        @Html.ListBoxFor(model => model.SelectedCharacteristics, new MultiSelectList(Model.SelectedCharacteristics, "PositionLength", "Name"),
-                new { size = 6, style = "width:250px" })
-                        @Html.ListBoxFor(model => model.SelectedValues, new MultiSelectList(Model.SelectedValues, "PositionLength", "Value"),
-                new { size = 6, style = "width:100px" })
-                        @Html.HiddenFor(model => model.Characreristics, new { @class = "IncludeHidden" })
-                        <br />
-                        @Html.ValidationMessageFor(model => model.Characreristics, "", new { @class = "text-danger" })
-                    </td>
-                </tr>
+    document.getElementById('ValueCharacteristic').value.toString(), document.getElementById('MessageErrorChar'));">
+                    <br />
+                    <input type="button" id="rem" value="<"
+                           onclick="javascript: MoveToObjChar(document.getElementById('SelectedCharacteristics'), document.getElementById('AllCharacteristics'), document.getElementById('SelectedValues'));">
+                    <br />
+                    <span class="text-danger" id="MessageErrorAdd"></span>
+                </td>
+                <td>
+                    @Html.ListBoxFor(model => model.SelectedCharacteristics, new MultiSelectList(Model.SelectedCharacteristics, "PositionLength", "Name"),
+                new { size = 8, style = "width:250px" })
+                    @Html.ListBoxFor(model => model.SelectedValues, new MultiSelectList(Model.SelectedValues, "PositionLength", "Value"),
+                new { size = 8, style = "width:100px" })
+                    @Html.ListBoxFor(model => model.SelectedModifiers, new MultiSelectList(Model.SelectedModifiers, "PositionLength", "Value"),
+                new { size = 8, style = "width:100px" })
+                    @Html.HiddenFor(model => model.Characreristics, new { @class = "IncludeHidden" })
+                    @Html.HiddenFor(model => model.CharacteristicsLevelModifier, new { @class = "IncludeHidden" })
+                    <br />
+                    @Html.ValidationMessageFor(model => model.Characreristics, "", new { @class = "text-danger" })
+                </td>
+            </tr>
         </table>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.CharacteristicsLevelModifier, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CharacteristicsLevelModifier, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CharacteristicsLevelModifier, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        
         <table class="table">
             <colgroup>
                 <col style="width: 300px" />
@@ -110,11 +109,11 @@
                     <input type="button" id="addPred" value=">"
                            onclick="javascript: MoveToSel(document.getElementById('AllPredispositions'),
     document.getElementById('SelectedPredispositions'), document.getElementById('SelectedValuesPredisposition'),
-    document.getElementById('ValuePredisposition').value.toString(), document.getElementById('MessageErrorPred'));" />
+    document.getElementById('ValuePredisposition').value.toString(), document.getElementById('MessageErrorPred'));" >
                     <br />
                     <input type="button" id="remPred" value="<"
                            onclick="javascript: MoveToObj(document.getElementById('SelectedPredispositions'),
-    document.getElementById('AllPredispositions'), document.getElementById('SelectedValuesPredisposition'));" />
+    document.getElementById('AllPredispositions'), document.getElementById('SelectedValuesPredisposition'));" >
                     <br />
                 </td>
                 <td>
@@ -151,11 +150,11 @@
                     <input type="button" id="addPred" value=">"
                            onclick="javascript: MoveToSel(document.getElementById('AllProperties'),
     document.getElementById('SelectedProperties'), document.getElementById('SelectedValuesProperties'),
-    document.getElementById('ValueProperty').value.toString(), document.getElementById('MessageErrorProp'));" />
+    document.getElementById('ValueProperty').value.toString(), document.getElementById('MessageErrorProp'));">
                     <br />
                     <input type="button" id="remPred" value="<"
                            onclick="javascript: MoveToObj(document.getElementById('SelectedProperties'),
-    document.getElementById('AllProperties'), document.getElementById('SelectedValuesProperties'));" />
+    document.getElementById('AllProperties'), document.getElementById('SelectedValuesProperties'));">
                     <br />
                 </td>
                 <td>
@@ -172,7 +171,8 @@
         
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: GetStringValue(document.getElementById('SelectedValues'), document.getElementById('Characreristics')); GetStringValue(document.getElementById('SelectedValuesPredisposition'), document.getElementById('Predisposition')); GetStringValue(document.getElementById('SelectedValuesProperties'), document.getElementById('Properties'))" />
+                <input type="submit" value="Записати" class="btn btn-default" onfocus="javascript: GetStringValue(document.getElementById('SelectedValues'), document.getElementById('Characreristics')); GetStringValue(document.getElementById('SelectedValuesPredisposition'), document.getElementById('Predisposition'));
+    GetStringValue(document.getElementById('SelectedValuesProperties'), document.getElementById('Properties')); GetStringValue(document.getElementById('SelectedModifiers'), document.getElementById('CharacteristicsLevelModifier'));" />
                 @Html.ActionLink("Повернутись до списку", "Index")
             </div>
         </div>
@@ -193,66 +193,163 @@
             }
         };
 
-        function MoveToSel(From, ToSel, ToValue, SelValue, Message) {
-            // From = список всіх можливих
-            // ToSel = список вибраних по назві
-            // ToValue = список вибраних по значенн
-            // SelValue = елемент значення
-            // Message = повідомлення про помилку
-            var SelID = '';
-            var SelText = '';
+        function MoveToSel(from, toSel, toValue, selValue, message) {
+            // from = список всіх можливих
+            // toSel = список вибраних по назві
+            // toValue = список вибраних по значенн
+            // selValue = елемент значення
+            // message = повідомлення про помилку
+            var selId = '';
+            var selText = '';
             var length = 0;
             var maxValue = "";
-            var ValidateValue = Number(SelValue);
-            if (ValidateValue > 0) {
-                for (i = From.options.length - 1; i >= 0; i--) {
-                    if (From.options[i].selected == true) {
-                        SelID = From.options[i].value;
-                        SelText = From.options[i].text;
-                        length = parseInt(SelID.substring(SelID.indexOf(".") + 1));
-                        if (SelValue.length <= length) {
-                            var newRow = new Option(SelText, SelID);
-                            ToSel.options[ToSel.length] = newRow;
-                            newRow = new Option(SelValue, SelID);
-                            ToValue[ToValue.length] = newRow;
-                            From.options[i] = null;
-                            while (Message.firstChild) {
-                                Message.removeChild(Message.firstChild);
-                            }
+            var validateValue = Number(selValue);
+            if (validateValue > 0) {
+                var i = from.selectedIndex;
+                if (i != -1) {
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    length = parseInt(selId.substring(selId.indexOf(".") + 1));
+                    if (selValue.length <= length) {
+                        var newRow = new Option(selText, selId);
+                        toSel.options[toSel.length] = newRow;
+                        newRow = new Option(selValue, selId);
+                        toValue.options[toValue.length] = newRow;
+                        from.options[i] = null;
+                        while (message.firstChild) {
+                            message.removeChild(message.firstChild);
+                        }
+                    }
+                    else {
+                        for (maxValue = ''; maxValue.length < length; maxValue += '9') {
+                        }
+                        while (message.firstChild) {
+                            message.removeChild(message.firstChild);
+                        }
+                        message.appendChild(document.createTextNode("Для " + selText + " введіть число від 1 до " + maxValue + " !"));
+                    }
+                }
+            }
+            else {
+                while (message.firstChild) {
+                    message.removeChild(message.firstChild);
+                }
+                message.appendChild(document.createTextNode("Введіть число більше 0 !"));
+            }
+        }
+
+        function MoveToSelChar(from, toSel, toValue, selValue, message) {
+            // from = список всіх можливих
+            // toSel = список вибраних по назві
+            // toValue = список вибраних по значенн
+            // selValue = елемент значення
+            // message = повідомлення про помилку
+            var selId = '';
+            var selText = '';
+            var length = 0;
+            var maxValue = "";
+            var validateValue = Number(selValue);
+            var modifierValue = document.getElementById("ValueModifier").value;
+            var validateModifier = Number(modifierValue);
+            var messageModifier = document.getElementById("MessageErrorModi");
+            var messageAdd = document.getElementById("MessageErrorAdd");
+            var selectedModifiers = document.getElementById("SelectedModifiers");
+            while (message.firstChild) {
+                message.removeChild(message.firstChild);
+            }
+            while (messageModifier.firstChild) {
+                messageModifier.removeChild(messageModifier.firstChild);
+            }
+            while (messageAdd.firstChild) {
+                messageAdd.removeChild(messageAdd.firstChild);
+            }
+            var i = from.selectedIndex;
+            if (i != -1) {
+                selId = from.options[i].value;
+                selText = from.options[i].text;
+                length = parseInt(selId.substring(selId.indexOf(".") + 1));
+                for (maxValue = ''; maxValue.length < length; maxValue += '9') {
+                }
+                if (validateValue > 0 & validateModifier > 0) {
+                    if (selValue.length <= length) {
+                        if (modifierValue.length <= length) {
+                            var newRow = new Option(selText, selId);
+                            toSel.options[toSel.length] = newRow;
+                            newRow = new Option(selValue, selId);
+                            toValue.options[toValue.length] = newRow;
+                            newRow = new Option(modifierValue, selId);
+                            selectedModifiers.options[selectedModifiers.length] = newRow;
+                            from.options[i] = null;
                         }
                         else {
-                            for (maxValue = ''; maxValue.length < length; maxValue += '9') {
-                            }
-                            while (Message.firstChild) {
-                                Message.removeChild(Message.firstChild);
-                            }
-                            Message.appendChild(document.createTextNode("Для " + SelText + " введіть число від 1 до " + maxValue + " !"));
+                            messageModifier.appendChild(document.createTextNode("Для модифікатора " + selText + " введіть число від 1 до " + maxValue + " !"));
+                        }
+                    }
+                    else {
+                        message.appendChild(document.createTextNode("Для " + selText + " введіть число від 1 до " + maxValue + " !"));
+                        if (modifierValue.length > length) {
+                            messageModifier.appendChild(document.createTextNode("Для модифікатора " + selText + " введіть число від 1 до " + maxValue + " !"));
+                        }
+                    }
+                }
+                else {
+                    if (validateValue <= 0) {
+                        message.appendChild(document.createTextNode("Введіть число більше 0 !"));
+                    }
+                    else {
+                        if (selValue.length > length) {
+                            message.appendChild(document.createTextNode("Для " + selText + " введіть число від 1 до " + maxValue + " !"));
+                        }
+                    }
+                    if (validateModifier <= 0) {
+                        messageModifier.appendChild(document.createTextNode("Введіть число більше 0 !"));
+                    }
+                    else {
+                        if (modifierValue.length > length) {
+                            messageModifier.appendChild(document.createTextNode("Для модифікатора " + selText + " введіть число від 1 до " + maxValue + " !"));
                         }
                     }
                 }
             }
             else {
-                while (Message.firstChild) {
-                    Message.removeChild(Message.firstChild);
-                }
-                Message.appendChild(document.createTextNode("Введіть число більше 0 !"));
+                messageAdd.appendChild(document.createTextNode("Виберіть характеристику!"));
             }
         }
 
-        function MoveToObj(from,toObj,fromValue){
-            // From = список вибраних по назві
+        function MoveToObj(from, toObj, fromValue) {
+            // from = список вибраних по назві
             // ToObj = список всіх можливих
-            // FromValue = список вибраних по значенню
+            // fromValue = список вибраних по значенню
             var selId = '';
             var selText = '';
-            for (i = from.options.length - 1; i >= 0; i--){
-                if (from.options[i].selected == true){
+            for (i = from.options.length - 1; i >= 0; i--) {
+                if (from.options[i].selected == true) {
                     selId = from.options[i].value;
                     selText = from.options[i].text;
                     var newRow = new Option(selText, selId);
                     toObj.options[toObj.length] = newRow;
                     fromValue.options[i] = null;
                     from.options[i] = null;
+                }
+            }
+        }
+
+        function MoveToObjChar(from, toObj, fromValue) {
+            // from = список вибраних по назві
+            // ToObj = список всіх можливих
+            // fromValue = список вибраних по значенню
+            var selId = '';
+            var selText = '';
+            var selectedModifiers = document.getElementById("SelectedModifiers");
+            for (i = from.options.length - 1; i >= 0; i--) {
+                if (from.options[i].selected == true) {
+                    selId = from.options[i].value;
+                    selText = from.options[i].text;
+                    var newRow = new Option(selText, selId);
+                    toObj.options[toObj.length] = newRow;
+                    fromValue.options[i] = null;
+                    from.options[i] = null;
+                    selectedModifiers.options[i] = null;
                 }
             }
         }

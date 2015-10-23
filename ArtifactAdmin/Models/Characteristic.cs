@@ -9,8 +9,9 @@
 
 namespace ArtifactAdmin.DAL.Models
 {
+    using System;
     using System.Collections.Generic;
-
+    
     public partial class Characteristic
     {
         public Characteristic()

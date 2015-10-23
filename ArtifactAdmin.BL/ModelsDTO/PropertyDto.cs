@@ -49,8 +49,7 @@ namespace ArtifactAdmin.BL.ModelsDTO
         [Required(ErrorMessageResourceName = "RequiredDeviation",
    ErrorMessageResourceType = typeof(ValidationStrings))]
         [Display(Name = "Відхилення")]
-        [StringLength(50, ErrorMessageResourceName = "StringLength",
-  ErrorMessageResourceType = typeof(ValidationStrings))]
-        public string Deviation { get; set; }
+       
+        public double Deviation { get; set; }
     }
 }

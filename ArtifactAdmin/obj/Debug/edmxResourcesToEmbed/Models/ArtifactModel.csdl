@@ -779,7 +779,7 @@
     <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Length" Type="Int32" Nullable="false" />
     <Property Name="Position" Type="Int32" Nullable="false" />
-    <Property Name="Deviation" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Deviation" Type="Double" Nullable="false" />
     <NavigationProperty Name="ActionProperties" Relationship="artModel.FK_ActionProperties_Properties" FromRole="Property" ToRole="ActionProperty" />
     <NavigationProperty Name="ActionTemplateProperties" Relationship="artModel.FK_ActionTemplateProperties_Properties" FromRole="Property" ToRole="ActionTemplateProperty" />
   </EntityType>

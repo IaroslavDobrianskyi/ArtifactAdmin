@@ -10,13 +10,14 @@
 namespace ArtifactAdmin.DAL.Models
 {
     using System;
-
+    using System.Collections.Generic;
+    
     public partial class Log
     {
         public int Id { get; set; }
         public string ShortLog { get; set; }
         public string ExtendedLog { get; set; }
-        public DateTime Date { get; set; }
+        public System.DateTime Date { get; set; }
         public int UserArtifact { get; set; }
     
         public virtual UserArtifact UserArtifact1 { get; set; }

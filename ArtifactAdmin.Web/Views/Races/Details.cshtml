@@ -28,14 +28,8 @@
                 new{size=6,style="width:280px"})
             @Html.ListBoxFor(model => model.SelectedCharacteristics, new SelectList(Model.SelectedCharacteristics, "PositionLength", "Value"),
                 new { size = 6, style = "width:280px" })
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CharacteristicsLevelModifier)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CharacteristicsLevelModifier)
+            @Html.ListBoxFor(model => model.SelectedModifiers, new SelectList(Model.SelectedModifiers, "PositionLength", "Value"),
+                new { size = 6, style = "width:280px" })
         </dd>
 
         <dt>

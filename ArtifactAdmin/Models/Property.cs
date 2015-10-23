@@ -9,8 +9,9 @@
 
 namespace ArtifactAdmin.DAL.Models
 {
+    using System;
     using System.Collections.Generic;
-
+    
     public partial class Property
     {
         public Property()
@@ -24,7 +25,7 @@ namespace ArtifactAdmin.DAL.Models
         public string Description { get; set; }
         public int Length { get; set; }
         public int Position { get; set; }
-        public string Deviation { get; set; }
+        public double Deviation { get; set; }
     
         public virtual ICollection<ActionProperty> ActionProperties { get; set; }
         public virtual ICollection<ActionTemplateProperty> ActionTemplateProperties { get; set; }
