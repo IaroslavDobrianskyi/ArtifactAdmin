@@ -1,6 +1,6 @@
 ﻿namespace ArtifactAdmin.BL.Interfaces
 {
-    using MapHelpers;
+    using Utils.MapHelpers;
 
     public interface IMapManagerService
     {

@@ -13,56 +13,56 @@
         {
         }
 
-        public void SaveFlow(int userId, LinkedList<FlowStep> stepsToSave)
-        {
-            using (artEntities db = new artEntities())
-            {
-                using (var transaction = db.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        for (var node = stepsToSave.First; node != null; node = node.Next)
-                        {
+        //public void SaveFlow(int userId, LinkedList<FlowStep> stepsToSave)
+        //{
+        //    using (artEntities db = new artEntities())
+        //    {
+        //        using (var transaction = db.Database.BeginTransaction())
+        //        {
+        //            try
+        //            {
+        //                for (var node = stepsToSave.First; node != null; node = node.Next)
+        //                {
 
-                            foreach (var action in node.Value.ActionsList)
-                            {
-                                var actionToBeSaved = new Action
-                                                         {
-                                                             //TODO fill all fields. Create converter method.
-                                                             ActionChangeCost = action.ActionChangeCost,
-                                                             ExperienceModifier = action.ExperienceModifier
-                                                         };
+        //                    foreach (var action in node.Value.ActionsList)
+        //                    {
+        //                        var actionToBeSaved = new Action
+        //                                                 {
+        //                                                     //TODO fill all fields. Create converter method.
+        //                                                     ActionChangeCost = action.ActionChangeCost,
+        //                                                     ExperienceModifier = action.ExperienceModifier
+        //                                                 };
 
-                                db.Actions.Add(actionToBeSaved);
-                                if (action.Id == node.Value.ActiveAction)
-                                {
-                                    node.Value.ActiveAction = actionToBeSaved.Id;
-                                }
-                            }
+        //                        db.Actions.Add(actionToBeSaved);
+        //                        if (action.Id == node.Value.ActiveAction)
+        //                        {
+        //                            node.Value.ActiveAction = actionToBeSaved.Id;
+        //                        }
+        //                    }
 
-                            //TODO fill all fields. Create converter method.
-                            Step stepToBeSaved = new Step { Duration = node.Value.Duration, Name = node.Value.Name, ActiveActionInFlow = node.Value.ActiveAction };
-                            db.Steps.Add(stepToBeSaved);
-                            db.SaveChanges();
+        //                    //TODO fill all fields. Create converter method.
+        //                    Step stepToBeSaved = new Step { Duration = node.Value.Duration, Name = node.Value.Name, ActiveActionInFlow = node.Value.ActiveAction };
+        //                    db.Steps.Add(stepToBeSaved);
+        //                    db.SaveChanges();
 
-                            if (stepsToSave.First != node)
-                            {
-                                var firstOrDefault = db.Actions.FirstOrDefault(el => el.Id == node.Previous.Value.ActiveAction);
-                                if (firstOrDefault != null)
-                                {
-                                    firstOrDefault.Step = stepToBeSaved.Id;
-                                }
-                            }
-                        }
-                    }
-                    catch (Exception error)
-                    {
-                        //log.Error(error.Message);
-                        transaction.Rollback();
-                    }
-                }
-            }
-        }
+        //                    if (stepsToSave.First != node)
+        //                    {
+        //                        var firstOrDefault = db.Actions.FirstOrDefault(el => el.Id == node.Previous.Value.ActiveAction);
+        //                        if (firstOrDefault != null)
+        //                        {
+        //                            firstOrDefault.Step = stepToBeSaved.Id;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //            catch (Exception error)
+        //            {
+        //                //log.Error(error.Message);
+        //                transaction.Rollback();
+        //            }
+        //        }
+        //    }
+        //}
 
         //private void PutFlow(object obj)
         //{
@@ -122,5 +122,49 @@
 
         //    }
         //}
+
+
+        /*FlowService.GenerateFlow(CarrierId)
+   GenerateFlow(carrierId)
+   {
+      if(lastStep - currentStep > CarrierService.GetCarrierPredictionRadius(carrierId))
+        {
+          return;
+         } 
+        
+       var lastStep = StepService.RetrieveLastStepFromDB(carrierId);
+       var currentStep = StepService.RetrieveCurrentStepFromDB(carrierId);
+       var currentDesireList = DesireService.RetrieveListOfCurrentCarrierDesires(carrierId);
+       var ListActionResults = ActionService.RetrieveListOfActionResults(CurrentStep, LastStep)
+       var lastDesireList = ActionService.ApplyActionResultDesire(ListActionResults, currentDesireList)
+       var maxLastDesire = lastDesireList.Max(Value);
+        
+       //Тут починається генерація нового флову
+        
+       var KeyStepCoords = StepFinderService.GetKeyStepCoords(maxLastDesire, lastStep.Coords);
+       var IntermediateStepsCoords = StepFinderService.GetIntermediateStepCoords(lastStep, keyStep);
+       IntermediateStepsCoords.Add(KeyStepCoords);   
+       foreach(item in IntermediateStepsCoords)
+       {
+           var step = StepService.GenerateStep(item); //Save to DB
+           var actionResult = ActionService.GenerateActionResult(step); //Saves to DB
+           var desireList = ActionService.ApplyActionResultDesire(actionResult, lastDesireList);
+           var maxDesire = desireList.Max(Value);
+           if(maxDesire != maxLastDesire)
+           {
+               GenerateFlow(carrierId);
+           }
+       }
+   }
+     
+    *
+    ApplyActionResultDesire(ListActionResults, currentDesireList) 
+    * {
+    *  foreach (var actionResult in ListActionResults)
+    *  {
+    *      ActionService.ApplyActionResultDesire(actionResult, lastDesireList);
+    *  }
+    * }
+    */
     }
 }

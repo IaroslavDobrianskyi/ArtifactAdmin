@@ -17,5 +17,7 @@
         public int ActionImprovementCost { get; set; }
 
         public string Icon { get; set; }
+
+        public FlowStep NextStep { get; set; }
     }
 }
