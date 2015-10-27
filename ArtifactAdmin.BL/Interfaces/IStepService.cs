@@ -19,6 +19,12 @@ namespace ArtifactAdmin.BL.Interfaces
 
         StepDto Update(StepDto stepDto, string fileName);
 
+        StepDto RetrieveLastStepFromDb(int carrierId );
+
+        StepDto RetrieveCurrentStepFromDb(int carrierId );
+
+        StepDto GenerateStep(int coordX, int coordY);
+
         void Delete(int? id);
     }
 }

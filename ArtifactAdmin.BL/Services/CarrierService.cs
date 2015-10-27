@@ -148,5 +148,10 @@ namespace ArtifactAdmin.BL.Services
 
             return baseCharacteristics;
         }
+
+        public int GetCarrierPredictionRadius(int carrierId)
+        {
+            return 0;
+        }
     }
 }

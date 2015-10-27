@@ -26,6 +26,9 @@ namespace ArtifactAdmin.BL.Interfaces
 
         void UpdateDesireMapZone(int id, int[] desireMapZoneId, string[] modifiers);
 
+        //тут має бути список значень всіх бажаннь для керіора. Можливо окремий обєкт 
+        List<DesireDto> RetrieveListOfCurrentCarrierDesires(int carrierId);
+
         void Delete(int? id);
     }
 }

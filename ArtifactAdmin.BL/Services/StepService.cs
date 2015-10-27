@@ -46,6 +46,21 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<StepDto>(step);
         }
 
+        public StepDto RetrieveLastStepFromDb(int carrierId)
+        {
+            return null;
+        }
+
+        public StepDto RetrieveCurrentStepFromDb(int carrierId)
+        {
+            return null;
+        }
+
+        public StepDto GenerateStep(int coordX, int coordY)
+        {
+            return null;
+        }
+
         public void Delete(int? id)
         {
             var step = this.stepRepository.GetAll().FirstOrDefault(s => s.Id == id);

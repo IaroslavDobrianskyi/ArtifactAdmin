@@ -1,16 +1,23 @@
 ﻿namespace ArtifactAdmin.BL.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using DAL.Models;
-    using ModelsDTO.FlowItems;
-    using Action = DAL.Models.Action;
+    using Interfaces;
 
-    public class FlowService
+    public class FlowService : IFlowService
     {
-        public FlowService()
+        private readonly IStepService stepService;
+        private readonly ICarrierService carrierService;
+        private readonly IDesireService desireService;
+        private readonly IActionService actionService;
+        //private readonly IStepFinderService stepFinderService;
+
+        public FlowService(IStepService stepService, ICarrierService carrierService, IDesireService desireService, IActionService actionService)
         {
+            this.stepService = stepService;
+            this.carrierService = carrierService;
+            this.desireService = desireService;
+            this.actionService = actionService;
         }
 
         //public void SaveFlow(int userId, LinkedList<FlowStep> stepsToSave)
@@ -122,6 +129,39 @@
 
         //    }
         //}
+
+        public void GenerateFlow(int carrierId)
+        {
+            var lastStep = this.stepService.RetrieveLastStepFromDb(carrierId);
+            var currentStep = this.stepService.RetrieveCurrentStepFromDb(carrierId);
+
+            // Тут треба порахувати чи радіус передбачення більший за кількість часу/кроків між останнім і поточним
+            //if (lastStep - currentStep > this.carrierService.GetCarrierPredictionRadius(carrierId))
+            //{
+            //    return;
+            //} 
+
+            var currentDesireList = this.desireService.RetrieveListOfCurrentCarrierDesires(carrierId);
+            var listActionResults = this.actionService.RetrieveListOfActionResults(currentStep, lastStep);
+            var lastDesireList = actionService.ApplyActionResultDesire(listActionResults, currentDesireList);
+            //var maxLastDesire = lastDesireList.Max(desire => desire.Value);
+
+            // var KeyStepCoords = StepFinderService.GetKeyStepCoords(maxLastDesire, lastStep.Coords);
+            // var IntermediateStepsCoords = StepFinderService.GetIntermediateStepCoords(lastStep, keyStep);
+            // IntermediateStepsCoords.Add(KeyStepCoords); 
+            //  foreach(item in IntermediateStepsCoords)
+            //  {
+            //    var step = StepService.GenerateStep(item); //Save to DB
+            //    var actionResult = ActionService.GenerateActionResult(step); //Saves to DB
+            //    var desireList = ActionService.ApplyActionResultDesire(actionResult, lastDesireList);
+            //    var maxDesire = desireList.Max(Value);
+            //    if(maxDesire != maxLastDesire)
+            //    {
+            //        GenerateFlow(carrierId);
+            //    }
+            //  }
+
+        }
 
 
         /*FlowService.GenerateFlow(CarrierId)

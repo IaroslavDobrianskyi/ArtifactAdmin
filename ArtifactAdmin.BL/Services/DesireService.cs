@@ -95,6 +95,11 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<DesireDto>(desire);
         }
 
+        public List<DesireDto> RetrieveListOfCurrentCarrierDesires(int carrierId)
+        {
+            return null;
+        }
+
         public void Delete(int? id)
         {
             var desire = this.desireRepository.GetAll().FirstOrDefault(s => s.Id == id);

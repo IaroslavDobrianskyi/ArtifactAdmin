@@ -78,10 +78,13 @@
   <ItemGroup>
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="Interfaces\ICacheService.cs" />
+    <Compile Include="Interfaces\IActionService.cs" />
     <Compile Include="Interfaces\IDimentionRadiusService.cs" />
+    <Compile Include="Interfaces\IFlowService.cs" />
     <Compile Include="Interfaces\IMapInfoDimensionService.cs" />
     <Compile Include="Interfaces\IMapManagerService.cs" />
     <Compile Include="Interfaces\IMiddlePointNeighborsService.cs" />
+    <Compile Include="Services\StepService.cs" />
     <Compile Include="Utils\MapHelpers\LinesContainer.cs" />
     <Compile Include="Utils\MapHelpers\LineOfPoints.cs" />
     <Compile Include="InjectionConfig.cs" />
@@ -186,7 +189,7 @@
     <Compile Include="Services\RaceDesireService.cs" />
     <Compile Include="Services\RaceService.cs" />
     <Compile Include="Services\StepActionTemplateService.cs" />
-    <Compile Include="Services\StepService.cs" />
+    <Compile Include="Services\ActionService.cs" />
     <Compile Include="Services\StepObjectService.cs" />
     <Compile Include="Services\StepObjectTypeService.cs" />
     <Compile Include="Services\StepTemplateService.cs" />
