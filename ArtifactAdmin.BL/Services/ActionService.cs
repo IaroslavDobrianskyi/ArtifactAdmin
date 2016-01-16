@@ -11,20 +11,43 @@ namespace ArtifactAdmin.BL.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+
+    using ArtifactAdmin.DAL.Models;
+
+    using AutoMapper;
+
     using Interfaces;
     using ModelsDTO;
     using ModelsDTO.FlowItems;
 
     public class ActionService : IActionService 
     {
-        public List<int> RetrieveListOfActionResults(StepDto currentStepDto, StepDto lastStepDto)
+        private readonly IRepository<ActionResultDesire> actionResultDesireRepository;
+
+        public ActionService(IRepository<ActionResultDesire> actionResultDesireRepository)
         {
-            return null;
+            this.actionResultDesireRepository = actionResultDesireRepository;
         }
 
-        public List<DesireDto> ApplyActionResultDesire(List<int> actionResults, List<DesireDto> desireList)
+        public List<ActionResultDesireDto> RetrieveListOfActionResultDesires(List<StepDto> stepsList)
         {
-            return null;
+            var stepIds = stepsList.Select(s => s.Id).ToList();
+            var listActionResultDesires =
+                actionResultDesireRepository.GetAll().Where(ar => stepIds.Contains(ar.ActionResult1.Action1.Step));
+            return Mapper.Map<List<ActionResultDesireDto>>(listActionResultDesires);
+        }
+
+        public List<CarrierDesireDto> ApplyActionResultDesire(List<CarrierDesireDto> desireList, List<ActionResultDesireDto> actionResults)
+        {
+            var desireCount = desireList.Count;
+            for (int i = 0; i < desireCount; i++)
+            {
+                desireList[i].Value -=
+                    actionResults.Where(ar => ar.Desire == desireList[i].DesireId).Sum(ar => ar.Modifier);
+            }
+
+            return desireList;
         }
 
         public int GenerateActionResult(StepDto step)
@@ -32,9 +55,16 @@ namespace ArtifactAdmin.BL.Services
             return 0;
         }
 
+        public List<DesireDto> ApplyActionResultDesire(List<DesireDto> desireList, List<ActionResultDesireDto> actionResults)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
         public List<DesireDto> ApplyActionResultDesire(int actionResult, List<DesireDto> desireList)
         {
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

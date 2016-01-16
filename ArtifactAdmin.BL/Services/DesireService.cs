@@ -12,6 +12,9 @@ namespace ArtifactAdmin.BL.Services
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using ArtifactAdmin.BL.ModelsDTO.FlowItems;
+
     using AutoMapper;
     using DAL.Models;
     using Interfaces;
@@ -21,14 +24,17 @@ namespace ArtifactAdmin.BL.Services
     public class DesireService : IDesireService
     {
         private readonly IRepository<Desire> desireRepository;
+        private readonly IRepository<CarrierDesire> carrierDesireRepository;
         private readonly IRepository<DesireMapZone> desireMapZoneRepository;
         private readonly IRepository<MapZone> mapZoneRepository;
 
         public DesireService(IRepository<Desire> desireRepository,
+            IRepository<CarrierDesire> carrierDesireRepository,
             IRepository<DesireMapZone> desireMapZoneRepository,
             IRepository<MapZone> mapZoneRepository) 
         {
             this.desireRepository = desireRepository;
+            this.carrierDesireRepository = carrierDesireRepository;
             this.desireMapZoneRepository = desireMapZoneRepository;
             this.mapZoneRepository = mapZoneRepository;
         }
@@ -95,9 +101,10 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<DesireDto>(desire);
         }
 
-        public List<DesireDto> RetrieveListOfCurrentCarrierDesires(int carrierId)
+        public List<CarrierDesireDto> RetrieveListOfCurrentCarrierDesires(int carrierId)
         {
-            return null;
+            var carierDesires = this.carrierDesireRepository.GetAll().Where(cd => cd.CarrierId == carrierId).ToList();
+            return Mapper.Map<List<CarrierDesireDto>>(carierDesires);
         }
 
         public void Delete(int? id)

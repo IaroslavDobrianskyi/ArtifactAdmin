@@ -1,23 +1,37 @@
 ﻿namespace ArtifactAdmin.BL.Services
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data.Entity.Core.Objects;
+    using System.Drawing;
     using System.Linq;
+
+    using ArtifactAdmin.BL.ModelsDTO.FlowItems;
+    using ArtifactAdmin.DAL.Models;
+
     using Interfaces;
 
     public class FlowService : IFlowService
     {
         private readonly IStepService stepService;
-        private readonly ICarrierService carrierService;
+        private readonly IUserArtifactService userArtifactService;
         private readonly IDesireService desireService;
         private readonly IActionService actionService;
-        //private readonly IStepFinderService stepFinderService;
+        private readonly IRepository<Step> stepRepository;
+        private readonly IStepFinderService stepFinderService;
 
-        public FlowService(IStepService stepService, ICarrierService carrierService, IDesireService desireService, IActionService actionService)
+        public FlowService(
+            IStepService stepService,
+            IDesireService desireService,
+            IActionService actionService,
+            IUserArtifactService userArtifactService,
+            IStepFinderService stepFinderService)
         {
             this.stepService = stepService;
-            this.carrierService = carrierService;
             this.desireService = desireService;
             this.actionService = actionService;
+            this.userArtifactService = userArtifactService;
+            this.stepFinderService = stepFinderService;
         }
 
         //public void SaveFlow(int userId, LinkedList<FlowStep> stepsToSave)
@@ -135,39 +149,74 @@
             var lastStep = this.stepService.RetrieveLastStepFromDb(carrierId);
             var currentStep = this.stepService.RetrieveCurrentStepFromDb(carrierId);
 
+            var predictionRadius = this.userArtifactService.GetUserArtifactPredictionRadius(carrierId);
+            var stepsFromCurrentToLast = this.GetSteps(currentStep, lastStep);
+            var existingFlowDuration = CalculateStepsDuration(stepsFromCurrentToLast);
+                     
             // Тут треба порахувати чи радіус передбачення більший за кількість часу/кроків між останнім і поточним
-            //if (lastStep - currentStep > this.carrierService.GetCarrierPredictionRadius(carrierId))
-            //{
-            //    return;
-            //} 
+            if (predictionRadius < existingFlowDuration)
+            {
+                return;
+            } 
 
-            var currentDesireList = this.desireService.RetrieveListOfCurrentCarrierDesires(carrierId);
-            var listActionResults = this.actionService.RetrieveListOfActionResults(currentStep, lastStep);
-            var lastDesireList = actionService.ApplyActionResultDesire(listActionResults, currentDesireList);
-            //var maxLastDesire = lastDesireList.Max(desire => desire.Value);
+            var currentCarriesDesiresState = this.desireService.RetrieveListOfCurrentCarrierDesires(carrierId);
+            var fromCurrentToLastActionResultCarriesDesires = this.actionService.RetrieveListOfActionResultDesires(stepsFromCurrentToLast);
+            var desiresInTheFlowEnd = this.actionService.ApplyActionResultDesire(currentCarriesDesiresState, fromCurrentToLastActionResultCarriesDesires);
+            var maxLastDesire = desiresInTheFlowEnd.OrderByDescending(desire => desire.Value).FirstOrDefault();
 
-            // var KeyStepCoords = StepFinderService.GetKeyStepCoords(maxLastDesire, lastStep.Coords);
-            // var IntermediateStepsCoords = StepFinderService.GetIntermediateStepCoords(lastStep, keyStep);
-            // IntermediateStepsCoords.Add(KeyStepCoords); 
-            //  foreach(item in IntermediateStepsCoords)
-            //  {
-            //    var step = StepService.GenerateStep(item); //Save to DB
-            //    var actionResult = ActionService.GenerateActionResult(step); //Saves to DB
-            //    var desireList = ActionService.ApplyActionResultDesire(actionResult, lastDesireList);
-            //    var maxDesire = desireList.Max(Value);
-            //    if(maxDesire != maxLastDesire)
-            //    {
-            //        GenerateFlow(carrierId);
-            //    }
-            //  }
+            var newKeyStepCoords = this.stepFinderService.GetNewKeyStepCoords(
+                maxLastDesire,
+                new Point()
+                    {
+                        X = lastStep.XCoordinate,
+                        Y = lastStep.YCoordinate
+                    });
 
+            var intermediateStepsCoords = this.stepFinderService.GetIntermediateStepCoords(lastStep, newKeyStepCoords);
+            intermediateStepsCoords.Add(newKeyStepCoords); 
+            foreach(var coordinates in intermediateStepsCoords)
+            {
+                var step = this.stepService.GenerateStep(coordinates); //Save to DB
+              //var actionResult = ActionService.GenerateActionResult(step); //Saves to DB
+              //var desireList = ActionService.ApplyActionResultDesire(actionResult, lastDesireList);
+              //var maxDesire = desireList.Max(Value);
+              //if(maxDesire != maxLastDesire)
+              //{
+              //    this.GenerateFlow(carrierId);
+              //}
+            }
         }
+
+        private List<StepDto> GetSteps(StepDto startStep, StepDto endStep)
+        {
+            var retVal = new List<StepDto>();
+            var currentStep = startStep;
+            do
+            {
+                retVal.Add(currentStep);
+                currentStep = this.stepService.GetNextStep(currentStep);
+            }
+            while (currentStep != null);
+            return retVal;
+        }
+
+        private int CalculateStepsDuration(List<StepDto> steps)
+        {
+            var duration = 0;
+            foreach (var stepDto in steps)
+            {
+                duration += stepDto.Duration;
+            }
+
+            return duration;
+        }
+        
 
 
         /*FlowService.GenerateFlow(CarrierId)
    GenerateFlow(carrierId)
    {
-      if(lastStep - currentStep > CarrierService.GetCarrierPredictionRadius(carrierId))
+      if(lastStep - currentStep > CarrierService.GetUserArtifactPredictionRadius(carrierId))
         {
           return;
          } 

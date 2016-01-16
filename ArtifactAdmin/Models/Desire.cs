@@ -17,12 +17,12 @@ namespace ArtifactAdmin.DAL.Models
         public Desire()
         {
             this.ActionResultDesires = new HashSet<ActionResultDesire>();
-            this.CarrierDesires = new HashSet<CarrierDesire>();
             this.DesireActionTemplateResults = new HashSet<DesireActionTemplateResult>();
             this.DesireMapZones = new HashSet<DesireMapZone>();
             this.RaceDesires = new HashSet<RaceDesire>();
             this.Steps = new HashSet<Step>();
             this.StepTemplates = new HashSet<StepTemplate>();
+            this.CarrierDesires = new HashSet<CarrierDesire>();
         }
     
         public int Id { get; set; }
@@ -31,11 +31,11 @@ namespace ArtifactAdmin.DAL.Models
         public string Icon { get; set; }
     
         public virtual ICollection<ActionResultDesire> ActionResultDesires { get; set; }
-        public virtual ICollection<CarrierDesire> CarrierDesires { get; set; }
         public virtual ICollection<DesireActionTemplateResult> DesireActionTemplateResults { get; set; }
         public virtual ICollection<DesireMapZone> DesireMapZones { get; set; }
         public virtual ICollection<RaceDesire> RaceDesires { get; set; }
         public virtual ICollection<Step> Steps { get; set; }
         public virtual ICollection<StepTemplate> StepTemplates { get; set; }
+        public virtual ICollection<CarrierDesire> CarrierDesires { get; set; }
     }
 }

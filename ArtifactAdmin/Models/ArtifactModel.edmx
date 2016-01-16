@@ -191,6 +191,7 @@
           <Property Name="Predisposition" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Characteristics" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="DefaultPredisposition" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CurrentStep" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="CarrierDesire">
           <Key>
@@ -199,7 +200,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CarrierId" Type="int" Nullable="false" />
           <Property Name="DesireId" Type="int" Nullable="false" />
-          <Property Name="DesireMask" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Value" Type="float" Nullable="false" />
           <Property Name="AddictionRequirement" Type="int" Nullable="false" />
           <Property Name="IsSecret" Type="bit" Nullable="false" />
           <Property Name="DefaultValue" Type="int" Nullable="false" />
@@ -968,6 +969,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Carrier_Step">
+          <End Role="Step" Type="Self.Step" Multiplicity="1" />
+          <End Role="Carrier" Type="Self.Carrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carrier">
+              <PropertyRef Name="CurrentStep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CarrierDesire_Carrier">
           <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
           <End Role="CarrierDesire" Type="Self.CarrierDesire" Multiplicity="*" />
@@ -1340,6 +1353,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Step_UserArtifact">
+          <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
+          <End Role="Step" Type="Self.Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StepObject_StepObjectType">
           <End Role="StepObjectType" Type="Self.StepObjectType" Multiplicity="1" />
           <End Role="StepObject" Type="Self.StepObject" Multiplicity="*" />
@@ -1705,6 +1730,10 @@
             <End Role="Race" EntitySet="Race" />
             <End Role="Carrier" EntitySet="Carrier" />
           </AssociationSet>
+          <AssociationSet Name="FK_Carrier_Step" Association="Self.FK_Carrier_Step">
+            <End Role="Step" EntitySet="Step" />
+            <End Role="Carrier" EntitySet="Carrier" />
+          </AssociationSet>
           <AssociationSet Name="FK_CarrierDesire_Carrier" Association="Self.FK_CarrierDesire_Carrier">
             <End Role="Carrier" EntitySet="Carrier" />
             <End Role="CarrierDesire" EntitySet="CarrierDesire" />
@@ -1829,6 +1858,10 @@
             <End Role="Desire" EntitySet="Desire" />
             <End Role="Step" EntitySet="Step" />
           </AssociationSet>
+          <AssociationSet Name="FK_Step_UserArtifact" Association="Self.FK_Step_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifact" />
+            <End Role="Step" EntitySet="Step" />
+          </AssociationSet>
           <AssociationSet Name="FK_StepObject_StepObjectType" Association="Self.FK_StepObject_StepObjectType">
             <End Role="StepObjectType" EntitySet="StepObjectType" />
             <End Role="StepObject" EntitySet="StepObject" />
@@ -1923,7 +1956,6 @@
           <EntitySet Name="ArtifactBonus" EntityType="artModel.ArtifactBonu" />
           <EntitySet Name="ArtifactTypes" EntityType="artModel.ArtifactType" />
           <EntitySet Name="Carriers" EntityType="artModel.Carrier" />
-          <EntitySet Name="CarrierDesires" EntityType="artModel.CarrierDesire" />
           <EntitySet Name="CarrierUserArtifacts" EntityType="artModel.CarrierUserArtifact" />
           <EntitySet Name="Characteristics" EntityType="artModel.Characteristic" />
           <EntitySet Name="Classes" EntityType="artModel.Class" />
@@ -1937,7 +1969,6 @@
           <EntitySet Name="MapObjectProbabilities" EntityType="artModel.MapObjectProbability" />
           <EntitySet Name="MapZones" EntityType="artModel.MapZone" />
           <EntitySet Name="Predispositions" EntityType="artModel.Predisposition" />
-          <EntitySet Name="Properties" EntityType="artModel.Property" />
           <EntitySet Name="Races" EntityType="artModel.Race" />
           <EntitySet Name="RaceDesires" EntityType="artModel.RaceDesire" />
           <EntitySet Name="Settings" EntityType="artModel.Setting" />
@@ -1998,10 +2029,6 @@
             <End Role="Predisposition" EntitySet="Predispositions" />
             <End Role="ActionPredisposition" EntitySet="ActionPredispositions" />
           </AssociationSet>
-          <AssociationSet Name="FK_ActionProperties_Properties" Association="artModel.FK_ActionProperties_Properties">
-            <End Role="Property" EntitySet="Properties" />
-            <End Role="ActionProperty" EntitySet="ActionProperties" />
-          </AssociationSet>
           <AssociationSet Name="FK_ActionResultDesire_ActionResult" Association="artModel.FK_ActionResultDesire_ActionResult">
             <End Role="ActionResult" EntitySet="ActionResults" />
             <End Role="ActionResultDesire" EntitySet="ActionResultDesires" />
@@ -2037,10 +2064,6 @@
           <AssociationSet Name="FK_ActionTemplatePredisposition_Predisposition" Association="artModel.FK_ActionTemplatePredisposition_Predisposition">
             <End Role="Predisposition" EntitySet="Predispositions" />
             <End Role="ActionTemplatePredisposition" EntitySet="ActionTemplatePredispositions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ActionTemplateProperties_Properties" Association="artModel.FK_ActionTemplateProperties_Properties">
-            <End Role="Property" EntitySet="Properties" />
-            <End Role="ActionTemplateProperty" EntitySet="ActionTemplateProperties" />
           </AssociationSet>
           <AssociationSet Name="FK_DesireActionTemplateResult_ActionTemplateResult" Association="artModel.FK_DesireActionTemplateResult_ActionTemplateResult">
             <End Role="ActionTemplateResult" EntitySet="ActionTemplateResults" />
@@ -2078,17 +2101,9 @@
             <End Role="Race" EntitySet="Races" />
             <End Role="Carrier" EntitySet="Carriers" />
           </AssociationSet>
-          <AssociationSet Name="FK_CarrierDesire_Carrier" Association="artModel.FK_CarrierDesire_Carrier">
-            <End Role="Carrier" EntitySet="Carriers" />
-            <End Role="CarrierDesire" EntitySet="CarrierDesires" />
-          </AssociationSet>
           <AssociationSet Name="FK_CarrierUserArtifact_Carrier" Association="artModel.FK_CarrierUserArtifact_Carrier">
             <End Role="Carrier" EntitySet="Carriers" />
             <End Role="CarrierUserArtifact" EntitySet="CarrierUserArtifacts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CarrierDesire_Desire" Association="artModel.FK_CarrierDesire_Desire">
-            <End Role="Desire" EntitySet="Desires" />
-            <End Role="CarrierDesire" EntitySet="CarrierDesires" />
           </AssociationSet>
           <AssociationSet Name="FK_CarrierUserArtifact_UserArtifact" Association="artModel.FK_CarrierUserArtifact_UserArtifact">
             <End Role="UserArtifact" EntitySet="UserArtifacts" />
@@ -2276,6 +2291,32 @@
           <AssociationSet Name="FK_PathFinderConfig_MapInfoDimension" Association="artModel.FK_PathFinderConfig_MapInfoDimension">
             <End Role="MapInfoDimension" EntitySet="MapInfoDimensions" />
             <End Role="PathFinderConfig" EntitySet="PathFinderConfigs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Step_UserArtifact" Association="artModel.FK_Step_UserArtifact">
+            <End Role="UserArtifact" EntitySet="UserArtifacts" />
+            <End Role="Step" EntitySet="Steps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Carrier_Step" Association="artModel.FK_Carrier_Step">
+            <End Role="Step" EntitySet="Steps" />
+            <End Role="Carrier" EntitySet="Carriers" />
+          </AssociationSet>
+          <EntitySet Name="CarrierDesires" EntityType="artModel.CarrierDesire" />
+          <AssociationSet Name="FK_CarrierDesire_Carrier" Association="artModel.FK_CarrierDesire_Carrier">
+            <End Role="Carrier" EntitySet="Carriers" />
+            <End Role="CarrierDesire" EntitySet="CarrierDesires" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CarrierDesire_Desire" Association="artModel.FK_CarrierDesire_Desire">
+            <End Role="Desire" EntitySet="Desires" />
+            <End Role="CarrierDesire" EntitySet="CarrierDesires" />
+          </AssociationSet>
+          <EntitySet Name="Properties" EntityType="artModel.Property" />
+          <AssociationSet Name="FK_ActionProperties_Properties" Association="artModel.FK_ActionProperties_Properties">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="ActionProperty" EntitySet="ActionProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActionTemplateProperties_Properties" Association="artModel.FK_ActionTemplateProperties_Properties">
+            <End Role="Property" EntitySet="Properties" />
+            <End Role="ActionTemplateProperty" EntitySet="ActionTemplateProperties" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Action">
@@ -2496,23 +2537,11 @@
           <Property Name="Characteristics" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DefaultPredisposition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Race1" Relationship="artModel.FK_Carrier_Race" FromRole="Carrier" ToRole="Race" />
-          <NavigationProperty Name="CarrierDesires" Relationship="artModel.FK_CarrierDesire_Carrier" FromRole="Carrier" ToRole="CarrierDesire" />
           <NavigationProperty Name="CarrierUserArtifacts" Relationship="artModel.FK_CarrierUserArtifact_Carrier" FromRole="Carrier" ToRole="CarrierUserArtifact" />
           <NavigationProperty Name="Quests" Relationship="artModel.FK_Quest_Carrier" FromRole="Carrier" ToRole="Quest" />
-        </EntityType>
-        <EntityType Name="CarrierDesire">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CarrierId" Type="Int32" Nullable="false" />
-          <Property Name="DesireId" Type="Int32" Nullable="false" />
-          <Property Name="DesireMask" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="AddictionRequirement" Type="Int32" Nullable="false" />
-          <Property Name="IsSecret" Type="Boolean" Nullable="false" />
-          <Property Name="DefaultValue" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carrier" Relationship="artModel.FK_CarrierDesire_Carrier" FromRole="CarrierDesire" ToRole="Carrier" />
-          <NavigationProperty Name="Desire" Relationship="artModel.FK_CarrierDesire_Desire" FromRole="CarrierDesire" ToRole="Desire" />
+          <Property Name="CurrentStep" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Step" Relationship="artModel.FK_Carrier_Step" FromRole="Carrier" ToRole="Step" />
+          <NavigationProperty Name="CarrierDesires" Relationship="artModel.FK_CarrierDesire_Carrier" FromRole="Carrier" ToRole="CarrierDesire" />
         </EntityType>
         <EntityType Name="CarrierUserArtifact">
           <Key>
@@ -2580,12 +2609,12 @@
           <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Icon" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ActionResultDesires" Relationship="artModel.FK_ActionResultDesire_Desire" FromRole="Desire" ToRole="ActionResultDesire" />
-          <NavigationProperty Name="CarrierDesires" Relationship="artModel.FK_CarrierDesire_Desire" FromRole="Desire" ToRole="CarrierDesire" />
           <NavigationProperty Name="DesireActionTemplateResults" Relationship="artModel.FK_DesireActionTemplateResult_Desire" FromRole="Desire" ToRole="DesireActionTemplateResult" />
           <NavigationProperty Name="DesireMapZones" Relationship="artModel.FK_DesireMapZone_Desire" FromRole="Desire" ToRole="DesireMapZone" />
           <NavigationProperty Name="RaceDesires" Relationship="artModel.FK_RaceDesire_Desire" FromRole="Desire" ToRole="RaceDesire" />
           <NavigationProperty Name="Steps" Relationship="artModel.FK_Step_Desire" FromRole="Desire" ToRole="Step" />
           <NavigationProperty Name="StepTemplates" Relationship="artModel.FK_StepTemplate_Desire" FromRole="Desire" ToRole="StepTemplate" />
+          <NavigationProperty Name="CarrierDesires" Relationship="artModel.FK_CarrierDesire_Desire" FromRole="Desire" ToRole="CarrierDesire" />
         </EntityType>
         <EntityType Name="DesireActionTemplateResult">
           <Key>
@@ -2664,19 +2693,6 @@
           <NavigationProperty Name="ActionPredispositions" Relationship="artModel.FK_ActionPredisposition_Predisposition" FromRole="Predisposition" ToRole="ActionPredisposition" />
           <NavigationProperty Name="ActionTemplatePredispositions" Relationship="artModel.FK_ActionTemplatePredisposition_Predisposition" FromRole="Predisposition" ToRole="ActionTemplatePredisposition" />
         </EntityType>
-        <EntityType Name="Property">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Length" Type="Int32" Nullable="false" />
-          <Property Name="Position" Type="Int32" Nullable="false" />
-          <Property Name="Deviation" Type="Double" Nullable="false" />
-          <NavigationProperty Name="ActionProperties" Relationship="artModel.FK_ActionProperties_Properties" FromRole="Property" ToRole="ActionProperty" />
-          <NavigationProperty Name="ActionTemplateProperties" Relationship="artModel.FK_ActionTemplateProperties_Properties" FromRole="Property" ToRole="ActionTemplateProperty" />
-        </EntityType>
         <EntityType Name="Race">
           <Key>
             <PropertyRef Name="Id" />
@@ -2746,6 +2762,8 @@
           <NavigationProperty Name="ActiveActionInFlow1" Relationship="artModel.FK_Step_ActiveActionInFlow" FromRole="Step" ToRole="ActiveActionInFlow" />
           <NavigationProperty Name="Desire1" Relationship="artModel.FK_Step_Desire" FromRole="Step" ToRole="Desire" />
           <NavigationProperty Name="QuestSteps" Relationship="artModel.FK_QuestStep_Step" FromRole="Step" ToRole="QuestStep" />
+          <NavigationProperty Name="UserArtifact1" Relationship="artModel.FK_Step_UserArtifact" FromRole="Step" ToRole="UserArtifact" />
+          <NavigationProperty Name="Carriers" Relationship="artModel.FK_Carrier_Step" FromRole="Step" ToRole="Carrier" />
         </EntityType>
         <EntityType Name="StepObject">
           <Key>
@@ -2850,6 +2868,7 @@
           <NavigationProperty Name="UserArtifactClasses" Relationship="artModel.FK_UserArtifactClass_UserArtifact" FromRole="UserArtifact" ToRole="UserArtifactClass" />
           <NavigationProperty Name="UserArtifactTalents" Relationship="artModel.FK_UserTalent_UserArtifact" FromRole="UserArtifact" ToRole="UserArtifactTalent" />
           <NavigationProperty Name="User1" Relationship="artModel.FK_UserArtifact_User" FromRole="UserArtifact" ToRole="User" />
+          <NavigationProperty Name="Steps" Relationship="artModel.FK_Step_UserArtifact" FromRole="UserArtifact" ToRole="Step" />
         </EntityType>
         <EntityType Name="UserArtifactClass">
           <Key>
@@ -3017,18 +3036,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ActionProperties_Properties">
-          <End Type="artModel.Property" Role="Property" Multiplicity="1" />
-          <End Type="artModel.ActionProperty" Role="ActionProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Property">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ActionProperty">
-              <PropertyRef Name="Properties" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ActionResultDesire_ActionResult">
           <End Type="artModel.ActionResult" Role="ActionResult" Multiplicity="1" />
           <End Type="artModel.ActionResultDesire" Role="ActionResultDesire" Multiplicity="*" />
@@ -3134,18 +3141,6 @@
             </Principal>
             <Dependent Role="ActionTemplatePredisposition">
               <PropertyRef Name="Predisposition" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ActionTemplateProperties_Properties">
-          <End Type="artModel.Property" Role="Property" Multiplicity="1" />
-          <End Type="artModel.ActionTemplateProperty" Role="ActionTemplateProperty" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Property">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ActionTemplateProperty">
-              <PropertyRef Name="Properties" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3257,18 +3252,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CarrierDesire_Carrier">
-          <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
-          <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carrier">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CarrierDesire">
-              <PropertyRef Name="CarrierId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CarrierUserArtifact_Carrier">
           <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
           <End Type="artModel.CarrierUserArtifact" Role="CarrierUserArtifact" Multiplicity="*" />
@@ -3278,18 +3261,6 @@
             </Principal>
             <Dependent Role="CarrierUserArtifact">
               <PropertyRef Name="Carrier" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CarrierDesire_Desire">
-          <End Type="artModel.Desire" Role="Desire" Multiplicity="1" />
-          <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Desire">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CarrierDesire">
-              <PropertyRef Name="DesireId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3949,6 +3920,105 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Step_UserArtifact">
+          <End Type="artModel.UserArtifact" Role="UserArtifact" Multiplicity="1" />
+          <End Type="artModel.Step" Role="Step" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserArtifact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Step">
+              <PropertyRef Name="UserArtifact" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Carrier_Step">
+          <End Type="artModel.Step" Role="Step" Multiplicity="1" />
+          <End Type="artModel.Carrier" Role="Carrier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Step">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Carrier">
+              <PropertyRef Name="CurrentStep" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CarrierDesire">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CarrierId" Type="Int32" Nullable="false" />
+          <Property Name="DesireId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Double" Nullable="false" />
+          <Property Name="AddictionRequirement" Type="Int32" Nullable="false" />
+          <Property Name="IsSecret" Type="Boolean" Nullable="false" />
+          <Property Name="DefaultValue" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Carrier" Relationship="artModel.FK_CarrierDesire_Carrier" FromRole="CarrierDesire" ToRole="Carrier" />
+          <NavigationProperty Name="Desire" Relationship="artModel.FK_CarrierDesire_Desire" FromRole="CarrierDesire" ToRole="Desire" />
+        </EntityType>
+        <Association Name="FK_CarrierDesire_Carrier">
+          <End Type="artModel.Carrier" Role="Carrier" Multiplicity="1" />
+          <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carrier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarrierDesire">
+              <PropertyRef Name="CarrierId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CarrierDesire_Desire">
+          <End Type="artModel.Desire" Role="Desire" Multiplicity="1" />
+          <End Type="artModel.CarrierDesire" Role="CarrierDesire" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Desire">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CarrierDesire">
+              <PropertyRef Name="DesireId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Property">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="Deviation" Type="Double" Nullable="false" />
+          <NavigationProperty Name="ActionProperties" Relationship="artModel.FK_ActionProperties_Properties" FromRole="Property" ToRole="ActionProperty" />
+          <NavigationProperty Name="ActionTemplateProperties" Relationship="artModel.FK_ActionTemplateProperties_Properties" FromRole="Property" ToRole="ActionTemplateProperty" />
+        </EntityType>
+        <Association Name="FK_ActionProperties_Properties">
+          <End Type="artModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="artModel.ActionProperty" Role="ActionProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActionProperty">
+              <PropertyRef Name="Properties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActionTemplateProperties_Properties">
+          <End Type="artModel.Property" Role="Property" Multiplicity="1" />
+          <End Type="artModel.ActionTemplateProperty" Role="ActionTemplateProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Property">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActionTemplateProperty">
+              <PropertyRef Name="Properties" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4141,6 +4211,7 @@
           <EntitySetMapping Name="Carriers">
             <EntityTypeMapping TypeName="artModel.Carrier">
               <MappingFragment StoreEntitySet="Carrier">
+                <ScalarProperty Name="CurrentStep" ColumnName="CurrentStep" />
                 <ScalarProperty Name="DefaultPredisposition" ColumnName="DefaultPredisposition" />
                 <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
                 <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
@@ -4148,19 +4219,6 @@
                 <ScalarProperty Name="ExperiencePoints" ColumnName="ExperiencePoints" />
                 <ScalarProperty Name="ExperienceLevel" ColumnName="ExperienceLevel" />
                 <ScalarProperty Name="Race" ColumnName="Race" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CarrierDesires">
-            <EntityTypeMapping TypeName="artModel.CarrierDesire">
-              <MappingFragment StoreEntitySet="CarrierDesire">
-                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
-                <ScalarProperty Name="IsSecret" ColumnName="IsSecret" />
-                <ScalarProperty Name="AddictionRequirement" ColumnName="AddictionRequirement" />
-                <ScalarProperty Name="DesireMask" ColumnName="DesireMask" />
-                <ScalarProperty Name="DesireId" ColumnName="DesireId" />
-                <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4291,18 +4349,6 @@
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="Mask" ColumnName="Mask" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Properties">
-            <EntityTypeMapping TypeName="artModel.Property">
-              <MappingFragment StoreEntitySet="Properties">
-                <ScalarProperty Name="Deviation" ColumnName="Deviation" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="Length" ColumnName="Length" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -4616,6 +4662,31 @@
                 <ScalarProperty Name="DimentionRadius" ColumnName="DimentionRadius" />
                 <ScalarProperty Name="MapInfoDimention" ColumnName="MapInfoDimention" />
                 <ScalarProperty Name="MapInfo" ColumnName="MapInfo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarrierDesires">
+            <EntityTypeMapping TypeName="artModel.CarrierDesire">
+              <MappingFragment StoreEntitySet="CarrierDesire">
+                <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+                <ScalarProperty Name="IsSecret" ColumnName="IsSecret" />
+                <ScalarProperty Name="AddictionRequirement" ColumnName="AddictionRequirement" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="DesireId" ColumnName="DesireId" />
+                <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Properties">
+            <EntityTypeMapping TypeName="artModel.Property">
+              <MappingFragment StoreEntitySet="Properties">
+                <ScalarProperty Name="Deviation" ColumnName="Deviation" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -16,9 +16,9 @@ namespace ArtifactAdmin.DAL.Models
     {
         public Carrier()
         {
-            this.CarrierDesires = new HashSet<CarrierDesire>();
             this.CarrierUserArtifacts = new HashSet<CarrierUserArtifact>();
             this.Quests = new HashSet<Quest>();
+            this.CarrierDesires = new HashSet<CarrierDesire>();
         }
     
         public int Id { get; set; }
@@ -29,10 +29,12 @@ namespace ArtifactAdmin.DAL.Models
         public string Predisposition { get; set; }
         public string Characteristics { get; set; }
         public string DefaultPredisposition { get; set; }
+        public int CurrentStep { get; set; }
     
         public virtual Race Race1 { get; set; }
-        public virtual ICollection<CarrierDesire> CarrierDesires { get; set; }
         public virtual ICollection<CarrierUserArtifact> CarrierUserArtifacts { get; set; }
         public virtual ICollection<Quest> Quests { get; set; }
+        public virtual Step Step { get; set; }
+        public virtual ICollection<CarrierDesire> CarrierDesires { get; set; }
     }
 }

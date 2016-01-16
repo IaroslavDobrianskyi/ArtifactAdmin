@@ -10,6 +10,9 @@
 namespace ArtifactAdmin.BL.Interfaces
 {
     using System.Collections.Generic;
+
+    using ArtifactAdmin.BL.ModelsDTO.FlowItems;
+
     using ModelsDTO;
 
     public interface IDesireService
@@ -27,7 +30,7 @@ namespace ArtifactAdmin.BL.Interfaces
         void UpdateDesireMapZone(int id, int[] desireMapZoneId, string[] modifiers);
 
         //тут має бути список значень всіх бажаннь для керіора. Можливо окремий обєкт 
-        List<DesireDto> RetrieveListOfCurrentCarrierDesires(int carrierId);
+        List<CarrierDesireDto> RetrieveListOfCurrentCarrierDesires(int carrierId);
 
         void Delete(int? id);
     }

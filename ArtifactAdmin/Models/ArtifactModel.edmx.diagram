@@ -24,7 +24,6 @@
         <EntityTypeShape EntityType="artModel.ArtifactBonu" Width="1.5" PointX="21" PointY="3.875" />
         <EntityTypeShape EntityType="artModel.ArtifactType" Width="1.5" PointX="13.5" PointY="4.5" />
         <EntityTypeShape EntityType="artModel.Carrier" Width="1.5" PointX="6.75" PointY="31.5" />
-        <EntityTypeShape EntityType="artModel.CarrierDesire" Width="1.5" PointX="9" PointY="23.625" />
         <EntityTypeShape EntityType="artModel.CarrierUserArtifact" Width="1.5" PointX="20.25" PointY="20.75" />
         <EntityTypeShape EntityType="artModel.Characteristic" Width="1.5" PointX="8.25" PointY="0.75" />
         <EntityTypeShape EntityType="artModel.Class" Width="1.5" PointX="18" PointY="15.375" />
@@ -38,7 +37,6 @@
         <EntityTypeShape EntityType="artModel.MapObjectProbability" Width="1.5" PointX="13" PointY="10" />
         <EntityTypeShape EntityType="artModel.MapZone" Width="1.5" PointX="6.75" PointY="8.875" />
         <EntityTypeShape EntityType="artModel.Predisposition" Width="1.5" PointX="8.25" PointY="4.75" />
-        <EntityTypeShape EntityType="artModel.Property" Width="1.5" PointX="11.25" PointY="5.75" />
         <EntityTypeShape EntityType="artModel.Race" Width="1.5" PointX="4.5" PointY="31.5" />
         <EntityTypeShape EntityType="artModel.RaceDesire" Width="1.5" PointX="6" PointY="23.75" />
         <EntityTypeShape EntityType="artModel.Setting" Width="1.5" PointX="3.75" PointY="1.625" />
@@ -66,7 +64,6 @@
         <AssociationConnector Association="artModel.FK_ActionDescription_MapZone" />
         <AssociationConnector Association="artModel.FK_ActionDescription_Race1" />
         <AssociationConnector Association="artModel.FK_ActionPredisposition_Predisposition" />
-        <AssociationConnector Association="artModel.FK_ActionProperties_Properties" />
         <AssociationConnector Association="artModel.FK_ActionResultDesire_ActionResult" />
         <AssociationConnector Association="artModel.FK_ActionResultDesire_Desire" />
         <AssociationConnector Association="artModel.FK_ActionTemplate_ActionTemplateResult" />
@@ -76,7 +73,6 @@
         <AssociationConnector Association="artModel.FK_StepTemplateActionTemplate_ActionTemplate" />
         <AssociationConnector Association="artModel.FK_ActionTemplateCharacteristics_Characteristics" />
         <AssociationConnector Association="artModel.FK_ActionTemplatePredisposition_Predisposition" />
-        <AssociationConnector Association="artModel.FK_ActionTemplateProperties_Properties" />
         <AssociationConnector Association="artModel.FK_DesireActionTemplateResult_ActionTemplateResult" />
         <AssociationConnector Association="artModel.FK_ActiveActionInFlow_Step" />
         <AssociationConnector Association="artModel.FK_Step_ActiveActionInFlow" />
@@ -86,9 +82,7 @@
         <AssociationConnector Association="artModel.FK_ArtifactTypeBonus_Bonus" />
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Bonus" />
         <AssociationConnector Association="artModel.FK_Carrier_Race" />
-        <AssociationConnector Association="artModel.FK_CarrierDesire_Carrier" />
         <AssociationConnector Association="artModel.FK_CarrierUserArtifact_Carrier" />
-        <AssociationConnector Association="artModel.FK_CarrierDesire_Desire" />
         <AssociationConnector Association="artModel.FK_CarrierUserArtifact_UserArtifact" />
         <AssociationConnector Association="artModel.FK_UserArtifactClass_Class" />
         <AssociationConnector Association="artModel.FK_ConstellationBonus_Constellation" />
@@ -144,6 +138,14 @@
         <AssociationConnector Association="artModel.FK_PathFinderConfig_DimentionRadius" />
         <AssociationConnector Association="artModel.FK_PathFinderConfig_MapInfo" />
         <AssociationConnector Association="artModel.FK_PathFinderConfig_MapInfoDimension" />
+        <AssociationConnector Association="artModel.FK_Step_UserArtifact" />
+        <AssociationConnector Association="artModel.FK_Carrier_Step" />
+        <EntityTypeShape EntityType="artModel.CarrierDesire" Width="1.5" PointX="9" PointY="24" />
+        <AssociationConnector Association="artModel.FK_CarrierDesire_Carrier" />
+        <AssociationConnector Association="artModel.FK_CarrierDesire_Desire" />
+        <EntityTypeShape EntityType="artModel.Property" Width="1.5" PointX="0.75" PointY="17" />
+        <AssociationConnector Association="artModel.FK_ActionProperties_Properties" />
+        <AssociationConnector Association="artModel.FK_ActionTemplateProperties_Properties" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

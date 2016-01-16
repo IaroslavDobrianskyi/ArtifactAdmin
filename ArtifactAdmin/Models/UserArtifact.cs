@@ -20,6 +20,7 @@ namespace ArtifactAdmin.DAL.Models
             this.Logs = new HashSet<Log>();
             this.UserArtifactClasses = new HashSet<UserArtifactClass>();
             this.UserArtifactTalents = new HashSet<UserArtifactTalent>();
+            this.Steps = new HashSet<Step>();
         }
     
         public int Id { get; set; }
@@ -42,5 +43,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual ICollection<UserArtifactClass> UserArtifactClasses { get; set; }
         public virtual ICollection<UserArtifactTalent> UserArtifactTalents { get; set; }
         public virtual User User1 { get; set; }
+        public virtual ICollection<Step> Steps { get; set; }
     }
 }

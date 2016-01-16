@@ -187,6 +187,7 @@
     <EntitySetMapping Name="Carriers">
       <EntityTypeMapping TypeName="artModel.Carrier">
         <MappingFragment StoreEntitySet="Carrier">
+          <ScalarProperty Name="CurrentStep" ColumnName="CurrentStep" />
           <ScalarProperty Name="DefaultPredisposition" ColumnName="DefaultPredisposition" />
           <ScalarProperty Name="Characteristics" ColumnName="Characteristics" />
           <ScalarProperty Name="Predisposition" ColumnName="Predisposition" />
@@ -194,19 +195,6 @@
           <ScalarProperty Name="ExperiencePoints" ColumnName="ExperiencePoints" />
           <ScalarProperty Name="ExperienceLevel" ColumnName="ExperienceLevel" />
           <ScalarProperty Name="Race" ColumnName="Race" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CarrierDesires">
-      <EntityTypeMapping TypeName="artModel.CarrierDesire">
-        <MappingFragment StoreEntitySet="CarrierDesire">
-          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
-          <ScalarProperty Name="IsSecret" ColumnName="IsSecret" />
-          <ScalarProperty Name="AddictionRequirement" ColumnName="AddictionRequirement" />
-          <ScalarProperty Name="DesireMask" ColumnName="DesireMask" />
-          <ScalarProperty Name="DesireId" ColumnName="DesireId" />
-          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -337,18 +325,6 @@
           <ScalarProperty Name="Position" ColumnName="Position" />
           <ScalarProperty Name="Length" ColumnName="Length" />
           <ScalarProperty Name="Mask" ColumnName="Mask" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Properties">
-      <EntityTypeMapping TypeName="artModel.Property">
-        <MappingFragment StoreEntitySet="Properties">
-          <ScalarProperty Name="Deviation" ColumnName="Deviation" />
-          <ScalarProperty Name="Position" ColumnName="Position" />
-          <ScalarProperty Name="Length" ColumnName="Length" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -662,6 +638,31 @@
           <ScalarProperty Name="DimentionRadius" ColumnName="DimentionRadius" />
           <ScalarProperty Name="MapInfoDimention" ColumnName="MapInfoDimention" />
           <ScalarProperty Name="MapInfo" ColumnName="MapInfo" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CarrierDesires">
+      <EntityTypeMapping TypeName="artModel.CarrierDesire">
+        <MappingFragment StoreEntitySet="CarrierDesire">
+          <ScalarProperty Name="DefaultValue" ColumnName="DefaultValue" />
+          <ScalarProperty Name="IsSecret" ColumnName="IsSecret" />
+          <ScalarProperty Name="AddictionRequirement" ColumnName="AddictionRequirement" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="DesireId" ColumnName="DesireId" />
+          <ScalarProperty Name="CarrierId" ColumnName="CarrierId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Properties">
+      <EntityTypeMapping TypeName="artModel.Property">
+        <MappingFragment StoreEntitySet="Properties">
+          <ScalarProperty Name="Deviation" ColumnName="Deviation" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Length" ColumnName="Length" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

@@ -19,6 +19,7 @@ namespace ArtifactAdmin.DAL.Models
             this.Actions = new HashSet<Action>();
             this.ActiveActionInFlows = new HashSet<ActiveActionInFlow>();
             this.QuestSteps = new HashSet<QuestStep>();
+            this.Carriers = new HashSet<Carrier>();
         }
     
         public int Id { get; set; }
@@ -38,5 +39,7 @@ namespace ArtifactAdmin.DAL.Models
         public virtual ActiveActionInFlow ActiveActionInFlow1 { get; set; }
         public virtual Desire Desire1 { get; set; }
         public virtual ICollection<QuestStep> QuestSteps { get; set; }
+        public virtual UserArtifact UserArtifact1 { get; set; }
+        public virtual ICollection<Carrier> Carriers { get; set; }
     }
 }

@@ -9,6 +9,8 @@
 
 namespace ArtifactAdmin.BL.Interfaces
 {
+    using System.Drawing;
+
     using ModelsDTO.FlowItems;
 
     public interface IStepService
@@ -23,8 +25,15 @@ namespace ArtifactAdmin.BL.Interfaces
 
         StepDto RetrieveCurrentStepFromDb(int carrierId );
 
-        StepDto GenerateStep(int coordX, int coordY);
+        StepDto GenerateStep(Point point);
 
         void Delete(int? id);
+
+        /// <summary>
+        /// Get the next step for the current step.
+        /// </summary>
+        /// <param name="currentStep">Current step.</param>
+        /// <returns>Next step.</returns>
+        StepDto GetNextStep(StepDto currentStep);
     }
 }

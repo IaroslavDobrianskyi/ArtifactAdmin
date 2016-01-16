@@ -75,6 +75,9 @@ namespace ArtifactAdmin.BL
             Mapper.CreateMap<ActionTemplate, ActionTemplateDto>();
             Mapper.CreateMap<ActionTemplateDto, ActionTemplate>();
 
+            Mapper.CreateMap<ActionResultDesire, ActionResultDesireDto>();
+            Mapper.CreateMap<ActionResultDesireDto, ActionResultDesire>();
+
             Mapper.CreateMap<ActionDescription, ActionDescriptionDto>();
             Mapper.CreateMap<ActionDescriptionDto, ActionDescription>();
 
@@ -89,6 +92,9 @@ namespace ArtifactAdmin.BL
 
             Mapper.CreateMap<Desire, DesireDto>();
             Mapper.CreateMap<DesireDto, Desire>();
+
+            Mapper.CreateMap<CarrierDesire, CarrierDesireDto>();
+            Mapper.CreateMap<CarrierDesireDto, CarrierDesire>();
 
             Mapper.CreateMap<Race, RaceDto>();
             Mapper.CreateMap<RaceDto, Race>();

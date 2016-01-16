@@ -17,15 +17,15 @@ namespace ArtifactAdmin.BL.Interfaces
     public interface IActionService
     {
         // Вихідний параметр список нових обєктів типу ActionResult
-        List<int> RetrieveListOfActionResults(StepDto currentStepDto, StepDto lastStepDto);
+        List<ActionResultDesireDto> RetrieveListOfActionResultDesires(List<StepDto> stepsList);
 
         /// <summary>
         /// Останні значення бажань
         /// </summary>
-        /// <param name="actionResults">Вхідний параметр список нових обєктів типу ActionResult</param>
         /// <param name="desireList">значення бажань на які треба накласти результати дій</param>
+        /// <param name="actionResults">Вхідний параметр список нових обєктів типу ActionResult</param>
         /// <returns></returns>
-        List<DesireDto> ApplyActionResultDesire(List<int> actionResults, List<DesireDto> desireList);
+        List<CarrierDesireDto> ApplyActionResultDesire(List<CarrierDesireDto> desireList, List<ActionResultDesireDto> actionResults);
 
         /// <summary>
         /// Згенерувати результат дій

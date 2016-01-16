@@ -21,6 +21,7 @@ namespace ArtifactAdmin.BL.Services
         private readonly IRaceService raceService;
         private readonly IRepository<Property> propertyRepository;
         private readonly IRepository<Characteristic> characteristicsRepository;
+        
 
         public CarrierService(IRaceService raceService, IRepository<Property> propertyRepository, IRepository<Characteristic> characteristicsRepository)
         {
@@ -147,11 +148,6 @@ namespace ArtifactAdmin.BL.Services
             }
 
             return baseCharacteristics;
-        }
-
-        public int GetCarrierPredictionRadius(int carrierId)
-        {
-            return 0;
         }
     }
 }

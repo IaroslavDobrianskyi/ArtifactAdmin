@@ -4,6 +4,6 @@
 
     public interface ICarrierService
     {
-        int GetCarrierPredictionRadius(int carrierId);
+        
     }
 }

@@ -186,6 +186,7 @@
     <Property Name="Predisposition" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Characteristics" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="DefaultPredisposition" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CurrentStep" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="CarrierDesire">
     <Key>
@@ -194,7 +195,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CarrierId" Type="int" Nullable="false" />
     <Property Name="DesireId" Type="int" Nullable="false" />
-    <Property Name="DesireMask" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Value" Type="float" Nullable="false" />
     <Property Name="AddictionRequirement" Type="int" Nullable="false" />
     <Property Name="IsSecret" Type="bit" Nullable="false" />
     <Property Name="DefaultValue" Type="int" Nullable="false" />
@@ -963,6 +964,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Carrier_Step">
+    <End Role="Step" Type="Self.Step" Multiplicity="1" />
+    <End Role="Carrier" Type="Self.Carrier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Step">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Carrier">
+        <PropertyRef Name="CurrentStep" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CarrierDesire_Carrier">
     <End Role="Carrier" Type="Self.Carrier" Multiplicity="1" />
     <End Role="CarrierDesire" Type="Self.CarrierDesire" Multiplicity="*" />
@@ -1335,6 +1348,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Step_UserArtifact">
+    <End Role="UserArtifact" Type="Self.UserArtifact" Multiplicity="1" />
+    <End Role="Step" Type="Self.Step" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserArtifact">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Step">
+        <PropertyRef Name="UserArtifact" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_StepObject_StepObjectType">
     <End Role="StepObjectType" Type="Self.StepObjectType" Multiplicity="1" />
     <End Role="StepObject" Type="Self.StepObject" Multiplicity="*" />
@@ -1700,6 +1725,10 @@
       <End Role="Race" EntitySet="Race" />
       <End Role="Carrier" EntitySet="Carrier" />
     </AssociationSet>
+    <AssociationSet Name="FK_Carrier_Step" Association="Self.FK_Carrier_Step">
+      <End Role="Step" EntitySet="Step" />
+      <End Role="Carrier" EntitySet="Carrier" />
+    </AssociationSet>
     <AssociationSet Name="FK_CarrierDesire_Carrier" Association="Self.FK_CarrierDesire_Carrier">
       <End Role="Carrier" EntitySet="Carrier" />
       <End Role="CarrierDesire" EntitySet="CarrierDesire" />
@@ -1822,6 +1851,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Step_Desire" Association="Self.FK_Step_Desire">
       <End Role="Desire" EntitySet="Desire" />
+      <End Role="Step" EntitySet="Step" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Step_UserArtifact" Association="Self.FK_Step_UserArtifact">
+      <End Role="UserArtifact" EntitySet="UserArtifact" />
       <End Role="Step" EntitySet="Step" />
     </AssociationSet>
     <AssociationSet Name="FK_StepObject_StepObjectType" Association="Self.FK_StepObject_StepObjectType">

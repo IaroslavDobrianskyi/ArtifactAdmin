@@ -17,7 +17,7 @@ namespace ArtifactAdmin.DAL.Models
         public int Id { get; set; }
         public int CarrierId { get; set; }
         public int DesireId { get; set; }
-        public string DesireMask { get; set; }
+        public double Value { get; set; }
         public int AddictionRequirement { get; set; }
         public bool IsSecret { get; set; }
         public int DefaultValue { get; set; }

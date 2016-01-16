@@ -45,7 +45,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<ArtifactBonu> ArtifactBonus { get; set; }
         public virtual DbSet<ArtifactType> ArtifactTypes { get; set; }
         public virtual DbSet<Carrier> Carriers { get; set; }
-        public virtual DbSet<CarrierDesire> CarrierDesires { get; set; }
         public virtual DbSet<CarrierUserArtifact> CarrierUserArtifacts { get; set; }
         public virtual DbSet<Characteristic> Characteristics { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
@@ -59,7 +58,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<MapObjectProbability> MapObjectProbabilities { get; set; }
         public virtual DbSet<MapZone> MapZones { get; set; }
         public virtual DbSet<Predisposition> Predispositions { get; set; }
-        public virtual DbSet<Property> Properties { get; set; }
         public virtual DbSet<Race> Races { get; set; }
         public virtual DbSet<RaceDesire> RaceDesires { get; set; }
         public virtual DbSet<Setting> Settings { get; set; }
@@ -88,6 +86,8 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<MiddlePointNeighbor> MiddlePointNeighbors { get; set; }
         public virtual DbSet<DimentionRadiu> DimentionRadius { get; set; }
         public virtual DbSet<PathFinderConfig> PathFinderConfigs { get; set; }
+        public virtual DbSet<CarrierDesire> CarrierDesires { get; set; }
+        public virtual DbSet<Property> Properties { get; set; }
     
         public virtual ObjectResult<Nullable<int>> QuestStarter(Nullable<int> idActionResult)
         {

@@ -84,7 +84,13 @@
     <Compile Include="Interfaces\IMapInfoDimensionService.cs" />
     <Compile Include="Interfaces\IMapManagerService.cs" />
     <Compile Include="Interfaces\IMiddlePointNeighborsService.cs" />
+    <Compile Include="Interfaces\IStepFinderService.cs" />
+    <Compile Include="Interfaces\IUserArtifactService.cs" />
+    <Compile Include="ModelsDTO\ActionResultDesireDto.cs" />
+    <Compile Include="ModelsDTO\CarrierDesireDto.cs" />
+    <Compile Include="Services\StepFinderService.cs" />
     <Compile Include="Services\StepService.cs" />
+    <Compile Include="Services\UserArtifactService.cs" />
     <Compile Include="Utils\MapHelpers\LinesContainer.cs" />
     <Compile Include="Utils\MapHelpers\LineOfPoints.cs" />
     <Compile Include="InjectionConfig.cs" />
