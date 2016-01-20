@@ -228,6 +228,9 @@
     <Compile Include="Models\StepTemplateActionTemplate.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StepTemplateMapZone.cs">
+      <DependentUpon>ArtifactModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>ArtifactModel.tt</DependentUpon>
     </Compile>

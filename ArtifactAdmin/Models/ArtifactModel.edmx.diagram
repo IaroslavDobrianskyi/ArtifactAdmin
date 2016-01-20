@@ -146,6 +146,9 @@
         <EntityTypeShape EntityType="artModel.Property" Width="1.5" PointX="0.75" PointY="17" />
         <AssociationConnector Association="artModel.FK_ActionProperties_Properties" />
         <AssociationConnector Association="artModel.FK_ActionTemplateProperties_Properties" />
+        <EntityTypeShape EntityType="artModel.StepTemplateMapZone" Width="1.5" PointX="12" PointY="25" />
+        <AssociationConnector Association="artModel.FK_StepTemplateMapZone_MapZone" />
+        <AssociationConnector Association="artModel.FK_StepTemplateMapZone_StepTemplate" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

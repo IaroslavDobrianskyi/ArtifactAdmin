@@ -20,6 +20,7 @@ namespace ArtifactAdmin.DAL.Models
             this.DesireMapZones = new HashSet<DesireMapZone>();
             this.MapObjectProbabilities = new HashSet<MapObjectProbability>();
             this.ZoneCoordinats = new HashSet<ZoneCoordinat>();
+            this.StepTemplateMapZones = new HashSet<StepTemplateMapZone>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual ICollection<DesireMapZone> DesireMapZones { get; set; }
         public virtual ICollection<MapObjectProbability> MapObjectProbabilities { get; set; }
         public virtual ICollection<ZoneCoordinat> ZoneCoordinats { get; set; }
+        public virtual ICollection<StepTemplateMapZone> StepTemplateMapZones { get; set; }
     }
 }

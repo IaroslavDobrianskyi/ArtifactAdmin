@@ -88,6 +88,7 @@ namespace ArtifactAdmin.DAL.Models
         public virtual DbSet<PathFinderConfig> PathFinderConfigs { get; set; }
         public virtual DbSet<CarrierDesire> CarrierDesires { get; set; }
         public virtual DbSet<Property> Properties { get; set; }
+        public virtual DbSet<StepTemplateMapZone> StepTemplateMapZones { get; set; }
     
         public virtual ObjectResult<Nullable<int>> QuestStarter(Nullable<int> idActionResult)
         {

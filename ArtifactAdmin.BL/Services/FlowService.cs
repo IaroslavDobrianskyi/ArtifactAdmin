@@ -179,12 +179,13 @@
                 var step = this.stepService.GenerateStep(stepInfo); //Save to DB
                 this.actionService.GenerateActions(step, stepInfo); //Saves to DB
                 var activeActionResultDesire = this.actionService.GetActiveActionResultDesire(step);
-                var desireList = actionService.ApplyActionResultDesire(desiresInTheFlowEnd, activeActionResultDesire);
-              //var maxDesire = desireList.Max(Value);
-              //if(maxDesire != maxLastDesire)
-              //{
-              //    this.GenerateFlow(carrierId);
-              //}
+                var desireList = this.actionService.ApplyActionResultDesire(desiresInTheFlowEnd, activeActionResultDesire);
+                var maxDesire = desireList.OrderBy(x=>x.Value).FirstOrDefault();
+                if (maxDesire.Id != maxLastDesire.Id)
+                {
+                    this.GenerateFlow(carrierId);
+                    break;
+                }
             }
         }
 

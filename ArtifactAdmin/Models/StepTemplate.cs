@@ -19,6 +19,7 @@ namespace ArtifactAdmin.DAL.Models
             this.StepObjectStepTemplates = new HashSet<StepObjectStepTemplate>();
             this.StepTemplateActionTemplates = new HashSet<StepTemplateActionTemplate>();
             this.QuestTemplateStepTemplates = new HashSet<QuestTemplateStepTemplate>();
+            this.StepTemplateMapZones = new HashSet<StepTemplateMapZone>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,6 @@ namespace ArtifactAdmin.DAL.Models
         public virtual ICollection<StepObjectStepTemplate> StepObjectStepTemplates { get; set; }
         public virtual ICollection<StepTemplateActionTemplate> StepTemplateActionTemplates { get; set; }
         public virtual ICollection<QuestTemplateStepTemplate> QuestTemplateStepTemplates { get; set; }
+        public virtual ICollection<StepTemplateMapZone> StepTemplateMapZones { get; set; }
     }
 }
