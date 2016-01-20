@@ -12,8 +12,8 @@ namespace ArtifactAdmin.BL.Interfaces
 
     public interface IStepFinderService
     {
-        Point GetNewKeyStepCoords(CarrierDesireDto carrierDesire, Point stepCoordinates);
+        StepCreationInfo GetNewKeyStepInfo(CarrierDesireDto carrierDesire, Point previousStepCoordinates);
 
-        List<Point> GetIntermediateStepCoords(StepDto lastStep, Point newKeyStepCoords);
+        List<StepCreationInfo> GetIntermediateStepCoords(StepDto lastStep, StepCreationInfo newKeyStepCoords);
     }
 }

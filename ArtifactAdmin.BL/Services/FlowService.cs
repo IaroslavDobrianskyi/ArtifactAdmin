@@ -151,7 +151,7 @@
 
             var predictionRadius = this.userArtifactService.GetUserArtifactPredictionRadius(carrierId);
             var stepsFromCurrentToLast = this.GetSteps(currentStep, lastStep);
-            var existingFlowDuration = CalculateStepsDuration(stepsFromCurrentToLast);
+            var existingFlowDuration = this.CalculateStepsDuration(stepsFromCurrentToLast);
                      
             // Тут треба порахувати чи радіус передбачення більший за кількість часу/кроків між останнім і поточним
             if (predictionRadius < existingFlowDuration)
@@ -164,7 +164,7 @@
             var desiresInTheFlowEnd = this.actionService.ApplyActionResultDesire(currentCarriesDesiresState, fromCurrentToLastActionResultCarriesDesires);
             var maxLastDesire = desiresInTheFlowEnd.OrderByDescending(desire => desire.Value).FirstOrDefault();
 
-            var newKeyStepCoords = this.stepFinderService.GetNewKeyStepCoords(
+            var newKeyStepInfo = this.stepFinderService.GetNewKeyStepInfo(
                 maxLastDesire,
                 new Point()
                     {
@@ -172,13 +172,14 @@
                         Y = lastStep.YCoordinate
                     });
 
-            var intermediateStepsCoords = this.stepFinderService.GetIntermediateStepCoords(lastStep, newKeyStepCoords);
-            intermediateStepsCoords.Add(newKeyStepCoords); 
-            foreach(var coordinates in intermediateStepsCoords)
+            var intermediateStepsInfo = this.stepFinderService.GetIntermediateStepCoords(lastStep, newKeyStepInfo);
+            intermediateStepsInfo.Add(newKeyStepInfo);
+            foreach (var stepInfo in intermediateStepsInfo)
             {
-                var step = this.stepService.GenerateStep(coordinates); //Save to DB
-              //var actionResult = ActionService.GenerateActionResult(step); //Saves to DB
-              //var desireList = ActionService.ApplyActionResultDesire(actionResult, lastDesireList);
+                var step = this.stepService.GenerateStep(stepInfo); //Save to DB
+                this.actionService.GenerateActions(step, stepInfo); //Saves to DB
+                var activeActionResultDesire = this.actionService.GetActiveActionResultDesire(step);
+                var desireList = actionService.ApplyActionResultDesire(desiresInTheFlowEnd, activeActionResultDesire);
               //var maxDesire = desireList.Max(Value);
               //if(maxDesire != maxLastDesire)
               //{

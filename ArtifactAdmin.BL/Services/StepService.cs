@@ -15,6 +15,8 @@ namespace ArtifactAdmin.BL.Services
     using System.Linq;
     using System.Web.UI.WebControls;
 
+    using ArtifactAdmin.BL.ModelsDTO;
+
     using AutoMapper;
     using DAL.Models;
     using Interfaces;
@@ -24,20 +26,19 @@ namespace ArtifactAdmin.BL.Services
     {
         
         private readonly IRepository<StepTemplate> stepTemplateRepository;
+        
         private readonly IRepository<Step> stepRepository;
         private readonly IRepository<Carrier> carrierRepository;
-        private readonly IMapManagerService mapManagerService;
 
         public StepService(
             IRepository<StepTemplate> stepTemplateRepository,
             IRepository<Step> stepRepository,
-            IRepository<Carrier> carrierRepository,
-            IMapManagerService mapManagerService)
+            IRepository<Carrier> carrierRepository)
         {
             this.stepTemplateRepository = stepTemplateRepository;
             this.stepRepository = stepRepository;
             this.carrierRepository = carrierRepository;
-            this.mapManagerService = mapManagerService;
+            
         }
 
         public StepDto GetById(int? id)
@@ -95,19 +96,24 @@ namespace ArtifactAdmin.BL.Services
             return Mapper.Map<StepDto>(step);
         }
 
-        public StepDto GenerateStep(Point coordinates)
+        public StepDto GenerateStep(StepCreationInfo stepInfo)
         {
-            var mapManager = mapManagerService.GetFirstMapManager();
-            var zoneId = mapManager.GetZone(coordinates.X, coordinates.Y);
+            var template = this.stepTemplateRepository.GetAll().Where(st => st.Id == stepInfo.TemplateId).FirstOrDefault();
 
+            var step = new Step()
+                           {
+                               Desire = template.Desire,
+                               Duration = 1, // TODO: як визначити тривалість кроку?
+                               Icon = string.Empty, // TODO: де взяти іконку?
+                               IsKey = stepInfo.IsKey,
+                               Name = template.Name,
+                               Text = template.StepText,
+                               XCoordinate = stepInfo.Coordinates.X,
+                               YCoordinate = stepInfo.Coordinates.Y
+                           };
+            this.stepRepository.Insert(step);       
 
-
-            //this.stepTemplateRepository.GetAll().Where(st=>st.Desire == desireId && st.StepObjectStepTemplates)
-            //this.stepRepository.Insert(new Step()
-            //                               {
-                                               
-            //                               });
-            return null;
+            return Mapper.Map<StepDto>(step);
         }
 
         public void Delete(int? id)

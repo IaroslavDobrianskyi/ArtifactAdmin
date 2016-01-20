@@ -13,12 +13,12 @@ namespace ArtifactAdmin.BL.Services
 
     public class StepFinderService : IStepFinderService
     {
-        public Point GetNewKeyStepCoords(CarrierDesireDto carrierDesire, Point stepCoordinates)
+        public StepCreationInfo GetNewKeyStepInfo(CarrierDesireDto carrierDesire, Point previousStepCoordinates)
         {
             throw new NotImplementedException();
         }
 
-        public List<Point> GetIntermediateStepCoords(StepDto lastStep, Point newKeyStepCoords)
+        public List<StepCreationInfo> GetIntermediateStepCoords(StepDto lastStep, StepCreationInfo newKeyStepCoords)
         {
             throw new NotImplementedException();
         }

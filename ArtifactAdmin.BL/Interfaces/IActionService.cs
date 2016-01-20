@@ -32,8 +32,18 @@ namespace ArtifactAdmin.BL.Interfaces
         /// </summary>
         /// <param name="step"></param>
         /// <returns>ActionResult</returns>
-        int GenerateActionResult(StepDto step);
+        object GenerateActions(StepDto step, StepCreationInfo stepInfo);
 
         List<DesireDto> ApplyActionResultDesire(int actionResult, List<DesireDto> desireList);
+
+
+
+
+        /// <summary>
+        /// Повертає список actionresultdesire для активної дії в даному кроці.
+        /// </summary>
+        /// <param name="step"></param>
+        /// <returns></returns>
+        List<ActionResultDesireDto> GetActiveActionResultDesire(StepDto step);
     }
 }

@@ -88,6 +88,7 @@
     <Compile Include="Interfaces\IUserArtifactService.cs" />
     <Compile Include="ModelsDTO\ActionResultDesireDto.cs" />
     <Compile Include="ModelsDTO\CarrierDesireDto.cs" />
+    <Compile Include="ModelsDTO\StepCreationInfo.cs" />
     <Compile Include="Services\StepFinderService.cs" />
     <Compile Include="Services\StepService.cs" />
     <Compile Include="Services\UserArtifactService.cs" />
