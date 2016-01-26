@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtifactAdmin.DAL", "ArtifactAdmin\ArtifactAdmin.DAL.csproj", "{5A608750-C6A8-4A8D-819C-FBCD33B45AAD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtifactAdmin.BL", "ArtifactAdmin.BL\ArtifactAdmin.BL.csproj", "{960A35A0-5D68-447D-A928-12D99C3F43FC}"
@@ -13,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DD3CB8
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArtifactMain", "ArtifactMain\ArtifactMain.csproj", "{08CB00E1-6D4F-482C-842B-29395CA1D1B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +36,10 @@ Global
 		{BF2B893D-218E-48B1-A091-EF836DD37251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF2B893D-218E-48B1-A091-EF836DD37251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF2B893D-218E-48B1-A091-EF836DD37251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08CB00E1-6D4F-482C-842B-29395CA1D1B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08CB00E1-6D4F-482C-842B-29395CA1D1B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08CB00E1-6D4F-482C-842B-29395CA1D1B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08CB00E1-6D4F-482C-842B-29395CA1D1B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
