@@ -1,0 +1,60 @@
+﻿@model ArtifactAdmin.Web.Models.TestPathModel
+
+@{
+    ViewBag.Title = "Test Path Rendering";
+}
+
+<div class="container body-content">
+    <div style="width: 100%; float: left; clear: both">
+        <button type="button" onclick=" calculate() ">Calculate1</button>
+    </div>
+
+    <div style="width: 100%; float: left; clear: both">
+        <canvas class="_canvas" width="1000" height="1000" style="border: solid 1px #000000"></canvas>
+    </div>
+</div>
+@section TestPathScripts{
+    <script type="text/javascript">
+        function calculate() {
+            $.ajax({
+                url: '@Url.Action("GetPoints")'
+            })
+            .success(ondone)
+            .error(onerror);
+        }
+
+        function onerror(jqXHR, exception) {
+            if (jqXHR.status === 0) {
+                console.log("Calculate Request Error: " +"Not connect.\n Verify Network.");
+            } else if (jqXHR.status == 404) {
+                console.log("Calculate Request Error: " +"Requested page not found. [404]");
+            } else if (jqXHR.status == 500) {
+                console.log("Calculate Request Error: " +"Internal Server Error [500].");
+            } else if (exception === 'parsererror') {
+                console.log("Calculate Request Error: " +"Requested JSON parse failed.");
+            } else if (exception === 'timeout') {
+                console.log("Calculate Request Error: " +"Time out error.");
+            } else if (exception === 'abort') {
+                console.log("Calculate Request Error: " +"Ajax request aborted.");
+            } else {
+                console.log("Calculate Request Error: " +"Uncaught Error.\n" + jqXHR.responseText);
+            }
+        }
+
+        function ondone(data) {
+            var canvas = $("._canvas")[0];
+            var context = canvas.getContext('2d');;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.beginPath();
+            context.moveTo(data[0].X, data[0].Y);
+
+
+            $.each(data, function (idx, elem) {
+                console.log("X:" + elem.X + " Y:" + elem.Y);
+                context.lineTo(elem.X, elem.Y);
+            });
+            //context.closePath();
+            context.stroke();
+        }
+    </script>}
