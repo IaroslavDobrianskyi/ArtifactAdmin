@@ -12,20 +12,25 @@
 
     public class MapPoint : MapPointBase
     {
-        public Dictionary<int, bool> IsMiddlePoint { get; set; }
+        public Dictionary<int, bool> DimentionMiddlePoint { get; set; }
         public Dictionary<int, MapPoint> NearestMiddlePoint { get; set; }
         public Dictionary<int, Dictionary<int, List<MapPoint>>> MiddlePointsNeighbors { get; set; }
 
         public MapPoint()
         {
-            IsMiddlePoint = new Dictionary<int, bool>();
+            this.DimentionMiddlePoint = new Dictionary<int, bool>();
             NearestMiddlePoint = new Dictionary<int, MapPoint>();
             MiddlePointsNeighbors = new Dictionary<int, Dictionary<int, List<MapPoint> >>();
         }
 
+        public bool IsMiddlePointInDimention(int dimentionId)
+        {
+            return DimentionMiddlePoint.ContainsKey(dimentionId);
+        }
+
         internal void SetAsMiddlePoint(int dimensionId)
         {
-            if (IsMiddlePoint.ContainsKey(dimensionId))
+            if (this.DimentionMiddlePoint.ContainsKey(dimensionId))
             {
                 throw new Exception(string.Format(
                     "this middle point({0},{1}) is already existed in this dimention({2})",
@@ -33,7 +38,7 @@
             }
             else
             {
-                IsMiddlePoint.Add(dimensionId, true);
+                this.DimentionMiddlePoint.Add(dimensionId, true);
             }
         }
 

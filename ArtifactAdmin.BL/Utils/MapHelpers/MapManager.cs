@@ -76,7 +76,14 @@
 
         public List<MapPointBase> GetNeibhours(int dimantion, int radius, int x, int y)
         {
-            throw new NotImplementedException();
+            if (mapPoints[x, y].IsMiddlePointInDimention(dimantion))
+            {
+                return mapPoints[x, y].MiddlePointsNeighbors[dimantion][radius].ConvertAll(p => (MapPointBase)p);
+            }
+            else
+            {
+                return mapPoints[x, y].NearestMiddlePoint[dimantion].MiddlePointsNeighbors[dimantion][radius].ConvertAll(p => (MapPointBase)p);
+            }
         }
 
         public int GetZone(int x, int y)
