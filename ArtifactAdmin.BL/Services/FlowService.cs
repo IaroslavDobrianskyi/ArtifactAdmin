@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity.Core.Objects;
-    using System.Drawing;
+    using System.Windows;
     using System.Linq;
 
     using ArtifactAdmin.BL.ModelsDTO.FlowItems;
